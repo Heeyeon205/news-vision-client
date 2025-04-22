@@ -1,1 +1,0 @@
-# news-vision-client
