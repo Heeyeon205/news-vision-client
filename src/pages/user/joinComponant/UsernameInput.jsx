@@ -1,16 +1,25 @@
-import {useCallback, useState} from 'react'
+import {useCallback, useState, useEffect} from 'react'
 import axios  from '../../../api/axios';
 import ErrorAlert from '../../../utils/ErrorAlert';
 import { debounce } from 'lodash';
 
-export default function UsernameCheck({username, setUsername}) {
+export default function UsernameCheck({ username, setUsername, setValidationState }) {
   const [msg, setMsg] = useState('');
   const [color, setColor] = useState('');
+  const [touched, setTouched] = useState(false);
+
+  useEffect(() => {
+    if(touched && username === ''){
+      setMsg('아이디를 입력해 주세요.');
+      setColor('red');
+    }
+  }, [username, touched])
 
   const debounceCheck = useCallback(
     debounce(async (input) => {
       try{
-      const id = username.trim();
+      const id = input.trim();
+      if(id === '') { return }
       const response = await axios.get('/api/user/check-username', {
         params: {username: id}
     })
@@ -18,9 +27,11 @@ export default function UsernameCheck({username, setUsername}) {
     if(result.data.exists){
       setMsg('이미 사용중인 아이디입니다.')
       setColor('red')
+      setValidationState(prev => ({ ...prev, username: false }))
     }else{
       setMsg('사용 가능한 아이디입니다.')
       setColor('green')
+      setValidationState(prev => ({ ...prev, username: true }))
     }
     } catch (error) {
     ErrorAlert();
@@ -34,11 +45,12 @@ const handleChange = (e) => {
   const value = e.target.value;
   setUsername(value);
   debounceCheck(value);
+  if(!touched) { setTouched(true) }
 };
 
   return (
     <>
-      <label>아이디</label>
+      <label>아이디</label> <br/>
       <input
       type="text"
       value={username}
@@ -46,6 +58,7 @@ const handleChange = (e) => {
       onChange={handleChange}
       /> 
     <span style={{ color }}>{ msg }</span>
+    <br/>
     </>
   )
 }

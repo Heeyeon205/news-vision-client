@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import axios from '../../api/axios'
-import { useUser } from '../../utils/UserContext'
-import ErrorAlert from '../../utils/ErrorAlert';
+import axios from '../../../api/axios'
+import { useUser } from '../../../utils/UserContext'
+import ErrorAlert from '../../../utils/ErrorAlert';
 
 function DomainLogin() {
   const { setUser } = useUser();
@@ -10,13 +10,15 @@ function DomainLogin() {
   const [password, setPassword] = useState(''); 
   const navigate = useNavigate();
 
-  const loginBtn = async () => {
+  const loginBtn = async (e) => {
+    e.preventDefault(); 
     try{
       const response = await axios.post('/api/auth/login', {username, password});
       const result = response.data;
-      const { accessToken } = result.data;
+      const { nickname, accessToken, refreshToken } = result.data;
       localStorage.setItem('accessToken', accessToken);
-      setUser(accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      setUser(nickname);
       alert('로그인 성공!');
       navigate('/');
     }catch(error){
@@ -29,7 +31,7 @@ function DomainLogin() {
     <div>
       <h3>NEWSION</h3>
       <p>로그인하고 매일 나의 지식을 채워보세요</p>
-      <div className="loginContainer">
+      <form className="loginContainer" onSubmit={loginBtn}>
         <input
           type="text"
           placeholder='아이디를 입력해 주세요.'
@@ -44,8 +46,8 @@ function DomainLogin() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br/>
-        <button onClick={loginBtn}>로그인</button>
-      </div>
+        <button type="submit">로그인</button>
+        </form>
     </div>
   );
 }

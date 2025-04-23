@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useUser } from '../utils/UserContext'
 import LogoutButton from '../pages/user/LogoutButton'
+import Mypage from './headerComponamt/Mypage'
 
 export default function Header() {
   const navigate = useNavigate(); 
@@ -20,7 +21,10 @@ export default function Header() {
       <Link>검색</Link>
       <nav>
       {user ? (
+        <>
+        <Mypage />
         <LogoutButton/>
+        </>
       ) : (
         <button onClick={handleStartClick}>뉴션 시작하기</button>
       )}

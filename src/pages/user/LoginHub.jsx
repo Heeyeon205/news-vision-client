@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import SocialLoginButton from './SocialLoginButton';
+import SocialLoginButton from './loginComponant/SocialLoginButton';
 
 function LoginHub() {
   const navigate = useNavigate();
