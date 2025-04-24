@@ -1,4 +1,3 @@
-// 푸터 컴포넌트
 export default function Footer() {
   return (
   <footer>

@@ -3,6 +3,6 @@ import { checkAuthAndMove } from '../../utils/TokenCheck'
 
 export default function EditProfile(){
   const navigate = useNavigate();
-    const handleMove = () => { checkAuthAndMove(navigate, '/user/update') }
+  const handleMove = () => { checkAuthAndMove(navigate, '/user/update') }
   return <button onClick={handleMove}>프로필 편집</button>
 }

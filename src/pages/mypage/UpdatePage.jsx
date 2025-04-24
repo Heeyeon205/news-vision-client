@@ -1,52 +1,74 @@
-import { useState } from 'react'
-import EmailInput from '../user/joinComponant/EmailInput'
-import NicknameInput from './NicknameInput'
-import IntroduceInput from './IntroduceInput'
+import { useState, useEffect } from "react";
+import EmailInput from "../user/joinComponant/EmailInput";
+import NicknameInput from "./updateComponant/NicknameInput";
+import IntroduceInput from "./updateComponant/IntroduceInput";
+import ProfileImageInput from "./updateComponant/ProfileImageInput";
+import ErrorAlert from "../../utils/ErrorAlert";
+import axios from "../../api/axios";
+import UpdateSubmitButton from "./updateComponant/UpdateSubmitButton";
 
 export default function UpdatePage() {
-  const [image, setImage] = useState('');
-  const [email, setEmail] = useState('');
-  const [emailCode, setEmailCode] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [introduce, setIntroduce] = useState('');
+  const [image, setImage] = useState(null);
+  const [email, setEmail] = useState("");
+  const [emailCode, setEmailCode] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [introduce, setIntroduce] = useState("");
   const [validationState, setValidationState] = useState({
     nickname: false,
     email: false,
-    introduce: false
-  })
-  
+  });
+
+  useEffect(() => {
+    async function loadUpdatePage() {
+      try {
+        const response = await axios.get("/api/user/info");
+        const result = response.data;
+        if (!result.success) {
+          return;
+        }
+        setImage(result.data.image);
+        setNickname(result.data.nickname);
+        setEmail(result.data.email);
+        setIntroduce(result.data.introduce);
+      } catch (error) {
+        ErrorAlert(error);
+      }
+    }
+    loadUpdatePage();
+  }, []);
+
   return (
     <div className="updateContainer">
-        <div>
-          <h3>프로필 편집</h3>
-        </div>
-        <div>
-          <p>프로필이미지</p>
-          <img src={image} alt='프로필 이미지' />
-        </div>
-        <div>
-          <NicknameInput 
-            nickname={nickname}
-            setNickname={setNickname}
-            setValidationState={setValidationState}
-          />
+      <div>
+        <h3>프로필 편집</h3>
+      </div>
 
-          <EmailInput 
-            email={email} 
-            setEmail={setEmail} 
-            emailCode={emailCode} 
-            setEmailCode={setEmailCode}
-            setValidationState={setValidationState}
-            />
+      <div>
+        <ProfileImageInput image={image} setImage={setImage} />
+      </div>
 
-          <IntroduceInput 
-            introduce={introduce}
-            setIntroduce={setIntroduce}
-            setValidationState={setValidationState}
-            />
+      <div>
+        <NicknameInput
+          nickname={nickname}
+          setNickname={setNickname}
+          setValidationState={setValidationState}
+        />
+        <EmailInput
+          email={email}
+          setEmail={setEmail}
+          emailCode={emailCode}
+          setEmailCode={setEmailCode}
+          setValidationState={setValidationState}
+        />
+        <IntroduceInput introduce={introduce} setIntroduce={setIntroduce} />
 
-          <button>완료</button>
-        </div>
+        <UpdateSubmitButton
+          image={image}
+          nickname={nickname}
+          email={email}
+          introduce={introduce}
+        />
+      </div>
     </div>
-  )
+  );
 }
