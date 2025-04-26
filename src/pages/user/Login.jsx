@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import SocialLoginButton from "./loginComponant/SocialLoginButton";
+import SocialLoginButton from "./loginComponent/SocialLoginButton";
 
-function LoginHub() {
+export default function LoginHub() {
   const navigate = useNavigate();
 
   const moveToLogin = () => {
@@ -9,6 +9,9 @@ function LoginHub() {
   };
   const moveToJoin = () => {
     navigate("/user/join");
+  };
+  const moveToPassword = () => {
+    navigate("/user/password");
   };
 
   return (
@@ -27,10 +30,8 @@ function LoginHub() {
         <SocialLoginButton provider={"kakao"}>Kakao로 로그인</SocialLoginButton>
         <br />
         <span onClick={moveToJoin}>회원가입</span>
-        <span>비밀번호 찾기</span>
+        <span onClick={moveToPassword}>비밀번호 찾기</span>
       </div>
     </div>
   );
 }
-
-export default LoginHub;

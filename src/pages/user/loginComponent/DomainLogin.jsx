@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../../api/axios";
-import { useUser } from "../../../utils/UserContext";
 import ErrorAlert from "../../../utils/ErrorAlert";
+import { useStore } from "../../../store/useUserStore";
 
 function DomainLogin() {
-  const { setUser } = useUser();
+  const { setUser } = useStore();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();

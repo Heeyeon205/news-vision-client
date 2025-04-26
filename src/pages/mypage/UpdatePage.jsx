@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import EmailInput from "../user/joinComponant/EmailInput";
-import NicknameInput from "./updateComponant/NicknameInput";
-import IntroduceInput from "./updateComponant/IntroduceInput";
-import ProfileImageInput from "./updateComponant/ProfileImageInput";
+import EmailInput from "../user/joinComponent/EmailInput";
+import NicknameInput from "./updateComponent/NicknameInput";
+import IntroduceInput from "./updateComponent/IntroduceInput";
+import ProfileImageInput from "./updateComponent/ProfileImageInput";
 import ErrorAlert from "../../utils/ErrorAlert";
 import axios from "../../api/axios";
-import UpdateSubmitButton from "./updateComponant/UpdateSubmitButton";
+import UpdateSubmitButton from "./updateComponent/UpdateSubmitButton";
 
 export default function UpdatePage() {
   const [image, setImage] = useState(null);
@@ -13,7 +13,7 @@ export default function UpdatePage() {
   const [emailCode, setEmailCode] = useState("");
   const [nickname, setNickname] = useState("");
   const [introduce, setIntroduce] = useState("");
-  const [validationState, setValidationState] = useState({
+  const [_validationState, setValidationState] = useState({
     nickname: false,
     email: false,
   });

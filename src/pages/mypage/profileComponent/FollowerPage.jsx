@@ -1,6 +1,6 @@
-import axios from "../../api/axios";
+import axios from "../../../api/axios";
 import { useState, useEffect } from "react";
-import ErrorAlert from "../../utils/ErrorAlert";
+import ErrorAlert from "../../../utils/ErrorAlert";
 
 export default function FollowerPage() {
   const [followerList, setFollowerList] = useState([]);

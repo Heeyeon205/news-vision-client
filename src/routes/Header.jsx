@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useUser } from "../utils/UserContext";
+import { useStore } from "../store/useUserStore";
 import LogoutButton from "./headerComponamt/LogoutButton";
 import Mypage from "./headerComponamt/MypageButton";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { user } = useStore();
 
   const handleStartClick = () => {
     navigate("/user/login");

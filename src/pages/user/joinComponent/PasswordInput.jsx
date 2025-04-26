@@ -2,27 +2,17 @@ import { useCallback, useState, useEffect } from "react";
 import axios from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import { debounce } from "lodash";
+import { validatePassword } from "../../../utils/validatePassword";
 
-export function validatePassword(password) {
-  if (password.length < 8) {
-    return { valid: false, msg: "8자 이상 입력해주세요." };
-  }
-  if (!/[!@#$%^&*]/.test(password)) {
-    return { valid: false, msg: "특수문자를 1자 이상 입력해주세요." };
-  }
-  if (!/[A-Z]/.test(password)) {
-    return { valid: false, msg: "대문자를 1자 이상 입력해주세요." };
-  }
-  return { valid: true, msg: "사용가능한 비밀번호입니다." };
-}
-
-export default function MatchesPassword({
+export default function PasswordInput({
   password,
   setPassword,
   checkPassword,
   setCheckPassword,
   setValidationState,
 }) {
+  console.log("PasswordInput 컴포넌트 로드");
+  console.log("1= ", typeof setPassword);
   const [msg, setMsg] = useState("");
   const [checkMsg, setCheckMsg] = useState("");
   const [color, setColor] = useState("");
@@ -49,9 +39,7 @@ export default function MatchesPassword({
         const response = await axios.get("/api/user/match-password", {
           params: { password, checkPassword },
         });
-        console.log(response.data);
         const result = response.data;
-        console.log(result.data);
         if (!result.data.exists) {
           setValidationState((prev) => ({ ...prev, password: false }));
           setCheckMsg("비밀번호 인증 실패");

@@ -1,10 +1,12 @@
-import axios from "../../api/axios";
 import { useState, useEffect } from "react";
+import axios from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
-import UpdatePage from "./UpdateBtn";
-import FollowerButton from "./followComponant/FollowerButton";
-import FollowingButton from "./followComponant/FollowingButton";
-import ArticleButton from "./listComponant/ArticleButton";
+import UpdatePage from "./profileComponent/UpdateBtn";
+import FollowerButton from "./followComponent/FollowerButton";
+import FollowingButton from "./followComponent/FollowingButton";
+import NewsList from "./listComponent/NewsList";
+import ArticleList from "./listComponent/ArticleList";
+import ScrapList from "./listComponent/ScrapList";
 
 export default function Mypage() {
   const [role, setRole] = useState("");
@@ -13,6 +15,7 @@ export default function Mypage() {
   const [follower, setFollower] = useState("");
   const [following, setFollowing] = useState("");
   const [introduce, setIntroduce] = useState("");
+  const [activeTap, setActiveTap] = useState("article");
 
   useEffect(() => {
     async function loadMypage() {
@@ -51,17 +54,21 @@ export default function Mypage() {
           <FollowingButton following={following} />
         </div>
         <div className="profile4">
-          <p>{introduce}</p>
+          <p>{introduce || ""}</p>
         </div>
       </div>
 
       <div className="btnGroupe">
-        {role ? <span>뉴스</span> : ""}
-        <ArticleButton />
-        <span>스크랩</span>
+        {role ? <button onClick={() => setActiveTap("news")}>뉴스</button> : ""}
+        {<button onClick={() => setActiveTap("article")}>아티클</button>}
+        {<button onClick={() => setActiveTap("scrap")}>스크랩</button>}
       </div>
 
-      <div className="listGroupe">{/* 여기 리스트 출력할거임~ */}</div>
+      <div className="listGroupe">
+        {activeTap === "news" && <NewsList />}
+        {activeTap === "article" && <ArticleList />}
+        {activeTap === "scrap" && <ScrapList />}
+      </div>
     </div>
   );
 }

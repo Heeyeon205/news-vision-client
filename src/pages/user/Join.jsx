@@ -1,8 +1,8 @@
 import { useState } from "react";
-import UsernameInput from "../user/joinComponant/UsernameInput";
-import PasswordInput from "../user/joinComponant/PasswordInput";
-import EmailInput from "../user/joinComponant/EmailInput";
-import JoinButton from "../user/joinComponant/JoinButton";
+import UsernameInput from "./joinComponent/UsernameInput";
+import PasswordInput from "./joinComponent/PasswordInput";
+import EmailInput from "./joinComponent/EmailInput";
+import JoinButton from "./joinComponent/JoinButton";
 
 function Join() {
   const [username, setUsername] = useState("");
@@ -47,7 +47,12 @@ function Join() {
         setValidationState={setValidationState}
       />
 
-      <JoinButton validationState={validationState} />
+      <JoinButton
+        username={username}
+        password={password}
+        email={email}
+        validationState={validationState}
+      />
     </div>
   );
 }
