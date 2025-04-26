@@ -19,5 +19,9 @@ export default function MypageBtn() {
     }
   };
 
-  return <button onClick={handleMove}>마이페이지</button>;
+  return (
+    <button className="border rounded" onClick={handleMove}>
+      마이페이지
+    </button>
+  );
 }

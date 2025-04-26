@@ -35,6 +35,7 @@ function DomainLogin() {
       <p>로그인하고 매일 나의 지식을 채워보세요</p>
       <form className="loginContainer" onSubmit={loginBtn}>
         <input
+          className="border rounded"
           type="text"
           placeholder="아이디를 입력해 주세요."
           value={username}
@@ -42,6 +43,7 @@ function DomainLogin() {
         />
         <br />
         <input
+          className="border rounded"
           type="password"
           placeholder="비밀번호를 입력해 주세요."
           value={password}

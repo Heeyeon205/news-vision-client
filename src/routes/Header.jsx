@@ -30,7 +30,9 @@ export default function Header() {
             <LogoutButton />
           </>
         ) : (
-          <button onClick={handleStartClick}>뉴션 시작하기</button>
+          <button className="border rounded" onClick={handleStartClick}>
+            뉴션 시작하기
+          </button>
         )}
       </nav>
       <hr />

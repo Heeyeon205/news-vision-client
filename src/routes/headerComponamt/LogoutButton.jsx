@@ -29,5 +29,9 @@ export default function LogoutButton() {
       ErrorAlert(error);
     }
   };
-  return <button onClick={handleLogout}>로그아웃</button>;
+  return (
+    <button className="border rounded" onClick={handleLogout}>
+      로그아웃
+    </button>
+  );
 }

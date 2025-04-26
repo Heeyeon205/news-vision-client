@@ -21,7 +21,7 @@ export default function FollorwerButton({ following }) {
   };
 
   return (
-    <button onClick={hadleMove}>
+    <button className="border rounded" onClick={hadleMove}>
       팔로잉 <span>{following}</span>
     </button>
   );

@@ -59,6 +59,7 @@ export default function UsernameCheck({
     <>
       <label>아이디</label> <br />
       <input
+        className="border rounded"
         type="text"
         value={username}
         placeholder="아이디를 입력해주세요."

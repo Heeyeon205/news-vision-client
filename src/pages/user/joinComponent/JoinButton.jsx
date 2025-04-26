@@ -40,5 +40,9 @@ export default function JoinButton({
     }
   };
 
-  return <button onClick={joinBtn}>회원가입</button>;
+  return (
+    <button className="border rounded" onClick={joinBtn}>
+      회원가입
+    </button>
+  );
 }

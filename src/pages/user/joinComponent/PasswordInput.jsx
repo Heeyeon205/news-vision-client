@@ -64,6 +64,7 @@ export default function PasswordInput({
       </label>
       <br />
       <input
+        className="border rounded"
         type="password"
         value={password}
         placeholder="비밀번호를 입력해주세요."
@@ -79,6 +80,7 @@ export default function PasswordInput({
       <label>비밀번호 확인</label>
       <br />
       <input
+        className="border rounded"
         type="password"
         value={checkPassword}
         placeholder="비밀번호를 한번 더 입력해주세요."

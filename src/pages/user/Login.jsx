@@ -19,7 +19,9 @@ export default function LoginHub() {
       <h3>NEWSION</h3>
       <p>로그인하고 매일 나의 지식을 채워보세요</p>
       <div className="loginBtnGroup">
-        <button onClick={moveToLogin}>뉴션 로그인</button>
+        <button className="border rounded" onClick={moveToLogin}>
+          뉴션 로그인
+        </button>
         <br />
         <SocialLoginButton provider={"google"}>
           Google로 로그인

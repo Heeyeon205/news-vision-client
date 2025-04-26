@@ -6,5 +6,9 @@ export default function EditProfile() {
   const handleMove = () => {
     checkAuthAndMove(navigate, "/user/update");
   };
-  return <button onClick={handleMove}>프로필 편집</button>;
+  return (
+    <button className="border rounded" onClick={handleMove}>
+      프로필 편집
+    </button>
+  );
 }

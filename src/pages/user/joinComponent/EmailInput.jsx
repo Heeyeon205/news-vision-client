@@ -96,6 +96,7 @@ export default function MatchesEmailCode({
       <label>이메일</label>
       <br />
       <input
+        className="border rounded"
         type="email"
         value={email}
         placeholder="이메일을 입력해주세요."
@@ -111,6 +112,7 @@ export default function MatchesEmailCode({
       <label>인증번호</label>
       <br />
       <input
+        className="border rounded"
         type="text"
         value={emailCode}
         placeholder="인증번호를 입력해주세요."

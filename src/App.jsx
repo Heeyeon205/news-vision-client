@@ -3,17 +3,21 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Layout from "./routes/Layout";
-import Main from "./pages/news/Main";
+
 import Login from "./pages/user/Login";
 import DomainLogin from "./pages/user/loginComponent/DomainLogin";
 import Authentication from "./pages/user/Authentication";
 import FindPassword from "./pages/user/FindPassword";
 import UpdatePassword from "./pages/user/UpdatePassword";
 import Join from "./pages/user/Join";
+
 import Mypage from "./pages/mypage/Mypage";
 import UpdatePage from "./pages/mypage/UpdatePage";
 import FollowerPage from "./pages/mypage/profileComponent/FollowerPage";
 import FollowingPage from "./pages/mypage/profileComponent/FollowingPage";
+
+import Main from "./pages/news/Main";
+import NewsDetail from "./pages/news/NewsDetail";
 
 function App() {
   return (
@@ -32,6 +36,7 @@ function App() {
           <Route path="user/update" element={<UpdatePage />} />
           <Route path="/api/mypage/follower" element={<FollowerPage />} />
           <Route path="/api/mypage/following" element={<FollowingPage />} />
+          <Route path="/news/:id" element={<NewsDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

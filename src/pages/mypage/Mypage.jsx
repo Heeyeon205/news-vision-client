@@ -54,14 +54,37 @@ export default function Mypage() {
           <FollowingButton following={following} />
         </div>
         <div className="profile4">
-          <p>{introduce || ""}</p>
+          <p className="border">{introduce || ""}</p>
         </div>
       </div>
 
       <div className="btnGroupe">
-        {role ? <button onClick={() => setActiveTap("news")}>뉴스</button> : ""}
-        {<button onClick={() => setActiveTap("article")}>아티클</button>}
-        {<button onClick={() => setActiveTap("scrap")}>스크랩</button>}
+        {role ? (
+          <button
+            className="border rounded"
+            onClick={() => setActiveTap("news")}
+          >
+            뉴스
+          </button>
+        ) : (
+          ""
+        )}
+        {
+          <button
+            className="border rounded"
+            onClick={() => setActiveTap("article")}
+          >
+            아티클
+          </button>
+        }
+        {
+          <button
+            className="border rounded"
+            onClick={() => setActiveTap("scrap")}
+          >
+            스크랩
+          </button>
+        }
       </div>
 
       <div className="listGroupe">
