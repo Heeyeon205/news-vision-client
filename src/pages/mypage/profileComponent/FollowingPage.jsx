@@ -1,4 +1,4 @@
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import { useState, useEffect } from "react";
 import ErrorAlert from "../../../utils/ErrorAlert";
 
@@ -7,7 +7,7 @@ export default function FollowingPage() {
 
   useEffect(() => {
     async function loadFollowingPage() {
-      const response = await axios.get("/api/mypage/following-list");
+      const response = await apiClient.get("/api/mypage/following-list");
       const result = response.data;
       if (!result.success) {
         ErrorAlert();

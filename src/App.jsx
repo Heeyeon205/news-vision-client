@@ -18,6 +18,7 @@ import FollowingPage from "./pages/mypage/profileComponent/FollowingPage";
 
 import Main from "./pages/news/Main";
 import NewsDetail from "./pages/news/NewsDetail";
+import NewsCreatePage from "./pages/news/NewsCreatePage";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/api/mypage/follower" element={<FollowerPage />} />
           <Route path="/api/mypage/following" element={<FollowingPage />} />
           <Route path="/news/:id" element={<NewsDetail />} />
+          <Route path="/news/create-form" element={<NewsCreatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

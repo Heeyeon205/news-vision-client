@@ -1,5 +1,5 @@
 import ErrorAlert from "../../../utils/ErrorAlert";
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import { useState, useEffect } from "react";
 
 export default function ScrapList() {
@@ -8,7 +8,7 @@ export default function ScrapList() {
   useEffect(() => {
     async function loadScrapList() {
       try {
-        const response = await axios.get("/api/mypage/scrap-list");
+        const response = await apiClient.get("/api/mypage/scrap-list");
         const result = response.data;
         if (!result.success) {
           ErrorAlert();

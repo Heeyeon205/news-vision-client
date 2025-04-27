@@ -1,4 +1,4 @@
-import axios from "../../api/axios";
+import apiClient from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import ErrorAlert from "../../utils/ErrorAlert";
 import { useStore } from "../../store/useUserStore";
@@ -11,7 +11,7 @@ export default function LogoutButton() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("/api/auth/logout", {
+      const response = await apiClient.post("/api/auth/logout", {
         accessToken,
         refreshToken,
       });

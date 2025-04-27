@@ -1,4 +1,4 @@
-import axios from "../../api/axios";
+import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import { useState, useEffect } from "react";
 
@@ -45,7 +45,9 @@ export default function MatchesEmailCode({
       return;
     }
     try {
-      const response = await axios.post("/email/update/send-code", { email });
+      const response = await apiClient.post("/email/update/send-code", {
+        email,
+      });
       const result = response.data;
       if (!result.success) {
         ErrorAlert();
@@ -68,7 +70,7 @@ export default function MatchesEmailCode({
       return;
     }
     try {
-      const response = await axios.post("/api/auth/email-auth", {
+      const response = await apiClient.post("/api/auth/email-auth", {
         email,
         emailCode,
       });

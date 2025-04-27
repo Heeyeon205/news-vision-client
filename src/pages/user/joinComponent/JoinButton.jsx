@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 
 export default function JoinButton({
@@ -21,7 +21,7 @@ export default function JoinButton({
         return;
       }
 
-      const response = await axios.post("/api/user/join", {
+      const response = await apiClient.post("/api/user/join", {
         username,
         password,
         email,

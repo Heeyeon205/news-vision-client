@@ -1,5 +1,5 @@
 import ErrorAlert from "../../../utils/ErrorAlert";
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import { useState, useEffect } from "react";
 
 export default function ArticleList() {
@@ -8,7 +8,7 @@ export default function ArticleList() {
   useEffect(() => {
     async function loadArticleList() {
       try {
-        const response = await axios.get("/api/mypage/board-list");
+        const response = await apiClient.get("/api/mypage/board-list");
         const result = response.data;
         if (!result.success) {
           ErrorAlert();

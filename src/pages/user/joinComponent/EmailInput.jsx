@@ -1,4 +1,4 @@
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import { useState, useEffect } from "react";
 
@@ -45,7 +45,7 @@ export default function MatchesEmailCode({
       return;
     }
     try {
-      const response = await axios.post("/email/send-code", { email });
+      const response = await apiClient.post("/email/send-code", { email });
       const result = response.data;
       if (result.data.exists) {
         setMsg("이미 사용중인 이메일입니다.");
@@ -73,7 +73,10 @@ export default function MatchesEmailCode({
       return;
     }
     try {
-      const response = await axios.post("/email/verify", { email, emailCode });
+      const response = await apiClient.post("/email/verify", {
+        email,
+        emailCode,
+      });
       const result = response.data;
       if (!result.success) {
         setValidationState((prev) => ({ ...prev, email: false }));

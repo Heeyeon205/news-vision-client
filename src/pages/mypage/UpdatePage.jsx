@@ -4,7 +4,7 @@ import NicknameInput from "./updateComponent/NicknameInput";
 import IntroduceInput from "./updateComponent/IntroduceInput";
 import ProfileImageInput from "./updateComponent/ProfileImageInput";
 import ErrorAlert from "../../utils/ErrorAlert";
-import axios from "../../api/axios";
+import apiClient from "../../api/axios";
 import UpdateSubmitButton from "./updateComponent/UpdateSubmitButton";
 
 export default function UpdatePage() {
@@ -21,7 +21,7 @@ export default function UpdatePage() {
   useEffect(() => {
     async function loadUpdatePage() {
       try {
-        const response = await axios.get("/api/user/info");
+        const response = await apiClient.get("/api/user/info");
         const result = response.data;
         if (!result.success) {
           return;

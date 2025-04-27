@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import { useStore } from "../../../store/useUserStore";
 
@@ -13,7 +13,7 @@ function DomainLogin() {
   const loginBtn = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/login", {
+      const response = await apiClient.post("/api/auth/login", {
         username,
         password,
       });

@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import { debounce } from "lodash";
 
@@ -26,7 +26,7 @@ export default function UsernameCheck({
         if (id === "") {
           return;
         }
-        const response = await axios.get("/api/user/check-username", {
+        const response = await apiClient.get("/api/user/check-username", {
           params: { username: id },
         });
         const result = response.data;

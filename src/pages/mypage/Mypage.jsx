@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "../../api/axios";
+import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import UpdatePage from "./profileComponent/UpdateBtn";
 import FollowerButton from "./followComponent/FollowerButton";
@@ -20,7 +20,7 @@ export default function Mypage() {
   useEffect(() => {
     async function loadMypage() {
       try {
-        const response = await axios.get("/api/mypage");
+        const response = await apiClient.get("/api/mypage");
         const result = response.data;
         if (!result.data) {
           ErrorAlert();

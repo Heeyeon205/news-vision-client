@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import { debounce } from "lodash";
 import { validatePassword } from "../../../utils/validatePassword";
@@ -36,7 +36,7 @@ export default function PasswordInput({
         if (!validPassword || password === "" || checkPassword === "") {
           return;
         }
-        const response = await axios.get("/api/user/match-password", {
+        const response = await apiClient.get("/api/user/match-password", {
           params: { password, checkPassword },
         });
         const result = response.data;

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import ErrorAlert from "../../utils/ErrorAlert";
-import axios from "../../api/axios";
+import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
+import NewsCreateButton from "./NewsCreateButton";
 
 export default function Main() {
   const [newsList, setNewsList] = useState([]);
@@ -11,7 +12,7 @@ export default function Main() {
   useEffect(() => {
     async function loadNews() {
       try {
-        const response = await axios.get("/api/news/main");
+        const response = await apiClient.get("/api/news/main");
         const result = response.data;
         console.log(result.data);
         setNewsList(result.data);
@@ -25,6 +26,7 @@ export default function Main() {
   return (
     <div>
       <h4>{formatDate}</h4>
+      <NewsCreateButton />
       {newsList.length === 0 ? (
         <p>뉴스리스트가 없습니다.</p>
       ) : (
