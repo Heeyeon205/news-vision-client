@@ -4,6 +4,7 @@ import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import NewsLikeButton from "./NewsLikeButton";
 import ScrapButton from "./ScrapButton";
+import DropDownButton from "./DropDownButton";
 
 export default function NewsDetail() {
   const { id } = useParams();
@@ -39,15 +40,18 @@ export default function NewsDetail() {
   return !news ? (
     <p>뉴스 불러오는 중....</p>
   ) : (
-    <div>
+    <div className="flex flex-col items-center">
       <p>{news.category}</p>
+      <DropDownButton newsId={newsId} />
       <img src={news.image} alt="뉴스 썸네일" />
-      <p>{news.createdAt}</p>
-      <p>좋아요 {likeCount}</p>
-      <p>조회수 {news.view}</p>
+      <p>{news.title}</p>
+      <span>{news.createdAt}</span>
+      <span> 좋아요 {likeCount}</span>
+      <span> 조회수 {news.view}</span>
       <img src={news.profile} alt="유저 프로필" />
       <img src={news.authorBadgeIcon} alt="유저 뱃지" />
       <p>{news.authorNickname}</p>
+      <p>{news.content}</p>
       <NewsLikeButton
         newsId={newsId}
         isLike={isLike}

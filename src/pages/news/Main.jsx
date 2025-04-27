@@ -14,7 +14,6 @@ export default function Main() {
       try {
         const response = await apiClient.get("/api/news/main");
         const result = response.data;
-        console.log(result.data);
         setNewsList(result.data);
       } catch (error) {
         ErrorAlert(error);

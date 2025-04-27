@@ -20,7 +20,7 @@ export default function Header() {
         홈
       </Link>
       <Link>아티클</Link>
-      <Link>AI요약</Link>
+      <Link to="/gpt-info">AI요약</Link>
       <Link>커뮤니티</Link>
       <Link>검색</Link>
       <nav>

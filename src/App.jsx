@@ -19,6 +19,11 @@ import FollowingPage from "./pages/mypage/profileComponent/FollowingPage";
 import Main from "./pages/news/Main";
 import NewsDetail from "./pages/news/NewsDetail";
 import NewsCreatePage from "./pages/news/NewsCreatePage";
+import NewsCreateNewsPage from "./pages/news/NewsCreateNewsPage";
+import NewsUpdatePage from "./pages/news/NewsUpdatePage";
+
+import InfoPage from "./pages/AI/InfoPage";
+import GptMainPage from "./pages/AI/GptMainPage";
 
 function App() {
   return (
@@ -39,6 +44,10 @@ function App() {
           <Route path="/api/mypage/following" element={<FollowingPage />} />
           <Route path="/news/:id" element={<NewsDetail />} />
           <Route path="/news/create-form" element={<NewsCreatePage />} />
+          <Route path="/news/create-news" element={<NewsCreateNewsPage />} />
+          <Route path="/gpt-info" element={<InfoPage />} />
+          <Route path="/gpt-news" element={<GptMainPage />} />
+          <Route path="/news/update-form" element={<NewsUpdatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -29,7 +29,7 @@ export default function NewsCreatePage() {
     }
   };
 
-  const handleCreate = async () => {
+  const handleCreate = async (news) => {
     const check = confirm("해당 뉴스로 작성하시겠습니까?");
     if (check) {
       try {
@@ -39,7 +39,15 @@ export default function NewsCreatePage() {
           ErrorAlert();
           return;
         }
-        navigate("/news/create");
+        console.log(news);
+        console.log(news.id);
+        navigate("/news/create-news", {
+          state: {
+            referenceTitle: news.title,
+            referencePubDate: news.pubDate,
+            referenceLink: news.link,
+          },
+        });
       } catch (error) {
         ErrorAlert(error);
       }
@@ -65,9 +73,8 @@ export default function NewsCreatePage() {
         ) : (
           <div className="newsContainer">
             {naverList.map((news) => (
-              <div className="newsBox" key={news.id} onClick={handleCreate}>
+              <div className="newsBox" onClick={() => handleCreate(news)}>
                 <h3>{news.title}</h3>
-                {/* <p className="border">{news.description}</p> */}
                 <p>{news.pubDate}</p>
                 <a href={news.link}>뉴스 확인하러 가기</a>
                 <hr />
