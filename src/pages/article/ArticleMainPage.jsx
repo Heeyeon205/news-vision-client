@@ -3,12 +3,14 @@ import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import NewsCreateButton from "../news/NewsCreateButton";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "../../store/useUserStore";
 
 export default function ArticleMainPage() {
+  const logUserId = useStore((state) => state.userId);
   const categories = [
     "전체",
     "인기",
-    "팔로우",
+    ...(logUserId ? ["팔로우"] : []),
     "경제",
     "정치",
     "문화",
@@ -89,7 +91,7 @@ export default function ArticleMainPage() {
 
       <div>
         <h4>{formatDate}</h4>
-        <NewsCreateButton />
+        {logUserId && <NewsCreateButton />}
       </div>
 
       <div className="listBox">
@@ -104,7 +106,12 @@ export default function ArticleMainPage() {
                 onClick={() => navigate(`/news/${news.id}`)}
               >
                 <div className="newsImage">
-                  <img src={news.image} alt="뉴스 썸네일"></img>
+                  <img
+                    src={news.image}
+                    alt="뉴스 썸네일"
+                    width="600"
+                    height="350"
+                  ></img>
                 </div>
                 <div className="newsContent">
                   <p>{news.category}</p>

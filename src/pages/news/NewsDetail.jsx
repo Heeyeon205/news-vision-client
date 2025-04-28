@@ -41,12 +41,12 @@ export default function NewsDetail() {
     <div className="flex flex-col items-center">
       <p>{news.category}</p>
       <DropDownButton newsId={newsId} userId={userId} />
-      <img src={news.image} alt="뉴스 썸네일" />
+      <img src={news.image} alt="뉴스 썸네일" width="600" height="350" />
       <p>{news.title}</p>
       <span>{news.createdAt}</span>
       <span> 좋아요 {likeCount}</span>
       <span> 조회수 {news.view}</span>
-      <img src={news.profile} alt="유저 프로필" />
+      <img src={news.profileImage} alt="유저 프로필" />
       <img src={news.authorBadgeIcon} alt="유저 뱃지" />
       <p>{news.authorNickname}</p>
       <p>{news.content}</p>

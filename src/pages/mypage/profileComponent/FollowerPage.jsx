@@ -36,7 +36,12 @@ export default function FollowerPage() {
           followerList.map((follower) => (
             <div key={follower.id} className="followerCard">
               <div>
-                <img src={follower.image} alt="프로필 이미지" />
+                <img
+                  src={follower.image}
+                  alt="프로필 이미지"
+                  width="64px"
+                  height="64px"
+                />
               </div>
               <div>
                 <p>{follower.nickname}</p>

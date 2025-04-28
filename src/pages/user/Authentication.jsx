@@ -16,16 +16,12 @@ export default function Authentication() {
     const refreshToken = params.get("refreshToken");
     const userId = params.get("userId");
     const nickname = params.get("nickname");
-
-    console.log("accessToken", accessToken);
-    console.log("refreshToken", refreshToken);
-    console.log("user", userId);
-    console.log("nickname", nickname);
+    const image = params.get("image");
 
     if (accessToken && refreshToken) {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      setUser(userId, nickname);
+      setUser(userId, nickname, image);
       alert("로그인 성공");
       navigate("/");
     } else {

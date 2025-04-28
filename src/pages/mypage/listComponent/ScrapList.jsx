@@ -1,9 +1,11 @@
 import ErrorAlert from "../../../utils/ErrorAlert";
 import apiClient from "../../../api/axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ScrapList() {
   const [scraps, setScraps] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadScrapList() {
@@ -28,7 +30,11 @@ export default function ScrapList() {
         <p>아직 스크랩한 뉴스가 없어요.</p>
       ) : (
         scraps.map((scrap) => (
-          <div>
+          <div
+            className="border"
+            key={scrap.newsId}
+            onClick={() => navigate(`/news/${scrap.newsId}`)}
+          >
             <div>
               <img src={scrap.image} alt="뉴스 이미지" />
             </div>

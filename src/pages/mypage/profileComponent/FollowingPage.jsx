@@ -36,7 +36,12 @@ export default function FollowingPage() {
           followingList.map((following) => (
             <div>
               <div>
-                <img src={following.image} alt="프로필 이미지"></img>
+                <img
+                  src={following.image}
+                  alt="프로필 이미지"
+                  width="64px"
+                  height="64px"
+                ></img>
               </div>
               <div>
                 <p>{following.nickname}</p>

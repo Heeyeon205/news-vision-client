@@ -5,7 +5,7 @@ import Mypage from "./headerComponamt/MypageButton";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { user } = useStore();
+  const { userId } = useStore();
 
   const handleStartClick = () => {
     navigate("/user/login");
@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <header>
       <Link to="/" className="logo mx-5">
-        Newsion
+        NEWSION
       </Link>
       <Link to="/" className="newsMain mx-5">
         홈
@@ -32,7 +32,7 @@ export default function Header() {
         검색
       </Link>
       <nav>
-        {user ? (
+        {userId ? (
           <>
             <Mypage />
             <LogoutButton />

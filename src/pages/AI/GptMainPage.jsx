@@ -8,39 +8,43 @@ import ErrorAlert from "../../utils/ErrorAlert";
 export default function GptMainPage() {
   const [newsList, setNewsList] = useState([]);
   const navigate = useNavigate();
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const loadData = async () => {
       try {
         const respons = await apiClient.get("/api/gpt-news/main-summary");
         const result = respons.data;
-        if (!result.success) {
-          alert("데이터를 불러오지 못했습니다.");
-          return;
-        }
         setNewsList(result.data);
       } catch (error) {
-        ErrorAlert(error);
+        console.log(error);
       }
     };
     loadData();
   }, []);
 
   return (
-    <Swiper
-      spaceBetween={20}
-      slidesPerView={1}
-      pagination={{ clickable: true }}
-    >
-      {newsList.map((news) => (
-        <SwiperSlide key={news.id}>
-          <div className="border p-4 rounded shadow">
-            <h3>{news.title}</h3>
-            <p>{news.summary}</p>
-            <p onClick={() => navigate(`/news/${news.id}`)}>자세히 보기</p>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <div className="aiContainer">
+      <div>
+        <progress value={index + 1} max={newsList.length}></progress>
+      </div>
+      <Swiper
+        spaceBetween={20}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        onSlideChange={(swiper) => setIndex(swiper.activeIndex)}
+      >
+        {newsList.map((news) => (
+          <SwiperSlide key={news.id}>
+            <div className="border p-4 rounded shadow">
+              <img src={news.image} alt="뉴스 썸네일"></img>
+              <h3>{news.title}</h3>
+              <p>{news.summary}</p>
+              <p onClick={() => navigate(`/news/${news.id}`)}>자세히 보기</p>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 }

@@ -20,7 +20,7 @@ instance.interceptors.request.use(
 );
 
 instance.interceptors.response.use(
-  response => response, // 성공 응답은 그대로 통과
+  response => response,
   error => {
     if (error.response) {
       const { status, data } = error.response;

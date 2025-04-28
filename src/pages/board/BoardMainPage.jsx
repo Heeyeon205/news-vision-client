@@ -11,7 +11,6 @@ export default function BoardMainPage() {
       try {
         const response = await apiClient.get("/api/board");
         const result = response.data;
-        console.log("서버에서 넘오온 데이터: ", result.data);
         setData(result.data);
       } catch (error) {
         console.log(error);
@@ -34,7 +33,12 @@ export default function BoardMainPage() {
             className="boardBox"
             onClick={() => navigate(`/board/${board.boardId}`)}
           >
-            <img src={board.userImage} alt="프로필 이미지" />
+            <img
+              src={board.userImage}
+              alt="프로필 이미지"
+              width="64px"
+              height="64px"
+            />
             <p>{board.nickname}</p>
             <p>{board.createAt}</p>
             <button>팔로우</button>

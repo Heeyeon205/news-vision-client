@@ -1,9 +1,11 @@
 import ErrorAlert from "../../../utils/ErrorAlert";
 import apiClient from "../../../api/axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ArticleList() {
   const [articles, setArticles] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadArticleList() {
@@ -25,12 +27,21 @@ export default function ArticleList() {
   return (
     <>
       {articles.length === 0 ? (
-        <p>아직 작성한 아티클이 없어요.</p>
+        <p>아직 작성한 게시글이 없어요.</p>
       ) : (
         articles.map((article) => (
-          <div className="articleBox" key={article.id}>
+          <div
+            className="articleBox border"
+            key={article.boardId}
+            onClick={() => navigate(`/board/${article.boardId}`)}
+          >
             <div className="articleBox1">
-              <img src={article.image} alt="프로필 이미지" />
+              <img
+                src={article.image}
+                alt="프로필 이미지"
+                width="64px"
+                height="64px"
+              />
             </div>
             <div className="articleBox2">
               <div className="articles1">

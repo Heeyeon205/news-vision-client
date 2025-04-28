@@ -47,7 +47,7 @@ function App() {
           <Route path="/user/password" element={<FindPassword />} />
           <Route path="/user/update-password" element={<UpdatePassword />} />
           <Route path="/user/mypage" element={<Mypage />} />
-          <Route path="user/update" element={<UpdatePage />} />
+          <Route path="/user/update" element={<UpdatePage />} />
           <Route path="/api/mypage/follower" element={<FollowerPage />} />
           <Route path="/api/mypage/following" element={<FollowingPage />} />
 

@@ -1,22 +1,19 @@
-import ErrorAlert from "../../../utils/ErrorAlert";
 import apiClient from "../../../api/axios";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function NewsList() {
   const [newsList, setNewsList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadNewsList() {
       try {
         const response = await apiClient.get("/api/mypage/news-list");
         const result = response.data;
-        if (!result.success) {
-          ErrorAlert();
-          return;
-        }
         setNewsList(result.data);
       } catch (error) {
-        ErrorAlert(error);
+        console.log(error);
       }
     }
     loadNewsList();
@@ -28,7 +25,11 @@ export default function NewsList() {
         <p>아직 작성한 뉴스가 없어요.</p>
       ) : (
         newsList.map((news) => (
-          <div>
+          <div
+            className="border"
+            key={news.newsId}
+            onClick={() => navigate(`/news/${news.newsId}`)}
+          >
             <div>
               <img src={news.image} alt="뉴스 이미지" />
             </div>

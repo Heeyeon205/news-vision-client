@@ -26,7 +26,7 @@ export default function LogoutButton() {
       setUser(null);
       navigator("/");
     } catch (error) {
-      ErrorAlert(error);
+      console.log(error);
     }
   };
   return (

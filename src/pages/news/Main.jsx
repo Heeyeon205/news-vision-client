@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import ErrorAlert from "../../utils/ErrorAlert";
 import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
 import NewsCreateButton from "./NewsCreateButton";
+import { useStore } from "../../store/useUserStore";
 
 export default function Main() {
+  const logUserId = useStore((state) => state.userId);
   const [newsList, setNewsList] = useState([]);
   const navigate = useNavigate();
 
@@ -25,7 +26,7 @@ export default function Main() {
   return (
     <div>
       <h4>{formatDate}</h4>
-      <NewsCreateButton />
+      {logUserId && <NewsCreateButton />}
       {newsList.length === 0 ? (
         <p>뉴스가 없습니다.</p>
       ) : (
@@ -37,7 +38,12 @@ export default function Main() {
               onClick={() => navigate(`/news/${news.id}`)}
             >
               <div className="newsImage">
-                <img src={news.image} alt="뉴스 썸네일"></img>
+                <img
+                  src={news.image}
+                  alt="뉴스 썸네일"
+                  width="600"
+                  height="350"
+                ></img>
               </div>
               <div className="newsContent">
                 <p>{news.category}</p>

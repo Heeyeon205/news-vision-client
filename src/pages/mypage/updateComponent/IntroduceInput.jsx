@@ -1,8 +1,4 @@
-export default function setIntroduce({
-  introduce,
-  setIntroduce,
-  setValidationState,
-}) {
+export default function setIntroduce({ introduce, setIntroduce }) {
   return (
     <>
       <label>소개</label>

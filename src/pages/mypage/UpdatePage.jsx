@@ -9,7 +9,7 @@ import UpdateSubmitButton from "./updateComponent/UpdateSubmitButton";
 import { useStore } from "../../store/useUserStore";
 
 export default function UpdatePage() {
-  const userId = useStore((state) => state.user.id);
+  const userId = useStore((state) => state.userId);
   const [image, setImage] = useState(null);
   const [email, setEmail] = useState("");
   const [emailCode, setEmailCode] = useState("");
@@ -25,15 +25,14 @@ export default function UpdatePage() {
       try {
         const response = await apiClient.get(`/api/user/${userId}`);
         const result = response.data;
-        if (!result.success) {
-          return;
-        }
         setImage(result.data.image);
         setNickname(result.data.nickname);
         setEmail(result.data.email);
         setIntroduce(result.data.introduce);
+        console.log("리졸트: ", result);
+        console.log("리졸트 데이타: ", result.data);
       } catch (error) {
-        ErrorAlert(error);
+        console.log(error);
       }
     }
     loadUpdatePage();
