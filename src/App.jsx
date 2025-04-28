@@ -22,8 +22,15 @@ import NewsCreatePage from "./pages/news/NewsCreatePage";
 import NewsCreateNewsPage from "./pages/news/NewsCreateNewsPage";
 import NewsUpdatePage from "./pages/news/NewsUpdatePage";
 
-import InfoPage from "./pages/AI/InfoPage";
-import GptMainPage from "./pages/AI/GptMainPage";
+import ArticleMainPage from "./pages/article/ArticleMainPage";
+
+import InfoPage from "./pages/ai/InfoPage";
+import GptMainPage from "./pages/ai/GptMainPage";
+
+import BoardMainPage from "./pages/board/BoardMainPage";
+import BoardDetailPage from "./pages/board/BoardDetailPage";
+
+import SearchMainPage from "./pages/search/SearchMainPage";
 
 function App() {
   return (
@@ -32,6 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
+
           <Route path="/user/join" element={<Join />} />
           <Route path="/user/login" element={<Login />} />
           <Route path="/user/domain-login" element={<DomainLogin />} />
@@ -42,12 +50,21 @@ function App() {
           <Route path="user/update" element={<UpdatePage />} />
           <Route path="/api/mypage/follower" element={<FollowerPage />} />
           <Route path="/api/mypage/following" element={<FollowingPage />} />
+
           <Route path="/news/:id" element={<NewsDetail />} />
           <Route path="/news/create-form" element={<NewsCreatePage />} />
           <Route path="/news/create-news" element={<NewsCreateNewsPage />} />
+          <Route path="/news/update-form" element={<NewsUpdatePage />} />
+
+          <Route path="/article" element={<ArticleMainPage />} />
+
           <Route path="/gpt-info" element={<InfoPage />} />
           <Route path="/gpt-news" element={<GptMainPage />} />
-          <Route path="/news/update-form" element={<NewsUpdatePage />} />
+
+          <Route path="/board" element={<BoardMainPage />} />
+          <Route path="/board/:id" element={<BoardDetailPage />} />
+
+          <Route path="/search" element={<SearchMainPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

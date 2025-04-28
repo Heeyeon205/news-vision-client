@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import ErrorAlert from "../../utils/ErrorAlert";
 import apiClient from "../../api/axios";
+import NewsImageInput from "./NewsImageInput";
+import NewsUpdateButton from "./NewsUpdateButton";
+import NewsDeleteButton from "./NewsDeleteButton";
 
 export default function NewsUpdatePage() {
   const location = useLocation();
@@ -10,33 +12,24 @@ export default function NewsUpdatePage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [data, setData] = useState({});
+
   const { newsId } = location.state;
+
   useEffect(() => {
-    if (!newsId) {
-      alert("뉴스 아이디가 없음 오류");
-      return;
-    }
     const loadData = async () => {
       try {
         const response = await apiClient.get(`/api/news/update/${newsId}`);
         const result = response.data;
-        if (!result.success) {
-          ErrorAlert();
-          return;
-        }
-        console.log(result.data);
         setData(result.data);
         setImage(result.data.image);
         setTitle(result.data.title);
         setContent(result.data.content);
       } catch (error) {
-        ErrorAlert(error);
+        console.log(error);
       }
     };
     loadData();
   }, [newsId]);
-
-  const handleClick = async () => {};
 
   return (
     <div className="newsContainer">
@@ -50,9 +43,10 @@ export default function NewsUpdatePage() {
 
           <select
             className="border"
+            value={selectId || data.categoryId}
             onChange={(e) => setSelectId(e.target.value)}
           >
-            <option value={data.categoryId}>카테고리를 선택하세요</option>
+            <option value="">카테고리를 선택하세요</option>
             {data.list?.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
@@ -63,6 +57,7 @@ export default function NewsUpdatePage() {
           <div className="newsBox">
             <NewsImageInput image={image} setImage={setImage} />
             <input
+              className="border"
               type="text"
               placeholder="제목을 입력하세요."
               value={title}
@@ -70,14 +65,20 @@ export default function NewsUpdatePage() {
             />
             <br />
             <textarea
+              className="borders"
               placeholder="본문을 입력하세요"
               value={content}
               onChange={(e) => setContent(e.target.value)}
             ></textarea>
             <br />
-            <button className="border" onClick={handleClick}>
-              작성 완료
-            </button>
+            <NewsUpdateButton
+              newsId={newsId}
+              title={title}
+              content={content}
+              categoryId={data.categoryId}
+            />
+
+            <NewsDeleteButton newsId={newsId} />
           </div>
         </>
       ) : (

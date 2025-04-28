@@ -6,8 +6,10 @@ import ProfileImageInput from "./updateComponent/ProfileImageInput";
 import ErrorAlert from "../../utils/ErrorAlert";
 import apiClient from "../../api/axios";
 import UpdateSubmitButton from "./updateComponent/UpdateSubmitButton";
+import { useStore } from "../../store/useUserStore";
 
 export default function UpdatePage() {
+  const userId = useStore((state) => state.user.id);
   const [image, setImage] = useState(null);
   const [email, setEmail] = useState("");
   const [emailCode, setEmailCode] = useState("");
@@ -21,7 +23,7 @@ export default function UpdatePage() {
   useEffect(() => {
     async function loadUpdatePage() {
       try {
-        const response = await apiClient.get("/api/user/info");
+        const response = await apiClient.get(`/api/user/${userId}`);
         const result = response.data;
         if (!result.success) {
           return;
@@ -35,7 +37,7 @@ export default function UpdatePage() {
       }
     }
     loadUpdatePage();
-  }, []);
+  }, [userId]);
 
   return (
     <div className="updateContainer">

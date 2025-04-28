@@ -4,12 +4,13 @@ import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import NewsLikeButton from "./NewsLikeButton";
 import ScrapButton from "./ScrapButton";
-import DropDownButton from "./DropDownButton";
+import DropDownButton from "./DropDownMenu";
 
 export default function NewsDetail() {
   const { id } = useParams();
   const [news, setNews] = useState(null);
-  const [newsId, setNewsId] = useState(0);
+  const [newsId, setNewsId] = useState();
+  const [userId, setUserId] = useState();
 
   const [isLike, setIsLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
@@ -22,14 +23,11 @@ export default function NewsDetail() {
       try {
         const response = await apiClient.get(`/api/news/${id}`);
         const result = response.data;
-        if (!result.success) {
-          ErrorAlert();
-          return;
-        }
         setNews(result.data);
         setIsLike(result.data.liked);
         setNewsId(result.data.id);
         setLikeCount(result.data.likeCount);
+        setUserId(result.data.userId);
       } catch (error) {
         ErrorAlert(error);
       }
@@ -42,7 +40,7 @@ export default function NewsDetail() {
   ) : (
     <div className="flex flex-col items-center">
       <p>{news.category}</p>
-      <DropDownButton newsId={newsId} />
+      <DropDownButton newsId={newsId} userId={userId} />
       <img src={news.image} alt="뉴스 썸네일" />
       <p>{news.title}</p>
       <span>{news.createdAt}</span>

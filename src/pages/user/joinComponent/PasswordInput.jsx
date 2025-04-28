@@ -11,8 +11,6 @@ export default function PasswordInput({
   setCheckPassword,
   setValidationState,
 }) {
-  console.log("PasswordInput 컴포넌트 로드");
-  console.log("1= ", typeof setPassword);
   const [msg, setMsg] = useState("");
   const [checkMsg, setCheckMsg] = useState("");
   const [color, setColor] = useState("");

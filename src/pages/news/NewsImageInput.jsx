@@ -13,7 +13,12 @@ export default function NewsImageInput({ image, setImage }) {
   return (
     <>
       <p>프로필 이미지</p>
-      <input type="file" accept="image/*" onChange={handleChange} />
+      <input
+        className="border"
+        type="file"
+        accept="image/*"
+        onChange={handleChange}
+      />
       {preview ? (
         <img src={preview} alt="미리보기" width="530px" height="300px" />
       ) : (

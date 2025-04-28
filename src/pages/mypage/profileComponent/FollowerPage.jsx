@@ -7,13 +7,13 @@ export default function FollowerPage() {
 
   useEffect(() => {
     async function loadFollowerPage() {
-      const response = await apiClient.get("/api/mypage/follower-list");
-      const result = response.data;
-      if (!result.success) {
-        ErrorAlert();
-        return;
+      try {
+        const response = await apiClient.get("/api/mypage/follower-list");
+        const result = response.data;
+        setFollowerList(result.data);
+      } catch (error) {
+        console.log(error);
       }
-      setFollowerList(result.data);
     }
     loadFollowerPage();
   }, []);

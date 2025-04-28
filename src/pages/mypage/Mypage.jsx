@@ -10,7 +10,7 @@ import ScrapList from "./listComponent/ScrapList";
 
 export default function Mypage() {
   const [role, setRole] = useState("");
-  const [userImg, setUserImg] = useState("");
+  const [userImg, setUserImg] = useState(null);
   const [nickname, setNickname] = useState("");
   const [follower, setFollower] = useState("");
   const [following, setFollowing] = useState("");
@@ -22,10 +22,6 @@ export default function Mypage() {
       try {
         const response = await apiClient.get("/api/mypage");
         const result = response.data;
-        if (!result.data) {
-          ErrorAlert();
-          return;
-        }
         setRole(result.role);
         setUserImg(result.data.image);
         setNickname(result.data.nickname);
@@ -33,7 +29,7 @@ export default function Mypage() {
         setFollowing(result.data.followingCount);
         setIntroduce(result.data.introduce);
       } catch (error) {
-        ErrorAlert(error);
+        console.log(error);
       }
     }
     loadMypage();

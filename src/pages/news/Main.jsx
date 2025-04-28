@@ -10,15 +10,15 @@ export default function Main() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function loadNews() {
+    const loadNews = async () => {
       try {
         const response = await apiClient.get("/api/news/main");
         const result = response.data;
         setNewsList(result.data);
       } catch (error) {
-        ErrorAlert(error);
+        console.log(error);
       }
-    }
+    };
     loadNews();
   }, []);
 
@@ -27,7 +27,7 @@ export default function Main() {
       <h4>{formatDate}</h4>
       <NewsCreateButton />
       {newsList.length === 0 ? (
-        <p>뉴스리스트가 없습니다.</p>
+        <p>뉴스가 없습니다.</p>
       ) : (
         <div className="newsContainer">
           {newsList.map((news) => (

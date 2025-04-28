@@ -8,19 +8,14 @@ export default function MypageBtn() {
     try {
       const response = await apiClient.get("/api/auth/check");
       const result = response.data;
-      if (!result.success) {
-        alert("로그인 후 이용해 주세요.");
-        navigate("/user/login");
-        return;
-      }
       navigate("/user/mypage");
     } catch (error) {
-      ErrorAlert(error);
+      console.log(error);
     }
   };
 
   return (
-    <button className="border rounded" onClick={handleMove}>
+    <button className="border rounded mx-5" onClick={handleMove}>
       마이페이지
     </button>
   );

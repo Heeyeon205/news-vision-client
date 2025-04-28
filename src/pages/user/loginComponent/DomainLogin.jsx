@@ -18,14 +18,29 @@ function DomainLogin() {
         password,
       });
       const result = response.data;
-      const { nickname, accessToken, refreshToken } = result.data;
+      const { accessToken, refreshToken, userId, nickname } = result.data;
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      setUser(nickname);
+      setUser(userId, nickname);
+      console.log("domain login: ", userId, nickname);
       alert("로그인 성공!");
       navigate("/");
     } catch (error) {
-      ErrorAlert(error);
+      if (error.response) {
+        const { status, data } = error.response;
+        if (status === 400 || status === 404) {
+          alert(data.message);
+        } else if (status === 500) {
+          alert("서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        } else {
+          alert(data.message || "문제가 발생했습니다.");
+        }
+      } else if (error.request) {
+        alert("서버로부터 응답이 없습니다. 네트워크를 확인하세요.");
+      } else {
+        ErrorAlert(error);
+        console.log("error.message: ", error.message);
+      }
     }
   };
 

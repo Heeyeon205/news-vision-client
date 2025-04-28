@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 
-export default function DropDownButton({ newsId }) {
+export default function DropDownMenu({ newsId }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
@@ -18,13 +18,9 @@ export default function DropDownButton({ newsId }) {
     try {
       const response = await apiClient.get("/api/auth/check");
       const result = response.data;
-      if (!result.success) {
-        alert("접근 권한이 없습니다.");
-        return;
-      }
       navigate("/news/update-form", {
         state: {
-          newsId,
+          newsId: Number(newsId),
         },
       });
     } catch (error) {
