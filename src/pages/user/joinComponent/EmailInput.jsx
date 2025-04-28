@@ -4,9 +4,7 @@ import { useState, useEffect } from "react";
 
 export function validateEmail(email) {
   if (
-    !/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(
-      email
-    )
+    !/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(email)
   ) {
     return { valid: false, msg: "이메일 형식에 따라 입력해주세요." };
   }
@@ -41,9 +39,7 @@ export default function MatchesEmailCode({
       setColor("red");
       return;
     }
-    if (email === "") {
-      return;
-    }
+    if (email === "") return;
     try {
       const response = await apiClient.post("/email/send-code", { email });
       const result = response.data;
@@ -65,22 +61,17 @@ export default function MatchesEmailCode({
   const authCheckBtn = async () => {
     const { valid } = validateEmail(email);
     if (!valid) {
-      setCheckMsg("이메일 인증을 먼저해주세요");
+      setCheckMsg("이메일 인증을 먼저 해주세요.");
       setCheckColor("red");
       return;
     }
-    if (emailCode === "") {
-      return;
-    }
+    if (emailCode === "") return;
     try {
-      const response = await apiClient.post("/email/verify", {
-        email,
-        emailCode,
-      });
+      const response = await apiClient.post("/email/verify", { email, emailCode });
       const result = response.data;
       if (!result.success) {
         setValidationState((prev) => ({ ...prev, email: false }));
-        alert("이메일 인증에 실패했습니다. 다시 시도해주세요");
+        alert("이메일 인증에 실패했습니다. 다시 시도해주세요.");
         return;
       }
       setReadOnly(true);
@@ -88,43 +79,63 @@ export default function MatchesEmailCode({
       setCheckColor("green");
       setValidationState((prev) => ({ ...prev, email: true }));
     } catch (error) {
-      alert("이메일 인증에 실패했습니다. 다시 시도해주세요");
-      // ErrorAlert();
+      alert("이메일 인증에 실패했습니다. 다시 시도해주세요.");
       console.log(error);
     }
   };
 
   return (
-    <>
-      <label>이메일</label>
-      <br />
-      <input
-        className="border rounded"
-        type="email"
-        value={email}
-        placeholder="이메일을 입력해주세요."
-        readOnly={readOnly}
-        onChange={(e) => {
-          setEmail(e.target.value);
-          setTouched(true);
-        }}
-      />
-      <button onClick={authBtn}>인증하기 </button>
-      <br />
-      <label style={{ color }}>{msg}</label> <br />
-      <label>인증번호</label>
-      <br />
-      <input
-        className="border rounded"
-        type="text"
-        value={emailCode}
-        placeholder="인증번호를 입력해주세요."
-        onChange={(e) => setEmailCode(e.target.value)}
-        readOnly={readOnly}
-      />
-      <button onClick={authCheckBtn}>인증확인 </button>
-      <label style={{ color: checkColor }}>{checkMsg}</label> <br />
-      <br />
-    </>
+    <div className="flex flex-col space-y-1 w-80">
+      {/* 이메일 입력 */}
+      <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+        이메일
+      </label>
+      <div className="flex w-full">
+        <input
+          id="email"
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:ring-orange-500 focus:border-orange-500"
+          type="email"
+          value={email}
+          readOnly={readOnly}
+          placeholder="이메일을 입력해주세요."
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setTouched(true);
+          }}
+        />
+        <button
+          type="button"
+          onClick={authBtn}
+          className="px-4 py-2 bg-orange-500 text-white text-sm rounded-r-md hover:bg-orange-600"
+        >
+          인증하기
+        </button>
+      </div>
+      <p className="text-sm" style={{ color }}>{msg}</p>
+
+      {/* 인증번호 입력 */}
+      <label htmlFor="email-code" className="block text-sm mt-3 font-medium text-gray-700">
+        인증번호
+      </label>
+      <div className="flex w-full">
+        <input
+          id="email-code"
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:ring-orange-500 focus:border-orange-500"
+          type="text"
+          value={emailCode}
+          readOnly={readOnly}
+          placeholder="인증번호를 입력해주세요."
+          onChange={(e) => setEmailCode(e.target.value)}
+        />
+        <button
+          type="button"
+          onClick={authCheckBtn}
+          className="px-4 py-2 bg-orange-500 text-white text-sm rounded-r-md hover:bg-orange-600"
+        >
+          인증확인
+        </button>
+      </div>
+      <p className="text-sm" style={{ color: checkColor }}>{checkMsg}</p>
+    </div>
   );
 }

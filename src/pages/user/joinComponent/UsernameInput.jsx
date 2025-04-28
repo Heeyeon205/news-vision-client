@@ -1,13 +1,9 @@
 import { useCallback, useState, useEffect } from "react";
+import { debounce } from "lodash";
 import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
-import { debounce } from "lodash";
 
-export default function UsernameCheck({
-  username,
-  setUsername,
-  setValidationState,
-}) {
+export default function UsernameInput({ username, setUsername, setValidationState }) {
   const [msg, setMsg] = useState("");
   const [color, setColor] = useState("");
   const [touched, setTouched] = useState(false);
@@ -22,12 +18,9 @@ export default function UsernameCheck({
   const debounceCheck = useCallback(
     debounce(async (input) => {
       try {
-        const id = input.trim();
-        if (id === "") {
-          return;
-        }
+        if (input.trim() === "") return;
         const response = await apiClient.get("/api/user/check-username", {
-          params: { username: id },
+          params: { username: input },
         });
         const result = response.data;
         if (result.data.exists) {
@@ -50,23 +43,22 @@ export default function UsernameCheck({
     const value = e.target.value;
     setUsername(value);
     debounceCheck(value);
-    if (!touched) {
-      setTouched(true);
-    }
+    if (!touched) setTouched(true);
   };
 
   return (
     <>
-      <label>아이디</label> <br />
+      <label for="id" class="block text-sm font-medium text-gray-700"
+      >아이디</label
+      >
       <input
-        className="border rounded"
         type="text"
+        className="mt-1 block w-80 px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500"
+        placeholder="아이디를 입력하세요"
         value={username}
-        placeholder="아이디를 입력해주세요."
         onChange={handleChange}
       />
-      <span style={{ color }}>{msg}</span>
-      <br />
+      <p className="text-sm mt-1" style={{ color }}>{msg}</p>
     </>
   );
 }
