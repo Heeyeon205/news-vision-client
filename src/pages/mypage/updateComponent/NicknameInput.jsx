@@ -2,27 +2,16 @@ import axios from "../../../api/axios";
 import { useState } from "react";
 import ErrorAlert from "../../../utils/ErrorAlert";
 
-export default function ValidateNickname({
-  nickname,
-  setNickname,
-  setValidationState,
-}) {
+export default function ValidateNickname({ nickname, setNickname, setValidationState }) {
   const [color, setColor] = useState("");
   const [msg, setMsg] = useState("");
   const [readOnly, setReadOnly] = useState(false);
 
   const checkBtn = async () => {
     try {
-      if (nickname === "") {
-        return;
-      }
-      const response = await axios.get("/api/user/check-nickname", {
-        params: { nickname },
-      });
+      if (nickname === "") return;
+      const response = await axios.get("/api/user/check-nickname", { params: { nickname } });
       const result = response.data;
-      console.log(result);
-      console.log(result.data);
-      console.log(result.data.exists);
 
       if (result.data.exists) {
         setValidationState((prev) => ({ ...prev, nickname: false }));
@@ -40,24 +29,30 @@ export default function ValidateNickname({
   };
 
   const handleChange = (e) => {
-    const value = e.target.value;
-    setNickname(value);
+    setNickname(e.target.value);
   };
 
   return (
     <>
-      <label>닉네임</label> <br />
-      <input
-        style={{ borderColor: color }}
-        type="text"
-        value={nickname}
-        readOnly={readOnly}
-        placeholder="닉네임을 입력해주세요."
-        onChange={handleChange}
-      />
-      <button onClick={checkBtn}>중복확인</button> <br />
-      <label style={{ color }}>{msg}</label>
-      <br />
+      <div className="flex">
+        <input
+          type="text"
+          value={nickname}
+          readOnly={readOnly}
+          placeholder="닉네임을 입력해주세요."
+          onChange={handleChange}
+          style={{ borderColor: color }}
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+        />
+        <button
+          type="button"
+          onClick={checkBtn}
+          className="px-4  bg-orange-500 text-white text-sm rounded-r-md  hover:bg-orange-600"
+        >
+          중복확인
+        </button>
+      </div>
+      <p className="text-sm mt-1" style={{ color }}>{msg}</p>
     </>
   );
 }

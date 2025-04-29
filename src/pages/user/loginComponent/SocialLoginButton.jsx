@@ -1,22 +1,28 @@
-import { FaGoogle, FaApple } from "react-icons/fa";
-import { SiNaver, SiKakaotalk } from "react-icons/si";
 
-export default function SocialLoginButton({ provider, children }) {
+import { SiNaver, SiKakaotalk } from "react-icons/si";
+import { FcGoogle } from "react-icons/fc";
+import { BsChatFill } from "react-icons/bs";
+
+
+
+export default function SocialLoginButton({ provider, children, className = "" }) {
   const handleLogin = () => {
     window.location.href = `http://localhost:8080/oauth2/authorization/${provider}`;
   };
 
   let IconComponent;
-
+  let iconColor = "";
   switch (provider) {
     case "google":
-      IconComponent = FaGoogle;
+      IconComponent = FcGoogle;
       break;
     case "kakao":
-      IconComponent = SiKakaotalk;
+      IconComponent = BsChatFill;
+      iconColor = "#FEE500";
       break;
     case "naver":
       IconComponent = SiNaver;
+      iconColor = "#03C75A"
       break;
     default:
       IconComponent = null;
@@ -26,10 +32,16 @@ export default function SocialLoginButton({ provider, children }) {
   return (
     <button
       onClick={handleLogin}
-      className="w-full flex items-center justify-center border border-gray-300 rounded-md py-3 px-4 text-sm font-medium text-gray-700 hover:bg-gray-100"
+      className={`w-full flex items-center justify-center border border-gray-300 rounded-md py-3 px-4 text-sm font-medium ${className}`}
     >
-      {IconComponent && <IconComponent className="w-5 h-5 mr-2" />}
+      {IconComponent && (
+        <IconComponent
+          className="w-5 h-5 mr-2"
+          color={iconColor || undefined} // color props 추가 (없으면 undefined)
+        />
+      )}
       {children}
     </button>
   );
 }
+

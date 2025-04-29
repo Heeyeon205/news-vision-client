@@ -3,7 +3,6 @@ import EmailInput from "../user/joinComponent/EmailInput";
 import NicknameInput from "./updateComponent/NicknameInput";
 import IntroduceInput from "./updateComponent/IntroduceInput";
 import ProfileImageInput from "./updateComponent/ProfileImageInput";
-import ErrorAlert from "../../utils/ErrorAlert";
 import apiClient from "../../api/axios";
 import UpdateSubmitButton from "./updateComponent/UpdateSubmitButton";
 import { useStore } from "../../store/useUserStore";
@@ -29,8 +28,6 @@ export default function UpdatePage() {
         setNickname(result.data.nickname);
         setEmail(result.data.email);
         setIntroduce(result.data.introduce);
-        console.log("리졸트: ", result);
-        console.log("리졸트 데이타: ", result.data);
       } catch (error) {
         console.log(error);
       }
@@ -39,30 +36,52 @@ export default function UpdatePage() {
   }, [userId]);
 
   return (
-    <div className="updateContainer">
-      <div>
-        <h3>프로필 편집</h3>
-      </div>
+    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md mt-10">
+      {/* 타이틀 */}
+      <h2 className="text-2xl font-bold mb-8">프로필 편집</h2>
 
-      <div>
+      {/* 프로필 이미지 */}
+      <div className="flex flex-col items-start mb-8">
         <ProfileImageInput image={image} setImage={setImage} />
       </div>
 
-      <div>
-        <NicknameInput
-          nickname={nickname}
-          setNickname={setNickname}
-          setValidationState={setValidationState}
-        />
-        <EmailInput
-          email={email}
-          setEmail={setEmail}
-          emailCode={emailCode}
-          setEmailCode={setEmailCode}
-          setValidationState={setValidationState}
-        />
-        <IntroduceInput introduce={introduce} setIntroduce={setIntroduce} />
+      {/* 닉네임 */}
+      <div className="mb-6 w-full">
+        <label className="block text-sm font-medium text-gray-700 mb-2">닉네임</label>
+        <div className="w-full">
+          <NicknameInput
+            nickname={nickname}
+            setNickname={setNickname}
+            setValidationState={setValidationState}
+          />
+        </div>
+      </div>
 
+      {/* 이메일 */}
+      <div className="mb-6 w-full">
+        <label className="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+        <div className="w-full">
+          <EmailInput
+            email={email}
+            setEmail={setEmail}
+            emailCode={emailCode}
+            setEmailCode={setEmailCode}
+            setValidationState={setValidationState}
+          />
+        </div>
+      </div>
+
+      {/* 소개 */}
+      <div className="mb-6 w-full">
+        {/* 소개 */}
+        <div className="mb-6 w-full">
+          <IntroduceInput introduce={introduce} setIntroduce={setIntroduce} />
+        </div>
+
+      </div>
+
+      {/* 제출 버튼 */}
+      <div className="flex justify-end">
         <UpdateSubmitButton
           image={image}
           nickname={nickname}

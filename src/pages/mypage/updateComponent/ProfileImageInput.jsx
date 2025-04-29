@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function ProfileImageInput({ image, setImage }) {
+  const fileInputRef = useRef();
   const [preview, setPreview] = useState(null);
 
   const handleChange = (e) => {
@@ -10,15 +11,25 @@ export default function ProfileImageInput({ image, setImage }) {
     setPreview(URL.createObjectURL(file));
   };
 
+  const handleClickImage = () => {
+    fileInputRef.current.click();
+  };
+
   return (
-    <>
-      <p>프로필 이미지</p>
-      <input type="file" accept="image/*" onChange={handleChange} />
-      {preview ? (
-        <img src={preview} alt="미리보기" width="64px" height="64px" />
-      ) : (
-        <img src={image} alt="미리보기" width="64px" height="64px" />
-      )}
-    </>
+    <div className="flex flex-col items-start space-y-2">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleChange}
+        ref={fileInputRef}
+        className="hidden"
+      />
+      <img
+        src={preview || image}
+        alt="프로필 미리보기"
+        onClick={handleClickImage}
+        className="w-16 h-16 rounded-full object-cover cursor-pointer hover:opacity-80"
+      />
+    </div>
   );
 }

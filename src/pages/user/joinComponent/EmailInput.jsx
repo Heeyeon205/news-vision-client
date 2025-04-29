@@ -2,7 +2,7 @@ import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import { useState, useEffect } from "react";
 
-export function EmailInput(email) {
+export function EmailInputValidator(email) {
   if (
     !/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(
       email
@@ -29,13 +29,13 @@ export default function MatchesEmailCode({
 
   useEffect(() => {
     if (!touched) return;
-    const { msg, valid } = EmailInput(email);
+    const { msg, valid } = EmailInputValidator(email);
     setMsg(msg);
     setColor(valid ? "green" : "red");
   }, [email, touched]);
 
   const authBtn = async () => {
-    const { valid } = EmailInput(email);
+    const { valid } = EmailInputValidator(email);
     if (!valid) {
       setMsg("이메일 형식에 따라 입력해주세요.");
       setColor("red");
@@ -61,7 +61,7 @@ export default function MatchesEmailCode({
   };
 
   const authCheckBtn = async () => {
-    const { valid } = EmailInput(email);
+    const { valid } = EmailInputValidator(email);
     if (!valid) {
       setCheckMsg("이메일 인증을 먼저 해주세요.");
       setCheckColor("red");
@@ -69,10 +69,7 @@ export default function MatchesEmailCode({
     }
     if (emailCode === "") return;
     try {
-      const response = await apiClient.post("/email/verify", {
-        email,
-        emailCode,
-      });
+      const response = await apiClient.post("/email/verify", { email, emailCode });
       const result = response.data;
       if (!result.success) {
         setValidationState((prev) => ({ ...prev, email: false }));
@@ -90,17 +87,13 @@ export default function MatchesEmailCode({
   };
 
   return (
-    <div className="flex flex-col space-y-1 w-80">
-      <label
-        htmlFor="email"
-        className="block text-sm font-medium text-gray-700"
-      >
-        이메일
-      </label>
+    <div className="flex flex-col space-y-2 w-full">
+      {/* 이메일 입력 + 인증 버튼 */}
+
       <div className="flex w-full">
         <input
           id="email"
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:ring-orange-500 focus:border-orange-500"
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
           type="email"
           value={email}
           readOnly={readOnly}
@@ -118,20 +111,16 @@ export default function MatchesEmailCode({
           인증하기
         </button>
       </div>
-      <p className="text-sm" style={{ color }}>
-        {msg}
-      </p>
+      {msg && <p className="text-xs mt-1" style={{ color }}>{msg}</p>}
 
-      <label
-        htmlFor="email-code"
-        className="block text-sm mt-3 font-medium text-gray-700"
-      >
+      {/* 인증번호 입력 + 인증확인 버튼 */}
+      <label htmlFor="email-code" className="block text-sm font-medium text-gray-700 mt-3">
         인증번호
       </label>
       <div className="flex w-full">
         <input
           id="email-code"
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:ring-orange-500 focus:border-orange-500"
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
           type="text"
           value={emailCode}
           readOnly={readOnly}
@@ -146,9 +135,7 @@ export default function MatchesEmailCode({
           인증확인
         </button>
       </div>
-      <p className="text-sm" style={{ color: checkColor }}>
-        {checkMsg}
-      </p>
+      {checkMsg && <p className="text-xs mt-1" style={{ color: checkColor }}>{checkMsg}</p>}
     </div>
   );
 }
