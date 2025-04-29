@@ -24,18 +24,18 @@ export default function LoginHub() {
       {/* 로그인 버튼 그룹 */}
       <div className="flex flex-col gap-4 w-80">
         <button
-          className="w-full border border-gray-300 rounded py-3 text-sm font-medium"
+          className="w-full border border-gray-300 hover:bg-gray-100 rounded py-3 text-sm font-medium"
           onClick={openModal}
         >
           뉴션 로그인
         </button>
-        <SocialLoginButton provider="google" className="">
+        <SocialLoginButton provider="google" className="hover:bg-gray-200">
           Google로 로그인
         </SocialLoginButton>
-        <SocialLoginButton provider="naver" className="">
+        <SocialLoginButton provider="naver" className="hover:bg-[#03C75A33]">
           Naver로 로그인
         </SocialLoginButton>
-        <SocialLoginButton provider="kakao" className="">
+        <SocialLoginButton provider="kakao" className="hover:bg-[#FEE50033]">
           Kakao로 로그인
         </SocialLoginButton>
       </div>

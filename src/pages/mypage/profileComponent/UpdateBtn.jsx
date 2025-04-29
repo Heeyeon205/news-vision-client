@@ -7,7 +7,10 @@ export default function EditProfile() {
     checkAuthAndMove(navigate, "/user/update");
   };
   return (
-    <button className="border rounded" onClick={handleMove}>
+    <button
+      className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-3 py-1 rounded transition"
+      onClick={handleMove}
+    >
       프로필 편집
     </button>
   );

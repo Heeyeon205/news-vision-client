@@ -20,33 +20,31 @@ export default function NewsList() {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col space-y-4">
       {newsList.length === 0 ? (
         <p>아직 작성한 뉴스가 없어요.</p>
       ) : (
         newsList.map((news) => (
           <div
-            className="border"
             key={news.newsId}
             onClick={() => navigate(`/news/${news.newsId}`)}
+            className="bg-white rounded-lg shadow p-4 hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer"
           >
-            <div>
-              <img src={news.image} alt="뉴스 이미지" />
-            </div>
-            <div>
-              <div>
-                <p>{news.nickname}</p>
-                <p>{news.createAt}</p>
-              </div>
-              <div>{news.title}</div>
-              <div>
-                <span>좋아요 {news.likeCount}</span>
-              </div>
-            </div>
-            <div>{news.categoryName}</div>
+            {/* 뉴스 이미지 */}
+            <img
+              src={news.image}
+              alt="뉴스 이미지"
+              className="w-full h-48 object-cover rounded mb-4"
+            />
+            {/* 카테고리 */}
+            <div className="text-sm text-orange-500 font-semibold">{news.categoryName}</div>
+            {/* 제목 */}
+            <h3 className="font-bold text-lg mt-1">{news.title}</h3>
+            {/* 작성자 / 작성시간 */}
+            <div className="text-gray-400 text-xs mt-1">{news.nickname} · {news.createAt}</div>
           </div>
         ))
       )}
-    </>
+    </div>
   );
 }

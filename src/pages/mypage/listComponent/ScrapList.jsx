@@ -25,34 +25,31 @@ export default function ScrapList() {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col space-y-4">
       {scraps.length === 0 ? (
         <p>아직 스크랩한 뉴스가 없어요.</p>
       ) : (
         scraps.map((scrap) => (
           <div
-            className="border"
             key={scrap.newsId}
             onClick={() => navigate(`/news/${scrap.newsId}`)}
+            className="bg-white rounded-lg shadow p-4 hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer"
           >
-            <div>
-              <img src={scrap.image} alt="뉴스 이미지" />
-            </div>
-            <div>
-              <div>
-                <p>{scrap.nickname}</p>
-                <p>{scrap.createAt}</p>
-                <button>스크랩</button>
-              </div>
-              <div>{scrap.title}</div>
-              <div>
-                <span>좋아요 {scrap.likeCount}</span>
-              </div>
-            </div>
-            <div>{scrap.categoryName}</div>
+            {/* 뉴스 이미지 */}
+            <img
+              src={scrap.image}
+              alt="스크랩 뉴스 이미지"
+              className="w-full h-48 object-cover rounded mb-4"
+            />
+            {/* 카테고리 */}
+            <div className="text-sm text-orange-500 font-semibold">{scrap.categoryName}</div>
+            {/* 제목 */}
+            <h3 className="font-bold text-lg mt-1">{scrap.title}</h3>
+            {/* 작성자 / 작성시간 */}
+            <div className="text-gray-400 text-xs mt-1">{scrap.nickname} · {scrap.createAt}</div>
           </div>
         ))
       )}
-    </>
+    </div>
   );
 }
