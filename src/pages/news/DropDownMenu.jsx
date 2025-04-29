@@ -70,21 +70,22 @@ export default function DropDownMenu({ newsId, userId }) {
           {own ? (
             <button
               onClick={handleEdit}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
               뉴스 수정
             </button>
           ) : (
             <button
               onClick={handleInquiry}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
               문의하기
             </button>
           )}
+          /dev-smb
           <button
             onClick={handleShare}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
           >
             공유하기
           </button>

@@ -38,32 +38,68 @@ export default function NewsDetail() {
   return !news ? (
     <p>뉴스 불러오는 중....</p>
   ) : (
-    <div className="flex flex-col items-center">
-      <p>{news.category}</p>
-      <DropDownMenu newsId={newsId} userId={userId} />
+    <div class="p-4 max-w-[600px] w-full mx-auto shadow-lg mt-5 mb-6">
       <img src={news.image} alt="뉴스 썸네일" width="600" height="350" />
-      <p>{news.title}</p>
-      <span>{news.createdAt}</span>
-      <span> 좋아요 {likeCount}</span>
-      <span> 조회수 {news.view}</span>
-      <img src={news.profileImage} alt="유저 프로필" />
-      <img src={news.authorBadgeIcon} alt="유저 뱃지" />
-      <p>{news.authorNickname}</p>
-      <p>{news.content}</p>
-      <NewsLikeButton
-        newsId={newsId}
-        isLike={isLike}
-        setIsLike={setIsLike}
-        likeCount={likeCount}
-        setLikeCount={setLikeCount}
-      />
-      <ScrapButton
-        newsId={newsId}
-        isScrap={isScrap}
-        setIsScrap={setIsScrap}
-        scrapCount={scrapCount}
-        setScrapCount={setScrapCount}
-      />
+      <div className="flex justify-between items-center my-2">
+        <p className="bg-gray-100 text-sm text-balck-500 rounded-xl px-3 py-1">
+          {news.category}
+        </p>
+        <DropDownMenu newsId={newsId} userId={userId} />
+      </div>
+      <p className="text-lg font-bold mb-2">{news.title}</p>
+      <div className="flex items-center text-sm text-gray-400 mt-2 space-x-4">
+        <span>{news.createdAt}</span>
+        <span> 읽음 {news.view}</span>
+      </div>
+      <div className="mt-7 flex">
+        <div className="flex-shrink-0 w-10 h-10 mr-2">
+          <img
+            src={news.profileImage}
+            alt="유저 프로필"
+            className="rounded-full"
+          />
+        </div>
+        <div className="flex-1 flex flex-col">
+          <div className="flex items-center">
+            <span className="font-medium text-gray-800 mr-1">
+              {news.authorNickname}
+            </span>
+            <img
+              src={news.authorBadgeIcon}
+              alt="유저 뱃지"
+              className="w-5 h-5"
+            />
+          </div>
+          {news.badgeTitle && (
+            <span className="mx-0.5 text-xs text-gray-500">
+              {news.badgeTitle}
+            </span>
+          )}
+        </div>
+      </div>
+      <div className="mt-4 border-b border-gray-300"></div>
+      <div className="mt-6 text-gray-700 text-sm leading-relaxed font-noto-sans">
+        <p className="whitespace-pre-line tracking-normal">{news.content}</p>
+      </div>
+      <div className="mt-6 flex items-center justify-between">
+        <div className="flex items-center space-x-2 ">
+          <NewsLikeButton
+            newsId={newsId}
+            isLike={isLike}
+            setIsLike={setIsLike}
+            likeCount={likeCount}
+            setLikeCount={setLikeCount}
+          />
+          <span className="text-md text-gray-500">{likeCount}</span>
+        </div>
+        <ScrapButton
+          newsId={newsId}
+          isScrap={isScrap}
+          setIsScrap={setIsScrap}
+          scrapCount={scrapCount}
+          setScrapCount={setScrapCount}
+        />
+      </div>
     </div>
   );
 }
