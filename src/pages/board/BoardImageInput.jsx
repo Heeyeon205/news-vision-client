@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function NewsImageInput({ image, setImage }) {
+export default function BoardImageInput({ image, setImage }) {
   const [preview, setPreview] = useState(null);
 
   const handleChange = (e) => {
@@ -20,9 +20,9 @@ export default function NewsImageInput({ image, setImage }) {
         onChange={handleChange}
       />
       {preview ? (
-        <img src={preview} alt="미리보기" width="530px" height="300px" />
+        <img src={preview} alt="미리보기" width="40px" height="40px" />
       ) : (
-        <img src={image} alt="미리보기" width="530px" height="300px" />
+        <img src={image} alt="미리보기" width="40px" height="40px" />
       )}
     </>
   );

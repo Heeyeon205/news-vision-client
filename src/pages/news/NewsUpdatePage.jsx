@@ -41,18 +41,7 @@ export default function NewsUpdatePage() {
             <a href={data.refLink}>뉴스 확인하러 가기</a>
           </div>
 
-          <select
-            className="border"
-            value={selectId || data.categoryId}
-            onChange={(e) => setSelectId(e.target.value)}
-          >
-            <option value="">카테고리를 선택하세요</option>
-            {data.list?.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          <CategoriesInput categories={data.list} setSelectId={setSelectId} />
 
           <div className="newsBox">
             <NewsImageInput image={image} setImage={setImage} />

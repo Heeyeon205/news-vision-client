@@ -6,11 +6,22 @@ import { useNavigate } from "react-router-dom";
 import { useStore } from "../../store/useUserStore";
 
 export default function ArticleMainPage() {
-  const logUserId = useStore((state) => state.userId);
+  const logId = useStore((state) => state.userId);
+  const logRole = useStore((state) => state.role);
+  const [auth, setAuth] = useState(false);
+
+  useEffect(() => {
+    if (logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR") {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  }, [logRole]);
+
   const categories = [
     "전체",
     "인기",
-    ...(logUserId ? ["팔로우"] : []),
+    ...(logId ? ["팔로우"] : []),
     "경제",
     "정치",
     "문화",
@@ -91,7 +102,7 @@ export default function ArticleMainPage() {
 
       <div>
         <h4>{formatDate}</h4>
-        {logUserId && <NewsCreateButton />}
+        {auth && <NewsCreateButton />}
       </div>
 
       <div className="listBox">

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ErrorAlert from "../../utils/ErrorAlert";
 import apiClient from "../../api/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import NewsImageInput from "./NewsImageInput";
@@ -19,14 +18,10 @@ export default function NewsCreateNewsPage() {
       try {
         const response = await apiClient.get("/api/category");
         const result = response.data;
-        if (!result.success) {
-          ErrorAlert();
-          return;
-        }
         console.log(result.data);
         setCategories(result.data);
       } catch (error) {
-        ErrorAlert(error);
+        console.log(error);
       }
     };
     loadCategory();
@@ -47,15 +42,10 @@ export default function NewsCreateNewsPage() {
           "Content-Type": "multipart/form-data",
         },
       });
-      const result = response.data;
-      if (!result.success) {
-        ErrorAlert();
-        return;
-      }
       alert("뉴스 작성 완료");
       navigate("/");
     } catch (error) {
-      ErrorAlert(error);
+      console.log(error);
     }
   };
 

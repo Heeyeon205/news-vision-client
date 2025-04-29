@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../../api/axios";
 import { useStore } from "../../../store/useUserStore";
+import { toast } from "sonner";
 
 function DomainLogin({ closeModal }) {
   const { setUser } = useStore();
@@ -17,12 +18,12 @@ function DomainLogin({ closeModal }) {
         password,
       });
       const result = response.data;
-      const { accessToken, refreshToken, userId, nickname, image } =
+      const { accessToken, refreshToken, userId, nickname, image, role } =
         result.data;
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      setUser(userId, nickname, image);
-      alert("로그인 성공!");
+      setUser(userId, nickname, image, role);
+      toast.success("로그인 성공!");
       closeModal();
       navigate("/");
     } catch (error) {

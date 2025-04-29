@@ -4,7 +4,7 @@ import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import NewsLikeButton from "./NewsLikeButton";
 import ScrapButton from "./ScrapButton";
-import DropDownButton from "./DropDownMenu";
+import DropDownMenu from "./DropDownMenu";
 
 export default function NewsDetail() {
   const { id } = useParams();
@@ -40,7 +40,7 @@ export default function NewsDetail() {
   ) : (
     <div className="flex flex-col items-center">
       <p>{news.category}</p>
-      <DropDownButton newsId={newsId} userId={userId} />
+      <DropDownMenu newsId={newsId} userId={userId} />
       <img src={news.image} alt="뉴스 썸네일" width="600" height="350" />
       <p>{news.title}</p>
       <span>{news.createdAt}</span>

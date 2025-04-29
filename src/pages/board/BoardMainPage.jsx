@@ -2,10 +2,14 @@ import { useState, useEffect } from "react";
 import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
+import BoardCreateButton from "./BoardCreateButton";
+import { useStore } from "../../store/useUserStore";
 
 export default function BoardMainPage() {
-  const [data, setData] = useState([]);
+  const userId = useStore((state) => state.userId);
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -22,7 +26,7 @@ export default function BoardMainPage() {
   return (
     <div className="boardContainer">
       <h4>{formatDate}</h4>
-      <button>글쓰기</button>
+      {userId && <BoardCreateButton />}
       <hr />
       {data.length === 0 ? (
         <p>커뮤니티에 아티클이 없습니다.</p>

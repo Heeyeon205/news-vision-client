@@ -4,11 +4,21 @@ import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
 import NewsCreateButton from "./NewsCreateButton";
 import { useStore } from "../../store/useUserStore";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 export default function Main() {
-  const logUserId = useStore((state) => state.userId);
+  const logRole = useStore((state) => state.role);
+  const [auth, setAuth] = useState(false);
   const [newsList, setNewsList] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR") {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  }, [logRole]);
 
   useEffect(() => {
     const loadNews = async () => {
@@ -26,7 +36,7 @@ export default function Main() {
   return (
     <div>
       <h4>{formatDate}</h4>
-      {logUserId && <NewsCreateButton />}
+      {auth && <NewsCreateButton />}
       {newsList.length === 0 ? (
         <p>뉴스가 없습니다.</p>
       ) : (

@@ -5,16 +5,18 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import { useStore } from "../../store/useUserStore";
+import BoardDeleteButton from "./BoardDeleteButton";
 
-export default function DropDownMenu({ newsId, userId }) {
+export default function BoardDropDownButton({ boardId, userId }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
-  const logId = useStore((state) => state.userId);
+
   const [own, setOwn] = useState(false);
+  const logId = useStore((state) => state.userId);
 
   useEffect(() => {
-    if (userId === logId) {
+    if (logId === userId) {
       setOwn(true);
     } else {
       setOwn(false);
@@ -28,9 +30,9 @@ export default function DropDownMenu({ newsId, userId }) {
   const handleEdit = async () => {
     try {
       const res = await apiClient.get("/api/auth/check");
-      navigate("/news/update-form", {
+      navigate("/board/update-form", {
         state: {
-          newsId: Number(newsId),
+          boardId: Number(boardId),
         },
       });
     } catch (error) {
@@ -38,11 +40,11 @@ export default function DropDownMenu({ newsId, userId }) {
     }
   };
 
-  const handleInquiry = () => {
-    alert("개발 예정");
+  const handleReport = () => {
+    alert("너 신고, 개발 예정");
   };
   const handleShare = () => {
-    alert("개발 예정");
+    alert("공유?, 개발 예정");
   };
 
   useEffect(() => {
@@ -67,27 +69,31 @@ export default function DropDownMenu({ newsId, userId }) {
 
       {open && (
         <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg z-10">
-          {own ? (
-            <button
-              onClick={handleEdit}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-            >
-              뉴스 수정
-            </button>
-          ) : (
-            <button
-              onClick={handleInquiry}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-            >
-              문의하기
-            </button>
-          )}
           <button
-            onClick={handleShare}
+            onClick={handleReport}
             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
           >
             공유하기
           </button>
+          {own ? (
+            <>
+              <button
+                onClick={handleEdit}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              >
+                게시글 수정
+              </button>
+
+              <BoardDeleteButton boardId={boardId} />
+            </>
+          ) : (
+            <button
+              onClick={handleShare}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              신고하기
+            </button>
+          )}
         </div>
       )}
     </div>

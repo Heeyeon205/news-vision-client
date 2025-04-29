@@ -4,5 +4,6 @@ export const useStore = create((set) => ({
   userId: null,
   nickname: '',
   image: '',
-  setUser: (userId, nickname, image) => set({ userId, nickname, image }),
+  role: '',
+  setUser: (userId, nickname, image, role) => set({ userId, nickname, image, role }),
 }))
