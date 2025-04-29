@@ -1,5 +1,5 @@
 import apiClient from "../../api/axios";
-import { useState, useEffect } from "react";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 
 export default function NewsLikeButton({
   newsId,
@@ -8,11 +8,9 @@ export default function NewsLikeButton({
   scrapCount,
   setScrapCount,
 }) {
-  const [text, setText] = useState("");
 
-  useEffect(() => {
-    setText(isScrap ? "스크랩 취소" : "스크랩");
-  }, [isScrap]);
+
+
 
   const handleClick = async () => {
     if (isScrap) {
@@ -35,8 +33,19 @@ export default function NewsLikeButton({
   };
 
   return (
-    <button onClick={handleClick} className="border rounded">
-      {text}
+    <button onClick={handleClick} className="px-3 py-2 rounded-lg flex items-center space-x-2 transition-all duration-300 cursor-pointer">
+      {isScrap ? (
+        <FaBookmark className="w-5 h-5 text-orange-500 transform transition-transform duration-300 hover:scale-110" /> // 찬 스크랩
+      ) : (
+        <FaRegBookmark className="w-5 h-5 text-gray-500 transform transition-transform duration-300 hover:scale-110" /> // 빈 스크랩
+      )}
+
+      <span
+        className={`text-sm font-medium ${isScrap ? "text-orange-500" : "text-gray-500"
+          } transition-colors duration-300`}
+      >
+
+      </span>
     </button>
   );
 }

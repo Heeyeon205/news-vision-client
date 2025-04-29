@@ -24,20 +24,22 @@ export default function Main() {
   }, []);
 
   return (
-    <div>
-      <h4>{formatDate}</h4>
-      {logUserId && <NewsCreateButton />}
+    <div class="p-4 max-w-[600px] w-full mx-auto">
+      <div className="flex justify-between items-center mb-4">
+        <h4 className="text-lg font-bold mb-2">{formatDate}</h4>
+        {logUserId && <NewsCreateButton />}
+      </div>
       {newsList.length === 0 ? (
         <p>뉴스가 없습니다.</p>
       ) : (
-        <div className="newsContainer">
+        <div className="flex flex-col gap-4">
           {newsList.map((news) => (
             <div
               key={news.id}
-              className="newsBox border rounded"
+              className="rounded overflow-hidden cursor-pointer shadow-md hover:scale-101 hover:shadow-lg transition-transform duration-300"
               onClick={() => navigate(`/news/${news.id}`)}
             >
-              <div className="newsImage">
+              <div className="w-full h-full object-cover">
                 <img
                   src={news.image}
                   alt="뉴스 썸네일"
@@ -45,11 +47,13 @@ export default function Main() {
                   height="350"
                 ></img>
               </div>
-              <div className="newsContent">
-                <p>{news.category}</p>
-                <h4>{news.title}</h4>
-                <span>{news.author}</span>
-                <span>{news.createdAt}</span>
+              <div className="p-2">
+                <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">{news.category}</p>
+                <h4 className="text-lg font-bold mb-1">{news.title}</h4>
+                <div className="flex items-center text-sm text-gray-400 space-x-2">
+                  <span classname="mr-2">{news.author}</span>
+                  <span>{news.createdAt}</span>
+                </div>
               </div>
             </div>
           ))}

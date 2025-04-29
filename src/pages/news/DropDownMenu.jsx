@@ -59,19 +59,19 @@ export default function DropDownMenu({ newsId }) {
         <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg z-10">
           <button
             onClick={handleEdit}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
           >
             게시글 수정
           </button>
           <button
             onClick={handleInquiry}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
           >
             문의하기
           </button>
           <button
             onClick={handleShare}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
           >
             공유하기
           </button>
