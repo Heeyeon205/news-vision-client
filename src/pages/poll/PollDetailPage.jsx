@@ -17,6 +17,7 @@ export default function PollDetailPage() {
   const [voteCount, setVoteCount] = useState(0);
 
   useEffect(() => {
+    console.log(isVote);
     const loadData = async () => {
       const res = await apiClient.get(`/api/polls/${pollId}`);
       const result = res.data;
@@ -26,6 +27,7 @@ export default function PollDetailPage() {
       setCreatedAt(result.data.createdAt);
       setExpiredAt(result.data.expiredAt);
       setOptions(result.data.pollOptions);
+      setIsVote();
     };
     loadData();
   }, [pollId]);
@@ -43,8 +45,8 @@ export default function PollDetailPage() {
       console.log(res);
       console.log(res.data);
       console.log(result.data);
-      setIsVote(result.poll);
-      setVoteCount(result.voteCount);
+      setIsVote(result.data.poll);
+      setVoteCount(result.data.voteCount);
     } catch (error) {
       console.log(error);
     }

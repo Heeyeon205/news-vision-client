@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../../api/axios";
-
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -27,17 +27,6 @@ export default function SearchMainPage() {
     loadData();
   }, [type]);
 
-  const handleClick = async () => {
-    if (query === "") return;
-    try {
-      const res = await apiClient.get(`/api/search/news?keyword=${query}`);
-      const result = res.data;
-      setData(result.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const handleSearch = async (value) => {
     try {
       const res = await apiClient.get(`/api/search/news?keyword=${value}`);
@@ -60,7 +49,7 @@ export default function SearchMainPage() {
         ></input>
         <button
           className="border w-[52px] h-[48px] border-l-0 rounded-tr-lg rounded-br-lg border-gray-400 "
-          onClick={handleClick}
+          onClick={handleSearch}
         >
           <FontAwesomeIcon
             icon="fa-solid fa-magnifying-glass"

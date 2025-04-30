@@ -68,7 +68,10 @@ export default function NewsCreatePage() {
               placeholder="오늘의 뉴스를 검색하세요."
               onChange={handleChange}
             ></input>
-            <button className="px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors" onClick={handleClick}>
+            <button
+              className="px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors"
+              onClick={handleClick}
+            >
               검색
             </button>
           </div>
@@ -80,10 +83,21 @@ export default function NewsCreatePage() {
           ) : (
             <div className="newsContainer">
               {naverList.map((news) => (
-                <div className="bg-white shadow-md rounded-lg p-4 mb-6 cursor-pointer hover:shadow-lg transition-shadow" onClick={() => handleCreate(news)}>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">{news.title}</h3>
+                <div className="bg-white shadow-md rounded-lg p-4 mb-6 cursor-pointer hover:shadow-lg transition-shadow">
+                  <h3
+                    className="text-lg font-bold text-gray-800 mb-2"
+                    onClick={() => handleCreate(news)}
+                  >
+                    {news.title}
+                  </h3>
                   <p className="text-sm text-gray-500 mb-4">{news.pubDate}</p>
-                  <a href={news.link} className="text-orange-500 text-sm font-medium hover:underline">뉴스 확인하러 가기</a>
+                  <a
+                    href={news.link}
+                    className="text-orange-500 text-sm font-medium hover:underline"
+                    target="_blank"
+                  >
+                    뉴스 확인하러 가기
+                  </a>
                 </div>
               ))}
             </div>

@@ -1,49 +1,56 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useStore } from "../store/useUserStore";
-import LogoutButton from "./headerComponamt/LogoutButton";
-import Mypage from "./headerComponamt/MypageButton";
+import UserDropDownButton from "./headerComponamt/UserDropDownButton";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { userId } = useStore();
+  const userId = useStore((state) => state.userId);
 
   const handleStartClick = () => {
     navigate("/user/login");
   };
 
   return (
-    <header>
-      <Link to="/" className="logo mx-5">
-        NEWSION
-      </Link>
-      <Link to="/" className="newsMain mx-5">
-        홈
-      </Link>
-      <Link to="/article" className="mx-5">
-        아티클
-      </Link>
-      <Link to="/gpt-info" className="mx-5">
-        시간 없음!
-      </Link>
-      <Link to="/board" className="mx-5">
-        커뮤니티
-      </Link>
-      <Link to="/search" className="mx-5">
-        검색
-      </Link>
-      <nav>
-        {userId ? (
-          <>
-            <Mypage />
-            <LogoutButton />
-          </>
-        ) : (
-          <button className="border rounded mx-5" onClick={handleStartClick}>
-            뉴션 시작하기
-          </button>
-        )}
-      </nav>
-      <hr />
+    <header className="w-full bg-white shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 flex items-center justify-between flex-wrap md:flex-nowrap">
+        <Link
+          to="/"
+          className="text-2xl md:text-3xl font-extrabold text-orange-500"
+        >
+          NEWSION
+        </Link>
+
+        <nav className="w-full md:w-auto flex justify-center mt-3 md:mt-0 space-x-4 md:space-x-8 text-base md:text-lg font-semibold">
+          <Link to="/" className="hover:text-orange-500">
+            홈
+          </Link>
+          <Link to="/article" className="hover:text-orange-500">
+            아티클
+          </Link>
+          <Link to="/gpt-info" className="hover:text-orange-500">
+            시간 없음!
+          </Link>
+          <Link to="/board" className="hover:text-orange-500">
+            커뮤니티
+          </Link>
+          <Link to="/search" className="hover:text-orange-500">
+            검색
+          </Link>
+        </nav>
+
+        <div className="mt-3 md:mt-0">
+          {userId ? (
+            <UserDropDownButton />
+          ) : (
+            <button
+              onClick={handleStartClick}
+              className="border border-orange-500 text-orange-500 px-4 py-1 rounded hover:bg-orange-100 transition text-base md:text-lg font-medium"
+            >
+              뉴션 시작하기
+            </button>
+          )}
+        </div>
+      </div>
     </header>
   );
 }

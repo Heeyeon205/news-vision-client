@@ -30,7 +30,6 @@ export default function BoardMainPage() {
 
   return (
     <div className="max-w-xl mx-auto p-4">
-      {/* 날짜 + 작성란 */}
       <div className="flex justify-between items-center mb-3">
         <h4 className="text-sm text-gray-500">{formatDate}</h4>
       </div>
@@ -53,7 +52,6 @@ export default function BoardMainPage() {
 
       <hr className="mb-4" />
 
-      {/* 게시글 리스트 */}
       {data.length === 0 ? (
         <p className="text-center text-gray-400">
           커뮤니티에 아티클이 없습니다.
@@ -98,7 +96,6 @@ export default function BoardMainPage() {
           </div>
         ))
       )}
-      {/* 글쓰기 모달 */}
       {showModal && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-center items-center">
           <div className="bg-white rounded-md shadow-lg p-6 w-full max-w-lg relative">
@@ -108,7 +105,7 @@ export default function BoardMainPage() {
             >
               ✕
             </button>
-            <BoardCreatePage />
+            <BoardCreateButton />
           </div>
         </div>
       )}

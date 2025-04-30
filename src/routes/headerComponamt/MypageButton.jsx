@@ -6,17 +6,12 @@ export default function MypageBtn() {
   const navigate = useNavigate();
   const handleMove = async function MoveToMypage() {
     try {
-      const response = await apiClient.get("/api/auth/check");
-      const result = response.data;
+      await apiClient.get("/api/auth/check");
       navigate("/user/mypage");
     } catch (error) {
       console.log(error);
     }
   };
 
-  return (
-    <button className="border rounded mx-5" onClick={handleMove}>
-      마이페이지
-    </button>
-  );
+  return <button onClick={handleMove}>마이페이지</button>;
 }

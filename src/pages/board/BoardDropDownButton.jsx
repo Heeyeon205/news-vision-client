@@ -6,6 +6,7 @@ import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import { useStore } from "../../store/useUserStore";
 import BoardDeleteButton from "./BoardDeleteButton";
+import ShareButton from "../../utils/ShareButton";
 
 export default function BoardDropDownButton({ boardId, userId }) {
   const [open, setOpen] = useState(false);
@@ -43,9 +44,6 @@ export default function BoardDropDownButton({ boardId, userId }) {
   const handleReport = () => {
     alert("개발 예정");
   };
-  const handleShare = () => {
-    alert("개발 예정");
-  };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -69,12 +67,7 @@ export default function BoardDropDownButton({ boardId, userId }) {
 
       {open && (
         <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg z-10">
-          <button
-            onClick={handleShare}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-          >
-            공유하기
-          </button>
+          <ShareButton />
           {own ? (
             <>
               <button

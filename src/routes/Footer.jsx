@@ -1,10 +1,9 @@
 export default function Footer() {
   return (
-    <footer className="w-full  bg-gray-300 text-white py-7 bottom-0 flex flex-col md:flex-row justify-around p-23">
+    <footer className="w-full text-white py-7 bottom-0 flex flex-col md:flex-row justify-around p-23">
       <div className="w-full md:w-150 ml-0 md:ml-5 mb-4 md:mb-0 text-center md:text-left">
-        {' '}
-        {/* 변경된 부분 */}
-        <h2 className="text-2xl font-bold mb-4 text-black">Newsion</h2>
+        {" "}
+        <h2 className="text-2xl font-bold mb-4 text-black">NEWSION</h2>
         <p className="text-gray-500 mb-2">
           ㈜뉴션 대표: 2조 | 사업자 등록번호: 632-51-02355 | 통신판매업
           <br />

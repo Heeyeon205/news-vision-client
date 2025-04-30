@@ -35,6 +35,7 @@ import BoardCreatePage from "./pages/board/BoardCreatePage";
 import BoardUpdatePage from "./pages/board/BoardUpdatePage";
 
 import PollDetailPage from "./pages/poll/PollDetailPage";
+import AdminMainPage from "./pages/admin/AdminMainPage";
 
 function App() {
   return (
@@ -73,6 +74,8 @@ function App() {
           <Route path="/search" element={<SearchMainPage />} />
 
           <Route path="/polls/:pollId" element={<PollDetailPage />} />
+
+          <Route path="/admin" element={<AdminMainPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

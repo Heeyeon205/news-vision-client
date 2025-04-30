@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import { useStore } from "../../store/useUserStore";
+import ShareButton from "../../utils/ShareButton";
 
 export default function DropDownMenu({ newsId, userId }) {
   const [open, setOpen] = useState(false);
@@ -38,10 +39,7 @@ export default function DropDownMenu({ newsId, userId }) {
     }
   };
 
-  const handleInquiry = () => {
-    alert("개발 예정");
-  };
-  const handleShare = () => {
+  const handleOpinion = () => {
     alert("개발 예정");
   };
 
@@ -76,18 +74,13 @@ export default function DropDownMenu({ newsId, userId }) {
             </button>
           ) : (
             <button
-              onClick={handleInquiry}
+              onClick={handleOpinion}
               className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
               문의하기
             </button>
           )}
-          <button
-            onClick={handleShare}
-            className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
-          >
-            공유하기
-          </button>
+          <ShareButton />
         </div>
       )}
     </div>

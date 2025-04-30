@@ -9,7 +9,7 @@ export default function BoardCreateButton() {
 
   const handleClick = async () => {
     try {
-      const res = apiClient.get("/api/auth/check");
+      await apiClient.get("/api/auth/check");
       navigate("/board/create-form");
     } catch (error) {
       console.log(error);

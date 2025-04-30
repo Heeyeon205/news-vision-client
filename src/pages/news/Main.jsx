@@ -9,19 +9,11 @@ import "swiper/css";
 
 export default function Main() {
   const logRole = useStore((state) => state.role);
-  const [auth, setAuth] = useState(false);
+  const isAuht = logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR";
   const [newsList, setNewsList] = useState([]);
   const [pollList, setPollList] = useState([]);
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR") {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  }, [logRole]);
 
   useEffect(() => {
     const loadNews = async () => {
@@ -42,7 +34,7 @@ export default function Main() {
     <div className="p-4 max-w-[600px] w-full mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h4 className="text-lg font-bold mt-5">{formatDate}</h4>
-        {auth && <NewsCreateButton />}
+        {isAuht && <NewsCreateButton />}
       </div>
 
       <div className="rounded shadow-md flex flex-row gap-4 my-10 p-5">
