@@ -34,47 +34,58 @@ export default function NewsUpdatePage() {
   }, [newsId]);
 
   return (
-    <div className="newsContainer">
+    <div className="p-4 max-w-[600px] w-full mx-auto min-h-screen">
       {data && data.refTitle ? (
         <>
-          <div className="referenceBox border">
-            <h3>{data.refTitle}</h3>
-            <p>{data.refPubDate}</p>
-            <a href={data.refLink}>뉴스 확인하러 가기</a>
+          <div className="bg-white shadow-md rounded-lg p-4 mb-6">
+            <h3 className="text-lg font-bold text-gray-800 mb-2">{data.refTitle}</h3>
+            <p className="text-sm text-gray-500 mb-4">{data.refPubdate}</p>
+            <a href={data.refLink} className="text-orange-500 text-sm font-medium hover:underline">뉴스 확인하러 가기</a>
           </div>
 
-          <CategoriesInput categories={data.list} setSelectId={setSelectId} />
+          <div className="bg-white shadow-md rounded-lg p-4">
+            <div className="mb-4">
+              <CategoriesInput categories={data.list} setSelectId={setSelectId} />
+            </div>
+            <div className="mb-4">
+              <NewsImageInput image={image} setImage={setImage} />
+            </div>
 
-          <div className="newsBox">
-            <NewsImageInput image={image} setImage={setImage} />
-            <input
-              className="border"
-              type="text"
-              placeholder="제목을 입력하세요."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <br />
-            <textarea
-              className="borders"
-              placeholder="본문을 입력하세요"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            ></textarea>
-            <br />
-            <NewsUpdateButton
-              newsId={newsId}
-              title={title}
-              content={content}
-              categoryId={data.categoryId}
-            />
+            <div className="mb-4">
+              <input
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                type="text"
+                placeholder="제목을 입력하세요."
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <textarea
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 h-32"
+                placeholder="본문을 입력하세요"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              ></textarea>
+            </div>
+            <div className="flex justify-between items-center">
+              <NewsUpdateButton
+                newsId={newsId}
+                title={title}
+                content={content}
+                categoryId={data.categoryId}
+                image={image}
 
-            <NewsDeleteButton newsId={newsId} />
+              />
+
+              <NewsDeleteButton newsId={newsId} />
+            </div>
           </div>
         </>
       ) : (
         <div>Loading...</div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }

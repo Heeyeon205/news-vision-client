@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react"; // 여기도 useRef 명보가 드래그 때문에 추가가
 import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import NewsCreateButton from "../news/NewsCreateButton";
@@ -9,6 +9,7 @@ export default function ArticleMainPage() {
   const logId = useStore((state) => state.userId);
   const logRole = useStore((state) => state.role);
   const [auth, setAuth] = useState(false);
+  const categoryRef = useRef(null); //드래그 때문에 명보가 추가가
 
   useEffect(() => {
     if (logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR") {
@@ -86,13 +87,75 @@ export default function ArticleMainPage() {
     }
   };
 
+  // 카테고리 드래그
+  useEffect(() => {
+    const categoryContainer = categoryRef.current;
+    if (!categoryContainer) return;
+
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+
+    const handleMouseDown = (e) => {
+      isDragging = true;
+      startX = e.pageX - categoryContainer.offsetLeft;
+      scrollLeft = categoryContainer.scrollLeft;
+      categoryContainer.style.cursor = "grabbing"; // 드래그 중 커서 변경
+    };
+
+    const handleMouseLeave = () => {
+      isDragging = false;
+      categoryContainer.style.cursor = "grab"; // 드래그 종료 후 커서 복원
+    };
+
+    const handleMouseUp = () => {
+      isDragging = false;
+      categoryContainer.style.cursor = "grab"; // 드래그 종료 후 커서 복원
+    };
+
+    const handleMouseMove = (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - categoryContainer.offsetLeft;
+      const walk = (x - startX) * 2; // 스크롤 속도 조절 
+      categoryContainer.scrollLeft = scrollLeft - walk;
+    };
+
+    categoryContainer.addEventListener("mousedown", handleMouseDown);
+    categoryContainer.addEventListener("mouseleave", handleMouseLeave);
+    categoryContainer.addEventListener("mouseup", handleMouseUp);
+    categoryContainer.addEventListener("mousemove", handleMouseMove);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      categoryContainer.removeEventListener("mousedown", handleMouseDown);
+      categoryContainer.removeEventListener("mouseleave", handleMouseLeave);
+      categoryContainer.removeEventListener("mouseup", handleMouseUp);
+      categoryContainer.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
   return (
     <div className="p-4 max-w-[600px] w-full mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h4 className="text-lg font-bold">{formatDate}</h4>
         {auth && <NewsCreateButton />}
       </div>
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div
+        ref={categoryRef}
+        className="flex gap-2 mb-4 overflow-x-auto whitespace-nowrap cursor-grab select-none"
+        style={{
+          // 스크롤바 숨기기 (다양한 브라우저 지원)
+          scrollbarWidth: "none",
+          "-ms-overflow-style": "none",
+        }}
+      >
+        {/* Webkit 브라우저용 스크롤바 숨기기 */}
+        <style jsx>{`
+          div::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
         {categories.map((category) => (
           <button
             key={category}
@@ -128,7 +191,7 @@ export default function ArticleMainPage() {
                   <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">{news.category}</p>
                   <h4 className="text-lg font-bold text-black mb-1">{news.title}</h4>
                   <div className="flex items-center text-sm text-gray-400 space-x-2">
-                    <span classname="mr-2">{news.nickname}</span>
+                    <span className="mr-2">{news.nickname}</span>
                     <span>{news.createdAt}</span>
                   </div>
                 </div>

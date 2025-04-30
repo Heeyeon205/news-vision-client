@@ -8,6 +8,7 @@ export default function NewsUpdateButton({
   title,
   content,
   categoryId,
+  image
 }) {
   const navigate = useNavigate();
   const formData = new FormData();
@@ -15,6 +16,7 @@ export default function NewsUpdateButton({
   formData.append("title", title);
   formData.append("content", content);
   formData.append("categoryId", categoryId);
+  formData.append("image", image);
 
   const handleClick = async () => {
     try {
@@ -32,7 +34,7 @@ export default function NewsUpdateButton({
   };
 
   return (
-    <button className="border" onClick={handleClick}>
+    <button className="bg-orange-500 text-white font-bold px-4 py-2 rounded hover:bg-orange-600 cursor-pointer" onClick={handleClick}>
       수정
     </button>
   );
