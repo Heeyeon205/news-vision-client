@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
-import { useState } from "react"; 
+import { useState } from "react";
 
 export default function InfoPage() {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ export default function InfoPage() {
 
   const closeModal = () => {
     setIsModalVisible(false);
+  };
 
   return (
     <div>

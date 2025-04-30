@@ -6,7 +6,7 @@ export default function NewsCreateButton() {
   const navigate = useNavigate();
   const handleClick = async () => {
     try {
-      const response = await apiClient.get("/api/user/check-role");
+      await apiClient.get("/api/user/check-role");
       navigate("/news/create-form");
     } catch (error) {
       console.log(error);
