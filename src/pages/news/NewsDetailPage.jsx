@@ -23,13 +23,14 @@ export default function NewsDetail() {
       try {
         const response = await apiClient.get(`/api/news/${id}`);
         const result = response.data;
+        console.log("뉴스 디테일: ", result.data);
         setNews(result.data);
-        setIsLike(result.data.liked);
-        setNewsId(result.data.id);
-        setLikeCount(result.data.likeCount);
         setUserId(result.data.userId);
+        setNewsId(result.data.id);
+        setIsLike(result.data.liked);
+        setLikeCount(result.data.likeCount);
       } catch (error) {
-        ErrorAlert(error);
+        console.log(error);
       }
     };
     loadNewsDetail();
@@ -38,7 +39,7 @@ export default function NewsDetail() {
   return !news ? (
     <p>뉴스 불러오는 중....</p>
   ) : (
-    <div class="p-4 max-w-[600px] w-full mx-auto shadow-lg mt-5 mb-6">
+    <div className="p-4 max-w-[600px] w-full mx-auto shadow-lg mt-5 mb-6">
       <img src={news.image} alt="뉴스 썸네일" width="600" height="350" />
       <div className="flex justify-between items-center my-2">
         <p className="bg-gray-100 text-sm text-balck-500 rounded-xl px-3 py-1">
@@ -90,7 +91,6 @@ export default function NewsDetail() {
             likeCount={likeCount}
             setLikeCount={setLikeCount}
           />
-          <span className="text-md text-gray-500">{likeCount}</span>
         </div>
         <ScrapButton
           newsId={newsId}

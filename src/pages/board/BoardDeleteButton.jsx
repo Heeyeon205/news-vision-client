@@ -8,7 +8,7 @@ export default function BoardDeleteButton({ boardId }) {
     const check = confirm("해당 게시글을 삭제하시겠습니까?");
     if (check) {
       try {
-        const res = await apiClient.delete(`/api/board/${boardId}`);
+        await apiClient.delete(`/api/board/${boardId}`);
         toast.success("게시글 삭제 완료");
         navigate("/board");
       } catch (error) {

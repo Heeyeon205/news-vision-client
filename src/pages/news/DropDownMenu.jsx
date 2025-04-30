@@ -27,7 +27,7 @@ export default function DropDownMenu({ newsId, userId }) {
 
   const handleEdit = async () => {
     try {
-      const res = await apiClient.get("/api/auth/check");
+      await apiClient.get("/api/auth/check");
       navigate("/news/update-form", {
         state: {
           newsId: Number(newsId),
@@ -82,7 +82,6 @@ export default function DropDownMenu({ newsId, userId }) {
               문의하기
             </button>
           )}
-          /dev-smb
           <button
             onClick={handleShare}
             className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"

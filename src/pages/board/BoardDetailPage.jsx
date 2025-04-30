@@ -5,13 +5,17 @@ import { useStore } from "../../store/useUserStore";
 import CommentBox from "./CommentBox";
 import BoardDropDownButton from "./BoardDropDownButton";
 import CommentDropDownButton from "./CommentDropDownButton";
+import BoardLikeButton from "./BoardLikeButton";
 
 export default function BoardDetailPage() {
-  const { id } = useParams();
-  const [data, setData] = useState("");
   const logNickname = useStore((state) => state.nickname);
   const logProfile = useStore((state) => state.image);
+  const { id } = useParams();
+  const [data, setData] = useState("");
   const [userId, setUserId] = useState("");
+  const [isLike, setIsLike] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
+  const [commentCount, setCommentCount] = useState(0);
 
   const loadData = async () => {
     try {
@@ -19,6 +23,9 @@ export default function BoardDetailPage() {
       const result = response.data;
       setData(result.data);
       setUserId(result.data.userId);
+      setIsLike(result.data.like);
+      setLikeCount(result.data.likeCount);
+      setCommentCount(result.data.commentCount);
     } catch (error) {
       console.log(error);
     }
@@ -46,11 +53,21 @@ export default function BoardDetailPage() {
         <button className="border">팔로우</button>
         {data.image && <img src={data.image} alt="커뮤니티 이미지"></img>}
         <p>{data.content}</p>
-        <button className="border">좋아요</button>
-        <p>좋아요 {data.likeCount}</p>
-        <p>댓글 {data.commentCount}</p>
+
+        <BoardLikeButton
+          boardId={id}
+          isLike={isLike}
+          setIsLike={setIsLike}
+          likeCount={likeCount}
+          setLikeCount={setLikeCount}
+        />
+
+        <span> {isLike}</span>
+        <p>댓글 {commentCount}</p>
+
         <hr />
-        <h3>답글 {data.commentCount}</h3>
+
+        <h3>답글 {commentCount}</h3>
       </div>
       {data.comments.length === 0 ? (
         <p>댓글이 없습니다.</p>

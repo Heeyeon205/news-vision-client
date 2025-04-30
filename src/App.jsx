@@ -20,7 +20,7 @@ import FollowerPage from "./pages/mypage/profileComponent/FollowerPage";
 import FollowingPage from "./pages/mypage/profileComponent/FollowingPage";
 
 import Main from "./pages/news/Main";
-import NewsDetail from "./pages/news/NewsDetail";
+import NewsDetail from "./pages/news/NewsDetailPage";
 import NewsCreatePage from "./pages/news/NewsCreatePage";
 import NewsCreateNewsPage from "./pages/news/NewsCreateNewsPage";
 import NewsUpdatePage from "./pages/news/NewsUpdatePage";

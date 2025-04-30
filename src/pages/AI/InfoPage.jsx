@@ -5,7 +5,7 @@ export default function InfoPage() {
   const navigate = useNavigate();
   const handleClick = async () => {
     try {
-      const response = await apiClient.get("/api/auth/check");
+      await apiClient.get("/api/auth/check");
       navigate("/gpt-news");
     } catch (error) {
       console.log(error);

@@ -3,8 +3,8 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useStore } from "../../store/useUserStore";
 import { toast } from "sonner";
 
-export default function NewsLikeButton({
-  newsId,
+export default function BoardLikeButton({
+  boardId,
   isLike,
   setIsLike,
   likeCount,
@@ -18,9 +18,8 @@ export default function NewsLikeButton({
     }
     if (isLike) {
       try {
-        const res = await apiClient.delete(`/api/news/${newsId}/like`);
+        const res = await apiClient.delete(`/api/board/${boardId}/like`);
         const result = res.data;
-        console.log("좋아여 삭제: ", result.data);
         setIsLike(result.data.isLike);
         setLikeCount(result.data.likeCount);
       } catch (error) {
@@ -28,9 +27,8 @@ export default function NewsLikeButton({
       }
     } else {
       try {
-        const res = await apiClient.post(`/api/news/${newsId}/like`);
+        const res = await apiClient.post(`/api/board/${boardId}/like`);
         const result = res.data;
-        console.log("좋아여 추가: ", result.data);
         setIsLike(result.data.isLike);
         setLikeCount(result.data.likeCount);
       } catch (error) {
@@ -45,9 +43,9 @@ export default function NewsLikeButton({
       className="px-1 py-2 rounded-lg flex items-center space-x-2 transition-all duration-300 cursor-pointer"
     >
       {isLike ? (
-        <FaHeart className="w-5 h-5 text-red-500 transform transition-transform duration-300 hover:scale-110" /> // 찬 하트, 빨간색
+        <FaHeart className="w-5 h-5 text-red-500 transform transition-transform duration-300 hover:scale-110" />
       ) : (
-        <FaRegHeart className="w-5 h-5 text-gray-500 transform transition-transform duration-300 hover:scale-110" /> // 빈 하트
+        <FaRegHeart className="w-5 h-5 text-gray-500 transform transition-transform duration-300 hover:scale-110" />
       )}
       <span
         className={`text-sm font-medium ${

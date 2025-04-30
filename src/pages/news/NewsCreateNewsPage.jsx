@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import apiClient from "../../api/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import NewsImageInput from "./NewsImageInput";
+import { toast } from "sonner";
 
 export default function NewsCreateNewsPage() {
   const navigate = useNavigate();
@@ -37,12 +38,12 @@ export default function NewsCreateNewsPage() {
       formData.append("naverTitle", referenceTitle);
       formData.append("naverLink", referenceLink);
       formData.append("naverPubDate", referencePubDate);
-      const response = await apiClient.post("/api/news", formData, {
+      await apiClient.post("/api/news", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      alert("뉴스 작성 완료");
+      toast.success("뉴스 작성 완료");
       navigate("/");
     } catch (error) {
       console.log(error);

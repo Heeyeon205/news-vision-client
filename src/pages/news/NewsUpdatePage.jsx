@@ -4,6 +4,7 @@ import apiClient from "../../api/axios";
 import NewsImageInput from "./NewsImageInput";
 import NewsUpdateButton from "./NewsUpdateButton";
 import NewsDeleteButton from "./NewsDeleteButton";
+import CategoriesInput from "../../utils/CategoriesInput";
 
 export default function NewsUpdatePage() {
   const location = useLocation();
@@ -20,6 +21,7 @@ export default function NewsUpdatePage() {
       try {
         const response = await apiClient.get(`/api/news/update/${newsId}`);
         const result = response.data;
+        console.log("뉴스 업데이트 데이터: ", result.data);
         setData(result.data);
         setImage(result.data.image);
         setTitle(result.data.title);

@@ -13,7 +13,10 @@ export default function NewsCreateButton() {
     }
   };
   return (
-    <button className="bg-orange-500 text-white text-sm font-bold px-4 py-2 rounded hover:bg-orange-600 transition-colors shadow-sm cursor-pointer" onClick={handleClick}>
+    <button
+      className="bg-orange-500 text-white text-sm font-bold px-4 py-2 rounded hover:bg-orange-600 transition-colors shadow-sm cursor-pointer"
+      onClick={handleClick}
+    >
       글쓰기
     </button>
   );

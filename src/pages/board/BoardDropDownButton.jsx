@@ -29,7 +29,7 @@ export default function BoardDropDownButton({ boardId, userId }) {
 
   const handleEdit = async () => {
     try {
-      const res = await apiClient.get("/api/auth/check");
+      await apiClient.get("/api/auth/check");
       navigate("/board/update-form", {
         state: {
           boardId: Number(boardId),
@@ -41,10 +41,10 @@ export default function BoardDropDownButton({ boardId, userId }) {
   };
 
   const handleReport = () => {
-    alert("너 신고, 개발 예정");
+    alert("개발 예정");
   };
   const handleShare = () => {
-    alert("공유?, 개발 예정");
+    alert("개발 예정");
   };
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function BoardDropDownButton({ boardId, userId }) {
       {open && (
         <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg z-10">
           <button
-            onClick={handleReport}
+            onClick={handleShare}
             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
           >
             공유하기
@@ -88,7 +88,7 @@ export default function BoardDropDownButton({ boardId, userId }) {
             </>
           ) : (
             <button
-              onClick={handleShare}
+              onClick={handleReport}
               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
             >
               신고하기
