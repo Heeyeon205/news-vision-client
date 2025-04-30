@@ -46,7 +46,7 @@ export default function NewsDetail() {
         </p>
         <DropDownMenu newsId={newsId} userId={userId} />
       </div>
-      <p className="text-lg font-bold mb-2">{news.title}</p>
+      <p className="text-2xl font-bold mb-2">{news.title}</p>
       <div className="flex items-center text-sm text-gray-400 mt-2 space-x-4">
         <span>{news.createdAt}</span>
         <span> 읽음 {news.view}</span>
@@ -74,7 +74,7 @@ export default function NewsDetail() {
         </div>
       </div>
       <div className="mt-4 border-b border-gray-300"></div>
-      <div className="mt-6 text-gray-700 text-sm leading-relaxed font-noto-sans">
+      <div className="mt-6 text-gray-700 text-lg leading-relaxed font-noto-sans">
         <p className="whitespace-pre-line tracking-normal">{news.content}</p>
       </div>
       <div className="mt-6 flex items-center justify-between">

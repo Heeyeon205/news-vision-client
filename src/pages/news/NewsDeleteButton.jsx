@@ -19,7 +19,7 @@ export default function NewsDeleteButton({ newsId }) {
   };
 
   return (
-    <button className="border" onClick={handleClick}>
+    <button className="bg-gray-200 text-gray-700 font-bold px-4 py-2 rounded hover:bg-gray-300 cursor-pointer" onClick={handleClick}>
       삭제
     </button>
   );

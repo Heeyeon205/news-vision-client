@@ -51,39 +51,51 @@ export default function NewsCreateNewsPage() {
   };
 
   return (
-    <div className="newsContainer">
-      <div className="referenceBox border">
-        <h3>{referenceTitle}</h3>
-        <p>{referencePubDate}</p>
-        <a href={referenceLink}>뉴스 확인하러 가기</a>
+    <div className="p-4 max-w-[600px] w-full mx-auto min-h-screen">
+      <div className="bg-white shadow-md rounded-lg p-4 mb-6">
+        <h3 className="text-lg font-bold text-gray-800 mb-2">{referenceTitle}</h3>
+        <p className="text-sm text-gray-500 mb-4">{referencePubDate}</p>
+        <a href={referenceLink} className="text-orange-500 text-sm font-medium hover:underline">뉴스 확인하러 가기</a>
       </div>
 
-      <select className="border" onChange={(e) => setSelectId(e.target.value)}>
-        <option value="">카테고리를 선택하세요</option>
-        {categories.map((category) => (
-          <option key={category.id} value={category.id}>
-            {category.name}
-          </option>
-        ))}
-      </select>
+      <div className="bg-white shadow-md rounded-lg p-4">
+        <div className="mb-4">
+          <select className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 h-10" onChange={(e) => setSelectId(e.target.value)}>
+            <option value="">카테고리를 선택하세요</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="newsBox">
-        <NewsImageInput image={image} setImage={setImage} />
-        <input
-          type="text"
-          placeholder="제목을 입력하세요."
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <br />
-        <textarea
-          placeholder="본문을 입력하세요"
-          defaultValue={""}
-          onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-        <br />
-        <button className="border" onClick={handleClick}>
-          작성 완료
-        </button>
+        <div className="mb-4">
+          <NewsImageInput image={image} setImage={setImage} />
+        </div>
+        <div className="mb-4">
+          <input
+            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+            type="text"
+            placeholder="제목을 입력하세요."
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="mb-4">
+          <textarea
+            className="w-full border border-gray-300 rounded px-3 py-2  text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 h-32"
+            placeholder="본문을 입력하세요"
+            defaultValue={""}
+            onChange={(e) => setContent(e.target.value)}
+          ></textarea>
+          <br />
+        </div>
+        <div className="flex justify-end">
+          <button className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors" onClick={handleClick}>
+            작성 완료
+          </button>
+        </div>
+
       </div>
     </div>
   );
