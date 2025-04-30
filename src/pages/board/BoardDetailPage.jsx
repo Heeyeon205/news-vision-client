@@ -16,6 +16,7 @@ export default function BoardDetailPage() {
   const [isLike, setIsLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [commentCount, setCommentCount] = useState(0);
+  const [view, setView] = useState(0);
 
   const loadData = async () => {
     try {
@@ -26,6 +27,7 @@ export default function BoardDetailPage() {
       setIsLike(result.data.like);
       setLikeCount(result.data.likeCount);
       setCommentCount(result.data.commentCount);
+      setView(result.data.view);
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +63,7 @@ export default function BoardDetailPage() {
           likeCount={likeCount}
           setLikeCount={setLikeCount}
         />
+        <p>조회수{view}</p>
 
         <span> {isLike}</span>
         <p>댓글 {commentCount}</p>

@@ -3,13 +3,7 @@ import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { toast } from "sonner";
 import { useStore } from "../../store/useUserStore";
 
-export default function NewsLikeButton({
-  newsId,
-  isScrap,
-  setIsScrap,
-  scrapCount,
-  setScrapCount,
-}) {
+export default function NewsLikeButton({ newsId, isScrap, setIsScrap }) {
   const logId = useStore((state) => state.userId);
   const handleClick = async () => {
     if (!logId) {
@@ -19,16 +13,20 @@ export default function NewsLikeButton({
     if (isScrap) {
       try {
         const res = await apiClient.delete(`/api/news/${newsId}/scrap`);
-        setIsScrap(false);
-        setScrapCount(scrapCount - 1);
+        const result = res.data;
+        console.log(res);
+        setIsScrap(result.data.isScrap);
+        console.log("스크랩 취소: ", result.data.isScrap);
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
         const res = await apiClient.post(`/api/news/${newsId}/scrap`);
-        setIsScrap(true);
-        setScrapCount(scrapCount + 1);
+        const result = res.data;
+        console.log(res);
+        setIsScrap(result.data.isScrap);
+        console.log("스크랩 하기: ", result.data.isScrap);
       } catch (error) {
         console.log(error);
       }

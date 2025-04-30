@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
+import { toast } from "sonner";
 
 export default function NewsDeleteButton({ newsId }) {
   const navigate = useNavigate();
@@ -7,8 +8,8 @@ export default function NewsDeleteButton({ newsId }) {
     const check = confirm("해당 뉴스를 삭제하시겠습니까?");
     if (check) {
       try {
-        const response = await apiClient.delete(`/api/news/${newsId}`);
-        alert("뉴스 삭제 완료");
+        await apiClient.delete(`/api/news/${newsId}`);
+        toast.success("뉴스 삭제 완료");
         navigate("/");
       } catch (error) {
         console.log(error);
@@ -16,6 +17,7 @@ export default function NewsDeleteButton({ newsId }) {
     }
     return;
   };
+
   return (
     <button className="border" onClick={handleClick}>
       삭제

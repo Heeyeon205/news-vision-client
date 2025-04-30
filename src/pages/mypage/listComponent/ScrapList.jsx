@@ -1,4 +1,3 @@
-import ErrorAlert from "../../../utils/ErrorAlert";
 import apiClient from "../../../api/axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,13 +11,9 @@ export default function ScrapList() {
       try {
         const response = await apiClient.get("/api/mypage/scrap-list");
         const result = response.data;
-        if (!result.success) {
-          ErrorAlert();
-          return;
-        }
         setScraps(result.data);
       } catch (error) {
-        ErrorAlert(error);
+        console(error);
       }
     }
     loadScrapList();
@@ -35,18 +30,18 @@ export default function ScrapList() {
             onClick={() => navigate(`/news/${scrap.newsId}`)}
             className="bg-white rounded-lg shadow p-4 hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer"
           >
-            {/* 뉴스 이미지 */}
             <img
               src={scrap.image}
               alt="스크랩 뉴스 이미지"
               className="w-full h-48 object-cover rounded mb-4"
             />
-            {/* 카테고리 */}
-            <div className="text-sm text-orange-500 font-semibold">{scrap.categoryName}</div>
-            {/* 제목 */}
+            <div className="text-sm text-orange-500 font-semibold">
+              {scrap.categoryName}
+            </div>
             <h3 className="font-bold text-lg mt-1">{scrap.title}</h3>
-            {/* 작성자 / 작성시간 */}
-            <div className="text-gray-400 text-xs mt-1">{scrap.nickname} · {scrap.createAt}</div>
+            <div className="text-gray-400 text-xs mt-1">
+              {scrap.nickname} · {scrap.createAt}
+            </div>
           </div>
         ))
       )}

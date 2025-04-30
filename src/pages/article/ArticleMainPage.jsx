@@ -92,7 +92,7 @@ export default function ArticleMainPage() {
         <h4 className="text-lg font-bold">{formatDate}</h4>
         {auth && <NewsCreateButton />}
       </div>
-      <div className="flex flex-wrap gap-2 mb-4">
+      <div className="scrollbar-hide flex gap-2 mb-4 overflow-x-auto whitespace-nowrap">
         {categories.map((category) => (
           <button
             key={category}
@@ -125,10 +125,14 @@ export default function ArticleMainPage() {
                   ></img>
                 </div>
                 <div className="p-2">
-                  <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">{news.category}</p>
-                  <h4 className="text-lg font-bold text-black mb-1">{news.title}</h4>
+                  <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">
+                    {news.category}
+                  </p>
+                  <h4 className="text-lg font-bold text-black mb-1">
+                    {news.title}
+                  </h4>
                   <div className="flex items-center text-sm text-gray-400 space-x-2">
-                    <span classname="mr-2">{news.nickname}</span>
+                    <span className="mr-2">{news.nickname}</span>
                     <span>{news.createdAt}</span>
                   </div>
                 </div>

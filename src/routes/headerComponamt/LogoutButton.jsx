@@ -10,18 +10,21 @@ export default function LogoutButton() {
   const navigator = useNavigate();
 
   const handleLogout = async () => {
-    try {
-      await apiClient.post("/api/auth/logout", {
-        accessToken,
-        refreshToken,
-      });
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      toast.success("로그아웃 완료");
-      clearUser();
-      navigator("/");
-    } catch (error) {
-      console.log(error);
+    const check = confirm("로그아웃 하시겠습니까?");
+    if (check) {
+      try {
+        await apiClient.post("/api/auth/logout", {
+          accessToken,
+          refreshToken,
+        });
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        toast.success("로그아웃 완료");
+        clearUser();
+        navigator("/");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

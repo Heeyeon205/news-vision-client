@@ -1,9 +1,8 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import apiClient from '../../api/axios';
-import ErrorAlert from '../../utils/ErrorAlert';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import apiClient from "../../api/axios";
 
 export default function GptMainPage() {
   const [newsList, setNewsList] = useState([]);
@@ -13,7 +12,7 @@ export default function GptMainPage() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const respons = await apiClient.get('/api/gpt-news/main-summary');
+        const respons = await apiClient.get("/api/gpt-news/main-summary");
         const result = respons.data;
         setNewsList(result.data);
       } catch (error) {
@@ -30,7 +29,7 @@ export default function GptMainPage() {
           <div
             key={i}
             className={`indicator w-4 h-1 rounded ${
-              index === i ? 'bg-orange-500' : 'bg-gray-400'
+              index === i ? "bg-orange-500" : "bg-gray-400"
             }`}
           ></div>
         ))}

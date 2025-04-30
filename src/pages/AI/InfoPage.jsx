@@ -1,12 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useStore } from "../../store/useUserStore";
+import { toast } from "sonner";
 
 export default function InfoPage() {
   const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(true);
+  const logId = useStore((state) => state.userId);
 
   const handleClick = async () => {
+    if (!logId) {
+      toast.warning("로그인 후 이용 가능합니다.");
+      return;
+    }
     try {
       await apiClient.get("/api/auth/check");
       navigate("/gpt-news");
@@ -19,12 +26,18 @@ export default function InfoPage() {
     setIsModalVisible(false);
   };
 
+  useEffect(() => {
+    if (!isModalVisible) {
+      navigate("/");
+    }
+  }, [isModalVisible]);
+
   return (
     <div>
       {isModalVisible && (
         <div
           id="modal"
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+          className="fixed inset-0 bg-gray-400 bg-opacity-50 flex justify-center items-center z-50"
         >
           <div className="bg-white w-80 h-auto p-6 rounded-lg shadow-lg relative">
             <button
@@ -62,20 +75,6 @@ export default function InfoPage() {
               </button>
             </div>
           </div>
-        </div>
-      )}
-
-      {!isModalVisible && (
-        <div className="text-center mt-10">
-          <h3>시간 없으신가요?</h3>
-          <h3>오늘 딱 이것만 보세요!</h3>
-          <p>매일 업데이트되는 주요 뉴스 브리핑</p>
-          <button
-            className="border px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600"
-            onClick={() => setIsModalVisible(true)}
-          >
-            다시 보기
-          </button>
         </div>
       )}
     </div>

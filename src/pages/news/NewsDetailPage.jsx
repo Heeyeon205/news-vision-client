@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import apiClient from "../../api/axios";
-import ErrorAlert from "../../utils/ErrorAlert";
 import NewsLikeButton from "./NewsLikeButton";
 import ScrapButton from "./ScrapButton";
 import DropDownMenu from "./DropDownMenu";
@@ -16,19 +15,19 @@ export default function NewsDetail() {
   const [likeCount, setLikeCount] = useState(0);
 
   const [isScrap, setIsScrap] = useState(false);
-  const [scrapCount, setScrapCount] = useState(0);
 
   useEffect(() => {
     const loadNewsDetail = async () => {
       try {
         const response = await apiClient.get(`/api/news/${id}`);
         const result = response.data;
-        console.log("뉴스 디테일: ", result.data);
+        console.log("뉴스 디테일 로드 정보: ", result.data);
         setNews(result.data);
         setUserId(result.data.userId);
         setNewsId(result.data.id);
         setIsLike(result.data.liked);
         setLikeCount(result.data.likeCount);
+        setIsScrap(result.data.scraped);
       } catch (error) {
         console.log(error);
       }
@@ -63,13 +62,9 @@ export default function NewsDetail() {
         <div className="flex-1 flex flex-col">
           <div className="flex items-center">
             <span className="font-medium text-gray-800 mr-1">
-              {news.authorNickname}
+              {news.nickname}
             </span>
-            <img
-              src={news.authorBadgeIcon}
-              alt="유저 뱃지"
-              className="w-5 h-5"
-            />
+            <img src={news.icon} alt="유저 뱃지" className="w-5 h-5" />
           </div>
           {news.badgeTitle && (
             <span className="mx-0.5 text-xs text-gray-500">
@@ -96,8 +91,6 @@ export default function NewsDetail() {
           newsId={newsId}
           isScrap={isScrap}
           setIsScrap={setIsScrap}
-          scrapCount={scrapCount}
-          setScrapCount={setScrapCount}
         />
       </div>
     </div>

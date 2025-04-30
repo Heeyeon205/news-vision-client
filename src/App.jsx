@@ -1,8 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import { Toaster } from "sonner";
 
 import Layout from "./routes/Layout";
@@ -37,11 +34,12 @@ import SearchMainPage from "./pages/search/SearchMainPage";
 import BoardCreatePage from "./pages/board/BoardCreatePage";
 import BoardUpdatePage from "./pages/board/BoardUpdatePage";
 
+import PollDetailPage from "./pages/poll/PollDetailPage";
+
 function App() {
   return (
     <BrowserRouter>
-      <ToastContainer position="top-right" autoClose={3000} />
-      <Toaster position="top-right" richColors closeButton />
+      <Toaster position="top-center" richColors closeButton />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
@@ -73,6 +71,8 @@ function App() {
           <Route path="/board/update-form" element={<BoardUpdatePage />} />
 
           <Route path="/search" element={<SearchMainPage />} />
+
+          <Route path="/polls/:pollId" element={<PollDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
