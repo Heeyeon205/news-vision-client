@@ -62,7 +62,7 @@ export default function Main() {
                 </p>
                 <h4 className="text-lg font-bold mb-1">{news.title}</h4>
                 <div className="flex items-center text-sm text-gray-400 space-x-2">
-                  <span className="mr-2">{news.nickname}</span>
+                  <span classname="mr-2">{news.nickname}</span>
                   <span>{news.createdAt}</span>
                 </div>
               </div>
