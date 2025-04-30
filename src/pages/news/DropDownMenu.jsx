@@ -82,7 +82,7 @@ export default function DropDownMenu({ newsId, userId }) {
               문의하기
             </button>
           )}
-          /dev-smb
+
           <button
             onClick={handleShare}
             className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"

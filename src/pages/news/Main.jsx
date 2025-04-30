@@ -4,7 +4,7 @@ import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
 import NewsCreateButton from "./NewsCreateButton";
 import { useStore } from "../../store/useUserStore";
-import { faL } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function Main() {
   const logRole = useStore((state) => state.role);
@@ -34,7 +34,7 @@ export default function Main() {
   }, []);
 
   return (
-    <div class="p-4 max-w-[600px] w-full mx-auto">
+    <div className="p-4 max-w-[600px] w-full mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h4 className="text-lg font-bold mb-2">{formatDate}</h4>
         {auth && <NewsCreateButton />}
@@ -63,7 +63,7 @@ export default function Main() {
                 </p>
                 <h4 className="text-lg font-bold mb-1">{news.title}</h4>
                 <div className="flex items-center text-sm text-gray-400 space-x-2">
-                  <span classname="mr-2">{news.author}</span>
+                  <span classname="mr-2">{news.nickname}</span>
                   <span>{news.createdAt}</span>
                 </div>
               </div>
