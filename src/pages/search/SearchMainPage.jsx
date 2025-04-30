@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import apiClient from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+library.add(faMagnifyingGlass);
 
 export default function SearchMainPage() {
   const [query, setQuery] = useState("");
@@ -45,54 +50,51 @@ export default function SearchMainPage() {
 
   return (
     <div className="searchContainer">
-      <div className="searchBox">
-        <form onSubmit={handleClick}>
-          <input
-            type="text"
-            className="border"
-            placeholder="궁금한 지식을 찾아보세요."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          ></input>
-          <button className="border" type="submit">
-            검색
-          </button>
-        </form>
+      <div className="searchBox  flex justify-center m-5">
+        <input
+          type="text"
+          className="border w-[648px] h-[48px] border-r-0 rounded-tl-lg rounded-bl-lg border-gray-400"
+          placeholder=" 궁금한 지식을 찾아보세요."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        ></input>
+        <button
+          className="border w-[52px] h-[48px] border-l-0 rounded-tr-lg rounded-br-lg border-gray-400 "
+          onClick={handleClick}
+        >
+          <FontAwesomeIcon
+            icon="fa-solid fa-magnifying-glass"
+            className="text-gray-500 hover:text-gray-300"
+          />
+        </button>
       </div>
-
-      <hr />
-
       <div className="wordBox">
         {words.length === 0 ? (
           <p>검색 키워드가 없습니다.</p>
         ) : (
           <>
             {words.map((word) => (
-              <button
-                className="border"
-                key={word.id}
-                onClick={(e) => handleSearch(e.target.textContent)}
-              >
-                {word.keyword}
-              </button>
+              <p key={word.id}>{word.keyword}</p>
             ))}
           </>
         )}
       </div>
-
-      <hr />
-
-      <div className="buttonBox">
-        <button onClick={() => setType("news")} className="border">
-          뉴스
-        </button>
-        <button onClick={() => setType("board")} className="border">
-          커뮤니티
-        </button>
+      <div className="w-full h-full flex justify-center ">
+        <div className="buttonBox flex justify-start border-b-1 border-gray-200 w-[700px] h-[48px]">
+          <button
+            onClick={() => setType("news")}
+            className=" py-2 px-4 border-b-2 border-transparent text-gray-700 font-medium hover:border-orange-500 focus:border-orange-500 transition"
+          >
+            뉴스
+          </button>
+          <button
+            onClick={() => setType("board")}
+            className="px-2 px-4  border-b-2 border-transparent text-gray-700 font-medium hover:border-orange-500 focus:border-orange-500 transition"
+          >
+            커뮤니티
+          </button>
+        </div>
       </div>
-
-      <hr />
-
       <div className="listContainer">
         {data.length === 0 ? (
           <p>검색 결과가 없습니다.</p>

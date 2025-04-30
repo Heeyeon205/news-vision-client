@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
+import BoardCreateButton from "./BoardCreateButton";
 import { useStore } from "../../store/useUserStore";
-import BoardCreatePage from "./BoardCreatePage";
+import Topbutton from "../../utils/Topbutton";
 
 export default function BoardMainPage() {
   const userId = useStore((state) => state.userId);
@@ -18,7 +19,8 @@ export default function BoardMainPage() {
     const loadData = async () => {
       try {
         const response = await apiClient.get("/api/board");
-        setData(response.data.data);
+        const result = response.data;
+        setData(result.data);
       } catch (error) {
         console.log(error);
       }
@@ -53,7 +55,9 @@ export default function BoardMainPage() {
 
       {/* 게시글 리스트 */}
       {data.length === 0 ? (
-        <p className="text-center text-gray-400">커뮤니티에 아티클이 없습니다.</p>
+        <p className="text-center text-gray-400">
+          커뮤니티에 아티클이 없습니다.
+        </p>
       ) : (
         data.map((board) => (
           <div
@@ -94,7 +98,6 @@ export default function BoardMainPage() {
           </div>
         ))
       )}
-
       {/* 글쓰기 모달 */}
       {showModal && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-center items-center">
@@ -109,6 +112,7 @@ export default function BoardMainPage() {
           </div>
         </div>
       )}
+      <Topbutton />
     </div>
   );
 }
