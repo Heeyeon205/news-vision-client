@@ -26,7 +26,7 @@ export default function MatchesEmailCode({
   const [checkColor, setCheckColor] = useState("");
   const [touched, setTouched] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
-
+  const [codeSent, setCodeSent] = useState(false);
   useEffect(() => {
     if (!touched) return;
     const { msg, valid } = validateEmail(email);
@@ -54,6 +54,7 @@ export default function MatchesEmailCode({
         return;
       }
       alert("인증 메일을 발송했습니다.");
+      setCodeSent(true);
     } catch (error) {
       ErrorAlert(error);
     }
@@ -97,34 +98,67 @@ export default function MatchesEmailCode({
   };
 
   return (
-    <>
-      <label>이메일</label>
-      <br />
-      <input
-        type="email"
-        value={email}
-        placeholder="이메일을 입력해주세요."
-        readOnly={readOnly}
-        onChange={(e) => {
-          setEmail(e.target.value);
-          setTouched(true);
-        }}
-      />
-      <button onClick={authBtn}>인증하기 </button>
-      <br />
-      <label style={{ color }}>{msg}</label> <br />
-      <label>인증번호</label>
-      <br />
-      <input
-        type="text"
-        value={emailCode}
-        placeholder="인증번호를 입력해주세요."
-        onChange={(e) => setEmailCode(e.target.value)}
-        readOnly={readOnly}
-      />
-      <button onClick={authCheckBtn}>인증확인 </button>
-      <label style={{ color: checkColor }}>{checkMsg}</label> <br />
-      <br />
-    </>
+    <div className="flex flex-col w-full space-y-4">
+      {/* 이메일 입력 + 인증요청 */}
+      <div className="flex w-full">
+        <input
+          type="email"
+          value={email}
+          readOnly={readOnly}
+          placeholder="이메일을 입력해주세요."
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setTouched(true);
+          }}
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+        />
+        <button
+          type="button"
+          onClick={authBtn}
+          className="px-4 py-2 bg-orange-500 text-white text-sm rounded-r-md hover:bg-orange-600"
+        >
+          인증하기
+        </button>
+      </div>
+      {msg && <p className="text-xs text-red-500">{msg}</p>}
+  
+      {/* 인증번호 입력: codeSent = true일 때만 보임 */}
+      {codeSent && (
+        <>
+          <div>
+            <label
+              htmlFor="email-code"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              인증번호
+            </label>
+            <div className="flex w-full">
+              <input
+                id="email-code"
+                type="text"
+                value={emailCode}
+                readOnly={readOnly}
+                placeholder="인증번호를 입력해주세요."
+                onChange={(e) => setEmailCode(e.target.value)}
+                className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+              />
+              <button
+                type="button"
+                onClick={authCheckBtn}
+                className="px-4 py-2 bg-orange-500 text-white text-sm rounded-r-md hover:bg-orange-600"
+              >
+                인증확인
+              </button>
+            </div>
+            {checkMsg && (
+              <p className="text-xs mt-1" style={{ color: checkColor }}>
+                {checkMsg}
+              </p>
+            )}
+          </div>
+        </>
+      )}
+    </div>
   );
+  
 }

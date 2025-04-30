@@ -28,7 +28,7 @@ export default function BoardCreateSubmit({ image, content, categoryId }) {
   };
 
   return (
-    <button className="border" onClick={handleClick}>
+    <button className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-4 py-2 rounded" onClick={handleClick}>
       남기기
     </button>
   );
