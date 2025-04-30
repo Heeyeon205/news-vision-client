@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { IoImagesOutline } from "react-icons/io5";
 
 export default function BoardImageInput({ image, setImage }) {
   const [preview, setPreview] = useState(null);
@@ -11,19 +12,31 @@ export default function BoardImageInput({ image, setImage }) {
   };
 
   return (
-    <>
-      <p>이미지</p>
+    <div className="flex items-center gap-3">
+      {/* 아이콘 클릭 시 파일 업로드 */}
+      <label
+        htmlFor="image-upload"
+        className="cursor-pointer text-2xl text-orange-500 hover:text-orange-600"
+      >
+        <IoImagesOutline />
+      </label>
+
       <input
-        className="border"
+        id="image-upload"
         type="file"
         accept="image/*"
         onChange={handleChange}
+        className="hidden"
       />
-      {preview ? (
-        <img src={preview} alt="미리보기" width="40px" height="40px" />
-      ) : (
-        <img src={image} alt="미리보기" width="40px" height="40px" />
+
+      {/* 이미지 미리보기 */}
+      {(preview || image) && (
+        <img
+          src={preview || (typeof image === "string" ? image : URL.createObjectURL(image))}
+          alt="미리보기"
+          className="w-10 h-10 object-cover border rounded"
+        />
       )}
-    </>
+    </div>
   );
 }

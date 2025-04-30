@@ -6,6 +6,7 @@ import CommentBox from "./CommentBox";
 import BoardDropDownButton from "./BoardDropDownButton";
 import CommentDropDownButton from "./CommentDropDownButton";
 import BoardLikeButton from "./BoardLikeButton";
+import { FaRegComment } from "react-icons/fa";
 
 export default function BoardDetailPage() {
   const logNickname = useStore((state) => state.nickname);
@@ -37,71 +38,95 @@ export default function BoardDetailPage() {
   }, []);
 
   return !data ? (
-    <p>커뮤니티 불러오는 중....</p>
+    <p className="text-center py-10 text-gray-500">커뮤니티 불러오는 중...</p>
   ) : (
-    <div className="boardContainer flex flex-col items-center">
-      <div className="boardBox">
-        <BoardDropDownButton boardId={id} userId={userId} />
-        <img
-          src={data.userImage}
-          alt="프로필 이미지"
-          width="64px"
-          height="64px"
-        ></img>
-        <p>{data.nickname}</p>
-        <p>{data.createdAt}</p>
-        <button className="border">팔로우</button>
-        {data.image && <img src={data.image} alt="커뮤니티 이미지"></img>}
-        <p>{data.content}</p>
+    <div className="max-w-xl mx-auto p-4">
+      <div className="border-b pb-6">
 
-        <BoardLikeButton
-          boardId={id}
-          isLike={isLike}
-          setIsLike={setIsLike}
-          likeCount={likeCount}
-          setLikeCount={setLikeCount}
-        />
-
-        <span> {isLike}</span>
-        <p>댓글 {commentCount}</p>
-
-        <hr />
-
-        <h3>답글 {commentCount}</h3>
-      </div>
-      {data.comments.length === 0 ? (
-        <p>댓글이 없습니다.</p>
-      ) : (
-        data.comments.map((comment) => (
-          <div className="commentBox" key={comment.id}>
-            <img
-              src={comment.image}
-              alt="프로필 이미지"
-              width="40px"
-              height="40px"
-            ></img>
-            <p>{comment.nickname}</p>
-            <p>{comment.createdAt}</p>
-            <button>팔로우</button>
-            <p>{comment.content}</p>
-            <CommentDropDownButton
-              userId={userId}
-              commentId={comment.id}
-              onCommentDelete={loadData}
-            />
+        {/* 작성자 정보 */}
+        <div className="flex justify-between items-start mb-3">
+          <div className="flex items-start gap-3">
+            <img src={data.userImage} alt="프로필" className="w-10 h-10 rounded-full object-cover" />
+            <div>
+              <p className="font-semibold text-sm">{data.nickname}</p>
+              <p className="text-xs text-gray-400">{data.createdAt}</p>
+            </div>
           </div>
-        ))
-      )}
+          <BoardDropDownButton boardId={id} userId={userId} />
+        </div>
 
-      <hr />
+        {/* 본문 */}
+        <div className="text-sm text-gray-800 whitespace-pre-line leading-relaxed mb-3">
+          {data.content}
+        </div>
 
+        {/* 이미지 */}
+        {data.image && (
+  <div className="w-full flex justify-center mb-4">
+    <div className="max-w-[600px] max-h-[350px]">
+      <img
+        src={data.image}
+        alt="게시글 이미지"
+        className="w-full h-full object-contain"
+      />
+    </div>
+  </div>
+)}
+
+
+
+        {/* 좋아요 & 댓글 */}
+        <div className="flex items-center gap-6 text-sm text-gray-600 mt-2">
+          <BoardLikeButton
+            boardId={id}
+            isLike={isLike}
+            setIsLike={setIsLike}
+            likeCount={likeCount}
+            setLikeCount={setLikeCount}
+          />
+          <div className="flex items-center gap-1">
+            <FaRegComment />
+            <span>{commentCount}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 댓글 리스트 */}
+      <div className="mt-6">
+        <h3 className="text-sm font-semibold mb-3">답글 {commentCount}</h3>
+        {data.comments.length === 0 ? (
+          <p className="text-sm text-gray-500">댓글이 없습니다.</p>
+        ) : (
+          data.comments.map((comment) => (
+            <div key={comment.id} className="flex items-start gap-3 mb-4">
+              <img src={comment.image} alt="프로필" className="w-8 h-8 rounded-full object-cover" />
+              <div className="flex-1">
+                <div className="flex justify-between items-center">
+                  <p className="text-sm font-medium">{comment.nickname}</p>
+                  <CommentDropDownButton
+                    userId={userId}
+                    commentId={comment.id}
+                    onCommentDelete={loadData}
+                  />
+                </div>
+                <p className="text-xs text-gray-400">{comment.createdAt}</p>
+                <p className="text-sm mt-1">{comment.content}</p>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* 댓글 입력 */}
       {logNickname && (
-        <CommentBox
-          logProfile={logProfile}
-          logNickname={logNickname}
-          boardId={id}
-          onCommentSubmit={loadData}
-        />
+        <div className="mt-6 bg-gray-50 border border-gray-200 rounded-full flex items-center px-4 py-2">
+          <CommentBox
+            logProfile={logProfile}
+            logNickname={logNickname}
+            boardId={id}
+            onCommentSubmit={loadData}
+          />
+        </div>
       )}
     </div>
   );

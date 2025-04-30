@@ -2,10 +2,15 @@ import axios from "axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import { useNavigate } from "react-router-dom";
 
-export default function PasswordUpdateButton({ password, checkPassword }) {
+export default function PasswordUpdateButton({ password, checkPassword, validationState }) {
   const navigate = useNavigate();
-  console.log(localStorage.getItem("tempToken"));
+
   const handleClick = async () => {
+    if (!validationState.password) {
+      alert("비밀번호가 유효하지 않습니다.");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:8080/api/user/new-password",
@@ -23,11 +28,19 @@ export default function PasswordUpdateButton({ password, checkPassword }) {
         return;
       }
       alert("비밀번호 재설정 성공");
-      navigate("/user/domain-login");
+      navigate("/");
     } catch (error) {
       ErrorAlert(error);
     }
   };
 
-  return <button onClick={handleClick}>확인</button>;
+  return (
+    <button
+      onClick={handleClick}
+      className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-5 py-2 rounded"
+    >
+      확인
+    </button>
+  );
 }
+

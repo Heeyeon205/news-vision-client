@@ -8,14 +8,13 @@ export default function CommentBox({
   boardId,
   onCommentSubmit,
 }) {
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("");
 
   const handleClick = async () => {
     try {
       const res = await apiClient.post(`/api/comments/boards/${boardId}`, {
         content,
       });
-      console.log(res.data);
       setContent("");
       toast.success("댓글 작성 완료!");
       onCommentSubmit();
@@ -25,21 +24,24 @@ export default function CommentBox({
   };
 
   return (
-    <div className="writeBox">
+    <div className="flex items-center gap-2 w-full">
       <img
         src={logProfile}
         alt="프로필 이미지"
-        width="40px"
-        height="40px"
-      ></img>
-      <p>{logNickname}</p>
+        className="w-8 h-8 rounded-full object-cover"
+      />
+      <p className="text-sm font-medium text-gray-700">{logNickname}</p>
       <input
         type="text"
-        className="border"
-        value={content || ""}
+        value={content}
         onChange={(e) => setContent(e.target.value)}
-      ></input>
-      <button className="border" onClick={handleClick}>
+        placeholder="댓글을 입력하세요"
+        className="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400"
+      />
+      <button
+        onClick={handleClick}
+        className="text-sm px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-full"
+      >
         등록
       </button>
     </div>
