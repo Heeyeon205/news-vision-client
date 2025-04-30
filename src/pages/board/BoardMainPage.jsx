@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import apiClient from "../../api/axios";
-import { formatDate } from "../../utils/FormatDate";
-import { useNavigate } from "react-router-dom";
-import BoardCreateButton from "./BoardCreateButton";
-import { useStore } from "../../store/useUserStore";
+import { useState, useEffect } from 'react';
+import apiClient from '../../api/axios';
+import { formatDate } from '../../utils/FormatDate';
+import { useNavigate } from 'react-router-dom';
+import BoardCreateButton from './BoardCreateButton';
+import { useStore } from '../../store/useUserStore';
+import Topbutton from '../../utils/Topbutton';
 
 export default function BoardMainPage() {
   const userId = useStore((state) => state.userId);
@@ -13,7 +14,7 @@ export default function BoardMainPage() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const response = await apiClient.get("/api/board");
+        const response = await apiClient.get('/api/board');
         const result = response.data;
         setData(result.data);
       } catch (error) {
@@ -54,6 +55,7 @@ export default function BoardMainPage() {
           </div>
         ))
       )}
+      <Topbutton />
     </div>
   );
 }

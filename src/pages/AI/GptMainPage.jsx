@@ -43,19 +43,17 @@ export default function GptMainPage() {
       >
         {newsList.map((news) => (
           <SwiperSlide key={news.id}>
-            <div className="w-full flex justify-center items-center">
-              <div className="w-[600px]  flex-shrink-0 flex flex-col bg-white  p-5 mt-5">
-                <div className="w-full h-[350px] rounded-tl-lg rounded-tr-lg flex justify-center items-center border-gray-300 border-1 ">
-                  <img
-                    src={news.image}
-                    alt="뉴스 썸네일"
-                    className="max-h-full max-w-full object-contain"
-                  />
-                </div>
+            <div className="w-full h-full">
+              <div className="w-full flex-shrink-0 flex flex-col  p-5 mt-7 justify-center items-center">
+                <img
+                  src={news.image}
+                  alt="뉴스 썸네일"
+                  className="max-h-full max-w-full object-contain w-[600px] h-[350px] rounded-tl-lg rounded-tr-lg  border-gray-300 border-1 border-b-0"
+                />
 
-                <div className="w-full  rounded-bl-lg rounded-br-lg flex flex-col justify-center items-center border-gray-300 border-1 border-t-0 ">
-                  <div className="w-125 h-[160px]  flex flex-col mt-6 ">
-                    <h3 className="p-2 font-bold">{news.title}</h3>
+                <div className="max-h-full max-w-full w-[600px]  rounded-bl-lg rounded-br-lg flex flex-col justify-center items-center border-gray-300 border-1 border-t-0 ">
+                  <div className="w-125 h-[160px]  flex flex-col mt-6  max-h-full max-w-full">
+                    <h3 className="p-2 text-2xl font-bold">{news.title}</h3>
                     <p className="text-sm p-2 ">{news.summary}</p>
                   </div>
                   <p
