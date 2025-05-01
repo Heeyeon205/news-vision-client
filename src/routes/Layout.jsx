@@ -7,10 +7,11 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <main>
-        <Outlet />
-        <TopButton />
-      </main>
+      <main style={{ fontFamily: 'MaplestoryOTFBold' }}>
+  <Outlet />
+  <TopButton />
+</main>
+
       <Footer />
     </>
   );

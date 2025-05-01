@@ -37,6 +37,10 @@ import BoardUpdatePage from "./pages/board/BoardUpdatePage";
 
 import PollDetailPage from "./pages/poll/PollDetailPage";
 import AdminMainPage from "./pages/admin/AdminMainPage";
+import CategoryAdminPage from "./pages/admin/CategoryAdminPage";
+import BoardReportAdminPage from "./pages/admin/BoardReportAdminPage";
+import CommentReportAdminPage from "./pages/admin/CommentReportAdminPage";
+
 
 function App() {
   return (
@@ -79,6 +83,9 @@ function App() {
           <Route path="/polls/:pollId" element={<PollDetailPage />} />
 
           <Route path="/admin" element={<AdminMainPage />} />
+          <Route path="/admin/categories" element={<CategoryAdminPage />} />
+          <Route path="/admin/board-reports" element={<BoardReportAdminPage />} /> 
+          <Route path="/admin/comment-reports" element={<CommentReportAdminPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
