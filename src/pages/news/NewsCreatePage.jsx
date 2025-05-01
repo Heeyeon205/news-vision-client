@@ -61,7 +61,7 @@ export default function NewsCreatePage() {
           <div className="text-lg text-orange-500 font-bold mb-4">
             <h3>크리에이트 룸</h3>
           </div>
-          <div class="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <input
               className="flex-1 px-4 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white"
               type="text"
