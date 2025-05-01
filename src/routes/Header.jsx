@@ -1,26 +1,26 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useStore } from "../store/useUserStore";
-import UserDropDownButton from "./headerComponamt/UserDropDownButton";
+import { Link, useNavigate } from 'react-router-dom';
+import { useStore } from '../store/useUserStore';
+import UserDropDownButton from './headerComponamt/UserDropDownButton';
 
 export default function Header() {
   const navigate = useNavigate();
   const userId = useStore((state) => state.userId);
 
   const handleStartClick = () => {
-    navigate("/user/login");
+    navigate('/user/login');
   };
 
   return (
-    <header className="w-full bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 flex items-center justify-between flex-wrap md:flex-nowrap">
+    <header className="w-full  shadow-sm ">
+      <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 flex items-center justify-between  md:flex-row flex-wrap md:flex-nowrap ">
         <Link
           to="/"
-          className="text-2xl md:text-3xl font-extrabold text-orange-500"
+          className="text-2xl md:text-3xl font-extrabold text-orange-500 "
         >
           NEWSION
         </Link>
 
-        <nav className="w-full md:w-auto flex justify-center mt-3 md:mt-0 space-x-4 md:space-x-8 text-base md:text-lg font-semibold">
+        <nav className="w-full md:w-[600px] flex justify-center mt-3 order-2 md:order-none md:mt-0 space-x-4 md:space-x-8 text-base md:text-lg font-semibold ">
           <Link to="/" className="hover:text-orange-500">
             홈
           </Link>
@@ -38,7 +38,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        <div className="mt-3 md:mt-0">
+        <div className="mt-3 md:mt-0  ">
           {userId ? (
             <UserDropDownButton />
           ) : (
