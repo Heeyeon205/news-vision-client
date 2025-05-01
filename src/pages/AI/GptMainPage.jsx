@@ -1,8 +1,8 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import apiClient from "../../api/axios";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import apiClient from '../../api/axios';
 
 export default function GptMainPage() {
   const [newsList, setNewsList] = useState([]);
@@ -12,7 +12,7 @@ export default function GptMainPage() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const respons = await apiClient.get("/api/gpt-news/main-summary");
+        const respons = await apiClient.get('/api/gpt-news/main-summary');
         const result = respons.data;
         setNewsList(result.data);
       } catch (error) {
@@ -29,7 +29,7 @@ export default function GptMainPage() {
           <div
             key={i}
             className={`indicator w-4 h-1 rounded ${
-              index === i ? "bg-orange-500" : "bg-gray-400"
+              index === i ? 'bg-orange-500' : 'bg-gray-400'
             }`}
           ></div>
         ))}
@@ -43,21 +43,25 @@ export default function GptMainPage() {
         {newsList.map((news) => (
           <SwiperSlide key={news.id}>
             <div className="w-full h-full">
-              <div className="w-full flex-shrink-0 flex flex-col  p-5 mt-7 justify-center items-center">
-                <img
-                  src={news.image}
-                  alt="뉴스 썸네일"
-                  className="max-h-full max-w-full object-contain w-[600px] h-[350px] rounded-tl-lg rounded-tr-lg  border-gray-300 border-1 border-b-0"
-                />
+              <div className="w-full flex-shrink-0 flex flex-col mt-7 justify-center items-center">
+                <div className="w-11/12 sm:w-[600px] h-[350px] sm:h-[350px] rounded-tl-lg rounded-tr-lg border-gray-300 border-1 border-b-0 overflow-hidden">
+                  <img
+                    src={news.image}
+                    alt="뉴스 썸네일"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-                <div className="max-h-full max-w-full w-[600px]  rounded-bl-lg rounded-br-lg flex flex-col justify-center items-center border-gray-300 border-1 border-t-0 ">
-                  <div className="w-125 h-[160px]  flex flex-col mt-6  max-h-full max-w-full">
-                    <h3 className="p-2 text-2xl font-bold">{news.title}</h3>
+                <div className="w-11/12 sm:w-[600px] rounded-bl-lg rounded-br-lg flex flex-col justify-center items-center border-gray-300 border-1 border-t-0">
+                  <div className="w-11/12 sm:w-125 h-[120px] sm:h-[160px] flex flex-col mt-4 sm:mt-6 max-h-full max-w-full">
+                    <h3 className="p-2 text-xl sm:text-2xl font-bold">
+                      {news.title}
+                    </h3>
                     <p className="text-sm p-2 ">{news.summary}</p>
                   </div>
                   <p
                     onClick={() => navigate(`/news/${news.id}`)}
-                    className="text-orange-500 hover:text-orange-400  cursor-pointer p-5"
+                    className="text-orange-500 hover:text-orange-400 cursor-pointer p-3 sm:p-5"
                   >
                     자세히 보기
                   </p>
