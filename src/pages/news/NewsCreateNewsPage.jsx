@@ -3,6 +3,7 @@ import apiClient from "../../api/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import NewsImageInput from "./NewsImageInput";
 import { toast } from "sonner";
+import { validateNewsInput } from "./NewsCreateValidator";
 
 export default function NewsCreateNewsPage() {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ export default function NewsCreateNewsPage() {
   const [content, setContent] = useState("");
   const [selectId, setSelectId] = useState("");
   const { referenceTitle, referencePubDate, referenceLink } = location.state;
+  const infoImage =
+    "https://newsion-project.s3.ap-northeast-2.amazonaws.com/news/default-create-news.png";
 
   useEffect(() => {
     const loadCategory = async () => {
@@ -29,9 +32,13 @@ export default function NewsCreateNewsPage() {
   }, []);
 
   const handleClick = async () => {
-    if (selectId < 2) {
-      toast.warning("카테고리를 선택해 주세요.");
-    }
+    const isValid = validateNewsInput({
+      image,
+      selectId,
+      title,
+      content,
+    });
+    if (isValid) return;
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -84,7 +91,11 @@ export default function NewsCreateNewsPage() {
         </div>
 
         <div className="mb-4">
-          <NewsImageInput image={image} setImage={setImage} />
+          <NewsImageInput
+            image={image}
+            setImage={setImage}
+            infoImage={infoImage}
+          />
         </div>
         <div className="mb-4">
           <input
@@ -101,6 +112,9 @@ export default function NewsCreateNewsPage() {
             defaultValue={""}
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
+          <div className="text-right text-xs text-gray-400 mt-1">
+            {content.length}/1000
+          </div>
           <br />
         </div>
         <div className="flex justify-end">

@@ -1,19 +1,19 @@
-.voted-progress{
+.voted-progress {
   height: 23px;
   border-radius: 9px;
 }
 
-.voted-progress::-webkit-progress-bar{
-  background-colors: rgb(236, 236, 236);
+.voted-progress::-webkit-progress-bar {
+  background-color: rgb(236, 236, 236);
   border-radius: 9px;
 }
 
 .voted-progress::-webkit-progress-value {
-  background-color: #f97316; /* 오렌지 색상 (Tailwind bg-orange-500) */
+  background-color: #f97316;
   border-radius: 9px;
 }
 
-.voted-progress::-moz-progress-bar{
+.voted-progress::-moz-progress-bar {
   background-color: #f97316;
   border-radius: 9px;
 }
@@ -29,7 +29,7 @@
 }
 
 .default-progress::-webkit-progress-value {
-  background-color: #f97316; /* Tailwind gray-500 색상 */
+  background-color: #f97316;
   border-radius: 9px;
 }
 

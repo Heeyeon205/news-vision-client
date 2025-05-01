@@ -13,7 +13,9 @@ export default function NewsCreatePage() {
     setQuery(value);
   };
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
+    e.preventDefault();
+    if (query === "") return;
     try {
       const response = await apiClient.get("/api/naver-news/search", {
         params: { query },
@@ -58,23 +60,25 @@ export default function NewsCreatePage() {
     <>
       <div className="p-4 max-w-[600px] w-full mx-auto min-h-screen">
         <div className="p-4 bg-gray-100 shadow-md rounded-lg mb-6">
-          <div className="text-lg text-orange-500 font-bold mb-4">
-            <h3>크리에이트 룸</h3>
-          </div>
-          <div className="flex items-center gap-2">
-            <input
-              className="flex-1 px-4 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white"
-              type="text"
-              placeholder="오늘의 뉴스를 검색하세요."
-              onChange={handleChange}
-            ></input>
-            <button
-              className="px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors"
-              onClick={handleClick}
-            >
-              검색
-            </button>
-          </div>
+          <form onSubmit={handleClick}>
+            <div className="text-lg text-orange-500 font-bold mb-4">
+              <h3>창작의 공간</h3>
+            </div>
+            <div className="flex items-center gap-2">
+              <input
+                className="flex-1 px-4 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white"
+                type="text"
+                placeholder="오늘의 뉴스를 검색하세요."
+                onChange={handleChange}
+              ></input>
+              <button
+                className="px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors"
+                type="submit"
+              >
+                검색
+              </button>
+            </div>
+          </form>
         </div>
 
         <div>

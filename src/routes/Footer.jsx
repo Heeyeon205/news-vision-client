@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="w-full h-60  text-white py-7 bottom-0 flex flex-col lg:flex-row justify-around p-23">
       <div className="w-full md:w-150 ml-0 md:ml-5 mb-4 md:mb-0 text-center md:text-left">
-        {' '}
+        {" "}
         <h2 className="text-2xl font-bold mb-4 text-black">NEWSION</h2>
         <p className="text-gray-500 mb-2">
           ㈜뉴션 대표: 2조 | 사업자 등록번호: 632-51-02355 | 통신판매업
@@ -30,16 +30,16 @@ export default function Footer() {
         </div>
 
         <div className="flex">
-          <a className="text-gray-500 p-3" href="http://">
+          <a className="text-gray-500 p-3" href="/article">
             아티클
           </a>
-          <a className="text-gray-500 p-3" href="http://">
-            GptNews
+          <a className="text-gray-500 p-3" href="/gpt-info">
+            핵심 브리핑
           </a>
-          <a className="text-gray-500 p-3" href="http://">
+          <a className="text-gray-500 p-3" href="/board">
             커뮤니티
           </a>
-          <a className="text-gray-500 p-3" href="http://">
+          <a className="text-gray-500 p-3" href="/search">
             검색
           </a>
         </div>

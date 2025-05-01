@@ -61,7 +61,7 @@ export default function GptMainPage() {
                   </div>
                   <p
                     onClick={() => navigate(`/news/${news.id}`)}
-                    className="text-orange-500 hover:text-orange-400 cursor-pointer p-3 sm:p-5 mt-7 "
+                    className="w-full text-center text-orange-500 hover:text-orange-400 cursor-pointer p-3 sm:p-5 mt-4 sm:mt-7"
                   >
                     자세히 보기
                   </p>

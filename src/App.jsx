@@ -36,16 +36,17 @@ import BoardCreatePage from "./pages/board/BoardCreatePage";
 import BoardUpdatePage from "./pages/board/BoardUpdatePage";
 
 import PollDetailPage from "./pages/poll/PollDetailPage";
+import PollCreatePage from "./pages/poll/PollCreatePage";
+
 import AdminMainPage from "./pages/admin/AdminMainPage";
 import CategoryAdminPage from "./pages/admin/CategoryAdminPage";
 import BoardReportAdminPage from "./pages/admin/BoardReportAdminPage";
 import CommentReportAdminPage from "./pages/admin/CommentReportAdminPage";
 
-
 function App() {
   return (
     <BrowserRouter>
-      <Toaster position="top-center" richColors closeButton />
+      <Toaster position="top-center" richColors closeButton duration={2000} />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
@@ -80,12 +81,19 @@ function App() {
 
           <Route path="/search" element={<SearchMainPage />} />
 
-          <Route path="/polls/:pollId" element={<PollDetailPage />} />
+          <Route path="/poll/:pollId" element={<PollDetailPage />} />
+          <Route path="/poll/create-form" element={<PollCreatePage />} />
 
           <Route path="/admin" element={<AdminMainPage />} />
           <Route path="/admin/categories" element={<CategoryAdminPage />} />
-          <Route path="/admin/board-reports" element={<BoardReportAdminPage />} /> 
-          <Route path="/admin/comment-reports" element={<CommentReportAdminPage />} />
+          <Route
+            path="/admin/board-reports"
+            element={<BoardReportAdminPage />}
+          />
+          <Route
+            path="/admin/comment-reports"
+            element={<CommentReportAdminPage />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

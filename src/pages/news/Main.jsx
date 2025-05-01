@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import NewsCreateButton from "./NewsCreateButton";
 import { useStore } from "../../store/useUserStore";
 import { Swiper, SwiperSlide } from "swiper/react";
+import PollCreateButton from "../../pages/poll/PollCreateButton";
 import "swiper/css";
 
 export default function Main() {
@@ -20,7 +21,6 @@ export default function Main() {
       try {
         const response = await apiClient.get("/api/news/main");
         const result = response.data;
-        console.log(result.data);
         setNewsList(result.data.newsList);
         setPollList(result.data.pollList);
       } catch (error) {
@@ -31,13 +31,13 @@ export default function Main() {
   }, []);
 
   useEffect(() => {
-    if (pollList.length <= 1) return; // 투표가 1개 이하일 경우 자동 슬라이드 불필요
+    if (pollList.length <= 1) return;
 
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % pollList.length);
-    }, 5000); // 5초마다 변경
+    }, 5000);
 
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+    return () => clearInterval(interval);
   }, [pollList]);
 
   return (
@@ -48,10 +48,7 @@ export default function Main() {
         <div className="relative flex flex-col gap-4">
           <div className="font-bold text-2xl text-orange-500 overflow-hidden h-10">
             {pollList.length > 0 ? (
-              <div
-                key={index} // key를 변경하여 애니메이션 트리거
-                className="animate-slide-up"
-              >
+              <div key={index} className="animate-slide-up">
                 {pollList[index]?.title}
               </div>
             ) : (
@@ -72,7 +69,7 @@ export default function Main() {
         </div>
       </div>
       <style jsx>{`
-        @keyframes slide-up {
+        @keyframes main-slide-up {
           from {
             transform: translateY(100%);
             opacity: 0;
@@ -97,7 +94,7 @@ export default function Main() {
           시간 없으신가요? 하루에 딱 이것만 보세요!
         </div>
         <div
-          className="flex-1 text-gray-500 cursor-pointer"
+          className="flex-1 text-gray-600 cursor-pointer"
           onClick={() => navigate("/gpt-info")}
         >
           소식 보러 가기 {">"}
@@ -127,7 +124,7 @@ export default function Main() {
                   {news.category}
                 </p>
                 <h4 className="text-lg font-bold mb-1">{news.title}</h4>
-                <div className="flex items-center text-sm text-gray-400 space-x-2">
+                <div className="flex items-center text-sm text-gray-600 space-x-2">
                   <span className="mr-2">{news.nickname}</span>
                   <span>{news.createdAt}</span>
                 </div>
@@ -136,55 +133,68 @@ export default function Main() {
           ))}
         </div>
       )}
-      <hr className="mt-5 mb-10 border-orange-500 border-t-2"></hr>
+      <hr className="mt-5 mb-2 border-orange-500 border-t-2"></hr>
 
+      <div className="flex justify-end mb-5">
+        {isAuht && <PollCreateButton />}
+      </div>
 
-      {
-        pollList.length === 0 ? (
-          <p>진행중인 투표가 없습니다.</p>
-        ) : (
-          <div className="pollContainer rounded shadow-md p-3">
-            <h4 className="text-lg font-bold mb-2">당신의 의견을 들려주세요!</h4>
-            <Swiper
-              spaceBetween={20}
-              slidesPerView={1}
-              pagination={{ clickable: true }}
-              onSlideChange={(swiper) => setIndex(swiper.activeIndex)}
-            >
-              {pollList.map((poll) => (
-                <SwiperSlide key={poll.id}>
-                  <div className=" w-full flex justify-center items-center">
-                    <div className="w-full flex flex-col justify-center items-start border-t-0 rounded-bl-lg rounded-br-lg
-                    cursor-pointer shadow-md hover:scale-101 hover:shadow-lg transition-transform duration-300"
-                      onClick={() => navigate(`/polls/${poll.id}`)}
-                    >
-                      <div className="w-full flex flex-col p-3">
-                        <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">{poll.expiredAt}</p>
-                        <h3 className="mt-1 font-bold text-base break-words">
-                          {poll.title}
-                        </h3>
-                        <div className="flex w-full mt-1">
-                          <span className="text-xs text-gray-600 mr-2">{poll.nickname}</span>
-                          <span className="text-xs text-gray-600">{poll.createdAt}</span>
-                        </div>
-                        <div className="flex justify-center gap-2 mt-2 mb-2">
-                          {pollList.map((_, i) => (
-                            <div
-                              key={i}
-                              className={`indicator w-4 h-1 rounded ${index === i ? 'bg-orange-500' : 'bg-gray-400'
-                                }`}
-                            ></div>
-                          ))}
-                        </div>
+      {pollList.length === 0 ? (
+        <p>진행중인 투표가 없습니다.</p>
+      ) : (
+        <div className="pollContainer rounded shadow-md p-3 border">
+          <h4 className="text-xl font-bold my-3 ml-3">
+            당신의 의견을 들려주세요!
+          </h4>
+
+          <Swiper
+            spaceBetween={20}
+            slidesPerView={1}
+            pagination={{ clickable: true }}
+            onSlideChange={(swiper) => setIndex(swiper.activeIndex)}
+          >
+            {pollList.map((poll) => (
+              <SwiperSlide key={poll.id}>
+                <div className="w-full flex justify-center items-center">
+                  <div
+                    className="w-full flex flex-col justify-center items-start border-t-0 rounded-bl-lg rounded-br-lg
+              cursor-pointer shadow-md hover:scale-101 hover:shadow-lg transition-transform duration-300"
+                    onClick={() => navigate(`/poll/${poll.id}`)}
+                  >
+                    <div className="w-full flex flex-col p-3">
+                      <p className="inline-block mb-2 text-sm text-black rounded-xl px-3 py-1 w-fit border border-orange-400 text-orange-400">
+                        {poll.expiredAt}
+                      </p>
+                      <h3 className="my-1 font-bold text-base break-words">
+                        {poll.title}
+                      </h3>
+                      <div className="flex w-full mt-1">
+                        <span className="text-xs text-gray-600 mr-2">
+                          {poll.nickname}
+                        </span>
+                        <span className="text-xs text-gray-600">
+                          {poll.createdAt}
+                        </span>
                       </div>
                     </div>
                   </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          <div className="flex justify-center gap-2 mt-10 mb-2">
+            {pollList.map((_, i) => (
+              <div
+                key={`indicator-${i}`}
+                className={`indicator w-4 h-1 rounded ${
+                  index === i ? "bg-orange-500" : "bg-gray-400"
+                }`}
+              ></div>
+            ))}
           </div>
-        )
-      }
-    </div >
+        </div>
+      )}
+    </div>
   );
 }

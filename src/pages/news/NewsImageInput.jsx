@@ -1,10 +1,9 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
-
-export default function NewsImageInput({ image, setImage }) {
+export default function NewsImageInput({ image, setImage, infoImage }) {
   const [preview, setPreview] = useState(null);
-  const fileInputRef = useRef(null); //명보가 추가
-
+  const fileInputRef = useRef(null);
+  const imageToShow = preview || image || infoImage;
   const handleChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -16,22 +15,31 @@ export default function NewsImageInput({ image, setImage }) {
     fileInputRef.current.click();
   };
 
+  useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
+
   return (
     <div className="flex flex-col">
-      {/* <p className="mb-2 font-bold text-gray-800">이미지</p> */}
       <input
         className="hidden"
         type="file"
         accept="image/*"
         onChange={handleChange}
-        ref={fileInputRef} // 명보가 추가
+        ref={fileInputRef}
       />
-
-      {preview ? (
-        <img src={preview} alt="미리보기" width="530px" height="300px" className="w-full object-cover rounded cursor-pointer shadow-lg" onClick={handleImageClick} />
-      ) : (
-        <img src={image} alt="미리보기" width="530px" height="300px" className="w-full object-cover rounded cursor-pointer shadow-lg" onClick={handleImageClick} />
-      )}
+      <img
+        src={imageToShow}
+        alt="미리보기"
+        width="530px"
+        height="300px"
+        className="w-full object-cover rounded cursor-pointer shadow-lg"
+        onClick={handleImageClick}
+      />
     </div>
   );
 }

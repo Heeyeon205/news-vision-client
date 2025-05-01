@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react"; // 여기도 useRef 명보가 드래그 때문에 추가가
+import { useEffect, useState, useRef } from "react";
 import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import NewsCreateButton from "../news/NewsCreateButton";
@@ -9,7 +9,7 @@ export default function ArticleMainPage() {
   const logId = useStore((state) => state.userId);
   const logRole = useStore((state) => state.role);
   const [auth, setAuth] = useState(false);
-  const categoryRef = useRef(null); //드래그 때문에 명보가 추가가
+  const categoryRef = useRef(null);
 
   useEffect(() => {
     if (logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR") {
@@ -87,7 +87,6 @@ export default function ArticleMainPage() {
     }
   };
 
-  // 카테고리 드래그
   useEffect(() => {
     const categoryContainer = categoryRef.current;
     if (!categoryContainer) return;
@@ -100,24 +99,24 @@ export default function ArticleMainPage() {
       isDragging = true;
       startX = e.pageX - categoryContainer.offsetLeft;
       scrollLeft = categoryContainer.scrollLeft;
-      categoryContainer.style.cursor = "grabbing"; // 드래그 중 커서 변경
+      categoryContainer.style.cursor = "grabbing";
     };
 
     const handleMouseLeave = () => {
       isDragging = false;
-      categoryContainer.style.cursor = "grab"; // 드래그 종료 후 커서 복원
+      categoryContainer.style.cursor = "grab";
     };
 
     const handleMouseUp = () => {
       isDragging = false;
-      categoryContainer.style.cursor = "grab"; // 드래그 종료 후 커서 복원
+      categoryContainer.style.cursor = "grab";
     };
 
     const handleMouseMove = (e) => {
       if (!isDragging) return;
       e.preventDefault();
       const x = e.pageX - categoryContainer.offsetLeft;
-      const walk = (x - startX) * 2; // 스크롤 속도 조절
+      const walk = (x - startX) * 2;
       categoryContainer.scrollLeft = scrollLeft - walk;
     };
 
@@ -126,7 +125,6 @@ export default function ArticleMainPage() {
     categoryContainer.addEventListener("mouseup", handleMouseUp);
     categoryContainer.addEventListener("mousemove", handleMouseMove);
 
-    // 컴포넌트 언마운트 시 이벤트 리스너 제거
     return () => {
       categoryContainer.removeEventListener("mousedown", handleMouseDown);
       categoryContainer.removeEventListener("mouseleave", handleMouseLeave);
@@ -145,12 +143,10 @@ export default function ArticleMainPage() {
         ref={categoryRef}
         className="flex gap-2 mb-4 overflow-x-auto whitespace-nowrap cursor-grab select-none"
         style={{
-          // 스크롤바 숨기기 (다양한 브라우저 지원)
           scrollbarWidth: "none",
           "-ms-overflow-style": "none",
         }}
       >
-        {/* Webkit 브라우저용 스크롤바 숨기기 */}
         <style jsx>{`
           div::-webkit-scrollbar {
             display: none;
@@ -194,7 +190,7 @@ export default function ArticleMainPage() {
                   <h4 className="text-lg font-bold text-black mb-1">
                     {news.title}
                   </h4>
-                  <div className="flex items-center text-sm text-gray-400 space-x-2">
+                  <div className="flex items-center text-sm text-gray-600 space-x-2">
                     <span className="mr-2">{news.nickname}</span>
                     <span>{news.createdAt}</span>
                   </div>
