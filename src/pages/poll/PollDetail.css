@@ -1,0 +1,39 @@
+.voted-progress{
+  height: 30px;
+  border-radius: 9px;
+}
+
+.voted-progress::-webkit-progress-bar{
+  background-colors: rgb(219, 219, 219);
+  border-radius: 9px;
+}
+
+.voted-progress::-webkit-progress-value {
+  background-color: #f97316; /* 오렌지 색상 (Tailwind bg-orange-500) */
+  border-radius: 9px;
+}
+
+.voted-progress::-moz-progress-bar{
+  background-color: #f97316;
+  border-radius: 9px;
+}
+
+.default-progress {
+  height: 30px;
+  border-radius: 9px;
+}
+
+.default-progress::-webkit-progress-bar {
+  background-color: rgb(219, 219, 219);
+  border-radius: 9px;
+}
+
+.default-progress::-webkit-progress-value {
+  background-color: #f97316; /* Tailwind gray-500 색상 */
+  border-radius: 9px;
+}
+
+.default-progress::-moz-progress-bar {
+  background-color: #f97316;
+  border-radius: 9px;
+}
