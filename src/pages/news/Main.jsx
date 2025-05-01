@@ -38,8 +38,63 @@ export default function Main() {
     loadNews();
   }, []);
 
+  useEffect(() => {
+    if (pollList.length <= 1) return; // 투표가 1개 이하일 경우 자동 슬라이드 불필요
+
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % pollList.length);
+    }, 5000); // 5초마다 변경
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+  }, [pollList]);
+
   return (
     <div className="p-4 max-w-[600px] w-full mx-auto">
+      <div className="relative rounded-xl my-5 p-8 bg-gradient-to-r from-orange-50 via-orange-100 to-orange-200 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-200/30 to-transparent rounded-lg pointer-events-none"></div>
+        <div className="absolute top-0 left-0 w-24 h-24 bg-orange-300/10 rounded-full -translate-x-12 -translate-y-12 pointer-events-none"></div>
+        <div className="relative flex flex-col gap-4">
+          <div className="font-bold text-2xl text-orange-500 overflow-hidden h-10">
+            {pollList.length > 0 ? (
+              <div
+                key={index} // key를 변경하여 애니메이션 트리거
+                className="animate-slide-up"
+              >
+                {pollList[index]?.title}
+              </div>
+            ) : (
+              "진행중인 투표가 없습니다."
+            )}
+          </div>
+          <div
+            className="relative text-orange-600 dark:text-purple-400 font-medium cursor-pointer transition-colors duration-200 group"
+            onClick={() => {
+              if (pollList.length > 0) {
+                navigate(`/polls/${pollList[index]?.id}`);
+              }
+            }}
+          >
+            당신의 생각은? 투표로 알려주세요!
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-orange-600 dark:bg-orange-400 transition-all duration-400 group-hover:w-full"></span>
+          </div>
+        </div>
+      </div>
+      <style jsx>{`
+        @keyframes slide-up {
+          from {
+            transform: translateY(100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        .animate-slide-up {
+          animation: slide-up 0.5s ease-out forwards;
+        }
+      `}</style>
+
       <div className="flex justify-between items-center mb-4">
         <h4 className="text-lg font-bold mt-5">{formatDate}</h4>
         {auth && <NewsCreateButton />}
@@ -103,16 +158,16 @@ export default function Main() {
             {pollList.map((poll) => (
               <SwiperSlide key={poll.id}>
                 <div className="w-full flex justify-center items-center">
-                  <div className="w-full rounded-bl-lg rounded-br-lg flex flex-col justify-center items-center border-gray-300 border-1 border-t-0">
-                    <div className="w-125 h-[160px] flex flex-col mt-6">
-                      <p className="text-sm p-2">{poll.expiredAt}</p>
-                      <h3 className="p-2 font-bold">{poll.title}</h3>
-                      <span className="text-sm p-2">{poll.createdAt}</span>
-                      <span className="text-sm p-2">{poll.nickname}</span>
+                  <div className="w-full rounded-bl-lg rounded-br-lg flex flex-col justify-center items-center border-gray-300 border border-t-0">
+                    <div className="w-full flex flex-col mt-4 px-3">
+                      <p className="text-xs p-1">{poll.expiredAt}</p>
+                      <h3 className="p-1 font-bold text-base break-words">{poll.title}</h3>
+                      <span className="text-xs p-1">{poll.createdAt}</span>
+                      <span className="text-xs p-1">{poll.nickname}</span>
                     </div>
                     <p
                       onClick={() => navigate(`/polls/${poll.id}`)}
-                      className="text-orange-500 hover:text-orange-400 cursor-pointer p-5"
+                      className="text-orange-500 hover:text-orange-400 cursor-pointer p-3 text-sm"
                     >
                       자세히 보기
                     </p>
