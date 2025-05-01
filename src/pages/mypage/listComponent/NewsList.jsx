@@ -28,7 +28,7 @@ export default function NewsList() {
           <div
             key={news.newsId}
             onClick={() => navigate(`/news/${news.newsId}`)}
-            className="bg-white rounded-lg shadow p-4 hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer"
+            className="bg-white rounded-lg shadow p-4 hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer "
           >
             {/* 뉴스 이미지 */}
             <img

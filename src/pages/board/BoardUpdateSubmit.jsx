@@ -20,7 +20,7 @@ export default function BoardCreateSubmit({
     formData.append("content", content);
     formData.append("categoryId", categoryId);
     try {
-      const res = await apiClient.post("/api/board", formData, {
+      await apiClient.put(`/api/board/${boardId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -31,9 +31,11 @@ export default function BoardCreateSubmit({
       console.log(error);
     }
   };
-
   return (
-    <button className="border" onClick={handleClick}>
+    <button
+      onClick={handleClick}
+      className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded text-sm"
+    >
       수정하기
     </button>
   );
