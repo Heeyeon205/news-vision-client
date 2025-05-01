@@ -29,7 +29,7 @@ export default function LogoutButton() {
   };
 
   return (
-    <button className="border rounded mx-5" onClick={handleLogout}>
+    <button className="py-3 text-sm hover:bg-gray-100 transition" onClick={handleLogout}>
       로그아웃
     </button>
   );

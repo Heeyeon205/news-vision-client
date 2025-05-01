@@ -99,7 +99,7 @@ export default function Mypage() {
         <div className="flex gap-6 mb-6">
           {role && (
             <button
-              className={`py-2 px-4 border-b-2 text-sm font-semibold transition 
+              className={`py-2 px-4 border-b-2 text-sm font-semibold transition  
       ${activeTap === "news"
                   ? "text-orange-500 border-orange-400"
                   : "text-gray-500 border-transparent hover:text-orange-400"}`}

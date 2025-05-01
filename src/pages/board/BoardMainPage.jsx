@@ -3,6 +3,7 @@ import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
 import BoardCreateButton from "./BoardCreateButton";
+import BoardCreatePage from "./BoardCreatePage";
 import { useStore } from "../../store/useUserStore";
 
 export default function BoardMainPage() {
@@ -59,7 +60,7 @@ export default function BoardMainPage() {
         data.map((board) => (
           <div
             key={board.boardId}
-            className="mb-6 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer"
+            className="mb-6 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer bg-white rounded-lg shadow hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer"
             onClick={() => navigate(`/board/${board.boardId}`)}
           >
             <div className="flex items-start gap-3 mb-2">
@@ -104,7 +105,7 @@ export default function BoardMainPage() {
             >
               ✕
             </button>
-            <BoardCreateButton />
+            <BoardCreatePage />
           </div>
         </div>
       )}

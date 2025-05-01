@@ -6,5 +6,5 @@ export default function AdminPageButton() {
     navigate("/admin");
   };
 
-  return <button onClick={handleClick}>관리자 메뉴</button>;
+  return <button className="py-3 text-sm hover:bg-gray-100 transition" onClick={handleClick}>관리자 메뉴</button>;
 }
