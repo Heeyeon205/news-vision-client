@@ -2,6 +2,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useUserStore';
 import UserDropDownButton from './headerComponamt/UserDropDownButton';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(faMagnifyingGlass);
+
 export default function Header() {
   const navigate = useNavigate();
   const userId = useStore((state) => state.userId);
@@ -20,21 +26,39 @@ export default function Header() {
           NEWSION
         </Link>
 
-        <nav className="w-full md:w-[600px] flex justify-center mt-3 order-2 md:order-none md:mt-0 space-x-4 md:space-x-8 text-base md:text-lg font-semibold ">
-          <Link to="/" className="hover:text-orange-500">
+        <nav className="w-full md:w-[600px]  flex justify-center mt-10  mr-0 lg:mr-25 order-2 lg:order-none md:mt-0 space-x-4 md:space-x-8 text-base md:text-lg font-semibold ">
+          <Link
+            to="/"
+            className=" h-[32px] border-b-3 border-transparent text-black font-medium hover:text-orange-500  hover:border-orange-500 "
+          >
             홈
           </Link>
-          <Link to="/article" className="hover:text-orange-500">
+          <Link
+            to="/article"
+            className="h-[32px]  border-b-3 border-transparent text-black font-medium hover:text-orange-500 hover:border-orange-500 "
+          >
             아티클
           </Link>
-          <Link to="/gpt-info" className="hover:text-orange-500">
+          <Link
+            to="/gpt-info"
+            className="h-[32px]  border-b-3 border-transparent text-black  font-medium hover:text-orange-500 hover:border-orange-500 "
+          >
             시간 없음!
           </Link>
-          <Link to="/board" className="hover:text-orange-500">
+          <Link
+            to="/board"
+            className="h-[32px]  border-b-3 border-transparent text-black  font-medium hover:text-orange-500 hover:border-orange-500 "
+          >
             커뮤니티
           </Link>
-          <Link to="/search" className="hover:text-orange-500">
-            검색
+          <Link
+            to="/search"
+            className="group h-[32px] border-b-3 border-transparent text-black font-medium hover:text-orange-500 hover:border-orange-500 "
+          >
+            <FontAwesomeIcon
+              icon="fa-solid fa-magnifying-glass"
+              className="text-black font-medium hover:border-orange-500 hover:text-orange-500 "
+            />
           </Link>
         </nav>
 
