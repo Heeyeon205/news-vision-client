@@ -60,7 +60,7 @@ export default function BoardMainPage() {
         data.map((board) => (
           <div
             key={board.boardId}
-            className="mb-6 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer bg-white rounded-lg shadow hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer"
+            className="mb-6 p-4 border border-gray-200 rounded-lg hover:bg-gray-50  bg-white shadow hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer"
             onClick={() => navigate(`/board/${board.boardId}`)}
           >
             <div className="flex items-start gap-3 mb-2">
@@ -97,7 +97,7 @@ export default function BoardMainPage() {
         ))
       )}
       {showModal && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-center items-center">
+        <div className="fixed inset-0 z-50 bg-gray-400 bg-opacity-100 flex justify-center items-center">
           <div className="bg-white rounded-md shadow-lg p-6 w-full max-w-lg relative">
             <button
               className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-xl"
