@@ -136,42 +136,55 @@ export default function Main() {
           ))}
         </div>
       )}
+      <hr className="mt-5 mb-10 border-orange-500 border-t-2"></hr>
 
-      {pollList.length === 0 ? (
-        <p>진행중인 투표가 없습니다.</p>
-      ) : (
-        <div className="pollContainer rounded shadow-md">
-          <Swiper
-            spaceBetween={20}
-            slidesPerView={1}
-            pagination={{ clickable: true }}
-            onSlideChange={(swiper) => setIndex(swiper.activeIndex)}
-          >
-            {pollList.map((poll) => (
-              <SwiperSlide key={poll.id}>
-                <div className="w-full flex justify-center items-center">
-                  <div className="w-full rounded-bl-lg rounded-br-lg flex flex-col justify-center items-center border-gray-300 border border-t-0">
-                    <div className="w-full flex flex-col mt-4 px-3">
-                      <p className="text-xs p-1">{poll.expiredAt}</p>
-                      <h3 className="p-1 font-bold text-base break-words">
-                        {poll.title}
-                      </h3>
-                      <span className="text-xs p-1">{poll.createdAt}</span>
-                      <span className="text-xs p-1">{poll.nickname}</span>
-                    </div>
-                    <p
+
+      {
+        pollList.length === 0 ? (
+          <p>진행중인 투표가 없습니다.</p>
+        ) : (
+          <div className="pollContainer rounded shadow-md p-3">
+            <h4 className="text-lg font-bold mb-2">당신의 의견을 들려주세요!</h4>
+            <Swiper
+              spaceBetween={20}
+              slidesPerView={1}
+              pagination={{ clickable: true }}
+              onSlideChange={(swiper) => setIndex(swiper.activeIndex)}
+            >
+              {pollList.map((poll) => (
+                <SwiperSlide key={poll.id}>
+                  <div className=" w-full flex justify-center items-center">
+                    <div className="w-full flex flex-col justify-center items-start border-t-0 rounded-bl-lg rounded-br-lg
+                    cursor-pointer shadow-md hover:scale-101 hover:shadow-lg transition-transform duration-300"
                       onClick={() => navigate(`/polls/${poll.id}`)}
-                      className="text-orange-500 hover:text-orange-400 cursor-pointer p-3 text-sm"
                     >
-                      자세히 보기
-                    </p>
+                      <div className="w-full flex flex-col p-3">
+                        <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">{poll.expiredAt}</p>
+                        <h3 className="mt-1 font-bold text-base break-words">
+                          {poll.title}
+                        </h3>
+                        <div className="flex w-full mt-1">
+                          <span className="text-xs text-gray-600 mr-2">{poll.nickname}</span>
+                          <span className="text-xs text-gray-600">{poll.createdAt}</span>
+                        </div>
+                        <div className="flex justify-center gap-2 mt-2 mb-2">
+                          {pollList.map((_, i) => (
+                            <div
+                              key={i}
+                              className={`indicator w-4 h-1 rounded ${index === i ? 'bg-orange-500' : 'bg-gray-400'
+                                }`}
+                            ></div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      )}
-    </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        )
+      }
+    </div >
   );
 }
