@@ -4,7 +4,6 @@ import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
 import BoardCreateButton from "./BoardCreateButton";
 import { useStore } from "../../store/useUserStore";
-import Topbutton from "../../utils/Topbutton";
 
 export default function BoardMainPage() {
   const userId = useStore((state) => state.userId);
@@ -109,7 +108,6 @@ export default function BoardMainPage() {
           </div>
         </div>
       )}
-      <Topbutton />
     </div>
   );
 }
