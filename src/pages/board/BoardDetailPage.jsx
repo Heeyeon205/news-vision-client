@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
 import { useStore } from "../../store/useUserStore";
 import CommentBox from "./CommentBox";
@@ -7,10 +7,12 @@ import BoardDropDownButton from "./BoardDropDownButton";
 import CommentDropDownButton from "./CommentDropDownButton";
 import BoardLikeButton from "./BoardLikeButton";
 import { FaRegComment } from "react-icons/fa";
+import FollowButton from "../../utils/FollowButton";
 
 export default function BoardDetailPage() {
   const logNickname = useStore((state) => state.nickname);
   const logProfile = useStore((state) => state.image);
+  const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState("");
   const [userId, setUserId] = useState("");
@@ -18,17 +20,20 @@ export default function BoardDetailPage() {
   const [likeCount, setLikeCount] = useState(0);
   const [commentCount, setCommentCount] = useState(0);
   const [view, setView] = useState(0);
+  const [isFollow, setIsFollow] = useState(false);
 
   const loadData = async () => {
     try {
       const response = await apiClient.get(`/api/board/${id}`);
       const result = response.data;
+      console.log("보드디테일데이타:", result.data);
       setData(result.data);
       setUserId(result.data.userId);
       setIsLike(result.data.like);
       setLikeCount(result.data.likeCount);
       setCommentCount(result.data.commentCount);
       setView(result.data.view);
+      setIsFollow(result.data.followed);
     } catch (error) {
       console.log(error);
     }
@@ -52,13 +57,18 @@ export default function BoardDetailPage() {
               className="w-10 h-10 rounded-full object-cover"
             />
             <div>
-              <p className="font-semibold text-sm">{data.nickname}</p>
+              <p
+                className="font-semibold text-sm cursor-pointer"
+                onClick={() => navigate(`/userPage/${userId}`)}
+              >
+                {data.nickname}
+              </p>
               <p className="text-xs text-gray-400">{data.createdAt}</p>
             </div>
+            <FollowButton targetId={userId} followed={isFollow} />
           </div>
           <BoardDropDownButton boardId={id} userId={userId} />
         </div>
-
         <div className="text-sm text-gray-800 whitespace-pre-line leading-relaxed mb-3">
           {data.content}
         </div>
@@ -106,7 +116,7 @@ export default function BoardDetailPage() {
                 <div className="flex justify-between items-center">
                   <p className="text-sm font-medium">{comment.nickname}</p>
                   <CommentDropDownButton
-                    userId={userId}
+                    userId={comment.userId}
                     commentId={comment.id}
                     onCommentDelete={loadData}
                   />

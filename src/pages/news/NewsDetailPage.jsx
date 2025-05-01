@@ -1,33 +1,35 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import apiClient from "../../api/axios";
 import NewsLikeButton from "./NewsLikeButton";
 import ScrapButton from "./ScrapButton";
 import DropDownMenu from "./DropDownMenu";
+import FollowButton from "../../utils/FollowButton";
 
 export default function NewsDetail() {
   const { id } = useParams();
   const [news, setNews] = useState(null);
   const [newsId, setNewsId] = useState();
   const [userId, setUserId] = useState();
-
   const [isLike, setIsLike] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
-
   const [isScrap, setIsScrap] = useState(false);
+  const [isFollow, setIsFollow] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadNewsDetail = async () => {
       try {
         const response = await apiClient.get(`/api/news/${id}`);
         const result = response.data;
-        console.log("뉴스 디테일 로드 정보: ", result.data);
         setNews(result.data);
         setUserId(result.data.userId);
         setNewsId(result.data.id);
         setIsLike(result.data.liked);
         setLikeCount(result.data.likeCount);
         setIsScrap(result.data.scraped);
+        setIsFollow(result.data.followed);
       } catch (error) {
         console.log(error);
       }
@@ -61,7 +63,10 @@ export default function NewsDetail() {
         </div>
         <div className="flex-1 flex flex-col">
           <div className="flex items-center">
-            <span className="font-medium text-gray-800 mr-1">
+            <span
+              className="font-medium text-gray-800 mr-1 cursor-pointer"
+              onClick={() => navigate(`/userPage/${userId}`)}
+            >
               {news.nickname}
             </span>
             <img src={news.icon} alt="유저 뱃지" className="w-5 h-5" />
@@ -72,6 +77,7 @@ export default function NewsDetail() {
             </span>
           )}
         </div>
+        <FollowButton targetId={userId} followed={isFollow} />
       </div>
       <div className="mt-4 border-b border-gray-300"></div>
       <div className="mt-6 text-gray-700 text-lg leading-relaxed font-noto-sans">

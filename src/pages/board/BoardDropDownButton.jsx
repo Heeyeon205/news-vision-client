@@ -7,6 +7,7 @@ import ErrorAlert from "../../utils/ErrorAlert";
 import { useStore } from "../../store/useUserStore";
 import BoardDeleteButton from "./BoardDeleteButton";
 import ShareButton from "../../utils/ShareButton";
+import BoardReportButton from "./report/BoardReportButton";
 
 export default function BoardDropDownButton({ boardId, userId }) {
   const [open, setOpen] = useState(false);
@@ -39,10 +40,6 @@ export default function BoardDropDownButton({ boardId, userId }) {
     } catch (error) {
       ErrorAlert(error);
     }
-  };
-
-  const handleReport = () => {
-    alert("개발 예정");
   };
 
   useEffect(() => {
@@ -80,12 +77,7 @@ export default function BoardDropDownButton({ boardId, userId }) {
               <BoardDeleteButton boardId={boardId} />
             </>
           ) : (
-            <button
-              onClick={handleReport}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-            >
-              신고하기
-            </button>
+            <BoardReportButton boardId={boardId} />
           )}
         </div>
       )}

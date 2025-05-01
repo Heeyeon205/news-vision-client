@@ -6,7 +6,7 @@ export default function FollorwerButton({ following }) {
   const navigate = useNavigate();
   const hadleMove = async () => {
     try {
-      const response = await apiClient.get("/api/auth/check");
+      await apiClient.get("/api/auth/check");
       navigate("/api/mypage/following");
     } catch (error) {
       console.log(error);

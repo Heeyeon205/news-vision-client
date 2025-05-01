@@ -3,14 +3,16 @@ import apiClient from "../../../api/axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function ArticleList({ userImg }) {
+export default function ArticleList({ userImg, userId }) {
   const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function loadArticleList() {
       try {
-        const response = await apiClient.get("/api/mypage/board-list");
+        const response = await apiClient.get(
+          `/api/mypage/board-list/${userId}`
+        );
         const result = response.data;
         if (!result.success) {
           ErrorAlert();
@@ -22,7 +24,7 @@ export default function ArticleList({ userImg }) {
       }
     }
     loadArticleList();
-  }, []);
+  }, [userId]);
 
   return (
     <div className="flex flex-col space-y-4">

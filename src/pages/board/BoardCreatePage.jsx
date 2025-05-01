@@ -27,7 +27,6 @@ export default function BoardCreatePage() {
 
   return (
     <div className="flex flex-col gap-4 mr-4 mt-6">
-      {/* 카테고리 선택 */}
       <div>
         <select
           className="w-full border border-gray-300 p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
@@ -43,7 +42,6 @@ export default function BoardCreatePage() {
         </select>
       </div>
 
-      {/* 프로필 + 입력창 */}
       <div className="flex items-start gap-3 mt-5">
         <img
           src={logProfile}
@@ -51,22 +49,20 @@ export default function BoardCreatePage() {
           className="w-10 h-10 rounded-full object-cover"
         />
         <div className="flex-1">
-  <textarea
-    className="w-full border border-gray-300 p-3 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-orange-400 h-72"
-    rows={7}
-    maxLength={299}
-    value={content}
-    onChange={(e) => setContent(e.target.value)}
-    placeholder={`${logNickname}님의 생각을 나누며 지식을 넓혀보세요`}
-  />
-  <div className="text-right text-xs text-gray-400 mt-1">
-    {content.length}/300
-  </div>
-</div>
-
+          <textarea
+            className="w-full border border-gray-300 p-3 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-orange-400 h-72"
+            rows={7}
+            maxLength={299}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder={`${logNickname}님의 생각을 나누며 지식을 넓혀보세요`}
+          />
+          <div className="text-right text-xs text-gray-400 mt-1">
+            {content.length}/300
+          </div>
+        </div>
       </div>
 
-      {/* 이미지 업로드 + 제출 */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mt-3">
         <BoardImageInput image={image} setImage={setImage} />
         <BoardCreateSubmit

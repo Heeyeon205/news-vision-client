@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import apiClient from "../../api/axios";
-import UpdatePage from "./profileComponent/UpdateBtn";
-import FollowerModal from "./profileComponent/FollowerModal";
-import FollowingModal from "./profileComponent/FollowingModal";
-import NewsList from "./listComponent/NewsList";
-import ArticleList from "./listComponent/ArticleList";
-import ScrapList from "./listComponent/ScrapList";
+import OtherUserFollowerModal from "./profileComponent/OtherUserFollowerModal";
+import OtherUserFollowingModal from "./profileComponent/OtherUserFollowingModal";
+import OtherUserNewsList from "./listComponent/OtherUserNewsList";
+import OtherUserArticleList from "./listComponent/OtherUserArticleList";
+import OtherUserScrapList from "./listComponent/OtherUserScrapList";
+import FollowButton from "../../utils/FollowButton";
 
-export default function Mypage() {
+export default function UserPage() {
+  const { userId } = useParams();
   const [role, setRole] = useState(false);
   const [userImg, setUserImg] = useState(null);
   const [nickname, setNickname] = useState("");
@@ -20,12 +22,14 @@ export default function Mypage() {
 
   const [isFollowerModalOpen, setIsFollowerModalOpen] = useState(false);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
+  const [isFollow, setIsFollow] = useState(null);
 
   useEffect(() => {
     async function loadMypage() {
       try {
-        const response = await apiClient.get("/api/mypage");
+        const response = await apiClient.get(`/api/mypage/${userId}`);
         const result = response.data;
+        console.log("남의 페이지 데이터: ", result.data);
         setRole(result.data.role);
         setUserImg(result.data.image);
         setNickname(result.data.nickname);
@@ -34,17 +38,18 @@ export default function Mypage() {
         setIntroduce(result.data.introduce);
         setIcon(result.data.icon);
         setTitle(result.data.title);
+        setIsFollow(result.data.followed);
+        console.log("넘겨받은 팔로우드: ", result.data.followed);
       } catch (error) {
         console.log(error);
       }
     }
     loadMypage();
-  }, []);
+  }, [userId]);
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-white p-8">
       <div className="w-full max-w-md relative">
-        {/* 프로필 영역 */}
         <div className="flex flex-col items-start space-y-2 mb-8">
           <div className="flex items-start justify-between w-full">
             <img
@@ -53,11 +58,12 @@ export default function Mypage() {
               className="w-20 h-20 rounded-full object-cover"
             />
             <div className="ml-auto">
-              <UpdatePage />
+              {isFollow !== null && (
+                <FollowButton targetId={userId} followed={isFollow} />
+              )}
             </div>
           </div>
 
-          {/* 닉네임 + 뱃지 */}
           <div className="flex items-center space-x-2 mt-2">
             <p className="font-bold text-xl">{nickname}</p>
             {icon && (
@@ -68,7 +74,6 @@ export default function Mypage() {
             )}
           </div>
 
-          {/* 팔로워/팔로잉 */}
           <div className="flex space-x-4 text-sm text-gray-500 mt-2">
             <button
               onClick={() => setIsFollowerModalOpen(true)}
@@ -84,7 +89,6 @@ export default function Mypage() {
             </button>
           </div>
 
-          {/* 소개글 */}
           {introduce && (
             <p className="p-2 mt-4 w-full text-gray-700 text-sm break-words">
               {introduce}
@@ -92,8 +96,6 @@ export default function Mypage() {
           )}
         </div>
 
-        {/* 탭 버튼 */}
-        {/* 탭 버튼 (뉴스/커뮤니티/스크랩) */}
         <div className="flex gap-6 mb-6">
           {role && (
             <button
@@ -133,17 +135,25 @@ export default function Mypage() {
         </div>
 
         <div className="w-full bg-gray-50 rounded-lg p-6 shadow-sm space-y-4">
-          {activeTap === "news" && <NewsList />}
-          {activeTap === "article" && <ArticleList userImg={userImg} />}
-          {activeTap === "scrap" && <ScrapList />}
+          {activeTap === "news" && <OtherUserNewsList userId={userId} />}
+          {activeTap === "article" && (
+            <OtherUserArticleList userId={userId} userImg={userImg} />
+          )}
+          {activeTap === "scrap" && <OtherUserScrapList userId={userId} />}
         </div>
       </div>
 
       {isFollowerModalOpen && (
-        <FollowerModal onClose={() => setIsFollowerModalOpen(false)} />
+        <OtherUserFollowerModal
+          userId={userId}
+          onClose={() => setIsFollowerModalOpen(false)}
+        />
       )}
       {isFollowingModalOpen && (
-        <FollowingModal onClose={() => setIsFollowingModalOpen(false)} />
+        <OtherUserFollowingModal
+          userId={userId}
+          onClose={() => setIsFollowingModalOpen(false)}
+        />
       )}
     </div>
   );

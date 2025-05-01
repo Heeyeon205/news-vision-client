@@ -2,44 +2,43 @@ import { useEffect, useState } from "react";
 import apiClient from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
 
-export default function FollowingModal({ onClose }) {
-  const [followingList, setFollowingList] = useState([]);
+export default function FollowerModal({ onClose, userId }) {
+  const [followerList, setFollowerList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function loadFollowingPage() {
+    async function loadFollowerPage() {
       try {
-        const response = await apiClient.get("/api/mypage/following-list");
+        const response = await apiClient.get(
+          `/api/mypage/follower-list/${userId}`
+        );
         const result = response.data;
-        setFollowingList(result.data);
+        setFollowerList(result.data);
       } catch (error) {
         console.error(error);
       }
     }
-    loadFollowingPage();
-  }, []);
+    loadFollowerPage();
+  }, [userId]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
       <div className="bg-white p-6 rounded-lg w-80 relative max-h-[500px] overflow-y-scroll">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold">팔로잉</h3>
-          <span>{followingList.length}</span>
+          <h3 className="text-xl font-bold">팔로워</h3>
+          <span>{followerList.length}</span>
           <button onClick={onClose} className="text-gray-500 text-lg">
             ✕
           </button>
         </div>
         <hr className="mb-4" />
-        {followingList.length === 0 ? (
-          <p>팔로잉이 없습니다.</p>
+        {followerList.length === 0 ? (
+          <p>팔로워가 없습니다.</p>
         ) : (
-          followingList.map((following) => (
-            <div
-              key={following.id}
-              className="flex items-center space-x-4 mb-4"
-            >
+          followerList.map((follower) => (
+            <div key={follower.id} className="flex items-center space-x-4 mb-4">
               <img
-                src={following.image}
+                src={follower.image}
                 alt="프로필 이미지"
                 className="w-12 h-12 rounded-full object-cover"
               />
@@ -47,15 +46,15 @@ export default function FollowingModal({ onClose }) {
                 <div className="flex items-center space-x-2">
                   <p
                     className="font-bold cursor-pointer"
-                    onClick={() => navigate(`/userPage/${following.id}`)}
+                    onClick={() => navigate(`/userPage/${follower.id}`)}
                   >
-                    {following.nickname}
+                    {follower.nickname}
                   </p>
-                  {following.badge && (
-                    <img src={following.badge} alt="뱃지" className="w-4 h-4" />
+                  {follower.badge && (
+                    <img src={follower.badge} alt="뱃지" className="w-4 h-4" />
                   )}
                 </div>
-                <p className="text-sm text-gray-500">{following.introduce}</p>
+                <p className="text-sm text-gray-500">{follower.introduction}</p>
               </div>
             </div>
           ))

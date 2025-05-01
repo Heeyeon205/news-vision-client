@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import apiClient from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
 
-export default function FollowingModal({ onClose }) {
+export default function FollowingModal({ onClose, userId }) {
   const [followingList, setFollowingList] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function loadFollowingPage() {
       try {
-        const response = await apiClient.get("/api/mypage/following-list");
+        const response = await apiClient.get(
+          `/api/mypage/following-list/${userId}`
+        );
         const result = response.data;
         setFollowingList(result.data);
       } catch (error) {
@@ -17,7 +19,7 @@ export default function FollowingModal({ onClose }) {
       }
     }
     loadFollowingPage();
-  }, []);
+  }, [userId]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">

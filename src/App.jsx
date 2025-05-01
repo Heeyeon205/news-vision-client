@@ -12,6 +12,7 @@ import UpdatePassword from "./pages/user/UpdatePassword";
 import Join from "./pages/user/Join";
 
 import Mypage from "./pages/mypage/Mypage";
+import UserPage from "./pages/mypage/UserPage";
 import UpdatePage from "./pages/mypage/UpdatePage";
 import FollowerPage from "./pages/mypage/profileComponent/FollowerPage";
 import FollowingPage from "./pages/mypage/profileComponent/FollowingPage";
@@ -51,7 +52,9 @@ function App() {
           <Route path="/oauth2/redirect" element={<Authentication />} />
           <Route path="/user/password" element={<FindPassword />} />
           <Route path="/user/update-password" element={<UpdatePassword />} />
+
           <Route path="/user/mypage" element={<Mypage />} />
+          <Route path="/userPage/:userId" element={<UserPage />} />
           <Route path="/user/update" element={<UpdatePage />} />
           <Route path="/api/mypage/follower" element={<FollowerPage />} />
           <Route path="/api/mypage/following" element={<FollowingPage />} />

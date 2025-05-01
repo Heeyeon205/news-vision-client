@@ -1,8 +1,8 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import apiClient from '../../api/axios';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import apiClient from "../../api/axios";
 
 export default function GptMainPage() {
   const [newsList, setNewsList] = useState([]);
@@ -12,7 +12,7 @@ export default function GptMainPage() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const respons = await apiClient.get('/api/gpt-news/main-summary');
+        const respons = await apiClient.get("/api/gpt-news/main-summary");
         const result = respons.data;
         setNewsList(result.data);
       } catch (error) {
@@ -29,7 +29,7 @@ export default function GptMainPage() {
           <div
             key={i}
             className={`indicator w-4 h-1 rounded ${
-              index === i ? 'bg-orange-500' : 'bg-gray-400'
+              index === i ? "bg-orange-500" : "bg-gray-400"
             }`}
           ></div>
         ))}
@@ -57,11 +57,11 @@ export default function GptMainPage() {
                     <h3 className="p-2 text-xl sm:text-2xl font-bold">
                       {news.title}
                     </h3>
-                    <p className="text-sm p-2 ">{news.summary}</p>
+                    <p className="text-sm p-2 mt-2">{news.summary}</p>
                   </div>
                   <p
                     onClick={() => navigate(`/news/${news.id}`)}
-                    className="text-orange-500 hover:text-orange-400 cursor-pointer p-3 sm:p-5"
+                    className="text-orange-500 hover:text-orange-400 cursor-pointer p-3 sm:p-5 mt-7"
                   >
                     자세히 보기
                   </p>

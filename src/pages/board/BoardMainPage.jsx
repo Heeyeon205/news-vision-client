@@ -73,9 +73,6 @@ export default function BoardMainPage() {
                 <p className="font-semibold text-sm">{board.nickname}</p>
                 <p className="text-xs text-gray-400">{board.createAt}</p>
               </div>
-              <button className="text-orange-500 text-sm font-medium hover:underline">
-                팔로우
-              </button>
             </div>
 
             <p className="text-sm text-gray-800 whitespace-pre-line mb-3">
