@@ -28,8 +28,11 @@ export default function SearchMainPage() {
   }, [type]);
 
   const handleSearch = async (value) => {
+    if (value === "") return;
+    console.log("검색어: ", value);
+    console.log("검색 카테고리: ", type);
     try {
-      const res = await apiClient.get(`/api/search/news?keyword=${value}`);
+      const res = await apiClient.get(`/api/search/${type}?keyword=${value}`);
       const result = res.data;
       setData(result.data);
     } catch (error) {
@@ -40,22 +43,30 @@ export default function SearchMainPage() {
   return (
     <div className="searchContainer">
       <div className="searchBox  flex justify-center m-5">
-        <input
-          type="text"
-          className="border w-[648px] h-[48px] border-r-0 rounded-tl-lg rounded-bl-lg border-gray-400"
-          placeholder=" 궁금한 지식을 찾아보세요."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        ></input>
-        <button
-          className="border w-[52px] h-[48px] border-l-0 rounded-tr-lg rounded-br-lg border-gray-400 "
-          onClick={handleSearch}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch(query);
+          }}
         >
-          <FontAwesomeIcon
-            icon="fa-solid fa-magnifying-glass"
-            className="text-gray-500 hover:text-gray-300"
-          />
-        </button>
+          {" "}
+          <input
+            type="text"
+            className="border w-[648px] h-[48px] border-r-0 rounded-tl-lg rounded-bl-lg border-gray-400"
+            placeholder=" 궁금한 지식을 찾아보세요."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          ></input>
+          <button
+            className="border w-[52px] h-[48px] border-l-0 rounded-tr-lg rounded-br-lg border-gray-400 "
+            type="submit"
+          >
+            <FontAwesomeIcon
+              icon="fa-solid fa-magnifying-glass"
+              className="text-gray-500 hover:text-gray-300"
+            />
+          </button>
+        </form>
       </div>
       <div className="wordBox">
         {words.length === 0 ? (
@@ -68,6 +79,7 @@ export default function SearchMainPage() {
           </>
         )}
       </div>
+
       <div className="w-full h-full flex justify-center ">
         <div className="buttonBox flex justify-start border-b-1 border-gray-200 w-[700px] h-[48px]">
           <button
@@ -84,6 +96,7 @@ export default function SearchMainPage() {
           </button>
         </div>
       </div>
+
       <div className="listContainer">
         {data.length === 0 ? (
           <p>검색 결과가 없습니다.</p>

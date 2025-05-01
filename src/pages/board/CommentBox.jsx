@@ -11,8 +11,9 @@ export default function CommentBox({
   const [content, setContent] = useState("");
 
   const handleClick = async () => {
+    if (content === "") return;
     try {
-      const res = await apiClient.post(`/api/comments/boards/${boardId}`, {
+      await apiClient.post(`/api/comments/boards/${boardId}`, {
         content,
       });
       setContent("");
@@ -24,7 +25,13 @@ export default function CommentBox({
   };
 
   return (
-    <div className="flex items-center gap-2 w-full">
+    <form
+      className="flex items-center gap-2 w-full"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleClick();
+      }}
+    >
       <img
         src={logProfile}
         alt="프로필 이미지"
@@ -39,11 +46,11 @@ export default function CommentBox({
         className="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400"
       />
       <button
-        onClick={handleClick}
+        type="submit"
         className="text-sm px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-full"
       >
         등록
       </button>
-    </div>
+    </form>
   );
 }

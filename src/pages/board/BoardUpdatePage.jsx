@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import apiClient from "../../api/axios";
 import { useState, useEffect } from "react";
 import BoardImageInput from "./BoardImageInput";
-import BoardUpdateSubmit from "./BoardCreateSubmit";
+import BoardUpdateSubmit from "./BoardUpdateSubmit";
 import CategoriesInput from "../../utils/CategoriesInput";
 
 export default function BoardUpdatePage() {
@@ -37,7 +37,11 @@ export default function BoardUpdatePage() {
   return (
     <div className="boardBox">
       <div className="categoryBox">
-        <CategoriesInput categories={categories} setSelectId={setSelectId} />
+        <CategoriesInput
+          categories={categories}
+          selectId={selectId}
+          setSelectId={setSelectId}
+        />
       </div>
       <img src={userImage} alt="프로필이미지" />
       <textarea

@@ -26,6 +26,7 @@ export default function NewsUpdatePage() {
         setImage(result.data.image);
         setTitle(result.data.title);
         setContent(result.data.content);
+        setSelectId(result.data.categoryId);
       } catch (error) {
         console.log(error);
       }
@@ -38,14 +39,25 @@ export default function NewsUpdatePage() {
       {data && data.refTitle ? (
         <>
           <div className="bg-white shadow-md rounded-lg p-4 mb-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-2">{data.refTitle}</h3>
+            <h3 className="text-lg font-bold text-gray-800 mb-2">
+              {data.refTitle}
+            </h3>
             <p className="text-sm text-gray-500 mb-4">{data.refPubdate}</p>
-            <a href={data.refLink} className="text-orange-500 text-sm font-medium hover:underline">뉴스 확인하러 가기</a>
+            <a
+              href={data.refLink}
+              className="text-orange-500 text-sm font-medium hover:underline"
+            >
+              뉴스 확인하러 가기
+            </a>
           </div>
 
           <div className="bg-white shadow-md rounded-lg p-4">
             <div className="mb-4">
-              <CategoriesInput categories={data.list} setSelectId={setSelectId} />
+              <CategoriesInput
+                categories={data.list}
+                selectId={selectId}
+                setSelectId={setSelectId}
+              />
             </div>
             <div className="mb-4">
               <NewsImageInput image={image} setImage={setImage} />
@@ -75,7 +87,6 @@ export default function NewsUpdatePage() {
                 content={content}
                 categoryId={data.categoryId}
                 image={image}
-
               />
 
               <NewsDeleteButton newsId={newsId} />
@@ -84,8 +95,7 @@ export default function NewsUpdatePage() {
         </>
       ) : (
         <div>Loading...</div>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 }

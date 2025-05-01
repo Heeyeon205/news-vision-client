@@ -29,6 +29,9 @@ export default function NewsCreateNewsPage() {
   }, []);
 
   const handleClick = async () => {
+    if (selectId < 2) {
+      toast.warning("카테고리를 선택해 주세요.");
+    }
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -53,14 +56,24 @@ export default function NewsCreateNewsPage() {
   return (
     <div className="p-4 max-w-[600px] w-full mx-auto min-h-screen">
       <div className="bg-white shadow-md rounded-lg p-4 mb-6">
-        <h3 className="text-lg font-bold text-gray-800 mb-2">{referenceTitle}</h3>
+        <h3 className="text-lg font-bold text-gray-800 mb-2">
+          {referenceTitle}
+        </h3>
         <p className="text-sm text-gray-500 mb-4">{referencePubDate}</p>
-        <a href={referenceLink} className="text-orange-500 text-sm font-medium hover:underline">뉴스 확인하러 가기</a>
+        <a
+          href={referenceLink}
+          className="text-orange-500 text-sm font-medium hover:underline"
+        >
+          뉴스 확인하러 가기
+        </a>
       </div>
 
       <div className="bg-white shadow-md rounded-lg p-4">
         <div className="mb-4">
-          <select className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 h-10" onChange={(e) => setSelectId(e.target.value)}>
+          <select
+            className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 h-10"
+            onChange={(e) => setSelectId(e.target.value)}
+          >
             <option value="">카테고리를 선택하세요</option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
@@ -91,11 +104,13 @@ export default function NewsCreateNewsPage() {
           <br />
         </div>
         <div className="flex justify-end">
-          <button className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors" onClick={handleClick}>
+          <button
+            className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors"
+            onClick={handleClick}
+          >
             작성 완료
           </button>
         </div>
-
       </div>
     </div>
   );

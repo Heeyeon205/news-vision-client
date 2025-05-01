@@ -62,7 +62,6 @@ export default function PollDetailPage() {
       </div>
 
       <hr />
-
       {options.map((option) => (
         <div className="optionBox">
           <div key={option.id}>

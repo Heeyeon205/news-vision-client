@@ -29,10 +29,10 @@ export default function BoardDropDownButton({
   };
 
   const handleDelete = async () => {
-    const check = confirm("댓글을 삭제하시겠습니까?");
+    confirm("댓글을 삭제하시겠습니까?");
     if (confirm) {
       try {
-        const res = await apiClient.delete(`/api/comments/${commentId}`);
+        await apiClient.delete(`/api/comments/${commentId}`);
         toast.success("댓글 삭제 완료!");
         onCommentDelete();
       } catch (error) {
@@ -42,7 +42,7 @@ export default function BoardDropDownButton({
   };
 
   const handleReport = () => {
-    alert("너 신고, 개발 예정");
+    alert("개발 예정");
   };
 
   useEffect(() => {

@@ -59,7 +59,7 @@ export default function Main() {
             )}
           </div>
           <div
-            className="relative text-orange-600 dark:text-purple-400 font-medium cursor-pointer transition-colors duration-200 group"
+            className="relative text-orange-600 dark:text-orange-400 font-medium cursor-pointer transition-colors duration-200 group"
             onClick={() => {
               if (pollList.length > 0) {
                 navigate(`/polls/${pollList[index]?.id}`);
@@ -153,7 +153,9 @@ export default function Main() {
                   <div className="w-full rounded-bl-lg rounded-br-lg flex flex-col justify-center items-center border-gray-300 border border-t-0">
                     <div className="w-full flex flex-col mt-4 px-3">
                       <p className="text-xs p-1">{poll.expiredAt}</p>
-                      <h3 className="p-1 font-bold text-base break-words">{poll.title}</h3>
+                      <h3 className="p-1 font-bold text-base break-words">
+                        {poll.title}
+                      </h3>
                       <span className="text-xs p-1">{poll.createdAt}</span>
                       <span className="text-xs p-1">{poll.nickname}</span>
                     </div>

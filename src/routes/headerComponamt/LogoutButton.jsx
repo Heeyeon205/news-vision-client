@@ -28,9 +28,5 @@ export default function LogoutButton() {
     }
   };
 
-  return (
-    <button className="border rounded mx-5" onClick={handleLogout}>
-      로그아웃
-    </button>
-  );
+  return <button onClick={handleLogout}>로그아웃</button>;
 }
