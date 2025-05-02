@@ -4,6 +4,7 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import apiClient from "../../api/axios";
 import { useStore } from "../../store/useUserStore";
 import { toast } from "sonner";
+import CommentReportButton from "./report/CommentReportButton";
 
 export default function BoardDropDownButton({
   userId,
@@ -41,10 +42,6 @@ export default function BoardDropDownButton({
     }
   };
 
-  const handleReport = () => {
-    alert("개발 예정");
-  };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -77,12 +74,7 @@ export default function BoardDropDownButton({
               </button>
             </>
           ) : (
-            <button
-              onClick={handleReport}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-            >
-              댓글 신고하기
-            </button>
+            <CommentReportButton commentId={commentId} />
           )}
         </div>
       )}

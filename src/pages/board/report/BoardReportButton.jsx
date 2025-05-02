@@ -1,5 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 export default function BoardReportButton({ boardId }) {
-  const handleReport = () => {};
+  const navigate = useNavigate();
+  const handleReport = () => {
+    navigate(`/board/report/${boardId}`);
+  };
 
   return (
     <button

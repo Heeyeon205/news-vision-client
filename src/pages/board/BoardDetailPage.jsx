@@ -26,7 +26,6 @@ export default function BoardDetailPage() {
     try {
       const response = await apiClient.get(`/api/board/${id}`);
       const result = response.data;
-      console.log("보드디테일데이타:", result.data);
       setData(result.data);
       setUserId(result.data.userId);
       setIsLike(result.data.like);

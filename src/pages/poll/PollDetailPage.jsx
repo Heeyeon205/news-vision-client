@@ -20,26 +20,28 @@ export default function PollDetailPage() {
   const [badgeTitle, setBadgeTitle] = useState("");
   const [userId, setUserId] = useState("");
   const [isFollow, setIsFollow] = useState(false);
-
   const [isVote, setIsVote] = useState(false);
-  const totalVotes = options.reduce((sum, option) => sum + option.count, 0);
+  const [totalVotes, setTotalVotes] = useState(0);
 
   useEffect(() => {
     const loadData = async () => {
       const res = await apiClient.get(`/api/polls/${pollId}`);
       const result = res.data;
-      console.log(result.data);
+      console.log("투표 상세페이지 데이터: ", result.data);
       setUserId(result.data.userId);
       setTitle(result.data.title);
       setNickname(result.data.nickname);
       setCreatedAt(result.data.createdAt);
       setExpiredAt(result.data.expiredAt);
-      setOptions(result.data.pollOptions);
       setIsVote(result.data.vote);
       setProfile(result.data.image);
       setIcon(result.data.icon);
       setBadgeTitle(result.data.badgeTitle);
       setIsFollow(result.data.followed);
+      setOptions(result.data.pollOptions);
+      setTotalVotes(
+        result.data.pollOptions.reduce((sum, opt) => sum + opt.count, 0)
+      );
     };
     loadData();
   }, [pollId]);
@@ -58,10 +60,14 @@ export default function PollDetailPage() {
         optionId,
       });
       const result = res.data;
-      console.log(res);
-      console.log(res.data);
-      console.log(result.data);
+      setOptions((prevOptions) =>
+        prevOptions.map((opt) =>
+          opt.id === optionId ? { ...opt, count: opt.count + 1 } : opt
+        )
+      );
+      setTotalVotes((prev) => prev + 1);
       setIsVote(result.data.voted);
+      toast.success("투표 참여 완료!");
     } catch (error) {
       console.log(error);
     }

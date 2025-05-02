@@ -23,6 +23,9 @@ import NewsCreatePage from "./pages/news/NewsCreatePage";
 import NewsCreateNewsPage from "./pages/news/NewsCreateNewsPage";
 import NewsUpdatePage from "./pages/news/NewsUpdatePage";
 
+import PollDetailPage from "./pages/poll/PollDetailPage";
+import PollCreatePage from "./pages/poll/PollCreatePage";
+
 import ArticleMainPage from "./pages/article/ArticleMainPage";
 
 import InfoPage from "./pages/ai/InfoPage";
@@ -30,13 +33,12 @@ import GptMainPage from "./pages/ai/GptMainPage";
 
 import BoardMainPage from "./pages/board/BoardMainPage";
 import BoardDetailPage from "./pages/board/BoardDetailPage";
-
-import SearchMainPage from "./pages/search/SearchMainPage";
 import BoardCreatePage from "./pages/board/BoardCreatePage";
 import BoardUpdatePage from "./pages/board/BoardUpdatePage";
+import BoardReportPage from "./pages/board/report/BoaredReportPage";
+import CommentReportPage from "./pages/board/report/CommentReportPage";
 
-import PollDetailPage from "./pages/poll/PollDetailPage";
-import PollCreatePage from "./pages/poll/PollCreatePage";
+import SearchMainPage from "./pages/search/SearchMainPage";
 
 import AdminMainPage from "./pages/admin/AdminMainPage";
 import CategoryAdminPage from "./pages/admin/CategoryAdminPage";
@@ -78,6 +80,11 @@ function App() {
           <Route path="/board/:id" element={<BoardDetailPage />} />
           <Route path="/board/create-form" element={<BoardCreatePage />} />
           <Route path="/board/update-form" element={<BoardUpdatePage />} />
+          <Route path="/board/report/:boardId" element={<BoardReportPage />} />
+          <Route
+            path="/comment/report/:commentId"
+            element={<CommentReportPage />}
+          />
 
           <Route path="/search" element={<SearchMainPage />} />
 
