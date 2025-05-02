@@ -57,7 +57,7 @@ export default function BoardReportAdminPage() {
                   <th className="p-2 border">게시글 ID</th>
                   <th className="p-2 border">작성자</th>
                   <th className="p-2 border">작성일</th>
-                  <th className="p-2 border">신고자 ID</th>
+                  <th className="p-2 border">신고자</th>
                   <th className="p-2 border">처리</th>
                 </tr>
               </thead>
@@ -73,17 +73,17 @@ export default function BoardReportAdminPage() {
                     </td>
                     <td className="p-2 border text-center">{report.boardWriter}</td>
                     <td className="p-2 border text-center">{report.boardCreatedAt}</td>
-                    <td className="p-2 border text-center">{report.userId}</td>
+                    <td className="p-2 border text-center">{report.userNickname}</td>
                     <td className="p-2 border text-center space-x-2">
                       <button
                         onClick={() => handleIgnore(report.id)}
-                        className="px-3 py-1 rounded text-xs bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
+                        className="px-3 py-1 rounded text-xs  text-blue-600 hover:scale-110 transition"
                       >
                         처리
                       </button>
                       <button
                         onClick={() => handleDelete(report.id)}
-                        className="px-3 py-1 rounded text-xs bg-red-100 text-red-600 hover:bg-red-200 transition"
+                        className="px-3 py-1 rounded text-xs  text-red-600 hover:scale-110 transition"
                       >
                         삭제
                       </button>
@@ -107,17 +107,17 @@ export default function BoardReportAdminPage() {
                 </p>
                 <p className="text-sm">작성자: {report.boardWriter}</p>
                 <p className="text-sm">작성일: {report.boardCreatedAt}</p>
-                <p className="text-sm">신고자 ID: {report.userId}</p>
+                <p className="text-sm">신고자: {report.userNickname}</p>
                 <div className="flex justify-end space-x-2 mt-3">
                   <button
                     onClick={() => handleIgnore(report.id)}
-                    className="px-3 py-1 rounded text-xs bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
+                    className="px-3 py-1 rounded text-xs  text-blue-600 hover:scale-110 transition"
                   >
                     처리
                   </button>
                   <button
                     onClick={() => handleDelete(report.id)}
-                    className="px-3 py-1 rounded text-xs bg-red-100 text-red-600 hover:bg-red-200 transition"
+                    className="px-3 py-1 rounded text-xs  text-red-600 hover:scale-110 transition"
                   >
                     삭제
                   </button>
