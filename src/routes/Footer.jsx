@@ -1,6 +1,9 @@
 export default function Footer() {
   return (
-    <footer className="w-full h-full sm:h-60  text-white py-7 bottom-0  flex flex-col  sm:flex-row justify-around items-center p-0 sm:p-23 ">
+    <footer
+      className="w-full h-full sm:h-60  text-white py-7 bottom-0  flex flex-col  sm:flex-row justify-around items-center p-0 sm:p-23 "
+      style={{ fontFamily: "AppleSDGothicNeoL" }}
+    >
       <div className="w-full  md:w-150 ml-0 md:ml-5 mb-4 md:mb-0 text-center md:text-left ">
         {" "}
         <h2 className="text-2xl font-bold mb-4 text-black">NEWSION</h2>

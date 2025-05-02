@@ -20,7 +20,7 @@ export default function Header() {
   return (
     <header
       className="w-full  shadow-sm"
-      style={{ fontFamily: "ONE-Mobile-Title" }}
+      style={{ fontFamily: "AppleSDGothicNeoL" }}
     >
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 flex items-center justify-between  sm:flex-row flex-wrap sm:flex-nowrap ">
         <Link
