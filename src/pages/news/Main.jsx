@@ -14,7 +14,8 @@ export default function Main() {
   const [newsList, setNewsList] = useState([]);
   const [pollList, setPollList] = useState([]);
   const navigate = useNavigate();
-  const [index, setIndex] = useState(0);
+  const [bannerIndex, setBannerIndex] = useState(0);
+  const [swiperIndex, setSwiperIndex] = useState(0);
 
   useEffect(() => {
     const loadNews = async () => {
@@ -34,7 +35,7 @@ export default function Main() {
     if (pollList.length <= 1) return;
 
     const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % pollList.length);
+      setBannerIndex((prevIndex) => (prevIndex + 1) % pollList.length);
     }, 5000);
 
     return () => clearInterval(interval);
@@ -48,8 +49,8 @@ export default function Main() {
         <div className="relative flex flex-col gap-4">
           <div className="font-bold text-2xl text-orange-500 overflow-hidden h-10">
             {pollList.length > 0 ? (
-              <div key={index} className="animate-slide-up">
-                {pollList[index]?.title}
+              <div key={bannerIndex} className="animate-slide-up">
+                {pollList[bannerIndex]?.title}
               </div>
             ) : (
               "진행중인 투표가 없습니다."
@@ -59,7 +60,7 @@ export default function Main() {
             className="relative text-orange-600 font-medium cursor-pointer transition-colors duration-200 group"
             onClick={() => {
               if (pollList.length > 0) {
-                navigate(`/polls/${pollList[index]?.id}`);
+                navigate(`/poll/${pollList[bannerIndex]?.id}`);
               }
             }}
           >
@@ -69,7 +70,7 @@ export default function Main() {
         </div>
       </div>
       <style jsx>{`
-        @keyframes main-slide-up {
+        @keyframes slide-up {
           from {
             transform: translateY(100%);
             opacity: 0;
@@ -151,7 +152,7 @@ export default function Main() {
             spaceBetween={20}
             slidesPerView={1}
             pagination={{ clickable: true }}
-            onSlideChange={(swiper) => setIndex(swiper.activeIndex)}
+            onSlideChange={(swiper) => setSwiperIndex(swiper.activeIndex)}
           >
             {pollList.map((poll) => (
               <SwiperSlide key={poll.id}>
@@ -187,7 +188,7 @@ export default function Main() {
             {pollList.map((_, i) => (
               <div
                 key={`indicator-${i}`}
-                className={`indicator w-4 h-1 rounded ${index === i ? "bg-orange-500" : "bg-gray-400"
+                className={`indicator w-4 h-1 rounded ${swiperIndex === i ? "bg-orange-500" : "bg-gray-400"
                   }`}
               ></div>
             ))}
