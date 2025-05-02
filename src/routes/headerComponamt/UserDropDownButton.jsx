@@ -10,7 +10,7 @@ export default function UserDropDownButton() {
   const email = useStore((state) => state.email);
   const image = useStore((state) => state.image);
   const logRole = useStore((state) => state.role);
-  const isAuth = logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR";
+  const isAuth = logRole === "ROLE_ADMIN";
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef();

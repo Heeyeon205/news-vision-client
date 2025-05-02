@@ -20,7 +20,6 @@ export default function NewsLikeButton({
       try {
         const res = await apiClient.delete(`/api/news/${newsId}/like`);
         const result = res.data;
-        console.log("좋아여 삭제: ", result.data);
         setIsLike(result.data.like);
         setLikeCount(result.data.likeCount);
       } catch (error) {
@@ -30,7 +29,6 @@ export default function NewsLikeButton({
       try {
         const res = await apiClient.post(`/api/news/${newsId}/like`);
         const result = res.data;
-        console.log("좋아요 추가: ", result.data);
         setIsLike(result.data.like);
         setLikeCount(result.data.likeCount);
       } catch (error) {

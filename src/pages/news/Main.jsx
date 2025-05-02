@@ -59,7 +59,7 @@ export default function Main() {
             className="relative text-orange-600 font-medium cursor-pointer transition-colors duration-200 group"
             onClick={() => {
               if (pollList.length > 0) {
-                navigate(`/polls/${pollList[index]?.id}`);
+                navigate(`/poll/${pollList[index]?.id}`);
               }
             }}
           >
@@ -187,8 +187,9 @@ export default function Main() {
             {pollList.map((_, i) => (
               <div
                 key={`indicator-${i}`}
-                className={`indicator w-4 h-1 rounded ${index === i ? "bg-orange-500" : "bg-gray-400"
-                  }`}
+                className={`indicator w-4 h-1 rounded ${
+                  index === i ? "bg-orange-500" : "bg-gray-400"
+                }`}
               ></div>
             ))}
           </div>

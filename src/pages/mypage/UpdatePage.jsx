@@ -37,17 +37,16 @@ export default function UpdatePage() {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-md mt-10">
-      {/* 타이틀 */}
       <h2 className="text-2xl font-bold mb-8">프로필 편집</h2>
 
-      {/* 프로필 이미지 */}
       <div className="flex flex-col items-start mb-8">
         <ProfileImageInput image={image} setImage={setImage} />
       </div>
 
-      {/* 닉네임 */}
       <div className="mb-6 w-full">
-        <label className="block text-sm font-medium text-gray-700 mb-2">닉네임</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          닉네임
+        </label>
         <div className="w-full">
           <NicknameInput
             nickname={nickname}
@@ -57,9 +56,10 @@ export default function UpdatePage() {
         </div>
       </div>
 
-      {/* 이메일 */}
       <div className="mb-6 w-full">
-        <label className="block text-sm font-medium text-gray-700 mb-2">이메일</label>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          이메일
+        </label>
         <div className="w-full">
           <EmailInput
             email={email}
@@ -71,16 +71,12 @@ export default function UpdatePage() {
         </div>
       </div>
 
-      {/* 소개 */}
       <div className="mb-6 w-full">
-        {/* 소개 */}
         <div className="mb-6 w-full">
           <IntroduceInput introduce={introduce} setIntroduce={setIntroduce} />
         </div>
-
       </div>
 
-      {/* 제출 버튼 */}
       <div className="flex justify-end">
         <UpdateSubmitButton
           image={image}

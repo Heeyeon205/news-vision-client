@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { FaRegHeart, FaRegComment } from "react-icons/fa";
+import { toast } from "sonner";
 
 library.add(faMagnifyingGlass);
 
@@ -29,11 +31,16 @@ export default function SearchMainPage() {
 
   const handleSearch = async (value) => {
     if (value === "") return;
+    if (value.length > 15) {
+      toast.warning("검색어가 너무 깁니다. 최대 15자까지 작성할 수 있습니다.");
+      return;
+    }
     console.log("검색어: ", value);
     console.log("검색 카테고리: ", type);
     try {
       const res = await apiClient.get(`/api/search/${type}?keyword=${value}`);
       const result = res.data;
+      console.log("검색결과: ", result.data);
       setData(result.data);
     } catch (error) {
       console.log(error);
@@ -54,7 +61,10 @@ export default function SearchMainPage() {
           className="w-full h-12 px-4 text-sm focus:outline-none"
           placeholder="궁금한 지식을 찾아보세요."
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            const trimmed = e.target.value.slice(0, 15);
+            setQuery(trimmed);
+          }}
         />
         <button
           type="submit"
@@ -87,7 +97,10 @@ export default function SearchMainPage() {
 
       <div className="flex justify-center mt-6 border-b border-gray-300">
         <button
-          onClick={() => setType("news")}
+          onClick={() => {
+            setType("news");
+            setData([]);
+          }}
           className={`py-2 px-6 text-sm font-medium border-b-2 ${
             type === "news"
               ? "border-orange-500 text-orange-500"
@@ -97,7 +110,10 @@ export default function SearchMainPage() {
           뉴스
         </button>
         <button
-          onClick={() => setType("board")}
+          onClick={() => {
+            setType("board");
+            setData([]);
+          }}
           className={`py-2 px-6 text-sm font-medium border-b-2 ${
             type === "board"
               ? "border-orange-500 text-orange-500"
@@ -116,22 +132,40 @@ export default function SearchMainPage() {
             <div
               key={search.id}
               className="rounded overflow-hidden cursor-pointer shadow-md hover:scale-101 hover:shadow-lg transition-transform duration-300 mb-5"
-              onClick={() => navigate(`/${type}/${search.id}`)} // news 또는 board로 경로 지정
+              onClick={() =>
+                navigate(`/${type}/${search.id || search.boardId}`)
+              }
             >
               <div className="w-full h-full max-h-[350px] overflow-hidden object-cover">
-                <img
-                  src={search.image}
-                  alt="썸네일"
-                  width="600"
-                  height="350"
-                  className="w-full h-auto object-cover"
-                />
+                {search.image && (
+                  <img
+                    src={search.image}
+                    alt="썸네일"
+                    width="600"
+                    height="350"
+                    className="w-full h-auto object-cover"
+                  />
+                )}
               </div>
               <div className="p-2">
-                <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">
-                  {search.category}
-                </p>
-                <h4 className="text-lg font-bold mb-1">{search.title}</h4>
+                {search.category && (
+                  <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">
+                    {search.category}
+                  </p>
+                )}
+
+                <h4 className="text-lg font-bold mb-1">
+                  {search.title || search.content}
+                </h4>
+                {type === "board" && (
+                  <div className="flex text-sm text-gray-600 gap-2">
+                    <FaRegHeart className="w-5 h-5 text-red-500" />
+                    <span>{search.likeCount}</span>
+                    <FaRegComment className="w-5 h-5 text-gray-500 ml-4" />
+                    <span>{search.commentCount}</span>
+                  </div>
+                )}
+
                 <div className="flex items-center text-sm text-gray-400 space-x-2">
                   <span className="mr-2">{search.nickname}</span>
                   <span>{search.createdAt}</span>

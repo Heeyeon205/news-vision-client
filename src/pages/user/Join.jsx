@@ -3,7 +3,6 @@ import UsernameInput from "./joinComponent/UsernameInput";
 import PasswordInput from "./joinComponent/PasswordInput";
 import EmailInput from "./joinComponent/EmailInput";
 import JoinButton from "./joinComponent/JoinButton";
-// import "../../assets/styles/pages/join.css"; // 이건 없어도 됨 (Tailwind로 처리)
 
 function Join() {
   const [username, setUsername] = useState("");
@@ -19,16 +18,15 @@ function Join() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      {/* Title */}
       <div className="text-center my-4">
         <h1 className="text-2xl font-bold">회원가입</h1>
         <p className="text-gray-500 text-sm mt-2">매일 새로운 소식과 함께,</p>
-        <p className="text-gray-500 text-sm mt-2">여러분의 지식과 경험이 담긴 아티클을 만나보세요.</p>
+        <p className="text-gray-500 text-sm mt-2">
+          여러분의 지식과 경험이 담긴 아티클을 만나보세요.
+        </p>
       </div>
 
-      {/* Form */}
       <form className="space-y-4 flex flex-col items-center">
-        {/* 아이디 */}
         <div className="w-80">
           <UsernameInput
             username={username}
@@ -37,7 +35,6 @@ function Join() {
           />
         </div>
 
-        {/* 비밀번호 */}
         <div className="w-80">
           <PasswordInput
             password={password}
@@ -48,7 +45,6 @@ function Join() {
           />
         </div>
 
-        {/* 이메일 */}
         <div className="w-80">
           <EmailInput
             email={email}
@@ -59,7 +55,6 @@ function Join() {
           />
         </div>
 
-        {/* 가입 버튼 */}
         <div className="mt-6 w-80">
           <JoinButton
             username={username}

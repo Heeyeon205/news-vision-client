@@ -44,7 +44,6 @@ export default function Mypage() {
   return (
     <div className="flex flex-col items-center min-h-screen bg-white p-8">
       <div className="w-full max-w-md relative">
-        {/* 프로필 영역 */}
         <div className="flex flex-col items-start space-y-2 mb-8">
           <div className="flex items-start justify-between w-full">
             <img
@@ -57,7 +56,6 @@ export default function Mypage() {
             </div>
           </div>
 
-          {/* 닉네임 + 뱃지 */}
           <div className="flex items-center space-x-2 mt-2">
             <p className="font-bold text-xl">{nickname}</p>
             {icon && (
@@ -68,7 +66,6 @@ export default function Mypage() {
             )}
           </div>
 
-          {/* 팔로워/팔로잉 */}
           <div className="flex space-x-4 text-sm text-gray-500 mt-2">
             <button
               onClick={() => setIsFollowerModalOpen(true)}
@@ -84,7 +81,6 @@ export default function Mypage() {
             </button>
           </div>
 
-          {/* 소개글 */}
           {introduce && (
             <p className="p-2 mt-4 w-full text-gray-700 text-sm break-words">
               {introduce}
@@ -92,8 +88,6 @@ export default function Mypage() {
           )}
         </div>
 
-        {/* 탭 버튼 */}
-        {/* 탭 버튼 (뉴스/커뮤니티/스크랩) */}
         <div className="flex gap-6 mb-6">
           {role && (
             <button

@@ -12,6 +12,9 @@ export default function CommentBox({
 
   const handleClick = async () => {
     if (content === "") return;
+    if (content.length > 50) {
+      toast.warning("댓글이 너무 깁니다. 최대 50자까지 작성할 수 있습니다.");
+    }
     try {
       await apiClient.post(`/api/comments/boards/${boardId}`, {
         content,

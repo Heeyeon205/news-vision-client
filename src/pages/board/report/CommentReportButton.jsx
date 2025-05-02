@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 export default function BoardReportButton({ commentId }) {
   const navigate = useNavigate();
   const handleReport = () => {
+    console.log("지금 신고하려는 댓글 아이디: ", commentId);
     navigate(`/comment/report/${commentId}`);
   };
 

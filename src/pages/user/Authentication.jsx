@@ -22,7 +22,7 @@ export default function Authentication() {
     if (accessToken && refreshToken) {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
-      setUser(userId, nickname, image, role);
+      setUser(Number(userId), nickname, image, role);
       alert("로그인 성공");
       navigate("/");
     } else {

@@ -5,6 +5,7 @@ import NewsLikeButton from "./NewsLikeButton";
 import ScrapButton from "./ScrapButton";
 import DropDownMenu from "./DropDownMenu";
 import FollowButton from "../../utils/FollowButton";
+import { useGlobalStore } from "../../store/useGlobalStore";
 
 export default function NewsDetail() {
   const { id } = useParams();
@@ -16,9 +17,12 @@ export default function NewsDetail() {
   const [isScrap, setIsScrap] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
 
+  const setLoading = useGlobalStore((state) => state.setLoading);
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     const loadNewsDetail = async () => {
       try {
         const response = await apiClient.get(`/api/news/${id}`);
@@ -32,6 +36,8 @@ export default function NewsDetail() {
         setIsFollow(result.data.followed);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
     loadNewsDetail();

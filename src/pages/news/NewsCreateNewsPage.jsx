@@ -38,7 +38,8 @@ export default function NewsCreateNewsPage() {
       title,
       content,
     });
-    if (isValid) return;
+    console.log(isValid);
+    if (!isValid) return;
     try {
       const formData = new FormData();
       formData.append("image", image);
@@ -48,13 +49,14 @@ export default function NewsCreateNewsPage() {
       formData.append("naverTitle", referenceTitle);
       formData.append("naverLink", referenceLink);
       formData.append("naverPubDate", referencePubDate);
-      await apiClient.post("/api/news", formData, {
+      const res = await apiClient.post("/api/news", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      const result = res.data;
       toast.success("뉴스 작성 완료");
-      navigate("/");
+      navigate(`/news/${result.data}`);
     } catch (error) {
       console.log(error);
     }
@@ -99,18 +101,30 @@ export default function NewsCreateNewsPage() {
         </div>
         <div className="mb-4">
           <input
+            value={title}
             className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
             type="text"
             placeholder="제목을 입력하세요."
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              const trimmed = e.target.value.slice(0, 15);
+              setTitle(trimmed);
+            }}
           />
         </div>
+        <div className="text-right text-xs text-gray-400 mb-3">
+          {title.length}/15
+        </div>
+
         <div className="mb-4">
           <textarea
+            value={content}
             className="w-full border border-gray-300 rounded px-3 py-2  text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 h-32"
             placeholder="본문을 입력하세요"
             defaultValue={""}
-            onChange={(e) => setContent(e.target.value)}
+            onChange={(e) => {
+              const trimmed = e.target.value.slice(0, 1000);
+              setContent(trimmed);
+            }}
           ></textarea>
           <div className="text-right text-xs text-gray-400 mt-1">
             {content.length}/1000

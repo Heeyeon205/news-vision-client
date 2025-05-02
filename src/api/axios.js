@@ -1,5 +1,6 @@
 import axios from 'axios';
 import ErrorAlert from '../utils/ErrorAlert';
+import { useGlobalStore } from '../store/useGlobalStore';
 
 const instance = axios.create({
   baseURL: 'http://localhost:8080',
@@ -8,46 +9,55 @@ const instance = axios.create({
   },
 });
 
+const { setLoading } = useGlobalStore.getState();
+
 instance.interceptors.request.use(
   config => {
+    setLoading(true);
     const token = localStorage.getItem('accessToken'); 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`; 
     }
     return config;
   },
-  error => Promise.reject(error)
+  error => {
+    setLoading(false);
+    return Promise.reject(error);
+  }
 );
 
 instance.interceptors.response.use(
-  response => response,
+  response => {
+    setLoading(false); 
+    return response;
+  },
   async error => {
+    setLoading(false);
     const originalRequest = error.config;
 
     if (error.response) {
       const { status, data } = error.response;
 
       if (status === 401 && !originalRequest._retry) {
-        console.log("현재 엑세스 토큰 만료")
+        console.log("현재 엑세스 토큰 만료");
         originalRequest._retry = true;
         try {
-          console.log("서버에 요청")
+          console.log("새로운 엑세스 토큰 서버에 요청");
           const refreshToken = localStorage.getItem('refreshToken');
           const res = await axios.post('http://localhost:8080/api/auth/refresh', {}, {
             headers: { refreshToken: refreshToken }
           });
 
           const newAccessToken = res.data.data; 
-          console.log("다시 받은 엑세스 토큰: ", newAccessToken)
+          console.log("다시 받은 엑세스 토큰: ", newAccessToken);
           localStorage.setItem('accessToken', newAccessToken);
 
-          // Authorization 헤더 교체
           originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
-          // 실패한 원래 요청 재시도
           return instance(originalRequest);
         } catch (refreshError) {
           alert("로그인 세션이 만료되었습니다. 다시 로그인해주세요.");
+          window.location.href="/user/login"
           return Promise.reject(refreshError);
         }
       }

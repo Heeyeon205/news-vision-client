@@ -1,10 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useStore } from '../store/useUserStore';
-import UserDropDownButton from './headerComponamt/UserDropDownButton';
+import { Link, useNavigate } from "react-router-dom";
+import { useStore } from "../store/useUserStore";
+import UserDropDownButton from "./headerComponamt/UserDropDownButton";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import NoticeButton from "../pages/notice/NoticeButton";
 
 library.add(faMagnifyingGlass);
 
@@ -13,13 +14,13 @@ export default function Header() {
   const userId = useStore((state) => state.userId);
 
   const handleStartClick = () => {
-    navigate('/user/login');
+    navigate("/user/login");
   };
 
   return (
     <header
       className="w-full  shadow-sm"
-      style={{ fontFamily: 'ONE-Mobile-Title' }}
+      style={{ fontFamily: "ONE-Mobile-Title" }}
     >
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 flex items-center justify-between  sm:flex-row flex-wrap sm:flex-nowrap ">
         <Link
@@ -67,7 +68,10 @@ export default function Header() {
 
         <div className="mt-3 md:mt-0  ">
           {userId ? (
-            <UserDropDownButton />
+            <>
+              <NoticeButton />
+              <UserDropDownButton />
+            </>
           ) : (
             <button
               onClick={handleStartClick}

@@ -14,7 +14,7 @@ export default function LoginHub() {
   const moveToPassword = () => navigate("/user/password");
 
   return (
-    <div className="p-6 min-h-screen flex flex-col justify-center items-center bg-gray-50">
+    <div className="p-6 min-h-screen flex flex-col justify-center pb-60 items-center">
       <div className="text-center mb-6">
         <h3 className="text-2xl font-bold">NEWSION</h3>
         <p className="text-gray-500 mt-2 text-sm">

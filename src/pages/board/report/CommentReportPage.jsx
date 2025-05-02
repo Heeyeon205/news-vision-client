@@ -9,6 +9,7 @@ export default function BoardReportPage() {
   const handleSubmit = async () => {
     try {
       await apiClient.post(`/api/reports/comments/${commentId}`);
+      console.log("지금 신고접수한 댓글 아이디: ", commentId);
       toast.success("댓글 신고 접수완료");
       navigate(-1);
     } catch (error) {

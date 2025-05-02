@@ -2,7 +2,11 @@ import axios from "../../../api/axios";
 import { useState } from "react";
 import ErrorAlert from "../../../utils/ErrorAlert";
 
-export default function ValidateNickname({ nickname, setNickname, setValidationState }) {
+export default function ValidateNickname({
+  nickname,
+  setNickname,
+  setValidationState,
+}) {
   const [color, setColor] = useState("");
   const [msg, setMsg] = useState("");
   const [readOnly, setReadOnly] = useState(false);
@@ -10,7 +14,9 @@ export default function ValidateNickname({ nickname, setNickname, setValidationS
   const checkBtn = async () => {
     try {
       if (nickname === "") return;
-      const response = await axios.get("/api/user/check-nickname", { params: { nickname } });
+      const response = await axios.get("/api/user/check-nickname", {
+        params: { nickname },
+      });
       const result = response.data;
 
       if (result.data.exists) {
@@ -28,10 +34,6 @@ export default function ValidateNickname({ nickname, setNickname, setValidationS
     }
   };
 
-  const handleChange = (e) => {
-    setNickname(e.target.value);
-  };
-
   return (
     <>
       <div className="flex">
@@ -40,7 +42,10 @@ export default function ValidateNickname({ nickname, setNickname, setValidationS
           value={nickname}
           readOnly={readOnly}
           placeholder="닉네임을 입력해주세요."
-          onChange={handleChange}
+          onChange={(e) => {
+            const trimmed = e.target.value.slice(0, 20);
+            setNickname(trimmed);
+          }}
           style={{ borderColor: color }}
           className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
         />
@@ -52,7 +57,9 @@ export default function ValidateNickname({ nickname, setNickname, setValidationS
           중복확인
         </button>
       </div>
-      <p className="text-sm mt-1" style={{ color }}>{msg}</p>
+      <p className="text-sm mt-1" style={{ color }}>
+        {msg}
+      </p>
     </>
   );
 }

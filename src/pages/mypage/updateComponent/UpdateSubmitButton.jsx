@@ -19,7 +19,7 @@ export default function UpdateSubmitButton({
 
   const HandleSubmit = async () => {
     try {
-      const response = await axios.put(`/api/user/${userId}`, formData, {
+      await axios.put(`/api/user/${userId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

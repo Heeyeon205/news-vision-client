@@ -1,4 +1,8 @@
+import { useGlobalStore } from "./store/useGlobalStore";
+import Loading from "./utils/Loading";
+import NotificationSSE from "./utils/NotificationSSE";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useStore } from "./store/useUserStore";
 
 import { Toaster } from "sonner";
 
@@ -16,6 +20,8 @@ import UserPage from "./pages/mypage/UserPage";
 import UpdatePage from "./pages/mypage/UpdatePage";
 import FollowerPage from "./pages/mypage/profileComponent/FollowerPage";
 import FollowingPage from "./pages/mypage/profileComponent/FollowingPage";
+
+import Notice from "./pages/notice/Notice";
 
 import Main from "./pages/news/Main";
 import NewsDetail from "./pages/news/NewsDetailPage";
@@ -46,9 +52,14 @@ import BoardReportAdminPage from "./pages/admin/BoardReportAdminPage";
 import CommentReportAdminPage from "./pages/admin/CommentReportAdminPage";
 
 function App() {
+  const isLoading = useGlobalStore((state) => state.isLoading);
+  const userId = useStore((state) => state.userId);
+
   return (
     <BrowserRouter>
+      {isLoading && <Loading />}
       <Toaster position="top-center" richColors closeButton duration={2000} />
+      <NotificationSSE userId={userId} />;
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
@@ -65,6 +76,8 @@ function App() {
           <Route path="/user/update" element={<UpdatePage />} />
           <Route path="/api/mypage/follower" element={<FollowerPage />} />
           <Route path="/api/mypage/following" element={<FollowingPage />} />
+
+          <Route path="/user/notice" element={<Notice />} />
 
           <Route path="/news/:id" element={<NewsDetail />} />
           <Route path="/news/create-form" element={<NewsCreatePage />} />
