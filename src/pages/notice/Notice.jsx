@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import apiClient from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import apiClient from '../../api/axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Notice() {
   const [data, setData] = useState([]);
@@ -9,11 +9,11 @@ export default function Notice() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const res = await apiClient("/api/notice/open");
+        const res = await apiClient('/api/notice/open');
         const result = res.data;
         setData(result.data);
-        console.log("리졸트: ", result);
-        console.log("리졸트.data: ", result.data);
+        console.log('리졸트: ', result);
+        console.log('리졸트.data: ', result.data);
       } catch (error) {
         console.log(error);
       }
@@ -37,11 +37,21 @@ export default function Notice() {
       ) : (
         <div>
           {data.map((notice) => (
-            <div>
-              <img src={notice.image} alt="프로필"></img>
-              <p>{notice.nickname}</p>
-              <p>{notice.title}</p>
-              <p>{notice.createdAt}</p>
+            <div class="flex items-center bg-white p-4  rounded shadow-sm">
+              <img
+                src={notice.image}
+                alt="프로필"
+                className="w-8 h-8 mt-1"
+              ></img>
+              <div class="ml-3 flex-1 ">
+                <div class="flex items-center ">
+                  <p>{notice.nickname} 님이 </p>
+                  <p className="text-gray-400 text-sm m-1">
+                    {notice.createdAt}
+                  </p>
+                </div>
+                <p className="mt-[-6px]">{notice.title}</p>
+              </div>
               <a
                 href={notice.url}
                 alt="알림 URL"
