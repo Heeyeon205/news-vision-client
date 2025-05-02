@@ -41,40 +41,74 @@ export default function BoardReportAdminPage() {
   }, []);
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-4">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">📌 게시글 신고 목록</h2>
 
       {reports.length === 0 ? (
         <p className="text-center text-gray-500">신고된 게시글이 없습니다.</p>
       ) : (
-        <table className="w-full border border-gray-300 text-sm">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="p-2 border">신고 ID</th>
-              <th className="p-2 border">게시글 ID</th>
-              <th className="p-2 border">작성자</th>
-              <th className="p-2 border">작성일</th>
-              <th className="p-2 border">신고자 ID</th>
-              <th className="p-2 border">처리</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reports.map((report) => (
-              <tr key={report.id} className="hover:bg-orange-50 transition">
-                <td className="p-2 border text-center">{report.id}</td>
+        <>
+          {/* 데스크탑용 테이블 */}
+          <div className="hidden md:block">
+            <table className="w-full border border-gray-300 text-sm">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="p-2 border">신고 ID</th>
+                  <th className="p-2 border">게시글 ID</th>
+                  <th className="p-2 border">작성자</th>
+                  <th className="p-2 border">작성일</th>
+                  <th className="p-2 border">신고자 ID</th>
+                  <th className="p-2 border">처리</th>
+                </tr>
+              </thead>
+              <tbody>
+                {reports.map((report) => (
+                  <tr key={report.id} className="hover:bg-orange-50 transition">
+                    <td className="p-2 border text-center">{report.id}</td>
+                    <td
+                      className="p-2 border text-center text-blue-600 hover:underline cursor-pointer"
+                      onClick={() => navigate(`/board/${report.boardId}`)}
+                    >
+                      {report.boardId}
+                    </td>
+                    <td className="p-2 border text-center">{report.boardWriter}</td>
+                    <td className="p-2 border text-center">{report.boardCreatedAt}</td>
+                    <td className="p-2 border text-center">{report.userId}</td>
+                    <td className="p-2 border text-center space-x-2">
+                      <button
+                        onClick={() => handleIgnore(report.id)}
+                        className="px-3 py-1 rounded text-xs bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
+                      >
+                        처리
+                      </button>
+                      <button
+                        onClick={() => handleDelete(report.id)}
+                        className="px-3 py-1 rounded text-xs bg-red-100 text-red-600 hover:bg-red-200 transition"
+                      >
+                        삭제
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-                <td
-                  className="p-2 border text-center text-blue-600 hover:underline cursor-pointer"
+          {/* 모바일용 카드형 */}
+          <div className="block md:hidden space-y-4">
+            {reports.map((report) => (
+              <div key={report.id} className="border rounded p-4 shadow-sm bg-white">
+                <p className="text-sm font-semibold text-gray-700">신고 ID: {report.id}</p>
+                <p
+                  className="text-sm text-blue-500 hover:underline cursor-pointer"
                   onClick={() => navigate(`/board/${report.boardId}`)}
                 >
-                  {report.boardId}
-                </td>
-
-                <td className="p-2 border text-center">{report.boardWriter}</td>
-                <td className="p-2 border text-center">{report.boardCreatedAt}</td>
-                <td className="p-2 border text-center">{report.userId}</td>
-
-                <td className="p-2 border text-center space-x-2">
+                  게시글 ID: {report.boardId}
+                </p>
+                <p className="text-sm">작성자: {report.boardWriter}</p>
+                <p className="text-sm">작성일: {report.boardCreatedAt}</p>
+                <p className="text-sm">신고자 ID: {report.userId}</p>
+                <div className="flex justify-end space-x-2 mt-3">
                   <button
                     onClick={() => handleIgnore(report.id)}
                     className="px-3 py-1 rounded text-xs bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
@@ -87,11 +121,11 @@ export default function BoardReportAdminPage() {
                   >
                     삭제
                   </button>
-                </td>
-              </tr>
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </>
       )}
     </div>
   );

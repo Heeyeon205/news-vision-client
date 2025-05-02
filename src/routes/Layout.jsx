@@ -5,9 +5,9 @@ import TopButton from "../utils/Topbutton";
 
 export default function Layout() {
   return (
-    <>
-      <Header />
-      <main style={{ fontFamily: 'MaplestoryOTFBold' }}>
+    <>      <Header />
+
+      <main style={{ fontFamily: 'ONE-Mobile-Title' }}>
   <Outlet />
   <TopButton />
 </main>

@@ -17,7 +17,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full  shadow-sm ">
+    <header className="w-full  shadow-sm"style={{ fontFamily: "ONE-Mobile-Title" }}>
       <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 flex items-center justify-between  md:flex-row flex-wrap md:flex-nowrap ">
         <Link
           to="/"
