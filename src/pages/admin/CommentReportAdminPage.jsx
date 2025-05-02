@@ -67,6 +67,7 @@ export default function CommentReportAdminPage() {
                   <th className="p-2 border w-[60px]">신고 ID</th>
                   <th className="p-2 border w-[60px]">게시글 ID</th>
                   <th className="p-2 border w-[80px]">작성자</th>
+                  <th className="p-2 border w-[80px]">신고자</th>
                   <th className="p-2 border w-[110px]">작성일</th>
                   <th className="p-2 border">댓글 내용</th>
                   <th className="p-2 border w-[120px]">처리</th>
@@ -83,18 +84,19 @@ export default function CommentReportAdminPage() {
                       {report.boardId}
                     </td>
                     <td className="p-2 border text-center">{report.userNickname}</td>
+                    <td className="p-2 border text-center">{report.commentWriter}</td>
                     <td className="p-2 border text-center">{formatDate(report.createdAt)}</td>
                     <td className="p-2 border truncate max-w-xs">{report.commentContent}</td>
                     <td className="p-2 border text-center space-x-2">
                       <button
                         onClick={() => handleIgnore(report.id)}
-                        className="px-3 py-1 rounded text-xs bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
+                        className="px-3 py-1 rounded text-xs  text-blue-600 hover:scale-110 transition"
                       >
                         처리
                       </button>
                       <button
                         onClick={() => handleDelete(report.id)}
-                        className="px-3 py-1 rounded text-xs bg-red-100 text-red-600 hover:bg-red-200 transition"
+                        className="px-3 py-1 rounded text-xs  text-red-600 hover:scale-110 transition"
                       >
                         삭제
                       </button>
@@ -122,13 +124,13 @@ export default function CommentReportAdminPage() {
                 <div className="flex justify-end space-x-2 mt-3">
                   <button
                     onClick={() => handleIgnore(report.id)}
-                    className="px-3 py-1 rounded text-xs bg-blue-100 text-blue-600 hover:bg-blue-200 transition"
+                    className="px-3 py-1 rounded text-xs  text-blue-600 hover:scale-110 transition"
                   >
                     처리
                   </button>
                   <button
                     onClick={() => handleDelete(report.id)}
-                    className="px-3 py-1 rounded text-xs bg-red-100 text-red-600 hover:bg-red-200 transition"
+                    className="px-3 py-1 rounded text-xs  text-red-600 hover:scale-110 transition"
                   >
                     삭제
                   </button>

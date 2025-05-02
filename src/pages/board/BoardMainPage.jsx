@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import BoardCreateButton from "./BoardCreateButton";
 import BoardCreatePage from "./BoardCreatePage";
 import { useStore } from "../../store/useUserStore";
+import {FaRegHeart, FaRegComment} from "react-icons/fa";
+
 
 export default function BoardMainPage() {
   const userId = useStore((state) => state.userId);
@@ -86,9 +88,11 @@ export default function BoardMainPage() {
               />
             )}
 
-            <div className="flex text-sm text-gray-600 gap-4">
-              <span>👍 좋아요 {board.likeCount}</span>
-              <span>💬 댓글 {board.commentCount}</span>
+            <div className="flex text-sm text-gray-600 gap-2">
+              <FaRegHeart className="w-5 h-5 text-red-500" />
+              <span>{board.likeCount}</span>
+              <FaRegComment className="w-5 h-5 text-gray-500 ml-4" />
+              <span>{board.commentCount}</span>
             </div>
           </div>
         ))
