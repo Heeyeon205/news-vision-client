@@ -1,8 +1,8 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import apiClient from "../../api/axios";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import apiClient from '../../api/axios';
 
 export default function GptMainPage() {
   const [newsList, setNewsList] = useState([]);
@@ -12,7 +12,7 @@ export default function GptMainPage() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const respons = await apiClient.get("/api/gpt-news/main-summary");
+        const respons = await apiClient.get('/api/gpt-news/main-summary');
         const result = respons.data;
         setNewsList(result.data);
       } catch (error) {
@@ -29,7 +29,7 @@ export default function GptMainPage() {
           <div
             key={i}
             className={`indicator w-4 h-1 rounded ${
-              index === i ? "bg-orange-500" : "bg-gray-400"
+              index === i ? 'bg-orange-500' : 'bg-gray-400'
             }`}
           ></div>
         ))}
@@ -53,7 +53,7 @@ export default function GptMainPage() {
                 </div>
 
                 <div className="w-11/12 sm:w-[600px] rounded-bl-lg rounded-br-lg flex flex-col justify-center items-center border-gray-300 border-1 border-t-0">
-                  <div className="w-11/12 sm:w-125 h-[120px] sm:h-[160px] flex flex-col mt-4 sm:mt-6 max-h-full max-w-full">
+                  <div className="w-11/12 sm:w-125 h-[120px] sm:h-[160px] flex flex-col mt-4 sm:mt-6 max-h-full max-w-full  ">
                     <h3 className="p-2 text-xl sm:text-2xl font-bold w-max-full h-max-full">
                       {news.title}
                     </h3>
@@ -61,7 +61,7 @@ export default function GptMainPage() {
                   </div>
                   <p
                     onClick={() => navigate(`/news/${news.id}`)}
-                    className="w-full text-center text-orange-500 hover:text-orange-400 cursor-pointer p-3 sm:p-5 mt-4 sm:mt-7"
+                    className="w-full text-center text-orange-500 hover:text-orange-400 cursor-pointer  p-3 sm:p-5 mt-15 sm:mt-7"
                   >
                     자세히 보기
                   </p>
