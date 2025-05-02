@@ -69,13 +69,13 @@ export default function Mypage() {
           <div className="flex space-x-4 text-sm text-gray-500 mt-2">
             <button
               onClick={() => setIsFollowerModalOpen(true)}
-              className="hover:underline"
+              className="hover:underline cursor-pointer"
             >
               팔로워 {follower}
             </button>
             <button
               onClick={() => setIsFollowingModalOpen(true)}
-              className="hover:underline"
+              className="hover:underline cursor-pointer"
             >
               팔로잉 {following}
             </button>
@@ -92,11 +92,10 @@ export default function Mypage() {
           {role && (
             <button
               className={`py-2 px-4 border-b-2 text-sm font-semibold transition  
-      ${
-        activeTap === "news"
-          ? "text-orange-500 border-orange-400"
-          : "text-gray-500 border-transparent hover:text-orange-400"
-      }`}
+      ${activeTap === "news"
+                  ? "text-orange-500 border-orange-400"
+                  : "text-gray-500 border-transparent hover:text-orange-400 cursor-pointer"
+                }`}
               onClick={() => setActiveTap("news")}
             >
               뉴스
@@ -104,22 +103,20 @@ export default function Mypage() {
           )}
           <button
             className={`py-2 px-4 border-b-2 text-sm font-semibold transition 
-    ${
-      activeTap === "article"
-        ? "text-orange-500 border-orange-400"
-        : "text-gray-500 border-transparent hover:text-orange-400"
-    }`}
+    ${activeTap === "article"
+                ? "text-orange-500 border-orange-400"
+                : "text-gray-500 border-transparent hover:text-orange-400 cursor-pointer"
+              }`}
             onClick={() => setActiveTap("article")}
           >
             커뮤니티
           </button>
           <button
             className={`py-2 px-4 border-b-2 text-sm font-semibold transition 
-    ${
-      activeTap === "scrap"
-        ? "text-orange-500 border-orange-400"
-        : "text-gray-500 border-transparent hover:text-orange-400"
-    }`}
+    ${activeTap === "scrap"
+                ? "text-orange-500 border-orange-400"
+                : "text-gray-500 border-transparent hover:text-orange-400 cursor-pointer"
+              }`}
             onClick={() => setActiveTap("scrap")}
           >
             스크랩

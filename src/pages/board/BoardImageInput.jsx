@@ -16,7 +16,7 @@ export default function BoardImageInput({ image, setImage }) {
       {/* 아이콘 클릭 시 파일 업로드 */}
       <label
         htmlFor="image-upload"
-        className="cursor-pointer text-2xl text-orange-500 hover:text-orange-600"
+        className="cursor-pointer text-2xl text-orange-500 hover:text-orange-400"
       >
         <IoImagesOutline />
       </label>

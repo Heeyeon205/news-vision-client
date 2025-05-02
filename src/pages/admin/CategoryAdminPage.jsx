@@ -62,7 +62,7 @@ export default function CategoryAdminPage() {
         />
         <button
           onClick={handleAdd}
-          className="px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded text-sm"
+          className="px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded text-sm cursor-pointer"
         >
           추가
         </button>
@@ -77,7 +77,7 @@ export default function CategoryAdminPage() {
         />
         <button
           onClick={handleDelete}
-          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded text-sm"
+          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded text-sm cursor-pointer"
         >
           삭제
         </button>

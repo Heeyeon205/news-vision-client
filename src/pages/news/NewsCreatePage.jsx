@@ -66,13 +66,13 @@ export default function NewsCreatePage() {
             </div>
             <div className="flex items-center gap-2">
               <input
-                className="flex-1 px-4 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white"
+                className="flex-1 px-4 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 bg-white"
                 type="text"
                 placeholder="오늘의 뉴스를 검색하세요."
                 onChange={handleChange}
               ></input>
               <button
-                className="px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors"
+                className="px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-400 transition-colors"
                 type="submit"
               >
                 검색

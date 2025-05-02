@@ -59,7 +59,7 @@ function App() {
     <BrowserRouter>
       {isLoading && <Loading />}
       <Toaster position="top-center" richColors closeButton duration={2000} />
-      <NotificationSSE userId={userId} />;
+      <NotificationSSE userId={userId} />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />

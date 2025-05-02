@@ -47,7 +47,7 @@ export default function BoardDetailPage() {
     <p className="text-center py-10 text-gray-500">커뮤니티 불러오는 중...</p>
   ) : (
     <div className="max-w-xl mx-auto p-4">
-      <div className="border-b pb-6">
+      <div className="border-b-2 pb-6 border-orange-500">
         <div className="flex justify-between items-start mb-3">
           <div className="flex items-start gap-3">
             <img
@@ -102,7 +102,7 @@ export default function BoardDetailPage() {
       <div className="mt-6">
         <h3 className="text-sm font-semibold mb-3">답글 {commentCount}</h3>
         {data.comments.length === 0 ? (
-          <p className="text-sm text-gray-500">댓글이 없습니다.</p>
+          <p className="text-sm text-gray-400">댓글이 없습니다.</p>
         ) : (
           data.comments.map((comment) => (
             <div key={comment.id} className="flex items-start gap-3 mb-4">

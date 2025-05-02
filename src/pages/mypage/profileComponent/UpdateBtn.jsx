@@ -8,7 +8,7 @@ export default function EditProfile() {
   };
   return (
     <button
-      className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-3 py-1 rounded transition"
+      className="bg-orange-500 hover:bg-orange-400 text-white text-sm px-3 py-1 rounded transition cursor-pointer"
       onClick={handleMove}
     >
       프로필 편집

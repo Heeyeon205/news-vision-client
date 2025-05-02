@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import BoardCreateButton from "./BoardCreateButton";
 import BoardCreatePage from "./BoardCreatePage";
 import { useStore } from "../../store/useUserStore";
-import {FaRegHeart, FaRegComment} from "react-icons/fa";
+import { FaRegHeart, FaRegComment } from "react-icons/fa";
 
 
 export default function BoardMainPage() {
@@ -22,7 +22,7 @@ export default function BoardMainPage() {
       try {
         const response = await apiClient.get("/api/board");
         const result = response.data;
-        setData(result.data);
+        setData(result.data.content);
       } catch (error) {
         console.log(error);
       }
@@ -73,7 +73,7 @@ export default function BoardMainPage() {
               />
               <div className="flex-1">
                 <p className="font-semibold text-sm">{board.nickname}</p>
-                <p className="text-xs text-gray-400">{board.createAt}</p>
+                <p className="text-xs text-gray-400">{board.createdAt}</p>
               </div>
             </div>
 

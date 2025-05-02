@@ -40,7 +40,7 @@ export default function BoardCreateSubmit({ image, content, categoryId }) {
 
   return (
     <button
-      className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-4 py-2 rounded"
+      className="bg-orange-500 hover:bg-orange-400 text-white text-sm px-4 py-2 rounded cursor-pointer"
       onClick={handleClick}
     >
       남기기

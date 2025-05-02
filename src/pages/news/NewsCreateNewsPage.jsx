@@ -80,7 +80,7 @@ export default function NewsCreateNewsPage() {
       <div className="bg-white shadow-md rounded-lg p-4">
         <div className="mb-4">
           <select
-            className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 h-10"
+            className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 h-10"
             onChange={(e) => setSelectId(e.target.value)}
           >
             <option value="">카테고리를 선택하세요</option>
@@ -102,7 +102,7 @@ export default function NewsCreateNewsPage() {
         <div className="mb-4">
           <input
             value={title}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
             type="text"
             placeholder="제목을 입력하세요."
             onChange={(e) => {
@@ -118,7 +118,7 @@ export default function NewsCreateNewsPage() {
         <div className="mb-4">
           <textarea
             value={content}
-            className="w-full border border-gray-300 rounded px-3 py-2  text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 h-32"
+            className="w-full border border-gray-300 rounded px-3 py-2  text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 h-32"
             placeholder="본문을 입력하세요"
             defaultValue={""}
             onChange={(e) => {
@@ -133,7 +133,7 @@ export default function NewsCreateNewsPage() {
         </div>
         <div className="flex justify-end">
           <button
-            className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors"
+            className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-bold cursor-pointer hover:bg-orange-400 transition-colors"
             onClick={handleClick}
           >
             작성 완료
