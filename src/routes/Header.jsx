@@ -17,11 +17,12 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full  shadow-sm"style={{ fontFamily: "ONE-Mobile-Title" }}>
+    <header className="w-full  shadow-sm"style={{ fontFamily: "AppleSDGothicNeoL" }}>
       <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 flex items-center justify-between  md:flex-row flex-wrap md:flex-nowrap ">
         <Link
           to="/"
-          className="text-2xl md:text-3xl font-extrabold text-orange-500 "
+          className="text-2xl md:text-3xl font-extrabold text-orange-500"
+          style ={{fontFamily: "ONE-Mobile-Title"}}
         >
           NEWSION
         </Link>

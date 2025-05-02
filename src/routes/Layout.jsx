@@ -10,7 +10,7 @@ export default function Layout() {
       <Header />
       <main
         className="flex-1 min-h-screen max-w-5xl w-full mx-auto p-4"
-        style={{ fontFamily: "ONE-Mobile-Title" }}
+        style={{ fontFamily: "AppleSDGothicNeoL" }}
       >
         <Outlet />
         <TopButton />
