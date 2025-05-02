@@ -56,7 +56,7 @@ export default function Main() {
             )}
           </div>
           <div
-            className="relative text-orange-600 dark:text-orange-400 font-medium cursor-pointer transition-colors duration-200 group"
+            className="relative text-orange-600 font-medium cursor-pointer transition-colors duration-200 group"
             onClick={() => {
               if (pollList.length > 0) {
                 navigate(`/polls/${pollList[index]?.id}`);
@@ -64,7 +64,7 @@ export default function Main() {
             }}
           >
             당신의 생각은? 투표로 알려주세요!
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-orange-600 dark:bg-orange-400 transition-all duration-400 group-hover:w-full"></span>
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-orange-600 transition-all duration-400 group-hover:w-full"></span>
           </div>
         </div>
       </div>
@@ -187,9 +187,8 @@ export default function Main() {
             {pollList.map((_, i) => (
               <div
                 key={`indicator-${i}`}
-                className={`indicator w-4 h-1 rounded ${
-                  index === i ? "bg-orange-500" : "bg-gray-400"
-                }`}
+                className={`indicator w-4 h-1 rounded ${index === i ? "bg-orange-500" : "bg-gray-400"
+                  }`}
               ></div>
             ))}
           </div>

@@ -55,33 +55,59 @@ export default function PollCreatePage() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="투표 제목을 작성해 주세요."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="datetime-local"
-          value={expiredAt}
-          onChange={(e) => setExpiredAt(e.target.value)}
-        />
+    <div className="p-4 max-w-[600px] w-full mx-auto shadow-md rounded-lg mt-4">
+      <div className="mx-8">
+        <div className="flex flex-col justify-center mb-4">
+          <div className="mb-2">
+            <p className="text-sm">투표 제목</p>
+          </div>
+          <input
+            className="w-full border border-gray-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+            type="text"
+            placeholder="투표 제목을 작성해 주세요."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div className="mb-3">
+          <div className="mb-2">
+            <p className="text-sm">투표 마감일</p>
+          </div>
+          <input
+            className="w-full border border-gray-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 "
+            type="datetime-local"
+            value={expiredAt}
+            onChange={(e) => setExpiredAt(e.target.value)}
+          />
+        </div>
+
+        <div className="mb-2">
+          <p className="text-sm">투표 선택지</p>
+        </div>
+
         {options.map((option, index) => (
-          <div key={index}>
+          <div key={index} className="flex items-center gap-2 mb-3">
             <input
+              className="flex-8 border border-gray-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 mb-3"
               type="text"
               value={option}
               onChange={(e) => handleChange(index, e.target.value)}
               placeholder={`항목 ${index + 1}`}
             />
-            <button onClick={() => handleRemove(index)}>삭제</button>
+
+            <button onClick={() => handleRemove(index)}
+              className="flex-1 bg-orange-500 text-white font-bold px-4 py-1.5 rounded mb-3 cursor-pointer hover:bg-orange-600 transition-colors"
+            >삭제</button>
+
           </div>
         ))}
-        <p onClick={handleClick}>항목 추가</p>
-        <button type="submit">투표 생성</button>
-      </form>
+
+        <p onClick={handleClick} className="w-full px-3 py-2 rounded text-sm mb-5 text-center font-bold cursor-pointer bg-orange-500 text-white hover:bg-orange-600 transition-colors">항목 추가</p>
+        <hr className="mt-5 mb-2 border-orange-500 border-t-2"></hr>
+        <div className="flex justify-end">
+          <button onClick={handleSubmit} className="mt-3 px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors">투표 생성</button>
+        </div>
+      </div>
     </div>
   );
 }
