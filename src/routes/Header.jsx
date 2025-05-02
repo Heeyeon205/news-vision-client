@@ -24,12 +24,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 flex items-center justify-between  sm:flex-row flex-wrap sm:flex-nowrap ">
         <Link
           to="/"
-          className="text-2xl sm:text-3xl font-extrabold text-orange-500 mt-1  "
+          className="text-2xl sm:text-3xl font-extrabold text-orange-500  mt-1 "
         >
           NEWSION
         </Link>
 
-        <nav className=" w-full sm:w-[500px]  flex  justify-center sm:mr-23 mr-0  mt-10   order-2 sm:order-none sm:mt-0 space-x-4 sm:space-x-8 text-base sm:text-lg font-semibold ">
+        <nav className=" w-full sm:w-[500px]  flex  justify-center sm:mr-23 mr-0  mt-10   order-2 sm:order-none sm:mt-2 space-x-4 sm:space-x-8 text-base sm:text-lg font-semibold ">
           <Link
             to="/"
             className=" h-[32px] border-b-3 border-transparent text-black font-medium hover:text-orange-500  hover:border-orange-500 "
