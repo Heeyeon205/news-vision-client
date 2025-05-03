@@ -31,7 +31,6 @@ export default function NotificationSSE({ userId }) {
 
     eventSource.onerror = (err) => {
       console.error("SSE 연결 오류:", err);
-      toast.error("서버 연결이 끊겼습니다. 새로고침해 주세요.");
       eventSource.close();
     };
 

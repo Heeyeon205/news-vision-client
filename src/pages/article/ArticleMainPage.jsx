@@ -10,6 +10,13 @@ export default function ArticleMainPage() {
   const logRole = useStore((state) => state.role);
   const [auth, setAuth] = useState(false);
   const categoryRef = useRef(null);
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(0);
+  const [selectedType, setSelectedType] = useState("recent");
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR") {
@@ -32,59 +39,82 @@ export default function ArticleMainPage() {
     "역사",
     "도서",
   ];
-  const navigate = useNavigate();
-  const [data, setData] = useState([]);
 
   useEffect(() => {
     const loadData = async () => {
+      if (isLoading || !hasMore) return;
+      setIsLoading(true);
       try {
-        const response = await apiClient.get("/api/news/article");
+        let url = `/api/news/article?type=${selectedType}&page=${page}&size=10`;
+        if (selectedType === "category" && selectedCategoryId) {
+          url += `&categoryId=${selectedCategoryId}`;
+        }
+
+        const response = await apiClient.get(url);
         const result = response.data;
-        setData(result.data.content);
+        const newContent = result.data.content;
+
+        if (page === 0) {
+          setData(newContent);
+        } else {
+          setData((prev) => [...prev, ...newContent]);
+        }
+
+        if (newContent.length < 10) {
+          setHasMore(false);
+        } else {
+          setHasMore(true);
+        }
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     loadData();
+  }, [page, selectedType, selectedCategoryId]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100
+      ) {
+        setPage((prev) => prev + 1);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleClick = async (category) => {
-    try {
-      let selectedType = "recent";
-      let selectedCategoryId = null;
+  const handleClick = (category) => {
+    let type = "recent";
+    let categoryId = null;
 
-      if (category === "전체") {
-        selectedType = "recent";
-      } else if (category === "인기") {
-        selectedType = "popular";
-      } else if (category === "팔로우") {
-        selectedType = "follow";
-      } else {
-        selectedType = "category";
-        const categoryIdMap = {
-          경제: 2,
-          정치: 3,
-          문화: 4,
-          글로벌: 5,
-          예술: 6,
-          과학기술: 7,
-          역사: 8,
-          도서: 9,
-        };
-        selectedCategoryId = categoryIdMap[category];
-      }
-
-      const url =
-        selectedType === "category"
-          ? `/api/news/article?type=${selectedType}&categoryId=${selectedCategoryId}`
-          : `/api/news/article?type=${selectedType}`;
-
-      const response = await apiClient.get(url);
-      const result = response.data;
-      setData(result.data.content);
-    } catch (error) {
-      console.log(error);
+    if (category === "전체") type = "recent";
+    else if (category === "인기") type = "popular";
+    else if (category === "팔로우") type = "follow";
+    else {
+      type = "category";
+      const categoryIdMap = {
+        경제: 2,
+        정치: 3,
+        문화: 4,
+        글로벌: 5,
+        예술: 6,
+        과학기술: 7,
+        역사: 8,
+        도서: 9,
+      };
+      categoryId = categoryIdMap[category];
     }
+
+    setSelectedType(type);
+    setSelectedCategoryId(categoryId);
+    setPage(0);
+    setHasMore(true);
+    setData([]);
   };
 
   useEffect(() => {

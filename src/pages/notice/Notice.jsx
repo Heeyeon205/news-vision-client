@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import apiClient from '../../api/axios';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import apiClient from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Notice() {
   const [data, setData] = useState([]);
@@ -9,11 +9,11 @@ export default function Notice() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const res = await apiClient('/api/notice/open');
+        const res = await apiClient("/api/notice/open");
         const result = res.data;
         setData(result.data);
-        console.log('리졸트: ', result);
-        console.log('리졸트.data: ', result.data);
+        console.log("리졸트: ", result);
+        console.log("리졸트.data: ", result.data);
       } catch (error) {
         console.log(error);
       }
@@ -28,6 +28,10 @@ export default function Notice() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleMove = (id) => {
+    navigate(`/userPage/${id}`);
   };
 
   return (
@@ -45,7 +49,9 @@ export default function Notice() {
               ></img>
               <div class="ml-3 flex-1 ">
                 <div class="flex items-center ">
-                  <p>{notice.nickname} 님이 </p>
+                  <p onClick={() => handleMove(notice.userId)}>
+                    {notice.nickname} 님이{" "}
+                  </p>
                   <p className="text-gray-400 text-sm m-1">
                     {notice.createdAt}
                   </p>
