@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
-import BoardCreateButton from "./BoardCreateButton";
 import BoardCreatePage from "./BoardCreatePage";
 import { useStore } from "../../store/useUserStore";
-import {FaRegHeart, FaRegComment} from "react-icons/fa";
-
+import { FaRegHeart, FaRegComment } from "react-icons/fa";
 
 export default function BoardMainPage() {
   const userId = useStore((state) => state.userId);

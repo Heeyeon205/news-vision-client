@@ -2,6 +2,7 @@ import ErrorAlert from "../../../utils/ErrorAlert";
 import apiClient from "../../../api/axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaRegHeart, FaRegComment } from "react-icons/fa";
 
 export default function ArticleList({ userImg }) {
   const [articles, setArticles] = useState([]);
@@ -35,7 +36,6 @@ export default function ArticleList({ userImg }) {
             onClick={() => navigate(`/board/${article.boardId}`)}
             className="bg-white rounded-lg shadow p-4 hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer space-y-3"
           >
-            {/* 작성자 정보 */}
             <div className="flex items-center gap-2 text-sm text-gray-700">
               <img
                 src={userImg}
@@ -49,12 +49,10 @@ export default function ArticleList({ userImg }) {
               <span className="text-gray-400 ml-auto">{article.createAt}</span>
             </div>
 
-            {/* 본문 내용 */}
             <div className="text-sm text-gray-800 line-clamp-3">
               {article.content}
             </div>
 
-            {/* 게시글 이미지 (있을 때만) */}
             {article.image && (
               <img
                 src={article.image}
@@ -62,10 +60,11 @@ export default function ArticleList({ userImg }) {
               />
             )}
 
-            {/* 좋아요, 댓글 */}
-            <div className="flex gap-6 text-sm text-gray-500 pt-2 border-t">
-              <span>❤️ 좋아요 {article.likeCount}</span>
-              <span>💬 댓글 {article.commentCount}</span>
+            <div className="flex text-sm text-gray-600 gap-2">
+              <FaRegHeart className="w-5 h-5 text-red-500" />
+              <span>{article.likeCount}</span>
+              <FaRegComment className="w-5 h-5 text-gray-500 ml-4" />
+              <span>{article.commentCount}</span>
             </div>
           </div>
         ))
