@@ -27,31 +27,28 @@ export default function AdminMainPage() {
       <div className="flex border-b mb-6">
         <button
           onClick={() => setActiveTab("category")}
-          className={`px-4 py-2 font-medium ${
-            activeTab === "category"
-              ? "border-b-2 border-orange-500 text-orange-500"
-              : "text-gray-500 hover:text-orange-500"
-          }`}
+          className={`px-4 py-2 font-medium ${activeTab === "category"
+            ? "border-b-2 border-orange-500 text-orange-500"
+            : "text-gray-500 hover:text-orange-400 cursor-pointer"
+            }`}
         >
           카테고리 관리
         </button>
         <button
           onClick={() => setActiveTab("board")}
-          className={`px-4 py-2 font-medium ${
-            activeTab === "board"
-              ? "border-b-2 border-orange-500 text-orange-500"
-              : "text-gray-500 hover:text-orange-500"
-          }`}
+          className={`px-4 py-2 font-medium ${activeTab === "board"
+            ? "border-b-2 border-orange-500 text-orange-500"
+            : "text-gray-500 hover:text-orange-400 cursor-pointer"
+            }`}
         >
           게시글 신고 관리
         </button>
         <button
           onClick={() => setActiveTab("comment")}
-          className={`px-4 py-2 font-medium ${
-            activeTab === "comment"
-              ? "border-b-2 border-orange-500 text-orange-500"
-              : "text-gray-500 hover:text-orange-500"
-          }`}
+          className={`px-4 py-2 font-medium ${activeTab === "comment"
+            ? "border-b-2 border-orange-500 text-orange-500"
+            : "text-gray-500 hover:text-orange-400 cursor-pointer"
+            }`}
         >
           댓글 신고 관리
         </button>

@@ -52,7 +52,7 @@ export default function ValidateNickname({
         <button
           type="button"
           onClick={checkBtn}
-          className="px-4  bg-orange-500 text-white text-sm rounded-r-md  hover:bg-orange-600"
+          className="px-4  bg-orange-500 text-white text-sm rounded-r-md  hover:bg-orange-400 cursor-pointer"
         >
           중복확인
         </button>

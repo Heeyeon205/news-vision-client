@@ -50,7 +50,7 @@ export default function CommentBox({
       />
       <button
         type="submit"
-        className="text-sm px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-full"
+        className="text-sm px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-full cursor-pointer"
       >
         등록
       </button>

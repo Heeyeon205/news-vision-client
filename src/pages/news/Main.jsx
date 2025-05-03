@@ -188,9 +188,8 @@ export default function Main() {
             {pollList.map((_, i) => (
               <div
                 key={`indicator-${i}`}
-                className={`indicator w-4 h-1 rounded ${
-                  swiperIndex === i ? "bg-orange-500" : "bg-gray-400"
-                }`}
+                className={`indicator w-4 h-1 rounded ${swiperIndex === i ? "bg-orange-500" : "bg-gray-400"
+                  }`}
               ></div>
             ))}
           </div>

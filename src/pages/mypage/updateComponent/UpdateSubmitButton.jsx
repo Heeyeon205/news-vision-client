@@ -31,5 +31,5 @@ export default function UpdateSubmitButton({
     }
   };
 
-  return <button onClick={HandleSubmit}>완료</button>;
+  return <button onClick={HandleSubmit} className="px-4 py-2 bg-orange-500 text-white text-sm rounded-md hover:bg-orange-400 cursor-pointer">완료</button>;
 }

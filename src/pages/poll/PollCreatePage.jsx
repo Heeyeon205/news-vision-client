@@ -96,16 +96,16 @@ export default function PollCreatePage() {
             />
 
             <button onClick={() => handleRemove(index)}
-              className="flex-1 bg-orange-500 text-white font-bold px-4 py-1.5 rounded mb-3 cursor-pointer hover:bg-orange-600 transition-colors"
+              className="flex-1 bg-orange-500 text-white font-bold px-4 py-1.5 rounded mb-3 cursor-pointer hover:bg-orange-400 transition-colors"
             >삭제</button>
 
           </div>
         ))}
 
-        <p onClick={handleClick} className="w-full px-3 py-2 rounded text-sm mb-5 text-center font-bold cursor-pointer bg-orange-500 text-white hover:bg-orange-600 transition-colors">항목 추가</p>
+        <p onClick={handleClick} className="w-full px-3 py-2 rounded text-sm mb-5 text-center font-bold cursor-pointer bg-orange-500 text-white hover:bg-orange-400 transition-colors">항목 추가</p>
         <hr className="mt-5 mb-2 border-orange-500 border-t-2"></hr>
         <div className="flex justify-end">
-          <button onClick={handleSubmit} className="mt-3 px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-600 transition-colors">투표 생성</button>
+          <button onClick={handleSubmit} className="mt-3 px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-400 transition-colors">투표 생성</button>
         </div>
       </div>
     </div>

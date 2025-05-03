@@ -58,7 +58,7 @@ export default function SearchMainPage() {
       >
         <input
           type="text"
-          className="w-full h-12 px-4 text-sm focus:outline-none"
+          className="w-full h-12 px-4 text-sm focus:outline-none "
           placeholder="궁금한 지식을 찾아보세요."
           value={query}
           onChange={(e) => {
@@ -101,11 +101,10 @@ export default function SearchMainPage() {
             setType("news");
             setData([]);
           }}
-          className={`py-2 px-6 text-sm font-medium border-b-2 ${
-            type === "news"
+          className={`py-2 px-6 text-sm font-medium border-b-2 ${type === "news"
               ? "border-orange-500 text-orange-500"
               : "border-transparent text-gray-500"
-          } transition`}
+            } transition`}
         >
           뉴스
         </button>
@@ -114,11 +113,10 @@ export default function SearchMainPage() {
             setType("board");
             setData([]);
           }}
-          className={`py-2 px-6 text-sm font-medium border-b-2 ${
-            type === "board"
+          className={`py-2 px-6 text-sm font-medium border-b-2 ${type === "board"
               ? "border-orange-500 text-orange-500"
               : "border-transparent text-gray-600"
-          } transition`}
+            } transition`}
         >
           커뮤니티
         </button>

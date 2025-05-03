@@ -69,7 +69,7 @@ export default function InfoPage() {
               </p>
               <button
                 onClick={handleClick}
-                className="px-4 py-2 bg-orange-500 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-orange-600 focus:outline-none"
+                className="px-4 py-2 bg-orange-500 text-white text-sm font-semibold rounded-lg shadow-md hover:bg-orange-400 focus:outline-none cursor-pointer"
               >
                 지금 시작하기
               </button>

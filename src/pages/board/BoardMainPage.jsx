@@ -11,7 +11,6 @@ export default function BoardMainPage() {
   const userImage = useStore((state) => state.image);
   const nickname = useStore((state) => state.nickname);
   const navigate = useNavigate();
-
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -20,7 +19,7 @@ export default function BoardMainPage() {
       try {
         const response = await apiClient.get("/api/board");
         const result = response.data;
-        setData(result.data);
+        setData(result.data.content);
       } catch (error) {
         console.log(error);
       }
@@ -71,7 +70,7 @@ export default function BoardMainPage() {
               />
               <div className="flex-1">
                 <p className="font-semibold text-sm">{board.nickname}</p>
-                <p className="text-xs text-gray-400">{board.createAt}</p>
+                <p className="text-xs text-gray-400">{board.createdAt}</p>
               </div>
             </div>
 
