@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import apiClient from "../../api/axios";
 import { formatDate } from "../../utils/FormatDate";
 import { useNavigate } from "react-router-dom";
 import BoardCreatePage from "./BoardCreatePage";
 import { useStore } from "../../store/useUserStore";
 import { FaRegHeart, FaRegComment } from "react-icons/fa";
+import { useInfiniteScroll } from "../../utils/useInfiniteScroll";
 
 export default function BoardMainPage() {
   const userId = useStore((state) => state.userId);
@@ -13,50 +14,14 @@ export default function BoardMainPage() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const size = 10;
-
-  useEffect(() => {
-    const loadData = async () => {
-      if (isLoading || !hasMore) return;
-      setIsLoading(true);
-      try {
-        const response = await apiClient.get(
-          `/api/board?page=${page}&size=${size}`
-        );
-        const result = response.data;
-        const newContent = result.data.content;
-        console.log("요청");
-        setData((prev) => [...prev, ...newContent]);
-
-        if (newContent.length < size) {
-          setHasMore(false);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadData();
-  }, [page]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 100
-      ) {
-        setPage((prev) => prev + 1);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const { data, isLoading, hasMore, reset } = useInfiniteScroll(
+    async (page, size) => {
+      const response = await apiClient.get(
+        `/api/board?page=${page}&size=${size}`
+      );
+      return response.data.data.content;
+    }
+  );
 
   return (
     <div className="max-w-xl mx-auto p-4">

@@ -4,27 +4,16 @@ import { formatDate } from "../../utils/FormatDate";
 import NewsCreateButton from "../news/NewsCreateButton";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../store/useUserStore";
+import { useInfiniteScroll } from "../../utils/useInfiniteScroll";
 
 export default function ArticleMainPage() {
   const logId = useStore((state) => state.userId);
   const logRole = useStore((state) => state.role);
-  const [auth, setAuth] = useState(false);
+  const isAuth = logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR";
   const categoryRef = useRef(null);
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(0);
   const [selectedType, setSelectedType] = useState("recent");
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR") {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  }, [logRole]);
 
   const categories = [
     "전체",
@@ -40,53 +29,16 @@ export default function ArticleMainPage() {
     "도서",
   ];
 
-  useEffect(() => {
-    const loadData = async () => {
-      if (isLoading || !hasMore) return;
-      setIsLoading(true);
-      try {
-        let url = `/api/news/article?type=${selectedType}&page=${page}&size=10`;
-        if (selectedType === "category" && selectedCategoryId) {
-          url += `&categoryId=${selectedCategoryId}`;
-        }
-
-        const response = await apiClient.get(url);
-        const result = response.data;
-        const newContent = result.data.content;
-
-        if (page === 0) {
-          setData(newContent);
-        } else {
-          setData((prev) => [...prev, ...newContent]);
-        }
-
-        if (newContent.length < 10) {
-          setHasMore(false);
-        } else {
-          setHasMore(true);
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIsLoading(false);
+  const { data, isLoading, hasMore, reset } = useInfiniteScroll(
+    async (page, size) => {
+      let url = `/api/news/article?type=${selectedType}&page=${page}&size=${size}`;
+      if (selectedType === "category" && selectedCategoryId) {
+        url += `&categoryId=${selectedCategoryId}`;
       }
-    };
-    loadData();
-  }, [page, selectedType, selectedCategoryId]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 100
-      ) {
-        setPage((prev) => prev + 1);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      const response = await apiClient.get(url);
+      return response.data.data.content;
+    }
+  );
 
   const handleClick = (category) => {
     let type = "recent";
@@ -112,9 +64,7 @@ export default function ArticleMainPage() {
 
     setSelectedType(type);
     setSelectedCategoryId(categoryId);
-    setPage(0);
-    setHasMore(true);
-    setData([]);
+    reset();
   };
 
   useEffect(() => {
@@ -167,7 +117,7 @@ export default function ArticleMainPage() {
     <div className="p-4 max-w-[600px] w-full mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h4 className="text-lg font-bold">{formatDate}</h4>
-        {auth && <NewsCreateButton />}
+        {isAuth && <NewsCreateButton />}
       </div>
       <div
         ref={categoryRef}

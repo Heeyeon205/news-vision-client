@@ -39,10 +39,6 @@ export default function DropDownMenu({ newsId, userId }) {
     }
   };
 
-  const handleOpinion = () => {
-    alert("개발 예정");
-  };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -65,19 +61,12 @@ export default function DropDownMenu({ newsId, userId }) {
 
       {open && (
         <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg z-10">
-          {own ? (
+          {own && (
             <button
               onClick={handleEdit}
               className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
             >
               뉴스 수정
-            </button>
-          ) : (
-            <button
-              onClick={handleOpinion}
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
-            >
-              문의하기
             </button>
           )}
           <ShareButton />

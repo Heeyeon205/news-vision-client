@@ -1,36 +1,25 @@
-import ErrorAlert from "../../../utils/ErrorAlert";
 import apiClient from "../../../api/axios";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaRegHeart, FaRegComment } from "react-icons/fa";
+import { useInfiniteScroll } from "../../../utils/useInfiniteScroll";
 
 export default function ArticleList({ userImg }) {
-  const [articles, setArticles] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function loadArticleList() {
-      try {
-        const response = await apiClient.get("/api/mypage/board-list");
-        const result = response.data;
-        if (!result.success) {
-          ErrorAlert();
-          return;
-        }
-        setArticles(result.data);
-      } catch (error) {
-        ErrorAlert(error);
-      }
+  const { data, isLoading, hasMore, reset } = useInfiniteScroll(
+    async (page, size) => {
+      let url = `/api/mypage/board-list?page=${page}&size=${size}`;
+      const response = await apiClient.get(url);
+      return response.data.data.content;
     }
-    loadArticleList();
-  }, []);
+  );
 
   return (
     <div className="flex flex-col space-y-4">
-      {articles.length === 0 ? (
+      {data.length === 0 ? (
         <p>아직 작성한 게시글이 없어요.</p>
       ) : (
-        articles.map((article) => (
+        data.map((article) => (
           <div
             key={article.boardId}
             onClick={() => navigate(`/board/${article.boardId}`)}

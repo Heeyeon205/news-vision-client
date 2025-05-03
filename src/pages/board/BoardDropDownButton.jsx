@@ -23,7 +23,6 @@ export default function BoardDropDownButton({ boardId, userId }) {
     } else {
       setOwn(false);
     }
-    console.log("지금 이 글의 오너임? ", own);
   }, [logId, userId, own]);
 
   const handleClick = () => {

@@ -12,8 +12,6 @@ export default function Notice() {
         const res = await apiClient("/api/notice/open");
         const result = res.data;
         setData(result.data);
-        console.log("리졸트: ", result);
-        console.log("리졸트.data: ", result.data);
       } catch (error) {
         console.log(error);
       }

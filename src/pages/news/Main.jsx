@@ -10,7 +10,7 @@ import "swiper/css";
 
 export default function Main() {
   const logRole = useStore((state) => state.role);
-  const isAuht = logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR";
+  const isAuth = logRole === "ROLE_ADMIN" || logRole === "ROLE_CREATOR";
   const [newsList, setNewsList] = useState([]);
   const [pollList, setPollList] = useState([]);
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ export default function Main() {
 
       <div className="flex justify-between items-center mb-4">
         <h4 className="text-lg font-bold mt-5">{formatDate}</h4>
-        {isAuht && <NewsCreateButton />}
+        {isAuth && <NewsCreateButton />}
       </div>
 
       <div className="rounded shadow-md flex flex-row gap-4 my-10 p-5">
@@ -137,7 +137,7 @@ export default function Main() {
       <hr className="mt-5 mb-2 border-orange-500 border-t-2"></hr>
 
       <div className="flex justify-end mb-5">
-        {isAuht && <PollCreateButton />}
+        {isAuth && <PollCreateButton />}
       </div>
 
       {pollList.length === 0 ? (
@@ -188,8 +188,9 @@ export default function Main() {
             {pollList.map((_, i) => (
               <div
                 key={`indicator-${i}`}
-                className={`indicator w-4 h-1 rounded ${swiperIndex === i ? "bg-orange-500" : "bg-gray-400"
-                  }`}
+                className={`indicator w-4 h-1 rounded ${
+                  swiperIndex === i ? "bg-orange-500" : "bg-gray-400"
+                }`}
               ></div>
             ))}
           </div>

@@ -1,0 +1,55 @@
+import { useState, useEffect } from "react";
+
+export function useInfiniteScroll(fetchData, size = 10) {
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loadData = async () => {
+    if (isLoading || !hasMore) return;
+    setIsLoading(true);
+    try {
+      const newContent = await fetchData(page, size);
+      setData((prev) => [...prev, ...newContent]);
+      if (newContent.length < size) {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, [page]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 100
+      ) {
+        setPage((prev) => prev + 1);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const reset = () => {
+    setData([]);
+    setPage(0);
+    setHasMore(true);
+    setIsLoading(false);
+  };
+
+  return {
+    data,
+    isLoading,
+    hasMore,
+    reset,
+  };
+}

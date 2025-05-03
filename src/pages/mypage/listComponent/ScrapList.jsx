@@ -1,30 +1,24 @@
 import apiClient from "../../../api/axios";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useInfiniteScroll } from "../../../utils/useInfiniteScroll";
 
 export default function ScrapList() {
-  const [scraps, setScraps] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function loadScrapList() {
-      try {
-        const response = await apiClient.get("/api/mypage/scrap-list");
-        const result = response.data;
-        setScraps(result.data);
-      } catch (error) {
-        console(error);
-      }
+  const { data, isLoading, hasMore, reset } = useInfiniteScroll(
+    async (page, size) => {
+      let url = `/api/mypage/scrap-list?page=${page}&size=${size}`;
+      const response = await apiClient.get(url);
+      return response.data.data.content;
     }
-    loadScrapList();
-  }, []);
+  );
 
   return (
     <div className="flex flex-col space-y-4">
-      {scraps.length === 0 ? (
+      {data.length === 0 ? (
         <p>아직 스크랩한 뉴스가 없어요.</p>
       ) : (
-        scraps.map((scrap) => (
+        data.map((scrap) => (
           <div
             key={scrap.newsId}
             onClick={() => navigate(`/news/${scrap.newsId}`)}
