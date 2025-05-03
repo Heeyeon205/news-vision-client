@@ -25,12 +25,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 flex items-center justify-between  sm:flex-row flex-wrap sm:flex-nowrap ">
         <Link
           to="/"
-          className="text-2xl sm:text-3xl font-extrabold text-orange-500  mt-1 "
+          className=" text-orange-500  mt-1 text-4xl sm:text-4xl font-extrabold  "
         >
           NEWSION
         </Link>
 
-        <nav className=" w-full sm:w-[500px]  flex  justify-center sm:mr-23 mr-0  mt-10   order-2 sm:order-none sm:mt-2 space-x-4 sm:space-x-8 text-base sm:text-lg font-semibold ">
+        <nav className=" w-full sm:w-[500px]  flex  justify-center sm:mr-10 mr-0  mt-10   order-2 sm:order-none sm:mt-2 space-x-4 sm:space-x-8 text-base sm:text-lg font-semibold ">
           <Link
             to="/"
             className=" h-[32px] border-b-3 border-transparent text-black font-medium hover:text-orange-500  hover:border-orange-500 "
@@ -66,7 +66,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        <div className="mt-3 md:mt-0 flex items-center space-x-4 ">
+        <div className="mt-3 md:mt-0 flex justify-between items-center space-x-4 ">
           {userId ? (
             <>
               <NoticeButton />
@@ -75,7 +75,7 @@ export default function Header() {
           ) : (
             <button
               onClick={handleStartClick}
-              className="border border-orange-500 text-orange-500 px-4 py-1 rounded hover:bg-orange-100 transition text-base sm:text-lg font-medium"
+              className="border border-orange-500 text-orange-500 px-4 py-1 rounded hover:bg-orange-100 transition text-base sm:text-lg font-medium cursor-pointer"
             >
               뉴션 시작하기
             </button>
