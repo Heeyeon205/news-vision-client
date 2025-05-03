@@ -24,7 +24,7 @@ export default function LoginHub() {
 
       <div className="flex flex-col gap-4 w-80">
         <button
-          className="w-full border border-gray-300 hover:bg-gray-100 rounded py-3 text-sm font-medium"
+          className="w-full border border-gray-300 hover:bg-gray-100 rounded py-3 text-sm font-medium cursor-pointer"
           onClick={openModal}
         >
           뉴션 로그인

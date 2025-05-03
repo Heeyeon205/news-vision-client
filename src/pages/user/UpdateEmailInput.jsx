@@ -115,13 +115,13 @@ export default function MatchesEmailCode({
         <button
           type="button"
           onClick={authBtn}
-          className="px-4 py-2 bg-orange-500 text-white text-sm rounded-r-md hover:bg-orange-600"
+          className="px-4 py-2 bg-orange-500 text-white text-sm rounded-r-md hover:bg-orange-400 cursor-pointer"
         >
           인증하기
         </button>
       </div>
       {msg && <p className="text-xs text-red-500">{msg}</p>}
-  
+
       {/* 인증번호 입력: codeSent = true일 때만 보임 */}
       {codeSent && (
         <>
@@ -145,7 +145,7 @@ export default function MatchesEmailCode({
               <button
                 type="button"
                 onClick={authCheckBtn}
-                className="px-4 py-2 bg-orange-500 text-white text-sm rounded-r-md hover:bg-orange-600"
+                className="px-4 py-2 bg-orange-500 text-white text-sm rounded-r-md hover:bg-orange-400 cursor-pointer"
               >
                 인증확인
               </button>
@@ -160,5 +160,5 @@ export default function MatchesEmailCode({
       )}
     </div>
   );
-  
+
 }

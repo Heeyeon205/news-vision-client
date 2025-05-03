@@ -26,7 +26,7 @@ export default function JoinButton({ username, password, email, validationState 
   return (
     <button
       type="button"
-      className="w-full py-3 bg-orange-500 text-white text-sm font-bold rounded-md hover:bg-orange-600"
+      className="w-full py-3 bg-orange-500 text-white text-sm font-bold rounded-md hover:bg-orange-400 cursor-pointer"
       onClick={joinBtn}
     >
       회원가입 완료

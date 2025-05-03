@@ -65,7 +65,7 @@ export default function NewsUpdatePage() {
 
             <div className="mb-4">
               <input
-                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
                 type="text"
                 placeholder="제목을 입력하세요."
                 value={title}
@@ -74,7 +74,7 @@ export default function NewsUpdatePage() {
             </div>
             <div className="mb-4">
               <textarea
-                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 h-32"
+                className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 h-32"
                 placeholder="본문을 입력하세요"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
