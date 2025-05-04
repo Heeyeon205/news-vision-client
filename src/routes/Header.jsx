@@ -25,7 +25,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 flex items-center justify-between  sm:flex-row flex-wrap sm:flex-nowrap ">
         <Link
           to="/"
-          className=" text-orange-500  mt-1 text-4xl sm:text-4xl font-extrabold  "
+          className=" text-orange-500  mt-1 text-4xl sm:text-4xl font-black  "
         >
           NEWSION
         </Link>

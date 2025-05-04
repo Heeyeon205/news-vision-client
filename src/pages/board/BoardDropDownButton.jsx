@@ -1,15 +1,18 @@
-import { useState, useRef, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import apiClient from "../../api/axios";
-import ErrorAlert from "../../utils/ErrorAlert";
-import { useStore } from "../../store/useUserStore";
-import BoardDeleteButton from "./BoardDeleteButton";
-import ShareButton from "../../utils/ShareButton";
-import BoardReportButton from "./report/BoardReportButton";
+import { useState, useRef, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import apiClient from '../../api/axios';
+import ErrorAlert from '../../utils/ErrorAlert';
+import { useStore } from '../../store/useUserStore';
+import BoardDeleteButton from './BoardDeleteButton';
+import ShareButton from '../../utils/ShareButton';
 
-export default function BoardDropDownButton({ boardId, userId }) {
+export default function BoardDropDownButton({
+  boardId,
+  userId,
+  onReportClick,
+}) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
@@ -23,8 +26,7 @@ export default function BoardDropDownButton({ boardId, userId }) {
     } else {
       setOwn(false);
     }
-    console.log("지금 이 글의 오너임? ", own);
-  }, [logId, userId, own]);
+  }, [logId, userId]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -32,8 +34,8 @@ export default function BoardDropDownButton({ boardId, userId }) {
 
   const handleEdit = async () => {
     try {
-      await apiClient.get("/api/auth/check");
-      navigate("/board/update-form", {
+      await apiClient.get('/api/auth/check');
+      navigate('/board/update-form', {
         state: {
           boardId: Number(boardId),
         },
@@ -49,9 +51,9 @@ export default function BoardDropDownButton({ boardId, userId }) {
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -74,11 +76,15 @@ export default function BoardDropDownButton({ boardId, userId }) {
               >
                 게시글 수정
               </button>
-
               <BoardDeleteButton boardId={boardId} />
             </>
           ) : (
-            <BoardReportButton boardId={boardId} />
+            <button
+              onClick={onReportClick} // 모달 열기 함수 호출
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              신고하기
+            </button>
           )}
         </div>
       )}

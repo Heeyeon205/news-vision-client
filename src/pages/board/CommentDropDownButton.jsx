@@ -1,15 +1,16 @@
-import { useState, useRef, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import apiClient from "../../api/axios";
-import { useStore } from "../../store/useUserStore";
-import { toast } from "sonner";
-import CommentReportButton from "./report/CommentReportButton";
+import { useState, useRef, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import apiClient from '../../api/axios';
+import { useStore } from '../../store/useUserStore';
+import { toast } from 'sonner';
+import CommentReportButton from './report/CommentReportButton';
 
 export default function BoardDropDownButton({
   userId,
   commentId,
   onCommentDelete,
+  onReportClick,
 }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
@@ -30,11 +31,11 @@ export default function BoardDropDownButton({
   };
 
   const handleDelete = async () => {
-    confirm("댓글을 삭제하시겠습니까?");
+    confirm('댓글을 삭제하시겠습니까?');
     if (confirm) {
       try {
         await apiClient.delete(`/api/comments/${commentId}`);
-        toast.success("댓글 삭제 완료!");
+        toast.success('댓글 삭제 완료!');
         onCommentDelete();
       } catch (error) {
         console.log(error);
@@ -48,9 +49,9 @@ export default function BoardDropDownButton({
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -74,7 +75,12 @@ export default function BoardDropDownButton({
               </button>
             </>
           ) : (
-            <CommentReportButton commentId={commentId} />
+            <button
+              onClick={() => onReportClick(commentId)}
+              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+            >
+              신고하기
+            </button>
           )}
         </div>
       )}
