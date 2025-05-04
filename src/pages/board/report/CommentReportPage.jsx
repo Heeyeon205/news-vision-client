@@ -1,32 +1,48 @@
-import { useParams, useNavigate } from "react-router-dom";
-import apiClient from "../../../api/axios";
-import { toast } from "sonner";
+import { useNavigate } from 'react-router-dom';
+import apiClient from '../../../api/axios';
+import { toast } from 'sonner';
 
-export default function BoardReportPage() {
-  const { commentId } = useParams();
+export default function CommentReportPage({ commentId, onClose }) {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
       await apiClient.post(`/api/reports/comments/${commentId}`);
-      console.log("지금 신고접수한 댓글 아이디: ", commentId);
-      toast.success("댓글 신고 접수완료");
-      navigate(-1);
+      console.log('지금 신고접수한 댓글 아이디: ', commentId);
+      toast.success('댓글 신고 접수완료');
+      onClose();
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleCancel = () => {
-    navigate(-1);
+    onClose();
   };
 
   return (
-    <div>
-      <p>해당 댓글을 신고할까요?</p>
-      <p>신고된 댓글은 운영 정책에 따라 삭제되거나 이용이 제한될 수 있어요</p>
-      <button onClick={handleCancel}>취소</button>
-      <button onClick={handleSubmit}>확인</button>
+    <div className="fixed top-0 left-0 w-full h-full  flex justify-center items-center z-50">
+      <div className="bg-white p-6 rounded-md shadow-lg">
+        <p className="text-lg font-semibold mb-4">댓글 신고</p>
+        <p className="text-gray-600 mb-4">해당 댓글을 신고할까요?</p>
+        <p className="text-gray-600 mb-4">
+          신고된 댓글은 운영 정책에 따라 삭제되거나 이용이 제한될 수 있어요.
+        </p>
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={handleCancel}
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            취소
+          </button>
+          <button
+            onClick={handleSubmit}
+            className="bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            확인
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

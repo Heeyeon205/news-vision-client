@@ -25,7 +25,8 @@ export default function CategoryAdminPage() {
 
   // 카테고리 추가
   const handleAdd = async () => {
-    if (!newCategory.trim()) return toast.warning("카테고리 이름을 입력하세요.");
+    if (!newCategory.trim())
+      return toast.warning("카테고리 이름을 입력하세요.");
     try {
       await apiClient.post("/api/category", { name: newCategory });
       toast.success("카테고리 추가 완료");
@@ -58,7 +59,7 @@ export default function CategoryAdminPage() {
           placeholder="새 카테고리명"
           value={newCategory}
           onChange={(e) => setNewCategory(e.target.value)}
-          className="border px-3 py-2 rounded w-60 text-sm border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 h-10"
+          className="border px-3 py-2 rounded w-60 text-sm "
         />
         <button
           onClick={handleAdd}
@@ -69,18 +70,20 @@ export default function CategoryAdminPage() {
       </div>
 
       <h3 className="text-lg font-semibold mt-6">카테고리 삭제</h3>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center  gap-2">
         <CategoriesInput
           categories={categories}
           selectId={selectId}
           setSelectId={setSelectId}
         />
-        <button
-          onClick={handleDelete}
-          className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded text-sm cursor-pointer"
-        >
-          삭제
-        </button>
+        <div className="w-50 flex">
+          <button
+            onClick={handleDelete}
+            className="px-8 py-[10px] bg-orange-500 hover:bg-orange-400 text-white rounded text-sm cursor-pointer "
+          >
+            삭제
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ export default function BoardDropDownButton({
   userId,
   commentId,
   onCommentDelete,
+  onReportClick,
 }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
@@ -83,7 +84,14 @@ export default function BoardDropDownButton({
               </button>
             </>
           ) : (
-            isLog && <CommentReportButton commentId={commentId} />
+            isLog && (
+              <button
+                onClick={() => onReportClick(commentId)}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              >
+                신고하기
+              </button>
+            )
           )}
         </div>
       )}

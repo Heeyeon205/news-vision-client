@@ -7,9 +7,12 @@ import ErrorAlert from "../../utils/ErrorAlert";
 import { useStore } from "../../store/useUserStore";
 import BoardDeleteButton from "./BoardDeleteButton";
 import ShareButton from "../../utils/ShareButton";
-import BoardReportButton from "./report/BoardReportButton";
 
-export default function BoardDropDownButton({ boardId, userId }) {
+export default function BoardDropDownButton({
+  boardId,
+  userId,
+  onReportClick,
+}) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
@@ -23,7 +26,7 @@ export default function BoardDropDownButton({ boardId, userId }) {
     } else {
       setOwn(false);
     }
-  }, [logId, userId, own]);
+  }, [logId, userId]);
 
   useEffect(() => {
     if (logId) {
@@ -81,11 +84,17 @@ export default function BoardDropDownButton({ boardId, userId }) {
               >
                 게시글 수정
               </button>
-
               <BoardDeleteButton boardId={boardId} />
             </>
           ) : (
-            isLog && <BoardReportButton boardId={boardId} />
+            isLog && (
+              <button
+                onClick={onReportClick} // 모달 열기 함수 호출
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              >
+                신고하기
+              </button>
+            )
           )}
         </div>
       )}
