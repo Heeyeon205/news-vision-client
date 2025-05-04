@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useStore } from "../../store/useUserStore";
 import apiClient from "../../api/axios";
 import OtherUserFollowerModal from "./profileComponent/OtherUserFollowerModal";
 import OtherUserFollowingModal from "./profileComponent/OtherUserFollowingModal";
@@ -9,6 +10,7 @@ import OtherUserScrapList from "./listComponent/OtherUserScrapList";
 import FollowButton from "../../utils/FollowButton";
 
 export default function UserPage() {
+  const logId = useStore((state) => state.userId);
   const { userId } = useParams();
   const [role, setRole] = useState(false);
   const [userImg, setUserImg] = useState(null);
@@ -19,7 +21,7 @@ export default function UserPage() {
   const [activeTap, setActiveTap] = useState("article");
   const [icon, setIcon] = useState("");
   const [title, setTitle] = useState("");
-
+  const navigate = useNavigate();
   const [isFollowerModalOpen, setIsFollowerModalOpen] = useState(false);
   const [isFollowingModalOpen, setIsFollowingModalOpen] = useState(false);
   const [isFollow, setIsFollow] = useState(null);
@@ -27,25 +29,30 @@ export default function UserPage() {
   useEffect(() => {
     async function loadMypage() {
       try {
-        const response = await apiClient.get(`/api/mypage/${userId}`);
-        const result = response.data;
-        console.log("남의 페이지 데이터: ", result.data);
-        setRole(result.data.role);
-        setUserImg(result.data.image);
-        setNickname(result.data.nickname);
-        setFollower(result.data.followerCount);
-        setFollowing(result.data.followingCount);
-        setIntroduce(result.data.introduce);
-        setIcon(result.data.icon);
-        setTitle(result.data.title);
-        setIsFollow(result.data.followed);
-        console.log("넘겨받은 팔로우드: ", result.data.followed);
+        let response = null;
+        if (logId === userId) {
+          response = await apiClient.get("/api/auth/check");
+          navigate("/user/mypage");
+          return;
+        } else {
+          response = await apiClient.get(`/api/mypage/${userId}`);
+          const result = response.data;
+          setRole(result.data.role);
+          setUserImg(result.data.image);
+          setNickname(result.data.nickname);
+          setFollower(result.data.followerCount);
+          setFollowing(result.data.followingCount);
+          setIntroduce(result.data.introduce);
+          setIcon(result.data.icon);
+          setTitle(result.data.title);
+          setIsFollow(result.data.followed);
+        }
       } catch (error) {
         console.log(error);
       }
     }
     loadMypage();
-  }, [userId]);
+  }, [userId, logId]);
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-white p-8">

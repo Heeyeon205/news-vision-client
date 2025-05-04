@@ -3,30 +3,30 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function ScrapList({ userId }) {
-  const [scraps, setScraps] = useState([]);
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function loadScrapList() {
+    async function loadFollowingPage() {
       try {
         const response = await apiClient.get(
           `/api/mypage/scrap-list/${userId}`
         );
         const result = response.data;
-        setScraps(result.data);
+        setData(result.data.content);
       } catch (error) {
-        console(error);
+        console.error(error);
       }
     }
-    loadScrapList();
+    loadFollowingPage();
   }, [userId]);
 
   return (
     <div className="flex flex-col space-y-4">
-      {scraps.length === 0 ? (
+      {data.length === 0 ? (
         <p>아직 스크랩한 뉴스가 없어요.</p>
       ) : (
-        scraps.map((scrap) => (
+        data.map((scrap) => (
           <div
             key={scrap.newsId}
             onClick={() => navigate(`/news/${scrap.newsId}`)}

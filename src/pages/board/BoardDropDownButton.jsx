@@ -13,9 +13,9 @@ export default function BoardDropDownButton({ boardId, userId }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
-
   const [own, setOwn] = useState(false);
   const logId = useStore((state) => state.userId);
+  const [isLog, setLog] = useState(false);
 
   useEffect(() => {
     if (logId === userId) {
@@ -24,6 +24,14 @@ export default function BoardDropDownButton({ boardId, userId }) {
       setOwn(false);
     }
   }, [logId, userId, own]);
+
+  useEffect(() => {
+    if (logId) {
+      setLog(true);
+    } else {
+      setLog(false);
+    }
+  }, [logId]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -77,7 +85,7 @@ export default function BoardDropDownButton({ boardId, userId }) {
               <BoardDeleteButton boardId={boardId} />
             </>
           ) : (
-            <BoardReportButton boardId={boardId} />
+            isLog && <BoardReportButton boardId={boardId} />
           )}
         </div>
       )}

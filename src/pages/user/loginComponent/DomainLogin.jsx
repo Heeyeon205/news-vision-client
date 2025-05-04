@@ -12,6 +12,7 @@ function DomainLogin({ closeModal }) {
 
   const loginBtn = async (e) => {
     e.preventDefault();
+    if (username === "" || password === "") return;
     try {
       const response = await apiClient.post("/api/auth/login", {
         username,

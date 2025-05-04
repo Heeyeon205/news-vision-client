@@ -16,6 +16,7 @@ export default function BoardDropDownButton({
 
   const [own, setOwn] = useState(false);
   const logId = useStore((state) => state.userId);
+  const [isLog, setLog] = useState(false);
 
   useEffect(() => {
     if (logId === userId) {
@@ -24,6 +25,14 @@ export default function BoardDropDownButton({
       setOwn(false);
     }
   }, [logId, userId]);
+
+  useEffect(() => {
+    if (logId) {
+      setLog(true);
+    } else {
+      setLog(false);
+    }
+  }, [logId]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -74,7 +83,7 @@ export default function BoardDropDownButton({
               </button>
             </>
           ) : (
-            <CommentReportButton commentId={commentId} />
+            isLog && <CommentReportButton commentId={commentId} />
           )}
         </div>
       )}

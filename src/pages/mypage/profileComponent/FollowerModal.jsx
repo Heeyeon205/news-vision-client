@@ -3,7 +3,7 @@ import apiClient from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
 
 export default function FollowerModal({ onClose }) {
-  const [followerList, setFollowerList] = useState([]);
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -11,7 +11,8 @@ export default function FollowerModal({ onClose }) {
       try {
         const response = await apiClient.get("/api/mypage/follower-list");
         const result = response.data;
-        setFollowerList(result.data);
+        setData(result.data.content);
+        console.log("팔로워 모달 오픈: ", result.data.content);
       } catch (error) {
         console.error(error);
       }
@@ -24,16 +25,16 @@ export default function FollowerModal({ onClose }) {
       <div className="bg-white p-6 rounded-lg w-80 relative max-h-[500px] overflow-y-scroll">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-bold">팔로워</h3>
-          <span>{followerList.length}</span>
+          <span>{data.length}</span>
           <button onClick={onClose} className="text-gray-500 text-lg">
             ✕
           </button>
         </div>
         <hr className="mb-4" />
-        {followerList.length === 0 ? (
+        {data.length === 0 ? (
           <p>팔로워가 없습니다.</p>
         ) : (
-          followerList.map((follower) => (
+          data.map((follower) => (
             <div key={follower.id} className="flex items-center space-x-4 mb-4">
               <img
                 src={follower.image}
