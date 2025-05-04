@@ -43,7 +43,7 @@ export default function Topbutton() {
 
   return (
     <button
-      className="w-[40px] h-[40px] bg-orange-500 z-50 rounded-full text-white hover:bg-orange-400 right-5 xl:right-90 fixed"
+      className="w-[40px] h-[40px] bg-orange-500 z-50 rounded-full text-white hover:bg-orange-400 right-5 xl:right-90 fixed cursor-pointer"
       style={{ bottom: `${bottomOffset}px` }}
       onClick={handleClick}
     >

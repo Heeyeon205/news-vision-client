@@ -58,7 +58,7 @@ export default function CategoryAdminPage() {
           placeholder="새 카테고리명"
           value={newCategory}
           onChange={(e) => setNewCategory(e.target.value)}
-          className="border px-3 py-2 rounded w-60 text-sm"
+          className="border px-3 py-2 rounded w-60 text-sm border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 h-10"
         />
         <button
           onClick={handleAdd}

@@ -32,7 +32,7 @@ export default function SocialLoginButton({ provider, children, className = "" }
   return (
     <button
       onClick={handleLogin}
-      className={`w-full flex items-center justify-center border border-gray-300 rounded-md py-3 px-4 text-sm font-medium ${className}`}
+      className={`w-full flex items-center justify-center border border-gray-300 rounded-md py-3 px-4 text-sm font-medium cursor-pointer ${className}`}
     >
       {IconComponent && (
         <IconComponent

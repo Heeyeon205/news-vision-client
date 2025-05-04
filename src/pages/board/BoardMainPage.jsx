@@ -45,7 +45,7 @@ export default function BoardMainPage() {
         </div>
       )}
 
-      <hr className="mb-4" />
+      <hr className="mb-4 border-orange-500 border-t-2" />
 
       {data.length === 0 ? (
         <p className="text-center text-gray-400">

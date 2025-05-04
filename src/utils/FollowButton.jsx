@@ -36,14 +36,14 @@ export default function FollowButton({ targetId, followed }) {
         logId !== targetId &&
         (isFollow ? (
           <button
-            className="text-orange-600 text-sm font-medium hover:underline"
+            className="text-orange-600 text-sm font-medium hover:underline cursor-pointer"
             onClick={handleClick}
           >
             팔로잉
           </button>
         ) : (
           <button
-            className="text-orange-400 text-sm font-medium hover:underline"
+            className="text-orange-400 text-sm font-medium hover:underline cursor-pointer"
             onClick={handleClick}
           >
             팔로우

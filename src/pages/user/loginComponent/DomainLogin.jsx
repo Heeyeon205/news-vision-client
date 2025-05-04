@@ -45,14 +45,14 @@ function DomainLogin({ closeModal }) {
       </p>
       <form className="flex flex-col w-72 space-y-4" onSubmit={loginBtn}>
         <input
-          className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500"
+          className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
           type="text"
           placeholder="아이디를 입력해 주세요."
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500"
+          className="px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
           type="password"
           placeholder="비밀번호를 입력해 주세요."
           value={password}
@@ -60,7 +60,7 @@ function DomainLogin({ closeModal }) {
         />
         <button
           type="submit"
-          className="py-3 bg-orange-500 text-white text-sm font-bold rounded-md hover:bg-orange-600"
+          className="py-3 bg-orange-500 text-white text-sm font-bold rounded-md hover:bg-orange-400 cursor-pointer"
         >
           로그인
         </button>
@@ -68,7 +68,7 @@ function DomainLogin({ closeModal }) {
 
       <button
         onClick={goToFindPassword}
-        className="mt-4 text-sm text-orange-500 hover:underline"
+        className="mt-4 text-sm text-orange-500 hover:underline cursor-pointer"
       >
         비밀번호를 잊으셨나요?
       </button>

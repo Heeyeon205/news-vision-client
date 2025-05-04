@@ -53,7 +53,7 @@ export default function FindPassword() {
         <div className="flex justify-center mt-6">
           <button
             onClick={handleSubmit}
-            className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-5 py-2 rounded"
+            className="bg-orange-500 hover:bg-orange-400 text-white text-sm px-5 py-2 rounded cursor-pointer"
           >
             비밀번호 재설정
           </button>

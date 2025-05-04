@@ -34,7 +34,7 @@ export default function NewsUpdateButton({
 
   return (
     <button
-      className="bg-orange-500 text-white font-bold px-4 py-2 rounded hover:bg-orange-600 cursor-pointer"
+      className="bg-orange-500 text-white font-bold px-4 py-2 rounded hover:bg-orange-400 cursor-pointer"
       onClick={handleClick}
     >
       수정

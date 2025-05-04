@@ -60,7 +60,7 @@ export default function PasswordInput({
       >
       <input
         type="password"
-        className="mt-1 block w-80 px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500"
+        className="mt-1 block w-80 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
         placeholder="8자 이상 영문 대문자 특수문자를 포함"
         value={password}
         readOnly={readOnly}
@@ -76,7 +76,7 @@ export default function PasswordInput({
       >
       <input
         type="password"
-        className="mt-1 block w-80 px-3 py-2  border border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500"
+        className="mt-1 block w-80 px-3 py-2  border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
         placeholder="비밀번호를 다시 입력하세요"
         value={checkPassword}
         readOnly={readOnly}

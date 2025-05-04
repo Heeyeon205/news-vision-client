@@ -93,7 +93,7 @@ export default function BoardDetailPage() {
             setLikeCount={setLikeCount}
           />
           <div className="flex items-center gap-1">
-            <FaRegComment />
+            <FaRegComment className="w-5 h-5 text-gray-500" />
             <span>{commentCount}</span>
           </div>
         </div>
