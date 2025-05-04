@@ -60,11 +60,11 @@ export default function NewsDetail() {
         <span> 읽음 {news.view}</span>
       </div>
       <div className="mt-7 flex">
-        <div className="flex-shrink-0 w-10 h-10 mr-2">
+        <div className="flex-shrink-0 w-10 h-10 mr-2 rounded-full">
           <img
             src={news.profileImage}
             alt="유저 프로필"
-            className="rounded-full"
+            className="w-10 h-10 rounded-full"
           />
         </div>
         <div className="flex-1 flex flex-col">
