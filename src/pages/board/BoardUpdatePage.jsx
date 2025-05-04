@@ -58,7 +58,7 @@ export default function BoardUpdatePage() {
         onChange={(e) => setContent(e.target.value)}
         value={content}
         rows={7}
-        maxLength={299}
+        maxLength={300}
         className="w-full border border-gray-300 p-3 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-orange-400 h-72"
       />
       <div className="text-right text-xs text-gray-400 mt-1">

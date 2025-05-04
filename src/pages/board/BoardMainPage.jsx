@@ -20,9 +20,10 @@ export default function BoardMainPage() {
         `/api/board?page=${page}&size=${size}`
       );
       return response.data.data.content;
-    }
+    },
+    10,
+    "boardId"
   );
-
   return (
     <div className="max-w-xl mx-auto p-4">
       <div className="flex justify-between items-center mb-3">
@@ -70,7 +71,7 @@ export default function BoardMainPage() {
               </div>
             </div>
 
-            <p className="text-sm text-gray-800 whitespace-pre-line mb-3">
+            <p className="text-sm break-words text-gray-800 whitespace-pre-line mb-3 ">
               {board.content}
             </p>
             {board.image && (

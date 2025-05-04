@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useInfiniteScroll(fetchData, size = 10) {
+export function useInfiniteScroll(fetchData, size = 10, uniqueKey = "id") {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
@@ -12,9 +12,9 @@ export function useInfiniteScroll(fetchData, size = 10) {
     try {
       const newContent = await fetchData(page, size);
       setData((prev) => {
-        const existingIds = new Set(prev.map((item) => item.id));
+        const existingIds = new Set(prev.map((item) => item[uniqueKey]));
         const filteredNew = newContent.filter(
-          (item) => !existingIds.has(item.id)
+          (item) => !existingIds.has(item[uniqueKey])
         );
         return [...prev, ...filteredNew];
       });

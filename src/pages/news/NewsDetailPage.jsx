@@ -6,6 +6,7 @@ import ScrapButton from "./ScrapButton";
 import DropDownMenu from "./DropDownMenu";
 import FollowButton from "../../utils/FollowButton";
 import { useGlobalStore } from "../../store/useGlobalStore";
+import { useStore } from "../../store/useUserStore";
 
 export default function NewsDetail() {
   const { id } = useParams();
@@ -16,10 +17,10 @@ export default function NewsDetail() {
   const [likeCount, setLikeCount] = useState(0);
   const [isScrap, setIsScrap] = useState(false);
   const [isFollow, setIsFollow] = useState(false);
-
   const setLoading = useGlobalStore((state) => state.setLoading);
-
+  const logId = useStore((state) => state.userId);
   const navigate = useNavigate();
+  const own = logId === userId;
 
   useEffect(() => {
     setLoading(true);
@@ -71,7 +72,11 @@ export default function NewsDetail() {
           <div className="flex items-center">
             <span
               className="font-medium text-gray-800 mr-1 cursor-pointer"
-              onClick={() => navigate(`/userPage/${userId}`)}
+              onClick={() => {
+                own
+                  ? navigate("/user/mypage")
+                  : navigate(`/userPage/${userId}`);
+              }}
             >
               {news.nickname}
             </span>
@@ -87,7 +92,9 @@ export default function NewsDetail() {
       </div>
       <div className="mt-4 border-b border-gray-300"></div>
       <div className="mt-6 text-gray-700 text-lg leading-relaxed font-noto-sans">
-        <p className="whitespace-pre-line tracking-normal">{news.content}</p>
+        <p className="whitespace-pre-line tracking-normal break-words">
+          {news.content}
+        </p>
       </div>
       <div className="mt-6 flex items-center justify-between">
         <div className="flex items-center space-x-2 ">

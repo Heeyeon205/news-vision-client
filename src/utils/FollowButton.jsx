@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import apiClient from "../api/axios";
 import { toast } from "sonner";
 import { useStore } from "../store/useUserStore";
@@ -6,6 +6,10 @@ import { useStore } from "../store/useUserStore";
 export default function FollowButton({ targetId, followed }) {
   const logId = useStore((state) => state.userId);
   const [isFollow, setIsFollow] = useState(followed);
+
+  useEffect(() => {
+    setIsFollow(followed);
+  }, [followed]);
 
   const handleClick = async () => {
     if (!logId) {
@@ -18,10 +22,10 @@ export default function FollowButton({ targetId, followed }) {
       let res;
       if (isFollow) {
         res = await apiClient.delete(`/api/follow/${targetId}`);
-        toast.success("팔로우 성공!");
+        toast.success("팔로우 취소");
       } else {
         res = await apiClient.post(`/api/follow/${targetId}`);
-        toast.success("팔로우 취소");
+        toast.success("팔로우 성공!");
       }
       const result = res.data;
       setIsFollow(result.data);

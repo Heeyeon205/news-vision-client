@@ -15,6 +15,10 @@ export default function BoardCreateSubmit({
       toast.warning("카테고리를 선택해 주세요");
       return;
     }
+    if (content.length < 30) {
+      toast.warning("본문 내용이 너무 짧습니다. 최소 30자 이상 작성해 주세요.");
+      return;
+    }
     const formData = new FormData();
     formData.append("image", image);
     formData.append("content", content);

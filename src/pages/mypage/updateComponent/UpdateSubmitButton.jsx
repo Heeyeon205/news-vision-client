@@ -19,6 +19,7 @@ export default function UpdateSubmitButton({
 
   const HandleSubmit = async () => {
     try {
+      console.log("인트로듀스: ", introduce);
       await axios.put(`/api/user/${userId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -31,5 +32,12 @@ export default function UpdateSubmitButton({
     }
   };
 
-  return <button onClick={HandleSubmit} className="px-4 py-2 bg-orange-500 text-white text-sm rounded-md hover:bg-orange-400 cursor-pointer">완료</button>;
+  return (
+    <button
+      onClick={HandleSubmit}
+      className="px-4 py-2 bg-orange-500 text-white text-sm rounded-md hover:bg-orange-400 cursor-pointer"
+    >
+      완료
+    </button>
+  );
 }

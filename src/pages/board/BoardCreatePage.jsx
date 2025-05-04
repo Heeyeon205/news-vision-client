@@ -50,7 +50,7 @@ export default function BoardCreatePage() {
         />
         <div className="flex-1">
           <textarea
-            className="w-full border border-gray-300 p-3 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-orange-400 h-72"
+            className="w-full break-words border border-gray-300 p-3 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-orange-400 h-72"
             rows={7}
             maxLength={300}
             value={content}

@@ -7,9 +7,9 @@ import "./PollDetail.css";
 import FollowButton from "../../utils/FollowButton";
 
 export default function PollDetailPage() {
+  const navigate = useNavigate();
   const logId = useStore((state) => state.userId);
   const { pollId } = useParams();
-  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [nickname, setNickname] = useState("");
   const [createdAt, setCreatedAt] = useState("");
@@ -42,6 +42,8 @@ export default function PollDetailPage() {
       setTotalVotes(
         result.data.pollOptions.reduce((sum, opt) => sum + opt.count, 0)
       );
+      console.log("서버에서 온 팔로우 불리언 값: ", result.data.followed);
+      console.log("이스 팔로우: ", isFollow);
     };
     loadData();
   }, [pollId]);
@@ -104,7 +106,6 @@ export default function PollDetailPage() {
             <span className="mx-0.5 text-xs text-gray-500">{badgeTitle}</span>
           )}
         </div>
-
         <FollowButton targetId={userId} followed={isFollow} />
       </div>
 
@@ -112,43 +113,28 @@ export default function PollDetailPage() {
 
       <p className="pt-10 text-2xl font-bold text-center mb-[60px]">{title}</p>
       {options.map((option) => (
-        <div className="optionBox mb-5">
-          <div key={option.id}>
-            {isVote ? (
-              <div className="mx-13">
-                <p className="mb-2">{option.content}</p>
-                <div className="flex items-center gap-2">
-                  <progress
-                    max={totalVotes}
-                    value={option.count}
-                    className="flex-8 voted-progress"
-                  ></progress>
-                  <span className="flex-1 text-center border border-orange-400 text-orange-400 font-medium text-sm rounded-full py-1">
-                    {option.count}표
-                  </span>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="mx-13">
-                  <p className="mb-2">{option.content}</p>
-                  <div className="flex items-center gap-2">
-                    <progress
-                      max={totalVotes}
-                      value={option.count}
-                      className="flex-8 default-progress"
-                    ></progress>
-                    <span
-                      className={`flex-1 text-center flex-1 text-center bg-orange-100 text-orange-700 font-medium text-sm rounded-full py-1
-                        ${!isVote ? "cursor-pointer hover:bg-orange-200" : ""}`}
-                      onClick={() => !isVote && handleClick(option.id)}
-                    >
-                      {option.count}표
-                    </span>
-                  </div>
-                </div>
-              </>
-            )}
+        <div key={option.id} className="optionBox mb-5">
+          <div className="mx-13">
+            <p className="mb-2">{option.content}</p>
+            <div className="flex items-center gap-2">
+              <progress
+                max={totalVotes}
+                value={option.count}
+                className={`flex-8 ${
+                  isVote ? "voted-progress" : "default-progress"
+                }`}
+              ></progress>
+              <span
+                className={`flex-1 text-center bg-orange-100 text-orange-700 font-medium text-sm rounded-full py-1 ${
+                  !isVote ? "cursor-pointer hover:bg-orange-200" : ""
+                }`}
+                onClick={() => {
+                  if (!isVote) handleClick(option.id);
+                }}
+              >
+                {option.count}표
+              </span>
+            </div>
           </div>
         </div>
       ))}

@@ -65,36 +65,36 @@ export default function BoardDropDownButton({
   }, []);
 
   return (
-    <div className="relative inline-block" ref={menuRef}>
-      <FontAwesomeIcon
-        icon={faEllipsisVertical}
-        onClick={handleClick}
-        className="cursor-pointer"
-      />
+    isLog && (
+      <div className="relative inline-block" ref={menuRef}>
+        <FontAwesomeIcon
+          icon={faEllipsisVertical}
+          onClick={handleClick}
+          className="cursor-pointer"
+        />
 
-      {open && (
-        <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg z-10">
-          {own ? (
-            <>
-              <button
-                onClick={handleDelete}
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              >
-                댓글 삭제
-              </button>
-            </>
-          ) : (
-            isLog && (
+        {open && (
+          <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg z-10">
+            {own ? (
+              <>
+                <button
+                  onClick={handleDelete}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  댓글 삭제
+                </button>
+              </>
+            ) : (
               <button
                 onClick={() => onReportClick(commentId)}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               >
                 신고하기
               </button>
-            )
-          )}
-        </div>
-      )}
-    </div>
+            )}
+          </div>
+        )}
+      </div>
+    )
   );
 }

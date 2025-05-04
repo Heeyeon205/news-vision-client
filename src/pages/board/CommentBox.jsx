@@ -13,7 +13,7 @@ export default function CommentBox({
   const handleClick = async () => {
     if (content === "") return;
     if (content.length > 50) {
-      toast.warning("댓글이 너무 깁니다. 최대 50자까지 작성할 수 있습니다.");
+      toast.warning("댓글이 너무 깁니다. 최대 100자까지 작성할 수 있습니다.");
     }
     try {
       await apiClient.post(`/api/comments/boards/${boardId}`, {
@@ -44,16 +44,21 @@ export default function CommentBox({
       <input
         type="text"
         value={content}
-        onChange={(e) => setContent(e.target.value)}
+        onChange={(e) => {
+          const trimmed = e.target.value.slice(0, 100);
+          setContent(trimmed);
+        }}
         placeholder="댓글을 입력하세요"
-        className="flex-1 text-sm px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400"
+        className="flex-1 break-words text-sm px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-400"
       />
-      <button
-        type="submit"
-        className="text-sm px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-full cursor-pointer"
-      >
-        등록
-      </button>
+      {content.length > 0 && (
+        <button
+          type="submit"
+          className="text-sm px-4 py-2 bg-orange-500 hover:bg-orange-400 text-white rounded-full cursor-pointer"
+        >
+          등록
+        </button>
+      )}
     </form>
   );
 }

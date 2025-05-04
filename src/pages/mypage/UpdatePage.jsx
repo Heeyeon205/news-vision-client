@@ -22,6 +22,7 @@ export default function UpdatePage() {
   useEffect(() => {
     async function loadUpdatePage() {
       try {
+        console.log("인트로듀스: ", introduce);
         const response = await apiClient.get(`/api/user/${userId}`);
         const result = response.data;
         setImage(result.data.image);
