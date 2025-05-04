@@ -12,9 +12,9 @@ export function useInfiniteScroll(fetchData, size = 10) {
     try {
       const newContent = await fetchData(page, size);
       setData((prev) => {
-        const existingIds = new Set(prev.map((item) => item.boardId));
+        const existingIds = new Set(prev.map((item) => item.id));
         const filteredNew = newContent.filter(
-          (item) => !existingIds.has(item.boardId)
+          (item) => !existingIds.has(item.id)
         );
         return [...prev, ...filteredNew];
       });

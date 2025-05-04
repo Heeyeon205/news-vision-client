@@ -1,27 +1,19 @@
-import { useEffect, useState } from "react";
 import apiClient from "../../api/axios";
 import { useNavigate } from "react-router-dom";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
-import { faCommentDots } from '@fortawesome/free-solid-svg-icons';
+import { useInfiniteScroll } from "../../utils/useInfiniteScroll";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 
 export default function Notice() {
-  const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const res = await apiClient("/api/notice/open");
-        const result = res.data;
-        setData(result.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    loadData();
-  }, []);
+  const { data, isLoading, hasMore, reset } = useInfiniteScroll(
+    async (page, size) => {
+      let url = `/api/notice/open?page=${page}&size=${size}`;
+      const response = await apiClient.get(url);
+      return response.data.data.content;
+    }
+  );
 
   const handleClick = async (url, id) => {
     try {
@@ -49,31 +41,34 @@ export default function Notice() {
       ) : (
         <div>
           {data.map((notice) => (
-            <div class="flex items-center bg-white p-2  rounded shadow-sm border-1 border-none">
+            <div
+              className="flex items-center bg-white p-2  rounded shadow-sm border-1 border-none"
+              key={notice.id}
+            >
               <img
                 src={notice.image}
                 alt="프로필"
                 className="w-8 h-8 mt-1 ml-2"
               ></img>
-              <div class="ml-3 flex-1 ">
-                <div class="flex items-center ">
-                  <p onClick={() => handleMove(notice.userId)}>
+              <div className="ml-3 flex-1 ">
+                <div className="flex items-center">
+                  <p
+                    className="cursor-pointer"
+                    onClick={() => handleMove(notice.userId)}
+                  >
                     {notice.nickname} 님이{" "}
                   </p>
                   <p className="text-gray-400 text-sm m-1">
                     {notice.createdAt}
                   </p>
                 </div>
-                <p className="mt-[-6px] text-sm">{notice.title}</p>
+                <p
+                  className="mt-[-6px] text-sm cursor-pointer"
+                  onClick={() => handleClick(notice.url, notice.id)}
+                >
+                  {notice.title}
+                </p>
               </div>
-              <a
-                className="mr-2"
-                href={notice.url}
-                alt="알림 URL"
-                onClick={(e) => handleClick(e.target, notice.id)}
-              >
-                <FontAwesomeIcon icon={faLink} />
-              </a>
             </div>
           ))}
         </div>
