@@ -6,7 +6,12 @@ export default function Footer() {
     >
       <div className="w-full  md:w-150 ml-0 md:ml-5 mb-4 md:mb-0 text-center md:text-left ">
         {" "}
-        <h2 className="text-2xl font-bold mb-4 text-black">NEWSION</h2>
+        <h2
+          className="text-2xl font-bold mb-4 text-black"
+          style={{ fontFamily: "'Anton', sans-serif" }}
+        >
+          NEWSION
+        </h2>
         <p className="text-gray-500 mb-2">
           ㈜뉴션 대표: 2조 | 사업자 등록번호: 632-51-02355 | 통신판매업
           <br />
@@ -15,7 +20,12 @@ export default function Footer() {
       </div>
 
       <div className="w-full sm:w-100 h-auto ml-0 sm:ml-5 flex flex-col  items-center mt-1 ">
-        <p className="text-black text-xl font-bold">CONTACT US</p>
+        <p
+          className="text-black text-xl font-bold"
+          style={{ fontFamily: "'Anton', sans-serif" }}
+        >
+          CONTACT US
+        </p>
         <div className="flex">
           <a
             href="https://github.com/Heeyeon205/newsion-server.git"

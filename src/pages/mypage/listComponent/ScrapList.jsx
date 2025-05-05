@@ -10,7 +10,9 @@ export default function ScrapList() {
       let url = `/api/mypage/scrap-list?page=${page}&size=${size}`;
       const response = await apiClient.get(url);
       return response.data.data.content;
-    }
+    },
+    10,
+    "newsId"
   );
 
   return (
@@ -38,6 +40,14 @@ export default function ScrapList() {
             </div>
           </div>
         ))
+      )}
+
+      {isLoading && <p className="text-center text-gray-400">로딩 중...</p>}
+
+      {!hasMore && data.length > 0 && (
+        <p className="text-center text-gray-400 mt-4">
+          더 이상 스크랩이 없습니다.
+        </p>
       )}
     </div>
   );

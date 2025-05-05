@@ -12,7 +12,6 @@ export default function FollowerModal({ onClose }) {
         const response = await apiClient.get("/api/mypage/follower-list");
         const result = response.data;
         setData(result.data.content);
-        console.log("팔로워 모달 오픈: ", result.data.content);
       } catch (error) {
         console.error(error);
       }

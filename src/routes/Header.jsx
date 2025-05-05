@@ -1,11 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useStore } from '../store/useUserStore';
-import UserDropDownButton from './headerComponamt/UserDropDownButton';
+import { Link, useNavigate } from "react-router-dom";
+import { useStore } from "../store/useUserStore";
+import UserDropDownButton from "./headerComponamt/UserDropDownButton";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import NoticeButton from '../pages/notice/NoticeButton';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import NoticeButton from "../pages/notice/NoticeButton";
 
 library.add(faMagnifyingGlass);
 
@@ -14,18 +14,19 @@ export default function Header() {
   const userId = useStore((state) => state.userId);
 
   const handleStartClick = () => {
-    navigate('/user/login');
+    navigate("/user/login");
   };
 
   return (
     <header
       className="w-full  shadow-sm"
-      style={{ fontFamily: 'AppleSDGothicNeoL' }}
+      style={{ fontFamily: "AppleSDGothicNeoL" }}
     >
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 flex items-center justify-between  sm:flex-row flex-wrap sm:flex-nowrap ">
         <Link
           to="/"
-          className=" text-orange-500  mt-1 text-4xl sm:text-4xl font-black  "
+          className=" text-orange-500  mt-1 text-3xl sm:text-3xl font-black  "
+          style={{ fontFamily: "'Anton', sans-serif" }}
         >
           NEWSION
         </Link>

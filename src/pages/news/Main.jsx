@@ -69,7 +69,7 @@ export default function Main() {
           </div>
         </div>
       </div>
-      <style jsx>{`
+      <style>{`
         @keyframes slide-up {
           from {
             transform: translateY(100%);
@@ -143,7 +143,7 @@ export default function Main() {
       {pollList.length === 0 ? (
         <p>진행중인 투표가 없습니다.</p>
       ) : (
-        <div className="pollContainer rounded shadow-md p-3 border">
+        <div className="pollContainer rounded shadow-md p-3 border border-orange-400">
           <h4 className="text-xl font-bold my-3 ml-3">
             당신의 의견을 들려주세요!
           </h4>

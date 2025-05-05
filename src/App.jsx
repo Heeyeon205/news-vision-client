@@ -1,55 +1,55 @@
-import { useGlobalStore } from './store/useGlobalStore';
-import Loading from './utils/Loading';
-import NotificationSSE from './utils/NotificationSSE';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useStore } from './store/useUserStore';
+import { useGlobalStore } from "./store/useGlobalStore";
+import Loading from "./utils/Loading";
+import NotificationSSE from "./utils/NotificationSSE";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useStore } from "./store/useUserStore";
 
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 
-import Layout from './routes/Layout';
+import Layout from "./routes/Layout";
 
-import Login from './pages/user/Login';
-import DomainLogin from './pages/user/loginComponent/DomainLogin';
-import Authentication from './pages/user/Authentication';
-import FindPassword from './pages/user/FindPassword';
-import UpdatePassword from './pages/user/UpdatePassword';
-import Join from './pages/user/Join';
+import Login from "./pages/user/Login";
+import DomainLogin from "./pages/user/loginComponent/DomainLogin";
+import Authentication from "./pages/user/Authentication";
+import FindPassword from "./pages/user/FindPassword";
+import UpdatePassword from "./pages/user/UpdatePassword";
+import Join from "./pages/user/Join";
 
-import Mypage from './pages/mypage/Mypage';
-import UserPage from './pages/mypage/UserPage';
-import UpdatePage from './pages/mypage/UpdatePage';
-import FollowerPage from './pages/mypage/profileComponent/FollowerPage';
-import FollowingPage from './pages/mypage/profileComponent/FollowingPage';
+import Mypage from "./pages/mypage/Mypage";
+import UserPage from "./pages/mypage/UserPage";
+import UpdatePage from "./pages/mypage/UpdatePage";
+import FollowerPage from "./pages/mypage/profileComponent/FollowerPage";
+import FollowingPage from "./pages/mypage/profileComponent/FollowingPage";
 
-import Notice from './pages/notice/Notice';
+import Notice from "./pages/notice/Notice";
 
-import Main from './pages/news/Main';
-import NewsDetail from './pages/news/NewsDetailPage';
-import NewsCreatePage from './pages/news/NewsCreatePage';
-import NewsCreateNewsPage from './pages/news/NewsCreateNewsPage';
-import NewsUpdatePage from './pages/news/NewsUpdatePage';
+import Main from "./pages/news/Main";
+import NewsDetail from "./pages/news/NewsDetailPage";
+import NewsCreatePage from "./pages/news/NewsCreatePage";
+import NewsCreateNewsPage from "./pages/news/NewsCreateNewsPage";
+import NewsUpdatePage from "./pages/news/NewsUpdatePage";
 
-import PollDetailPage from './pages/poll/PollDetailPage';
-import PollCreatePage from './pages/poll/PollCreatePage';
+import PollDetailPage from "./pages/poll/PollDetailPage";
+import PollCreatePage from "./pages/poll/PollCreatePage";
 
-import ArticleMainPage from './pages/article/ArticleMainPage';
+import ArticleMainPage from "./pages/article/ArticleMainPage";
 
-import InfoPage from './pages/ai/InfoPage';
-import GptMainPage from './pages/ai/GptMainPage';
+import InfoPage from "./pages/ai/InfoPage";
+import GptMainPage from "./pages/ai/GptMainPage";
 
-import BoardMainPage from './pages/board/BoardMainPage';
-import BoardDetailPage from './pages/board/BoardDetailPage';
-import BoardCreatePage from './pages/board/BoardCreatePage';
-import BoardUpdatePage from './pages/board/BoardUpdatePage';
-import BoardReportPage from './pages/board/report/BoaredReportPage';
-import CommentReportPage from './pages/board/report/CommentReportPage';
+import BoardMainPage from "./pages/board/BoardMainPage";
+import BoardDetailPage from "./pages/board/BoardDetailPage";
+import BoardCreatePage from "./pages/board/BoardCreatePage";
+import BoardUpdatePage from "./pages/board/BoardUpdatePage";
+import BoardReportPage from "./pages/board/report/BoaredReportPage";
+import CommentReportPage from "./pages/board/report/CommentReportPage";
 
-import SearchMainPage from './pages/search/SearchMainPage';
+import SearchMainPage from "./pages/search/SearchMainPage";
 
-import AdminMainPage from './pages/admin/AdminMainPage';
-import CategoryAdminPage from './pages/admin/CategoryAdminPage';
-import BoardReportAdminPage from './pages/admin/BoardReportAdminPage';
-import CommentReportAdminPage from './pages/admin/CommentReportAdminPage';
+import AdminMainPage from "./pages/admin/AdminMainPage";
+import CategoryAdminPage from "./pages/admin/CategoryAdminPage";
+import BoardReportAdminPage from "./pages/admin/BoardReportAdminPage";
+import CommentReportAdminPage from "./pages/admin/CommentReportAdminPage";
 
 function App() {
   const isLoading = useGlobalStore((state) => state.isLoading);

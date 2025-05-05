@@ -38,7 +38,7 @@ export function useInfiniteScroll(fetchData, size = 10, uniqueKey = "id") {
         window.innerHeight + window.scrollY >=
         document.body.offsetHeight - 100
       ) {
-        setPage((prev) => prev + 1);
+        setPage((prevPage) => prevPage + 1);
       }
     };
     window.addEventListener("scroll", handleScroll);

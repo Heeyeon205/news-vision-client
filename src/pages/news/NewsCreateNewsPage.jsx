@@ -106,13 +106,13 @@ export default function NewsCreateNewsPage() {
             type="text"
             placeholder="제목을 입력하세요."
             onChange={(e) => {
-              const trimmed = e.target.value.slice(0, 15);
+              const trimmed = e.target.value.slice(0, 30);
               setTitle(trimmed);
             }}
           />
         </div>
         <div className="text-right text-xs text-gray-400 mb-3">
-          {title.length}/15
+          {title.length}/30
         </div>
 
         <div className="mb-4">
@@ -122,12 +122,12 @@ export default function NewsCreateNewsPage() {
             placeholder="본문을 입력하세요"
             defaultValue={""}
             onChange={(e) => {
-              const trimmed = e.target.value.slice(0, 1000);
+              const trimmed = e.target.value.slice(0, 3000);
               setContent(trimmed);
             }}
           ></textarea>
           <div className="text-right text-xs text-gray-400 mt-1">
-            {content.length}/1000
+            {content.length}/3000
           </div>
           <br />
         </div>

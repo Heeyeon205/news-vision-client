@@ -104,6 +104,14 @@ export default function BoardMainPage() {
           </div>
         </div>
       )}
+
+      {isLoading && <p className="text-center text-gray-400">로딩 중...</p>}
+
+      {!hasMore && data.length > 0 && (
+        <p className="text-center text-gray-400 mt-4">
+          더 이상 게시글이 없습니다.
+        </p>
+      )}
     </div>
   );
 }

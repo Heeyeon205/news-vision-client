@@ -10,7 +10,9 @@ export default function NewsList() {
       let url = `/api/mypage/news-list?page=${page}&size=${size}`;
       const response = await apiClient.get(url);
       return response.data.data.content;
-    }
+    },
+    10,
+    "newsId"
   );
 
   return (
@@ -38,6 +40,13 @@ export default function NewsList() {
             </div>
           </div>
         ))
+      )}
+      {isLoading && <p className="text-center text-gray-400">로딩 중...</p>}
+
+      {!hasMore && data.length > 0 && (
+        <p className="text-center text-gray-400 mt-4">
+          더 이상 뉴스가 없습니다.
+        </p>
       )}
     </div>
   );

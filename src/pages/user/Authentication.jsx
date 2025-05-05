@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useStore } from "../../store/useUserStore";
+import { toast } from "sonner";
 
 export default function Authentication() {
   const { setUser } = useStore();
@@ -23,7 +24,7 @@ export default function Authentication() {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       setUser(Number(userId), nickname, image, role);
-      alert("로그인 성공");
+      toast.success("로그인 성공");
       navigate("/");
     } else {
       alert("로그인 실패");

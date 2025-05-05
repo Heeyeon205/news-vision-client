@@ -11,6 +11,8 @@ export default function UpdateSubmitButton({
 }) {
   const userId = useStore((state) => state.userId);
   const navigate = useNavigate();
+  const { setUser } = useStore();
+
   const formData = new FormData();
   formData.append("image", image);
   formData.append("nickname", nickname);
@@ -19,12 +21,19 @@ export default function UpdateSubmitButton({
 
   const HandleSubmit = async () => {
     try {
-      console.log("인트로듀스: ", introduce);
-      await axios.put(`/api/user/${userId}`, formData, {
+      const res = await axios.put(`/api/user/${userId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      const result = res.data;
+      const updatedUser = result.data;
+      setUser(
+        userId,
+        updatedUser.nickname,
+        updatedUser.image,
+        updatedUser.role
+      );
       toast.success("프로필 수정 완료!");
       navigate("/user/mypage");
     } catch (error) {
