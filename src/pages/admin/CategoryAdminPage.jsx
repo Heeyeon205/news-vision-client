@@ -8,7 +8,6 @@ export default function CategoryAdminPage() {
   const [selectId, setSelectId] = useState("");
   const [newCategory, setNewCategory] = useState("");
 
-  // 카테고리 불러오기
   const loadCategory = async () => {
     try {
       const response = await apiClient.get("/api/category");
@@ -23,7 +22,6 @@ export default function CategoryAdminPage() {
     loadCategory();
   }, []);
 
-  // 카테고리 추가
   const handleAdd = async () => {
     if (!newCategory.trim())
       return toast.warning("카테고리 이름을 입력하세요.");
@@ -37,7 +35,6 @@ export default function CategoryAdminPage() {
     }
   };
 
-  // 카테고리 삭제
   const handleDelete = async () => {
     if (!selectId) return toast.warning("삭제할 카테고리를 선택하세요.");
     try {

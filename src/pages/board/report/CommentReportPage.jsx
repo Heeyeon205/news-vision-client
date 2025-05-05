@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import apiClient from '../../../api/axios';
-import { toast } from 'sonner';
+import { useNavigate } from "react-router-dom";
+import apiClient from "../../../api/axios";
+import { toast } from "sonner";
 
 export default function CommentReportPage({ commentId, onClose }) {
   const navigate = useNavigate();
@@ -8,8 +8,8 @@ export default function CommentReportPage({ commentId, onClose }) {
   const handleSubmit = async () => {
     try {
       await apiClient.post(`/api/reports/comments/${commentId}`);
-      console.log('지금 신고접수한 댓글 아이디: ', commentId);
-      toast.success('댓글 신고 접수완료');
+      console.log("지금 신고접수한 댓글 아이디: ", commentId);
+      toast.success("댓글 신고 접수완료");
       onClose();
     } catch (error) {
       console.log(error);
@@ -21,7 +21,7 @@ export default function CommentReportPage({ commentId, onClose }) {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full  flex justify-center items-center z-50">
+    <div className="fixed top-0 left-0 w-full h-full bg-black/40 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-md shadow-lg">
         <p className="text-lg font-semibold mb-4">댓글 신고</p>
         <p className="text-gray-600 mb-4">해당 댓글을 신고할까요?</p>

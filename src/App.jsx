@@ -50,6 +50,7 @@ import AdminMainPage from "./pages/admin/AdminMainPage";
 import CategoryAdminPage from "./pages/admin/CategoryAdminPage";
 import BoardReportAdminPage from "./pages/admin/BoardReportAdminPage";
 import CommentReportAdminPage from "./pages/admin/CommentReportAdminPage";
+import AdminUserManagePage from "./pages/admin/AdminUserManagePage";
 
 function App() {
   const isLoading = useGlobalStore((state) => state.isLoading);
@@ -114,6 +115,7 @@ function App() {
             path="/admin/comment-reports"
             element={<CommentReportAdminPage />}
           />
+          <Route path="/admin/user-manage" element={<AdminUserManagePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

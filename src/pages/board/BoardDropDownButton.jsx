@@ -89,7 +89,7 @@ export default function BoardDropDownButton({
           ) : (
             isLog && (
               <button
-                onClick={onReportClick} // 모달 열기 함수 호출
+                onClick={onReportClick}
                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               >
                 신고하기

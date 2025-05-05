@@ -107,10 +107,11 @@ export default function UserPage() {
           {role && (
             <button
               className={`py-2 px-4 border-b-2 text-sm font-semibold transition  
-      ${activeTap === "news"
-                  ? "text-orange-500 border-orange-400"
-                  : "text-gray-500 border-transparent hover:text-orange-400"
-                }`}
+      ${
+        activeTap === "news"
+          ? "text-orange-500 border-orange-400"
+          : "text-gray-500 border-transparent hover:text-orange-400"
+      }`}
               onClick={() => setActiveTap("news")}
             >
               뉴스
@@ -118,20 +119,22 @@ export default function UserPage() {
           )}
           <button
             className={`py-2 px-4 border-b-2 text-sm font-semibold transition 
-    ${activeTap === "article"
-                ? "text-orange-500 border-orange-400"
-                : "text-gray-500 border-transparent hover:text-orange-400 cursor-pointer"
-              }`}
+    ${
+      activeTap === "article"
+        ? "text-orange-500 border-orange-400"
+        : "text-gray-500 border-transparent hover:text-orange-400 cursor-pointer"
+    }`}
             onClick={() => setActiveTap("article")}
           >
             커뮤니티
           </button>
           <button
             className={`py-2 px-4 border-b-2 text-sm font-semibold transition 
-    ${activeTap === "scrap"
-                ? "text-orange-500 border-orange-400"
-                : "text-gray-500 border-transparent hover:text-orange-400 cursor-pointer"
-              }`}
+    ${
+      activeTap === "scrap"
+        ? "text-orange-500 border-orange-400"
+        : "text-gray-500 border-transparent hover:text-orange-400 cursor-pointer"
+    }`}
             onClick={() => setActiveTap("scrap")}
           >
             스크랩
