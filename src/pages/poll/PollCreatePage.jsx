@@ -34,6 +34,21 @@ export default function PollCreatePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (title.trim() === "") {
+      toast.warning("투표 제목을 작성해 주세요.");
+      return;
+    }
+
+    if (expiredAt === "") {
+      toast.warning("투표 마감일을 선택해 주세요.");
+      return;
+    }
+
+    if (options.some(option => option.trim() === "")) {
+      toast.warning("모든 투표 항목을 작성해 주세요.");
+      return;
+    }
+
     try {
       const res = await apiClient.post("/api/polls", {
         title,
