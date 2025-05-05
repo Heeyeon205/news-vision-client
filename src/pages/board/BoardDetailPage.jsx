@@ -156,7 +156,9 @@ export default function BoardDetailPage() {
                   />
                 </div>
                 <p className="text-xs text-gray-400">{comment.createdAt}</p>
-                <p className="text-sm mt-1">{comment.content}</p>
+                <p className="text-sm mt-1 break-words break-all">
+                  {comment.content}
+                </p>
               </div>
             </div>
           ))
@@ -164,7 +166,7 @@ export default function BoardDetailPage() {
       </div>
 
       {logNickname && (
-        <div className="mt-6 bg-gray-50 border border-gray-200 rounded-full flex items-center px-4 py-2">
+        <div className="mt-6 bg-gray-50 break-words border border-gray-200 rounded-full flex items-center px-4 py-2">
           <CommentBox
             logProfile={logProfile}
             logNickname={logNickname}

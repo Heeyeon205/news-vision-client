@@ -52,16 +52,16 @@ export default function BoardCreatePage() {
           <textarea
             className="w-full break-words border border-gray-300 p-3 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-orange-400 h-72"
             rows={7}
-            maxLength={300}
+            maxLength={500}
             value={content}
             onChange={(e) => {
-              const trimmed = e.target.value.slice(0, 300);
+              const trimmed = e.target.value.slice(0, 500);
               setContent(trimmed);
             }}
             placeholder={`${logNickname}님의 생각을 나누며 지식을 넓혀보세요`}
           />
           <div className="text-right text-xs text-gray-400 mt-1">
-            {content.length}/300
+            {content.length}/500
           </div>
         </div>
       </div>
