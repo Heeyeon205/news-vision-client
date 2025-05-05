@@ -14,9 +14,9 @@ export default function BoardCreateSubmit({ image, content, categoryId }) {
       toast.warning("본문 내용이 너무 짧습니다. 최소 30자 이상 작성해 주세요.");
       return;
     }
-    if (content.length > 300) {
+    if (content.length > 500) {
       toast.warning(
-        "본문 내용이 너무 깁니다. 최대 300자까지 작성할 수 있습니다."
+        "본문 내용이 너무 깁니다. 최대 500자까지 작성할 수 있습니다."
       );
       return;
     }
