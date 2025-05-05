@@ -25,6 +25,8 @@ export default function FollowButton({ targetId, followed }) {
         toast.success("팔로우 취소");
       } else {
         res = await apiClient.post(`/api/follow/${targetId}`);
+        console.log("myId", logId);
+        console.log("targetId", targetId);
         toast.success("팔로우 성공!");
       }
       const result = res.data;

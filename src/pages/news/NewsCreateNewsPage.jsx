@@ -106,7 +106,7 @@ export default function NewsCreateNewsPage() {
             type="text"
             placeholder="제목을 입력하세요."
             onChange={(e) => {
-              const trimmed = e.target.value.slice(0, 30);
+              const trimmed = e.target.value.slice(0, 50);
               setTitle(trimmed);
             }}
           />

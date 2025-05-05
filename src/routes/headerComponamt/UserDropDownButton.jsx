@@ -4,6 +4,7 @@ import AdminPageButton from "./AdminPageButton.jsx";
 import LogoutButton from "./LogoutButton";
 import MypageBtn from "./MypageButton.jsx";
 import { FaUserCircle } from "react-icons/fa";
+import CreatorApplyPage from "./CreatorApplyPage.jsx";
 
 export default function UserDropDownButton() {
   const nickname = useStore((state) => state.nickname);
@@ -11,6 +12,7 @@ export default function UserDropDownButton() {
   const image = useStore((state) => state.image);
   const logRole = useStore((state) => state.role);
   const isAuth = logRole === "ROLE_ADMIN";
+  const isUser = logRole === "ROLE_USER";
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef();
@@ -70,8 +72,9 @@ export default function UserDropDownButton() {
 
           <div className="flex flex-col divide-y divide-gray-200 text-center">
             <MypageBtn />
-            <LogoutButton />
+            {isUser && <CreatorApplyPage />}
             {isAuth && <AdminPageButton />}
+            <LogoutButton />
           </div>
         </div>
       )}

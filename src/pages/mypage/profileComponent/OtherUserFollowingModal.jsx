@@ -22,7 +22,7 @@ export default function FollowingModal({ onClose, userId }) {
   }, [userId]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
       <div className="bg-white p-6 rounded-lg w-80 relative max-h-[500px] overflow-y-scroll">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-bold">팔로잉</h3>
