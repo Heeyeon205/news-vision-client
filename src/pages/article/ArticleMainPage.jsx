@@ -77,6 +77,9 @@ export default function ArticleMainPage() {
     fetchArticles(page);
   }, [page, selectedType, selectedCategoryId]);
 
+
+
+
   const handleClick = (category) => {
     let type = "recent";
     let categoryId = null;
@@ -105,6 +108,52 @@ export default function ArticleMainPage() {
     setPage(0);
     setHasMore(true);
   };
+  useEffect(() => { // 카테고리 스크롤
+    const categoryContainer = categoryRef.current;
+    if (!categoryContainer) return;
+
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+
+    const handleMouseDown = (e) => {
+      isDragging = true;
+      startX = e.pageX - categoryContainer.offsetLeft;
+      scrollLeft = categoryContainer.scrollLeft;
+      categoryContainer.style.cursor = "grabbing"; // 드래그 중 커서 변경
+    };
+
+    const handleMouseLeave = () => {
+      isDragging = false;
+      categoryContainer.style.cursor = "grab"; // 드래그 종료 후 커서 복원
+    };
+
+    const handleMouseUp = () => {
+      isDragging = false;
+      categoryContainer.style.cursor = "grab"; // 드래그 종료 후 커서 복원
+    };
+
+    const handleMouseMove = (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - categoryContainer.offsetLeft;
+      const walk = (x - startX) * 2; // 스크롤 속도 조절 
+      categoryContainer.scrollLeft = scrollLeft - walk;
+    };
+
+    categoryContainer.addEventListener("mousedown", handleMouseDown);
+    categoryContainer.addEventListener("mouseleave", handleMouseLeave);
+    categoryContainer.addEventListener("mouseup", handleMouseUp);
+    categoryContainer.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      categoryContainer.removeEventListener("mousedown", handleMouseDown);
+      categoryContainer.removeEventListener("mouseleave", handleMouseLeave);
+      categoryContainer.removeEventListener("mouseup", handleMouseUp);
+      categoryContainer.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
 
   return (
     <div className="p-4 max-w-[600px] w-full mx-auto">

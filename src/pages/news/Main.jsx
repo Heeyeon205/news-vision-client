@@ -47,9 +47,9 @@ export default function Main() {
         <div className="absolute inset-0 bg-gradient-to-br from-orange-200/30 to-transparent rounded-lg pointer-events-none"></div>
         <div className="absolute top-0 left-0 w-24 h-24 bg-orange-300/10 rounded-full -translate-x-12 -translate-y-12 pointer-events-none"></div>
         <div className="relative flex flex-col gap-4">
-          <div className="font-bold text-2xl text-orange-500 overflow-hidden h-10">
+          <div className="font-bold text-2xl text-orange-500 overflow-hidden">
             {pollList.length > 0 ? (
-              <div key={bannerIndex} className="animate-slide-up">
+              <div key={bannerIndex} className="animate-slide-up whitespace-normal">
                 {pollList[bannerIndex]?.title}
               </div>
             ) : (
@@ -188,9 +188,8 @@ export default function Main() {
             {pollList.map((_, i) => (
               <div
                 key={`indicator-${i}`}
-                className={`indicator w-4 h-1 rounded ${
-                  swiperIndex === i ? "bg-orange-500" : "bg-gray-400"
-                }`}
+                className={`indicator w-4 h-1 rounded ${swiperIndex === i ? "bg-orange-500" : "bg-gray-400"
+                  }`}
               ></div>
             ))}
           </div>
