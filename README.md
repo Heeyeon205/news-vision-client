@@ -10,9 +10,11 @@
 </p>
 <br/>
 
-|메인|
+
+
+|메인 페이지|
 |--|
-|동영상|
+|![01_뉴스메인](https://github.com/user-attachments/assets/dc07942f-4a30-48be-b67c-3823ffacf457)|
 
 |회원가입 + 로그인|
 |--|
@@ -44,7 +46,8 @@
 
 |커뮤니티|
 |--|
-|동영상|
+|![09_커뮤 메인](https://github.com/user-attachments/assets/3c28d63e-95ac-4fe4-a4b6-12583a56ed8e)|
+
 
 |커뮤니티 상세페이지|
 |--|
