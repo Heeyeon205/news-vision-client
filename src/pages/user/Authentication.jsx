@@ -27,7 +27,7 @@ export default function Authentication() {
       toast.success("로그인 성공");
       navigate("/");
     } else {
-      alert("로그인 실패");
+      toast.warning("로그인 실패");
       navigate("/");
     }
   }, [navigate, setUser]);

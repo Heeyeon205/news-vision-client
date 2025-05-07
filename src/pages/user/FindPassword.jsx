@@ -12,7 +12,7 @@ export default function FindPassword() {
 
   const handleSubmit = async () => {
     if (!validationState) {
-      alert("이메일 인증을 먼저 해주세요.");
+      toast.warning("이메일 인증을 먼저 해주세요.");
       return;
     }
     try {

@@ -11,7 +11,7 @@ export default function PollCreatePage() {
 
   const handleClick = () => {
     if (options.length > 3) {
-      alert("최대 4개의 항목까지만 추가할 수 있습니다.");
+      toast.warning("최대 4개의 항목까지만 추가할 수 있습니다.");
       return;
     }
     setOptions([...options, ""]);
@@ -25,7 +25,7 @@ export default function PollCreatePage() {
 
   const handleRemove = (index) => {
     if (options.length <= 2) {
-      alert("최소 2개의 항목이 필요합니다.");
+      toast.warning("최소 2개의 항목이 필요합니다.");
       return;
     }
     const newOptions = options.filter((_, i) => i !== index);

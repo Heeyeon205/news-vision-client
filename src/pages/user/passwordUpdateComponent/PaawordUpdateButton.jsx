@@ -7,7 +7,7 @@ export default function PasswordUpdateButton({ password, checkPassword, validati
 
   const handleClick = async () => {
     if (!validationState.password) {
-      alert("비밀번호가 유효하지 않습니다.");
+      toast.warning("비밀번호가 유효하지 않습니다.");
       return;
     }
 
@@ -27,7 +27,7 @@ export default function PasswordUpdateButton({ password, checkPassword, validati
         ErrorAlert();
         return;
       }
-      alert("비밀번호 재설정 성공");
+      toast.warning("비밀번호 재설정 성공");
       navigate("/");
     } catch (error) {
       ErrorAlert(error);

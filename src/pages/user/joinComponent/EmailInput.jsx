@@ -1,6 +1,7 @@
 import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 export function EmailInputValidator(email) {
   if (
@@ -54,7 +55,7 @@ export default function MatchesEmailCode({
         ErrorAlert();
         return;
       }
-      alert("인증 메일을 발송했습니다.");
+      toast.success("인증 메일을 발송했습니다.");
     } catch (error) {
       ErrorAlert(error);
     }
@@ -73,7 +74,7 @@ export default function MatchesEmailCode({
       const result = response.data;
       if (!result.success) {
         setValidationState((prev) => ({ ...prev, email: false }));
-        alert("이메일 인증에 실패했습니다. 다시 시도해주세요.");
+        toast.warning("이메일 인증에 실패했습니다. 다시 시도해주세요.");
         return;
       }
       setReadOnly(true);
@@ -81,7 +82,7 @@ export default function MatchesEmailCode({
       setCheckColor("green");
       setValidationState((prev) => ({ ...prev, email: true }));
     } catch (error) {
-      alert("이메일 인증에 실패했습니다. 다시 시도해주세요.");
+      toast.warning("이메일 인증에 실패했습니다. 다시 시도해주세요.");
       console.log(error);
     }
   };
