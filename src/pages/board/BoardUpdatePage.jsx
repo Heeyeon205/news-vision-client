@@ -58,11 +58,11 @@ export default function BoardUpdatePage() {
         onChange={(e) => setContent(e.target.value)}
         value={content}
         rows={7}
-        maxLength={300}
+        maxLength={500}
         className="w-full border border-gray-300 p-3 rounded-md text-sm resize-none focus:outline-none focus:ring-2 focus:ring-orange-400 h-72"
       />
       <div className="text-right text-xs text-gray-400 mt-1">
-        {content.length}/300
+        {content.length}/500
       </div>
 
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
