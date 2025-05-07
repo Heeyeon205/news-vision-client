@@ -112,7 +112,7 @@ export default function NewsCreateNewsPage() {
           />
         </div>
         <div className="text-right text-xs text-gray-400 mb-3">
-          {title.length}/30
+          {title.length}/50
         </div>
 
         <div className="mb-4">
