@@ -70,7 +70,10 @@ export default function MatchesEmailCode({
     }
     if (emailCode === "") return;
     try {
-      const response = await apiClient.post("/email/verify", { email, emailCode });
+      const response = await apiClient.post("/email/verify", {
+        email,
+        emailCode,
+      });
       const result = response.data;
       if (!result.success) {
         setValidationState((prev) => ({ ...prev, email: false }));
@@ -89,8 +92,6 @@ export default function MatchesEmailCode({
 
   return (
     <div className="flex flex-col space-y-2 w-full">
-      {/* 이메일 입력 + 인증 버튼 */}
-
       <div className="flex w-full">
         <input
           id="email"
@@ -112,10 +113,16 @@ export default function MatchesEmailCode({
           인증하기
         </button>
       </div>
-      {msg && <p className="text-xs mt-1" style={{ color }}>{msg}</p>}
+      {msg && (
+        <p className="text-xs mt-1" style={{ color }}>
+          {msg}
+        </p>
+      )}
 
-      {/* 인증번호 입력 + 인증확인 버튼 */}
-      <label htmlFor="email-code" className="block text-sm font-medium text-gray-700 mt-3">
+      <label
+        htmlFor="email-code"
+        className="block text-sm font-medium text-gray-700 mt-3"
+      >
         인증번호
       </label>
       <div className="flex w-full">
@@ -136,7 +143,11 @@ export default function MatchesEmailCode({
           인증확인
         </button>
       </div>
-      {checkMsg && <p className="text-xs mt-1" style={{ color: checkColor }}>{checkMsg}</p>}
+      {checkMsg && (
+        <p className="text-xs mt-1" style={{ color: checkColor }}>
+          {checkMsg}
+        </p>
+      )}
     </div>
   );
 }

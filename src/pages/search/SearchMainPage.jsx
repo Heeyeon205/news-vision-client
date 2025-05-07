@@ -31,8 +31,8 @@ export default function SearchMainPage() {
 
   const handleSearch = async (value) => {
     if (value === "") return;
-    if (value.length > 15) {
-      toast.warning("검색어가 너무 깁니다. 최대 15자까지 작성할 수 있습니다.");
+    if (value.length > 50) {
+      toast.warning("검색어가 너무 깁니다. 최대 50자까지 작성할 수 있습니다.");
       return;
     }
     console.log("검색어: ", value);
@@ -62,7 +62,7 @@ export default function SearchMainPage() {
           placeholder="궁금한 지식을 찾아보세요."
           value={query}
           onChange={(e) => {
-            const trimmed = e.target.value.slice(0, 15);
+            const trimmed = e.target.value.slice(0, 50);
             setQuery(trimmed);
           }}
         />
@@ -101,10 +101,11 @@ export default function SearchMainPage() {
             setType("news");
             setData([]);
           }}
-          className={`py-2 px-6 text-sm font-medium border-b-2 ${type === "news"
+          className={`py-2 px-6 text-sm font-medium border-b-2 ${
+            type === "news"
               ? "border-orange-500 text-orange-500"
               : "border-transparent text-gray-500"
-            } transition`}
+          } transition`}
         >
           뉴스
         </button>
@@ -112,11 +113,13 @@ export default function SearchMainPage() {
           onClick={() => {
             setType("board");
             setData([]);
+            setQuery("");
           }}
-          className={`py-2 px-6 text-sm font-medium border-b-2 ${type === "board"
+          className={`py-2 px-6 text-sm font-medium border-b-2 ${
+            type === "board"
               ? "border-orange-500 text-orange-500"
               : "border-transparent text-gray-600"
-            } transition`}
+          } transition`}
         >
           커뮤니티
         </button>
@@ -126,51 +129,85 @@ export default function SearchMainPage() {
         {data.length === 0 ? (
           <p className="text-center text-gray-600">검색 결과가 없습니다.</p>
         ) : (
-          data.map((search) => (
-            <div
-              key={search.id}
-              className="rounded overflow-hidden cursor-pointer shadow-md hover:scale-101 hover:shadow-lg transition-transform duration-300 mb-5"
-              onClick={() =>
-                navigate(`/${type}/${search.id || search.boardId}`)
-              }
-            >
-              <div className="w-full h-full max-h-[350px] overflow-hidden object-cover">
-                {search.image && (
-                  <img
-                    src={search.image}
-                    alt="썸네일"
-                    width="600"
-                    height="350"
-                    className="w-full h-auto object-cover"
-                  />
-                )}
-              </div>
-              <div className="p-2">
-                {search.category && (
-                  <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">
-                    {search.category}
-                  </p>
-                )}
+          <>
+            {type === "news" &&
+              data.map((search) => (
+                <div
+                  key={search.id}
+                  className="rounded overflow-hidden cursor-pointer shadow-md hover:scale-101 hover:shadow-lg transition-transform duration-300 mb-5"
+                  onClick={() =>
+                    navigate(`/${type}/${search.id || search.boardId}`)
+                  }
+                >
+                  <div className="w-full h-full max-h-[350px] overflow-hidden object-cover">
+                    {search.image && (
+                      <img
+                        src={search.image}
+                        alt="썸네일"
+                        width="600"
+                        height="350"
+                        className="w-full h-auto object-cover"
+                      />
+                    )}
+                  </div>
+                  <div className="p-2">
+                    {search.category && (
+                      <p className="inline-block bg-gray-100 text-sm text-black rounded-xl px-3 py-0.5 w-fit">
+                        {search.category}
+                      </p>
+                    )}
 
-                <h4 className="text-lg font-bold mb-1">
-                  {search.title || search.content}
-                </h4>
-                {type === "board" && (
+                    <h4 className="text-lg font-bold mb-1">
+                      {search.title || search.content}
+                    </h4>
+
+                    <div className="flex items-center text-sm text-gray-400 space-x-2">
+                      <span className="mr-2">{search.nickname}</span>
+                      <span>{search.createdAt}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+            {type === "board" &&
+              data.map((board) => (
+                <div
+                  key={board.boardId}
+                  className="mb-6 p-4 border border-gray-200 rounded-lg hover:bg-gray-50  bg-white shadow hover:scale-101 hover:shadow-lg transition-transform duration-300 cursor-pointer"
+                  onClick={() => navigate(`/board/${board.boardId}`)}
+                >
+                  <div className="flex items-start gap-3 mb-2">
+                    <img
+                      src={board.userImage}
+                      alt="프로필"
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                    <div className="flex-1">
+                      <p className="font-semibold text-sm">{board.nickname}</p>
+                      <p className="text-xs text-gray-400">{board.createdAt}</p>
+                    </div>
+                  </div>
+
+                  <p className="text-sm break-words text-gray-800 whitespace-pre-line mb-3 ">
+                    {board.content}
+                  </p>
+                  {board.image && (
+                    <img
+                      src={board.image}
+                      alt="게시글 이미지"
+                      className="w-full rounded-md mb-3 object-cover"
+                    />
+                  )}
+
                   <div className="flex text-sm text-gray-600 gap-2">
                     <FaRegHeart className="w-5 h-5 text-red-500" />
-                    <span>{search.likeCount}</span>
+                    <span>{board.likeCount}</span>
                     <FaRegComment className="w-5 h-5 text-gray-500 ml-4" />
-                    <span>{search.commentCount}</span>
+                    <span>{board.commentCount}</span>
                   </div>
-                )}
-
-                <div className="flex items-center text-sm text-gray-400 space-x-2">
-                  <span className="mr-2">{search.nickname}</span>
-                  <span>{search.createdAt}</span>
                 </div>
-              </div>
-            </div>
-          ))
+              ))}
+          </>
         )}
       </div>
     </div>

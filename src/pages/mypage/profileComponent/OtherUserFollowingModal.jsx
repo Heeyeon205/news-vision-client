@@ -25,8 +25,10 @@ export default function FollowingModal({ onClose, userId }) {
     <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
       <div className="bg-white p-6 rounded-lg w-80 relative max-h-[500px] overflow-y-scroll">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold">팔로잉</h3>
-          <span>{data.length}</span>
+          <div className="flex items-center space-x-2">
+            <h3 className="text-xl font-bold">팔로잉</h3>
+            <span className="text-xl font-bold">{data.length}</span>
+          </div>
           <button onClick={onClose} className="text-gray-500 text-lg">
             ✕
           </button>

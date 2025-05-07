@@ -1,9 +1,10 @@
 import apiClient from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 
-export default function MypageBtn() {
+export default function MypageBtn({ setIsOpen }) {
   const navigate = useNavigate();
   const handleMove = async function MoveToMypage() {
+    setIsOpen(false);
     try {
       await apiClient.get("/api/auth/check");
       navigate("/user/mypage");

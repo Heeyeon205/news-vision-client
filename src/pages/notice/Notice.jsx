@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots } from "@fortawesome/free-solid-svg-icons";
 
-export default function Notice() {
+export default function Notice({ setIsOpen }) {
   const navigate = useNavigate();
   const scrollRef = useRef();
 
@@ -22,7 +22,7 @@ export default function Notice() {
       const url = `/api/notice/open?page=${targetPage}&size=${size}`;
       const response = await apiClient.get(url);
       const newContent = response.data.data.content;
-
+      console.log(newContent);
       setData((prev) => {
         const existingIds = new Set(prev.map((item) => item.id));
         const filteredNew = newContent.filter(
@@ -72,6 +72,7 @@ export default function Notice() {
   const handleClick = async (url, id) => {
     try {
       await apiClient.get(`/api/notice/${id}`);
+      setIsOpen(false);
       navigate(url);
     } catch (error) {
       console.log(error);
@@ -79,6 +80,7 @@ export default function Notice() {
   };
 
   const handleMove = (id) => {
+    setIsOpen(false);
     navigate(`/userPage/${id}`);
   };
 

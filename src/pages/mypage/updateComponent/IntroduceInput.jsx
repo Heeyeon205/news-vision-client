@@ -10,7 +10,7 @@ export default function IntroduceInput({ introduce, setIntroduce }) {
       <textarea
         value={introduce ?? ""}
         onChange={(e) => {
-          const trimmed = e.target.value.slice(0, 50);
+          const trimmed = e.target.value.slice(0, 100);
           setIntroduce(trimmed);
         }}
         rows={8}
@@ -18,7 +18,7 @@ export default function IntroduceInput({ introduce, setIntroduce }) {
         className="w-full p-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400 text-gray-800 text-sm resize-none"
       />
       <div className="text-right text-xs text-gray-400 mt-1">
-        {introduce ? introduce.length : 0}/50
+        {introduce ? introduce.length : 0}/100
       </div>
     </div>
   );

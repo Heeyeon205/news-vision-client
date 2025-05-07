@@ -71,10 +71,10 @@ export default function UserDropDownButton() {
           </div>
 
           <div className="flex flex-col divide-y divide-gray-200 text-center">
-            <MypageBtn />
-            {isUser && <CreatorApplyPage />}
-            {isAuth && <AdminPageButton />}
-            <LogoutButton />
+            <MypageBtn setIsOpen={setIsOpen} />
+            {isUser && <CreatorApplyPage setIsOpen={setIsOpen} />}
+            {isAuth && <AdminPageButton setIsOpen={setIsOpen} />}
+            <LogoutButton setIsOpen={setIsOpen} />
           </div>
         </div>
       )}

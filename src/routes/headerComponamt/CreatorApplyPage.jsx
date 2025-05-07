@@ -1,15 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
-export default function CreatorApplyPage() {
+export default function CreatorApplyPage({ setIsOpen }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
   const handleApplyClick = () => {
-    navigate("/creator/apply/form");
+    setIsOpen(false);
+    toast.info("현재 준비 중인 기능입니다. 빠른 시일 내에 업데이트할게요!", {
+      duration: 3000,
+    });
+    return;
+    // navigate("/creator/apply/form");
   };
 
   return (

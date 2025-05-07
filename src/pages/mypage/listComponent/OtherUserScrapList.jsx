@@ -1,25 +1,19 @@
 import apiClient from "../../../api/axios";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useInfiniteScroll } from "../../../utils/useInfiniteScroll";
 
 export default function ScrapList({ userId }) {
-  const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function loadFollowingPage() {
-      try {
-        const response = await apiClient.get(
-          `/api/mypage/scrap-list/${userId}`
-        );
-        const result = response.data;
-        setData(result.data.content);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    loadFollowingPage();
-  }, [userId]);
+  const { data, isLoading, hasMore, reset } = useInfiniteScroll(
+    async (page, size) => {
+      let url = `/api/mypage/scrap-list/${userId}?page=${page}&size=${size}`;
+      const response = await apiClient.get(url);
+      return response.data.data.content;
+    },
+    10,
+    "newsId"
+  );
 
   return (
     <div className="flex flex-col space-y-4">
@@ -46,6 +40,14 @@ export default function ScrapList({ userId }) {
             </div>
           </div>
         ))
+      )}
+
+      {isLoading && <p className="text-center text-gray-400">로딩 중...</p>}
+
+      {!hasMore && data.length > 0 && (
+        <p className="text-center text-gray-400 mt-4">
+          더 이상 스크랩이 없습니다.
+        </p>
       )}
     </div>
   );

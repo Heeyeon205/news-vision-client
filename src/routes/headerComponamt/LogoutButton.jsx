@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
 import { useStore } from "../../store/useUserStore";
 import { toast } from "sonner";
-import ConfirmModal from "../../utils/ConfirmModal"; // 위치에 맞게 import
+import ConfirmModal from "../../utils/ConfirmModal";
 
-export default function LogoutButton() {
+export default function LogoutButton({ setIsOpen }) {
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");
   const clearUser = useStore((state) => state.clearUser);
@@ -13,6 +13,7 @@ export default function LogoutButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleLogout = async () => {
+    setIsOpen(false);
     try {
       await apiClient.post("/api/auth/logout", {
         accessToken,

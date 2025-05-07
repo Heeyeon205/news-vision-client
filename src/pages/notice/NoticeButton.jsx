@@ -35,7 +35,7 @@ export default function NoticeDropdown() {
       </button>
       {isOpen && (
         <div className="absolute right-0 top-8 mt-0 w-80 bg-white border-1 border-gray-200 rounded-lg shadow-lg z-10 h-90">
-          <Notice />
+          <Notice setIsOpen={setIsOpen} />
         </div>
       )}
     </div>

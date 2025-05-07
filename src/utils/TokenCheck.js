@@ -2,7 +2,7 @@ import apiClient from '../api/axios';
 
 export async function checkAuthAndMove(navigate, targetUrl) {
   try {
-    const response = await apiClient.get('/api/auth/check');
+    await apiClient.get('/api/auth/check');
     navigate(targetUrl);
     return true;
   } catch (error) {
