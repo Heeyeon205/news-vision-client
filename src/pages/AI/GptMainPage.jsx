@@ -28,9 +28,8 @@ export default function GptMainPage() {
         {newsList.map((_, i) => (
           <div
             key={i}
-            className={`indicator w-4 h-1 rounded ${
-              index === i ? 'bg-orange-500' : 'bg-gray-400'
-            }`}
+            className={`indicator w-4 h-1 rounded ${index === i ? 'bg-orange-500' : 'bg-gray-400'
+              }`}
           ></div>
         ))}
       </div>
@@ -61,7 +60,7 @@ export default function GptMainPage() {
                   </div>
                   <p
                     onClick={() => navigate(`/news/${news.id}`)}
-                    className="w-full text-center text-orange-500 hover:text-orange-400 cursor-pointer  p-3 sm:p-5 mt-25 sm:mt-7"
+                    className="w-full text-center text-orange-500 hover:text-orange-400 cursor-pointer p-8 sm:p-5 mt-25 sm:mt-7"
                   >
                     자세히 보기
                   </p>
