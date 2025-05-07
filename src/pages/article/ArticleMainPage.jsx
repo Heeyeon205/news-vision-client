@@ -90,7 +90,7 @@ export default function ArticleMainPage() {
         경제: 2,
         정치: 3,
         문화: 4,
-        글로벌: 5,
+        글로벌: 15,
         예술: 6,
         과학기술: 7,
         역사: 8,
