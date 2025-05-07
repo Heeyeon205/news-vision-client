@@ -1,6 +1,7 @@
 import axios from 'axios';
 import ErrorAlert from '../utils/ErrorAlert';
 import { useGlobalStore } from '../store/useGlobalStore';
+import { toast } from 'sonner';
 
 const instance = axios.create({
   baseURL: 'http://localhost:8080',
@@ -56,21 +57,21 @@ instance.interceptors.response.use(
 
           return instance(originalRequest);
         } catch (refreshError) {
-          alert("로그인 세션이 만료되었습니다. 다시 로그인해주세요.");
+          toast.warning("로그인 세션이 만료되었습니다. 다시 로그인해주세요.");
           window.location.href="/user/login"
           return Promise.reject(refreshError);
         }
       }
 
       if (status === 400 || status === 404) {
-        alert(data.message);
+        toast.warning(data.message);
       } else if (status === 500) {
-        alert("서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+        toast.warning("서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
       } else {
-        alert(data.message || "문제가 발생했습니다.");
+        toast.warning(data.message || "문제가 발생했습니다.");
       }
     } else if (error.request) {
-      alert("서버로부터 응답이 없습니다. 네트워크를 확인하세요.");
+      toast.warning("서버로부터 응답이 없습니다. 네트워크를 확인하세요.");
     } else {
       console.error("Axios Error:", error.message);
       ErrorAlert(error);

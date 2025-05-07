@@ -4,7 +4,7 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import apiClient from "../../api/axios";
 import { useStore } from "../../store/useUserStore";
 import { toast } from "sonner";
-import CommentReportButton from "./report/CommentReportButton";
+import ConfirmModal from "../../utils/ConfirmModal"; // ✅ import 추가
 
 export default function BoardDropDownButton({
   userId,
@@ -18,37 +18,24 @@ export default function BoardDropDownButton({
   const [own, setOwn] = useState(false);
   const logId = useStore((state) => state.userId);
   const [isLog, setLog] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false); // ✅ 모달 상태
 
   useEffect(() => {
-    if (logId === userId) {
-      setOwn(true);
-    } else {
-      setOwn(false);
-    }
+    setOwn(logId === userId);
+    setLog(!!logId);
   }, [logId, userId]);
 
-  useEffect(() => {
-    if (logId) {
-      setLog(true);
-    } else {
-      setLog(false);
-    }
-  }, [logId]);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  const handleClick = () => setOpen(!open);
 
   const handleDelete = async () => {
-    confirm("댓글을 삭제하시겠습니까?");
-    if (confirm) {
-      try {
-        await apiClient.delete(`/api/comments/${commentId}`);
-        toast.success("댓글 삭제 완료!");
-        onCommentDelete();
-      } catch (error) {
-        console.log(error);
-      }
+    try {
+      await apiClient.delete(`/api/comments/${commentId}`);
+      toast.success("댓글 삭제 완료!");
+      onCommentDelete();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setShowConfirm(false); // ✅ 모달 닫기
     }
   };
 
@@ -76,14 +63,12 @@ export default function BoardDropDownButton({
         {open && (
           <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-300 rounded-md shadow-lg z-10">
             {own ? (
-              <>
-                <button
-                  onClick={handleDelete}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                >
-                  댓글 삭제
-                </button>
-              </>
+              <button
+                onClick={() => setShowConfirm(true)}
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+              >
+                댓글 삭제
+              </button>
             ) : (
               <button
                 onClick={() => onReportClick(commentId)}
@@ -94,6 +79,17 @@ export default function BoardDropDownButton({
             )}
           </div>
         )}
+
+        {/* ✅ ConfirmModal 추가 */}
+        <ConfirmModal
+          open={showConfirm}
+          onClose={() => setShowConfirm(false)}
+          onConfirm={handleDelete}
+          title="댓글 삭제"
+          description="댓글을 삭제하시겠습니까?"
+          confirmText="삭제"
+          cancelText="취소"
+        />
       </div>
     )
   );

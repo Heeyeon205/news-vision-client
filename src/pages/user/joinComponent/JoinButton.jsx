@@ -8,7 +8,7 @@ export default function JoinButton({ username, password, email, validationState 
   const joinBtn = async () => {
     try {
       if (!validationState.username || !validationState.password || !validationState.email) {
-        alert("모든 인증을 완료해 주세요.");
+        toast.warning("모든 인증을 완료해 주세요.");
         return;
       }
       const response = await apiClient.post("/api/user/join", { username, password, email });
@@ -16,7 +16,7 @@ export default function JoinButton({ username, password, email, validationState 
         ErrorAlert();
         return;
       }
-      alert("회원가입 성공");
+      toast.success("회원가입 성공");
       navigate("/");
     } catch (error) {
       ErrorAlert(error);

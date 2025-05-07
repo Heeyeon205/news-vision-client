@@ -2,20 +2,23 @@ import { useState } from "react";
 import ErrorAlert from "../../utils/ErrorAlert";
 import apiClient from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import ConfirmModal from "../../utils/ConfirmModal"; // ✅ 모달 import
 
 export default function NewsCreatePage() {
   const [naverList, setNaverList] = useState([]);
   const [query, setQuery] = useState("");
+  const [selectedNews, setSelectedNews] = useState(null); // ✅ 선택된 뉴스
+  const [showConfirm, setShowConfirm] = useState(false); // ✅ 모달 상태
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
+    setQuery(e.target.value);
   };
 
   const handleClick = async (e) => {
     e.preventDefault();
-    if (query === "") return;
+    if (query.trim() === "") return;
+
     try {
       const response = await apiClient.get("/api/naver-news/search", {
         params: { query },
@@ -31,28 +34,31 @@ export default function NewsCreatePage() {
     }
   };
 
-  const handleCreate = async (news) => {
-    const check = confirm("해당 뉴스로 작성하시겠습니까?");
-    if (check) {
-      try {
-        const response = await apiClient.get("/api/auth/check");
-        const result = response.data;
-        if (!result.success) {
-          ErrorAlert();
-          return;
-        }
-        console.log(news);
-        console.log(news.id);
-        navigate("/news/create-news", {
-          state: {
-            referenceTitle: news.title,
-            referencePubDate: news.pubDate,
-            referenceLink: news.link,
-          },
-        });
-      } catch (error) {
-        ErrorAlert(error);
+  const handleCreate = (news) => {
+    setSelectedNews(news);
+    setShowConfirm(true);
+  };
+
+  const confirmCreate = async () => {
+    try {
+      const response = await apiClient.get("/api/auth/check");
+      const result = response.data;
+      if (!result.success) {
+        ErrorAlert();
+        return;
       }
+
+      navigate("/news/create-news", {
+        state: {
+          referenceTitle: selectedNews.title,
+          referencePubDate: selectedNews.pubDate,
+          referenceLink: selectedNews.link,
+        },
+      });
+    } catch (error) {
+      ErrorAlert(error);
+    } finally {
+      setShowConfirm(false);
     }
   };
 
@@ -70,7 +76,7 @@ export default function NewsCreatePage() {
                 type="text"
                 placeholder="오늘의 뉴스를 검색하세요."
                 onChange={handleChange}
-              ></input>
+              />
               <button
                 className="px-4 py-2 bg-orange-500 text-white rounded text-sm font-bold cursor-pointer hover:bg-orange-400 transition-colors"
                 type="submit"
@@ -87,7 +93,10 @@ export default function NewsCreatePage() {
           ) : (
             <div className="newsContainer">
               {naverList.map((news) => (
-                <div className="bg-white shadow-md rounded-lg p-4 mb-6 cursor-pointer hover:shadow-lg transition-shadow">
+                <div
+                  key={news.link}
+                  className="bg-white shadow-md rounded-lg p-4 mb-6 cursor-pointer hover:shadow-lg transition-shadow"
+                >
                   <h3
                     className="text-lg font-bold text-gray-800 mb-2"
                     onClick={() => handleCreate(news)}
@@ -99,6 +108,7 @@ export default function NewsCreatePage() {
                     href={news.link}
                     className="text-orange-500 text-sm font-medium hover:underline"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     뉴스 확인하러 가기
                   </a>
@@ -108,6 +118,17 @@ export default function NewsCreatePage() {
           )}
         </div>
       </div>
+
+      {/* ✅ ConfirmModal 적용 */}
+      <ConfirmModal
+        open={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        onConfirm={confirmCreate}
+        title="뉴스 작성"
+        description="해당 뉴스로 작성하시겠습니까?"
+        confirmText="작성"
+        cancelText="취소"
+      />
     </>
   );
 }

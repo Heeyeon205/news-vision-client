@@ -53,7 +53,7 @@ export default function MatchesEmailCode({
         ErrorAlert();
         return;
       }
-      alert("인증 메일을 발송했습니다.");
+      toast.success("인증 메일을 발송했습니다.");
       setCodeSent(true);
     } catch (error) {
       ErrorAlert(error);
@@ -78,7 +78,7 @@ export default function MatchesEmailCode({
       const result = response.data;
       if (!result.success) {
         setValidationState((prev) => ({ ...prev, email: false }));
-        alert("이메일 인증에 실패했습니다. 다시 시도해주세요");
+        toast.warning("이메일 인증에 실패했습니다. 다시 시도해주세요");
         return;
       }
       setReadOnly(true);
@@ -91,7 +91,7 @@ export default function MatchesEmailCode({
       console.log(tempToken);
       localStorage.setItem("tempToken", tempToken);
     } catch (error) {
-      alert("이메일 인증에 실패했습니다. 다시 시도해주세요");
+      toast.warning("이메일 인증에 실패했습니다. 다시 시도해주세요");
       // ErrorAlert();
       console.log(error);
     }
