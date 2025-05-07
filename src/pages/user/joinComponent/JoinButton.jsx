@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
+import { toast } from "sonner"
 
 export default function JoinButton({ username, password, email, validationState }) {
   const navigate = useNavigate();
