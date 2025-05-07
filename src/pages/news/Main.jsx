@@ -159,7 +159,7 @@ export default function Main() {
                 <div className="w-full flex justify-center items-center">
                   <div
                     className="w-full flex flex-col justify-center items-start border-t-0 rounded-bl-lg rounded-br-lg
-              cursor-pointer shadow-md hover:scale-101 hover:shadow-lg transition-transform duration-300"
+              cursor-pointer hover:scale-101 hover:shadow-lg transition-transform duration-300"
                     onClick={() => navigate(`/poll/${poll.id}`)}
                   >
                     <div className="w-full flex flex-col p-3">

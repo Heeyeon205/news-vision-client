@@ -103,7 +103,7 @@ export default function PollCreatePage() {
         {options.map((option, index) => (
           <div key={index} className="flex items-center gap-2 mb-3">
             <input
-              className="flex-8 border border-gray-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 mb-3"
+              className="flex-1 border border-gray-300 px-3 py-2 rounded text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
               type="text"
               value={option}
               onChange={(e) => handleChange(index, e.target.value)}
@@ -111,7 +111,7 @@ export default function PollCreatePage() {
             />
 
             <button onClick={() => handleRemove(index)}
-              className="flex-1 bg-orange-500 text-white font-bold px-4 py-1.5 rounded mb-3 cursor-pointer hover:bg-orange-400 transition-colors"
+              className="bg-orange-500 text-white font-bold px-4 py-2 rounded text-sm cursor-pointer hover:bg-orange-400 transition-colors"
             >삭제</button>
 
           </div>

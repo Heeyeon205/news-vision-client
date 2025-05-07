@@ -40,7 +40,7 @@ export default function CommentBox({
         alt="프로필 이미지"
         className="w-8 h-8 rounded-full object-cover"
       />
-      <p className="text-sm font-medium text-gray-700">{logNickname}</p>
+      {/* <p className="text-sm font-medium text-gray-700">{logNickname}</p> */}
       <input
         type="text"
         value={content}
