@@ -2,17 +2,17 @@ import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
 import { toast } from "sonner";
 import { useState } from "react";
-import ConfirmModal from "../../utils/ConfirmModal"; // ✅ 모달 컴포넌트 import
+import ConfirmModal from "../../utils/ConfirmModal";
 
 export default function NewsDeleteButton({ newsId }) {
   const navigate = useNavigate();
-  const [showConfirm, setShowConfirm] = useState(false); // ✅ 모달 상태 관리
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleDelete = async () => {
     try {
       await apiClient.delete(`/api/news/${newsId}`);
       toast.success("뉴스 삭제 완료");
-      navigate("/", { replace: true }); // ✅ 새로고침 방지
+      navigate("/", { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -27,7 +27,6 @@ export default function NewsDeleteButton({ newsId }) {
         삭제
       </button>
 
-      {/* ✅ ConfirmModal 사용 */}
       <ConfirmModal
         open={showConfirm}
         onClose={() => setShowConfirm(false)}
