@@ -10,7 +10,7 @@ export default function CategoryAdminPage() {
 
   const loadCategory = async () => {
     try {
-      const response = await apiClient.get("/api/category");
+      const response = await apiClient.get("/admin/categories");
       const result = response.data;
       setCategories(result.data);
     } catch (error) {
@@ -26,7 +26,7 @@ export default function CategoryAdminPage() {
     if (!newCategory.trim())
       return toast.warning("카테고리 이름을 입력하세요.");
     try {
-      await apiClient.post("/api/category", { name: newCategory });
+      await apiClient.post("/admin/categories", { name: newCategory });
       toast.success("카테고리 추가 완료");
       setNewCategory("");
       loadCategory();
@@ -38,7 +38,7 @@ export default function CategoryAdminPage() {
   const handleDelete = async () => {
     if (!selectId) return toast.warning("삭제할 카테고리를 선택하세요.");
     try {
-      await apiClient.delete(`/api/category/${selectId}`);
+      await apiClient.delete(`/admin/categories/${selectId}`);
       toast.success("카테고리 삭제 완료");
       setSelectId("");
       loadCategory();
