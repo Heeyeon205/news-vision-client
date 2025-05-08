@@ -1,11 +1,12 @@
-
 import { SiNaver, SiKakaotalk } from "react-icons/si";
 import { FcGoogle } from "react-icons/fc";
 import { BsChatFill } from "react-icons/bs";
 
-
-
-export default function SocialLoginButton({ provider, children, className = "" }) {
+export default function SocialLoginButton({
+  provider,
+  children,
+  className = "",
+}) {
   const handleLogin = () => {
     window.location.href = `http://localhost:8080/oauth2/authorization/${provider}`;
   };
@@ -22,7 +23,7 @@ export default function SocialLoginButton({ provider, children, className = "" }
       break;
     case "naver":
       IconComponent = SiNaver;
-      iconColor = "#03C75A"
+      iconColor = "#03C75A";
       break;
     default:
       IconComponent = null;
@@ -37,11 +38,10 @@ export default function SocialLoginButton({ provider, children, className = "" }
       {IconComponent && (
         <IconComponent
           className="w-5 h-5 mr-2"
-          color={iconColor || undefined} // color props 추가 (없으면 undefined)
+          color={iconColor || undefined}
         />
       )}
       {children}
     </button>
   );
 }
-
