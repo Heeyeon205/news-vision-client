@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import UpdatePasswordModal from "./UpdatePasswordModal";
+import { toast } from "sonner";
 
 export default function FindPassword() {
   const [email, setEmail] = useState("");

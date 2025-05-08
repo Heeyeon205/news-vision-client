@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import apiClient from "../../../api/axios";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 
 export default function FollorwerButton({ follower }) {
   const navigate = useNavigate();

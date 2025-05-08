@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import apiClient from "../../api/axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "sonner";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function NewsUpdateButton({
