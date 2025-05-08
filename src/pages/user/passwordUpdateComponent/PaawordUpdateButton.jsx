@@ -1,9 +1,13 @@
-import axios from "axios";
+import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-export default function PasswordUpdateButton({ password, checkPassword, validationState }) {
+export default function PasswordUpdateButton({
+  password,
+  checkPassword,
+  validationState,
+}) {
   const navigate = useNavigate();
 
   const handleClick = async () => {
@@ -13,8 +17,8 @@ export default function PasswordUpdateButton({ password, checkPassword, validati
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/user/new-password",
+      const response = await apiClient.post(
+        `/api/user/new-password`,
         { password, checkPassword },
         {
           headers: {
@@ -44,4 +48,3 @@ export default function PasswordUpdateButton({ password, checkPassword, validati
     </button>
   );
 }
-

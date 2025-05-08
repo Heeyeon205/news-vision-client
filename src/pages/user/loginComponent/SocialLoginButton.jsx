@@ -8,7 +8,7 @@ export default function SocialLoginButton({
   className = "",
 }) {
   const handleLogin = () => {
-    window.location.href = `http://localhost:8080/oauth2/authorization/${provider}`;
+    window.location.href = `https://newsion.kro.kr/oauth2/authorization/${provider}`;
   };
 
   let IconComponent;

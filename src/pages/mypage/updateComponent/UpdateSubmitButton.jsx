@@ -1,4 +1,4 @@
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../../store/useUserStore";
@@ -21,7 +21,7 @@ export default function UpdateSubmitButton({
 
   const HandleSubmit = async () => {
     try {
-      const res = await axios.put(`/api/user/${userId}`, formData, {
+      const res = await apiClient.put(`/api/user/${userId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

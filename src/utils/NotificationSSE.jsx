@@ -5,9 +5,7 @@ export default function NotificationSSE({ userId }) {
   useEffect(() => {
     if (!userId) return;
     const token = localStorage.getItem("accessToken");
-    const eventSource = new EventSource(
-      `http://localhost:8080/api/notice/subscribe?token=${token}`
-    );
+    const eventSource = new EventSource(`/api/notice/subscribe?token=${token}`);
 
     eventSource.onopen = () => {
       console.log("SSE 연결 시도");

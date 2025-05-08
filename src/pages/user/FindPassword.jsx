@@ -1,6 +1,6 @@
 import UpdateEmailInput from "../user/UpdateEmailInput";
 import { useState } from "react";
-import axios from "axios";
+import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import UpdatePasswordModal from "./UpdatePasswordModal";
 import { toast } from "sonner";
@@ -17,7 +17,7 @@ export default function FindPassword() {
       return;
     }
     try {
-      const response = await axios.get("http://localhost:8080/api/auth/temp-check", {
+      const response = await apiClient.get(`/api/auth/temp-check`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("tempToken")}`,
         },

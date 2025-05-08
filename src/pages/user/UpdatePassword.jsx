@@ -1,6 +1,6 @@
 import PasswordInput from "./joinComponent/PasswordInput";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import apiClient from "../../api/axios";
 import ErrorAlert from "../../utils/ErrorAlert";
 import PasswordUpdateButton from "./passwordUpdateComponent/PaawordUpdateButton";
 
@@ -15,15 +15,12 @@ export default function UpdatePassword() {
   useEffect(() => {
     const loadUpdateProcess = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8080/api/user/password-load",
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("tempToken")}`,
-            },
-          }
-        );
+        const response = await apiClient.get(`/api/user/password-load`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("tempToken")}`,
+          },
+        });
         const result = response.data;
         if (!result.success) {
           ErrorAlert();

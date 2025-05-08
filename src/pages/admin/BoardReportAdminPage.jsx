@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import apiClient from '../../api/axios';
-import { toast } from 'sonner';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import apiClient from "../../api/axios";
+import { toast } from "sonner";
 
 export default function BoardReportAdminPage() {
   const [reports, setReports] = useState([]);
@@ -9,10 +9,10 @@ export default function BoardReportAdminPage() {
 
   const loadReports = async () => {
     try {
-      const res = await apiClient.get('/admin/boardreports');
+      const res = await apiClient.get("/admin/boardreports");
       setReports(res.data.data);
     } catch (err) {
-      toast.error('신고 목록을 불러오지 못했습니다.');
+      toast.error("신고 목록을 불러오지 못했습니다.");
     }
   };
 
@@ -22,7 +22,7 @@ export default function BoardReportAdminPage() {
       toast.success(`${id}번 신고를 처리했습니다.`);
       loadReports();
     } catch (err) {
-      toast.error('처리 실패');
+      toast.error("처리 실패");
     }
   };
 
@@ -32,7 +32,7 @@ export default function BoardReportAdminPage() {
       toast.success(`${id}번 신고를 삭제했습니다.`);
       loadReports();
     } catch (err) {
-      toast.error('삭제 실패');
+      toast.error("삭제 실패");
     }
   };
 
@@ -50,7 +50,6 @@ export default function BoardReportAdminPage() {
         <p className="text-center text-gray-500">신고된 게시글이 없습니다.</p>
       ) : (
         <>
-          {/* 데스크탑용 테이블 */}
           <div className="hidden md:block">
             <table className="w-full border border-gray-300 text-sm">
               <thead className="bg-gray-100">
@@ -102,7 +101,6 @@ export default function BoardReportAdminPage() {
             </table>
           </div>
 
-          {/* 모바일용 카드형 */}
           <div className="block md:hidden space-y-4">
             {reports.map((report) => (
               <div

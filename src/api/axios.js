@@ -4,7 +4,7 @@ import { useGlobalStore } from '../store/useGlobalStore';
 import { toast } from 'sonner';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: import.meta.env.VITE_API_URL || "https://newsion.kro.kr",
   headers: {
     'Content-Type': 'application/json',
   },
@@ -45,7 +45,7 @@ instance.interceptors.response.use(
         try {
           console.log("새로운 엑세스 토큰 서버에 요청");
           const refreshToken = localStorage.getItem('refreshToken');
-          const res = await axios.post('http://localhost:8080/api/auth/refresh', {}, {
+          const res = await instance.post('/auth/refresh', {}, {
             headers: { refreshToken: refreshToken }
           });
 
@@ -58,7 +58,7 @@ instance.interceptors.response.use(
           return instance(originalRequest);
         } catch (refreshError) {
           toast.warning("로그인 세션이 만료되었습니다. 다시 로그인해주세요.");
-          window.location.href="/user/login"
+          window.location.href = "https://newsion.kro.kr/login";
           return Promise.reject(refreshError);
         }
       }

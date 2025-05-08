@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PasswordInput from "./joinComponent/PasswordInput";
 import PasswordUpdateButton from "./passwordUpdateComponent/PaawordUpdateButton";
 import ErrorAlert from "../../utils/ErrorAlert";
-import axios from "axios";
+import apiClient from "../../api/axios";
 
 export default function UpdatePasswordModal({ onClose }) {
   const [username, setUsername] = useState("");
@@ -10,18 +10,17 @@ export default function UpdatePasswordModal({ onClose }) {
   const [checkPassword, setCheckPassword] = useState("");
   const [validationState, setValidationState] = useState({ password: false });
 
-  const [visible, setVisible] = useState(false); // mount 후 보여줄지 여부
-  const [closing, setClosing] = useState(false); // unmount 애니메이션
+  const [visible, setVisible] = useState(false);
+  const [closing, setClosing] = useState(false);
 
   useEffect(() => {
-    // mount 후 바로 fade-in 시작
     setTimeout(() => setVisible(true), 10);
   }, []);
 
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/user/password-load", {
+        const res = await apiClient.get(`/api/user/password-load`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("tempToken")}`,
           },
@@ -49,12 +48,16 @@ export default function UpdatePasswordModal({ onClose }) {
   return (
     <div
       className={`fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-40
-        transition-opacity duration-300 ${visible && !closing ? "opacity-100" : "opacity-0"}`}
+        transition-opacity duration-300 ${
+          visible && !closing ? "opacity-100" : "opacity-0"
+        }`}
     >
       <div
         className={`bg-white p-6 rounded-lg w-[360px] max-w-sm shadow-lg relative transform
         transition-all duration-300 
-        ${visible && !closing ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}
+        ${
+          visible && !closing ? "scale-100 opacity-100" : "scale-95 opacity-0"
+        }`}
       >
         <button
           onClick={handleClose}
@@ -72,12 +75,11 @@ export default function UpdatePasswordModal({ onClose }) {
         />
 
         <div className="mt-4 flex justify-center">
-        <PasswordUpdateButton
-  password={password}
-  checkPassword={checkPassword}
-  validationState={validationState}
-/>
-
+          <PasswordUpdateButton
+            password={password}
+            checkPassword={checkPassword}
+            validationState={validationState}
+          />
         </div>
       </div>
     </div>

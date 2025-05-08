@@ -44,7 +44,7 @@ export default function MatchesEmailCode({
     }
     if (email === "") return;
     try {
-      const response = await apiClient.post("/email/send-code", { email });
+      const response = await apiClient.post("api/email/send-code", { email });
       const result = response.data;
       if (result.data.exists) {
         setMsg("이미 사용중인 이메일입니다.");
@@ -70,7 +70,7 @@ export default function MatchesEmailCode({
     }
     if (emailCode === "") return;
     try {
-      const response = await apiClient.post("/email/verify", {
+      const response = await apiClient.post("/api/email/verify", {
         email,
         emailCode,
       });

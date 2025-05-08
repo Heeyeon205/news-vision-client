@@ -93,14 +93,12 @@ export default function MatchesEmailCode({
       localStorage.setItem("tempToken", tempToken);
     } catch (error) {
       toast.warning("이메일 인증에 실패했습니다. 다시 시도해주세요");
-      // ErrorAlert();
       console.log(error);
     }
   };
 
   return (
     <div className="flex flex-col w-full space-y-4">
-      {/* 이메일 입력 + 인증요청 */}
       <div className="flex w-full">
         <input
           type="email"
@@ -123,7 +121,6 @@ export default function MatchesEmailCode({
       </div>
       {msg && <p className="text-xs text-red-500">{msg}</p>}
 
-      {/* 인증번호 입력: codeSent = true일 때만 보임 */}
       {codeSent && (
         <>
           <div>
@@ -161,5 +158,4 @@ export default function MatchesEmailCode({
       )}
     </div>
   );
-
 }

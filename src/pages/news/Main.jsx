@@ -18,6 +18,9 @@ export default function Main() {
   const [swiperIndex, setSwiperIndex] = useState(0);
 
   useEffect(() => {
+    console.log("import.meta.env.VITE_API_URL: ", import.meta.env.VITE_API_URL);
+    console.log("apiClient.defaults.baseURL:", apiClient.defaults.baseURL);
+
     const loadNews = async () => {
       try {
         const response = await apiClient.get("/api/news/main");
@@ -49,7 +52,10 @@ export default function Main() {
         <div className="relative flex flex-col gap-4">
           <div className="font-bold text-2xl text-orange-500 overflow-hidden">
             {pollList.length > 0 ? (
-              <div key={bannerIndex} className="animate-slide-up whitespace-normal">
+              <div
+                key={bannerIndex}
+                className="animate-slide-up whitespace-normal"
+              >
                 {pollList[bannerIndex]?.title}
               </div>
             ) : (
@@ -188,8 +194,9 @@ export default function Main() {
             {pollList.map((_, i) => (
               <div
                 key={`indicator-${i}`}
-                className={`indicator w-4 h-1 rounded ${swiperIndex === i ? "bg-orange-500" : "bg-gray-400"
-                  }`}
+                className={`indicator w-4 h-1 rounded ${
+                  swiperIndex === i ? "bg-orange-500" : "bg-gray-400"
+                }`}
               ></div>
             ))}
           </div>

@@ -1,4 +1,4 @@
-import axios from "../../../api/axios";
+import apiClient from "../../../api/axios";
 import { useState } from "react";
 import ErrorAlert from "../../../utils/ErrorAlert";
 
@@ -14,7 +14,7 @@ export default function ValidateNickname({
   const checkBtn = async () => {
     try {
       if (nickname === "") return;
-      const response = await axios.get("/api/user/check-nickname", {
+      const response = await apiClient.get("/api/user/check-nickname", {
         params: { nickname },
       });
       const result = response.data;
