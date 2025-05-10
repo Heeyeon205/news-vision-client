@@ -3,7 +3,11 @@ import { debounce } from "lodash";
 import apiClient from "../../../api/axios";
 import ErrorAlert from "../../../utils/ErrorAlert";
 
-export default function UsernameInput({ username, setUsername, setValidationState }) {
+export default function UsernameInput({
+  username,
+  setUsername,
+  setValidationState,
+}) {
   const [msg, setMsg] = useState("");
   const [color, setColor] = useState("");
   const [touched, setTouched] = useState(false);
@@ -48,9 +52,9 @@ export default function UsernameInput({ username, setUsername, setValidationStat
 
   return (
     <>
-      <label for="id" class="block text-sm font-medium text-gray-700"
-      >아이디</label
-      >
+      <label for="id" className="block text-sm font-medium text-gray-700">
+        아이디
+      </label>
       <input
         type="text"
         className="mt-1 block w-80 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
@@ -58,7 +62,9 @@ export default function UsernameInput({ username, setUsername, setValidationStat
         value={username}
         onChange={handleChange}
       />
-      <p className="text-sm mt-1" style={{ color }}>{msg}</p>
+      <p className="text-sm mt-1" style={{ color }}>
+        {msg}
+      </p>
     </>
   );
 }

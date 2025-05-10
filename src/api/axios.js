@@ -4,7 +4,8 @@ import { useGlobalStore } from '../store/useGlobalStore';
 import { toast } from 'sonner';
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "https://newsion.kro.kr",
+  baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -58,7 +59,7 @@ instance.interceptors.response.use(
           return instance(originalRequest);
         } catch (refreshError) {
           toast.warning("로그인 세션이 만료되었습니다. 다시 로그인해주세요.");
-          window.location.href = "https://newsion.kro.kr/login";
+          window.location.href = import.meta.env.VITE_API_URL + "/login";
           return Promise.reject(refreshError);
         }
       }
