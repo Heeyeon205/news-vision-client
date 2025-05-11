@@ -1,10 +1,8 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 export default function CreatorApplyPage({ setIsOpen }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // const navigate = useNavigate();
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -15,7 +13,6 @@ export default function CreatorApplyPage({ setIsOpen }) {
       duration: 3000,
     });
     return;
-    // navigate("/creator/apply/form");
   };
 
   return (

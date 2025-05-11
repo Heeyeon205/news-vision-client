@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import apiClient from '../../api/axios';
-import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import apiClient from "../../api/axios";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 export default function CommentReportAdminPage() {
   const [reports, setReports] = useState([]);
@@ -9,10 +9,10 @@ export default function CommentReportAdminPage() {
 
   const loadReports = async () => {
     try {
-      const res = await apiClient.get('/admin/commentreports');
+      const res = await apiClient.get("/admin/commentreports");
       setReports(res.data.data);
     } catch (err) {
-      toast.error('댓글 신고 목록을 불러오지 못했습니다.');
+      toast.error("댓글 신고 목록을 불러오지 못했습니다.");
     }
   };
 
@@ -22,7 +22,7 @@ export default function CommentReportAdminPage() {
       toast.success(`${id}번 신고를 처리했습니다.`);
       loadReports();
     } catch (err) {
-      toast.error('처리 실패');
+      toast.error("처리 실패");
     }
   };
 
@@ -32,18 +32,18 @@ export default function CommentReportAdminPage() {
       toast.success(`${id}번 신고를 삭제했습니다.`);
       loadReports();
     } catch (err) {
-      toast.error('삭제 실패');
+      toast.error("삭제 실패");
     }
   };
 
   const formatDate = (iso) => {
     const date = new Date(iso);
-    return date.toLocaleString('ko-KR', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
+    return date.toLocaleString("ko-KR", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -59,7 +59,6 @@ export default function CommentReportAdminPage() {
         <p className="text-center text-gray-500">신고된 댓글이 없습니다.</p>
       ) : (
         <>
-          {/* 데스크탑용 테이블 */}
           <div className="hidden md:block">
             <table className="w-full border border-gray-300 text-sm table-fixed">
               <thead className="bg-gray-100">
@@ -115,7 +114,6 @@ export default function CommentReportAdminPage() {
             </table>
           </div>
 
-          {/* 모바일 카드뷰 */}
           <div className="block md:hidden space-y-4">
             {reports.map((report) => (
               <div

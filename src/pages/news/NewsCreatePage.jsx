@@ -2,13 +2,13 @@ import { useState } from "react";
 import ErrorAlert from "../../utils/ErrorAlert";
 import apiClient from "../../api/axios";
 import { useNavigate } from "react-router-dom";
-import ConfirmModal from "../../utils/ConfirmModal"; // ✅ 모달 import
+import ConfirmModal from "../../utils/ConfirmModal";
 
 export default function NewsCreatePage() {
   const [naverList, setNaverList] = useState([]);
   const [query, setQuery] = useState("");
-  const [selectedNews, setSelectedNews] = useState(null); // ✅ 선택된 뉴스
-  const [showConfirm, setShowConfirm] = useState(false); // ✅ 모달 상태
+  const [selectedNews, setSelectedNews] = useState(null);
+  const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -119,7 +119,6 @@ export default function NewsCreatePage() {
         </div>
       </div>
 
-      {/* ✅ ConfirmModal 적용 */}
       <ConfirmModal
         open={showConfirm}
         onClose={() => setShowConfirm(false)}

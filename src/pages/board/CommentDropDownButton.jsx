@@ -4,7 +4,7 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import apiClient from "../../api/axios";
 import { useStore } from "../../store/useUserStore";
 import { toast } from "sonner";
-import ConfirmModal from "../../utils/ConfirmModal"; // ✅ import 추가
+import ConfirmModal from "../../utils/ConfirmModal";
 
 export default function BoardDropDownButton({
   userId,
@@ -18,7 +18,7 @@ export default function BoardDropDownButton({
   const [own, setOwn] = useState(false);
   const logId = useStore((state) => state.userId);
   const [isLog, setLog] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false); // ✅ 모달 상태
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     setOwn(logId === userId);
@@ -35,7 +35,7 @@ export default function BoardDropDownButton({
     } catch (error) {
       console.log(error);
     } finally {
-      setShowConfirm(false); // ✅ 모달 닫기
+      setShowConfirm(false);
     }
   };
 
@@ -80,7 +80,6 @@ export default function BoardDropDownButton({
           </div>
         )}
 
-        {/* ✅ ConfirmModal 추가 */}
         <ConfirmModal
           open={showConfirm}
           onClose={() => setShowConfirm(false)}

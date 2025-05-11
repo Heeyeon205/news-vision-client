@@ -16,7 +16,7 @@ export default function BoardDeleteButton({ boardId }) {
     } catch (error) {
       toast.error("삭제 중 오류가 발생했습니다.");
     } finally {
-      setIsModalOpen(false); // 성공/실패 관계없이 모달 닫기
+      setIsModalOpen(false);
     }
   };
 
@@ -31,7 +31,7 @@ export default function BoardDeleteButton({ boardId }) {
 
       <ConfirmModal
         open={isModalOpen}
-        onClose={() => setIsModalOpen(false)} // ❗취소 시 닫기
+        onClose={() => setIsModalOpen(false)}
         onConfirm={handleDelete}
         title="게시글 삭제"
         description="정말로 이 게시글을 삭제하시겠습니까?"
