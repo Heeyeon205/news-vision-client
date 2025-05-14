@@ -1,5 +1,7 @@
 # 📙 NEWSION Preview
 
+👉 [NEWSION Server Repository 바로가기](https://github.com/Heeyeon205/newsion-server)
+
 <br/>
 <p align="center">
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black" alt="JavaScript" />
